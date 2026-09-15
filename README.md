@@ -167,7 +167,7 @@ Target utama NANEM adalah:
 
 ### TAUTAN DEPLOYMENT PWS
 
-Tautan deployment PWS: https://jihan-nabiilah-proyek_tengah_sms26.pws.cs.ui.ac.id/
+Tautan deployment PWS: https://jihan-nabiilah-proyektengahsms.pws.cs.ui.ac.id/
 
 ---
 
