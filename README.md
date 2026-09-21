@@ -2,7 +2,7 @@
 
 ## NANEM
 
-**Nama aplikasi:** NANEM _(nama sementara)_
+**Nama aplikasi:** NANEM
 
 **Anggota:**
 
@@ -18,8 +18,6 @@
 
 **NANEM** merupakan aplikasi yang memberikan rekomendasi tanaman berdasarkan kondisi lahan dan lingkungan pengguna. Aplikasi ini membantu pengguna mengetahui tanaman yang sesuai dengan kondisi tertentu sehingga pemanfaatan lahan dapat dilakukan secara lebih optimal.
 
-Ide utama aplikasi **sudah ditetapkan**, sedangkan detail modul dan pembagian PIC masih dapat berubah menyesuaikan hasil diskusi kelompok, feedback, serta feasibility selama proses pengembangan.
-
 #### Siapa pelanggan?
 
 Target pengguna NANEM adalah:
@@ -28,10 +26,13 @@ Target pengguna NANEM adalah:
 - Pemilik lahan skala kecil.
 - Petani atau pengguna yang ingin mengetahui tanaman yang sesuai dengan kondisi lahannya.
 - Pemula yang belum mengetahui tanaman yang cocok dengan kondisi lingkungan tertentu.
+- Pengguna yang tertarik pada urban farming dengan media tanam terbatas, termasuk hidroponik.
 
 #### Apa solusi yang ditawarkan?
 
-NANEM memberikan rekomendasi tanaman berdasarkan kondisi lahan dan lingkungan pengguna. Pengguna dapat memasukkan atau memperoleh data seperti lokasi, kondisi tanah, suhu, kelembapan, dan curah hujan.
+NANEM memberikan rekomendasi tanaman berdasarkan kondisi lahan dan lingkungan pengguna. Pengguna memasukkan lokasi (latitude dan longitude) beserta media tanam yang digunakan (tanah, hidroponik, atau media lainnya). Pengguna juga dapat secara opsional menambahkan informasi luas lahan dan paparan cahaya matahari untuk hasil rekomendasi yang lebih akurat.
+
+Sistem mengambil data lingkungan (suhu, kelembapan, dan curah hujan) berdasarkan koordinat lokasi melalui Open-Meteo API, kemudian mencocokkannya dengan karakteristik tanaman yang tersedia di dalam database menggunakan rule-based recommendation engine (bukan machine learning).
 
 Berdasarkan data tersebut, sistem akan memberikan rekomendasi tanaman yang memiliki tingkat kecocokan dengan kondisi yang diberikan, disertai informasi mengenai karakteristik dan kebutuhan tanaman.
 
@@ -80,27 +81,66 @@ Berdasarkan hasil benchmarking, kombinasi fitur "input kondisi lahan → rekomen
 
 Modul yang direncanakan dalam aplikasi NANEM:
 
-1. **Input Kondisi Lahan**
-   - Pengguna memasukkan informasi kondisi lahan atau lokasi.
-   - PIC: Zhafira
+1. **Autentikasi, Rekomendasi, dan Riwayat**
+   Modul ini menangani autentikasi pengguna (register, login, logout), sistem rekomendasi tanaman berbasis rule-based menggunakan data lingkungan dari Open-Meteo API, serta riwayat rekomendasi yang pernah dilakukan pengguna.
 
-2. **Katalog Tanaman**
-   - Menampilkan daftar tanaman beserta informasi dan karakteristiknya.
-   - PIC: Bobby
+   **CRUD:**
+   - Create: generate rekomendasi berdasarkan input lokasi, media tanam, serta luas lahan dan paparan cahaya (opsional); hasil disimpan sebagai snapshot riwayat.
+   - Read: melihat daftar riwayat rekomendasi beserta detail satu riwayat.
+   - Update: mengubah nama lahan pada riwayat (hasil rekomendasi tidak dapat diubah secara manual).
+   - Delete: menghapus riwayat rekomendasi.
 
-3. **Rekomendasi Tanaman**
-   - Menghasilkan rekomendasi tanaman berdasarkan kondisi lahan dan lingkungan pengguna.
-   - PIC: Jihan
+   PIC: Jihan
 
-4. **Detail Tanaman**
-   - Menampilkan informasi lebih lengkap mengenai tanaman dan kebutuhan tumbuhnya.
-   - PIC: Hafidz
+2. **Profil Pengguna**
+   Modul ini mengelola data profil pengguna yang terhubung dengan akun Django (User).
 
-5. **Riwayat Rekomendasi**
-   - Menyimpan dan menampilkan riwayat rekomendasi yang pernah dilakukan pengguna.
-   - PIC: Nicholas
+   **CRUD:**
+   - Create: profil dibuat otomatis saat pengguna melakukan registrasi.
+   - Read: melihat profil sendiri maupun profil pengguna lain.
+   - Update: mengubah nama, username, foto profil, dan kata sandi.
+   - Delete: menghapus akun.
 
-> **Catatan:** Ide utama aplikasi NANEM sudah ditetapkan. Namun, daftar modul dan pembagian PIC di atas masih bersifat sementara dan dapat berubah berdasarkan hasil diskusi, pembagian tugas, serta pertimbangan feasibility proyek.
+   PIC: Hafidz
+
+3. **Koleksi Tanaman**
+   Modul ini berfungsi sebagai jurnal pribadi pengguna untuk mendokumentasikan tanaman yang mereka miliki atau tanam.
+
+   **CRUD:**
+   - Create: menambahkan tanaman ke koleksi pribadi beserta foto, judul, dan deskripsi.
+   - Read: melihat koleksi tanaman milik sendiri.
+   - Update: mengubah judul dan deskripsi (foto tidak dapat diganti setelah dibuat).
+   - Delete: menghapus tanaman dari koleksi.
+
+   PIC: Zhafira
+
+4. **Katalog Tanaman**
+   Modul ini merupakan master data tanaman yang digunakan bersama oleh modul Rekomendasi, Koleksi Tanaman, dan Panduan Budidaya.
+
+   **CRUD:**
+   - Create: admin menambahkan data tanaman baru (nama, kebutuhan cahaya, kebutuhan air, ukuran, gambar, dan atribut lain).
+   - Read: pengguna dapat melihat, mencari, dan memfilter katalog tanaman; admin dapat melihat seluruh data.
+   - Update: admin memperbarui data tanaman.
+   - Delete: admin menghapus data tanaman dari katalog.
+
+   PIC: Bobby
+
+5. **Panduan Budidaya**
+   Modul ini menyediakan informasi praktis mengenai cara membudidayakan tanaman, seperti cara menanam, media tanam, kebutuhan air, frekuensi penyiraman, kebutuhan cahaya, pemupukan, dan waktu panen.
+
+   **CRUD:**
+   - Create: admin menambahkan panduan budidaya untuk suatu tanaman.
+   - Read: pengguna dapat melihat panduan budidaya dan memfilter sesuai kebutuhan.
+   - Update: admin memperbarui panduan budidaya.
+   - Delete: admin menghapus panduan budidaya.
+
+   PIC: Nicholas
+
+> **Catatan:** Modul Katalog Tanaman dan Panduan Budidaya tetap merupakan dua modul terpisah dengan ownership berbeda, meskipun pada sisi pengguna keduanya ditampilkan sebagai satu halaman Plant Detail. Modul CRUD Admin (Katalog Tanaman dan Panduan Budidaya) diimplementasikan menggunakan Views, Template, dan Form khusus, bukan Django Admin bawaan, agar memenuhi definisi modul pada ketentuan tugas.
+>
+> Setiap modul dikembangkan pada branch Git terpisah sesuai PIC masing-masing, misalnya `module/auth-recommendation-history`, `module/user-profile`, `module/plant-collection`, `module/plant-catalog`, dan `module/cultivation-guide`.
+>
+> Ide utama aplikasi NANEM sudah ditetapkan. Namun, daftar modul dan pembagian PIC di atas masih bersifat sementara dan dapat berubah berdasarkan hasil diskusi, pembagian tugas, serta pertimbangan feasibility proyek.
 
 ---
 
@@ -108,14 +148,14 @@ Modul yang direncanakan dalam aplikasi NANEM:
 
 Model yang direncanakan:
 
-| Model             | Deskripsi                                                           | PIC |
-| ----------------- | ------------------------------------------------------------------- | --- |
-| Plant             | Menyimpan informasi tanaman                                         | TBD |
-| PlantRequirement  | Menyimpan kebutuhan lingkungan tanaman                              | TBD |
-| SoilData          | Menyimpan data atau karakteristik tanah                             | TBD |
-| EnvironmentalData | Menyimpan data lingkungan seperti suhu, kelembapan, dan curah hujan | TBD |
-| Recommendation    | Menyimpan hasil rekomendasi tanaman                                 | TBD |
-| SearchHistory     | Menyimpan riwayat pencarian atau rekomendasi pengguna               | TBD |
+| Model                  | Deskripsi                                                                      | PIC      |
+|-------------------------|-------------------------------------------------------------------------------|----------|
+| User                    | Model bawaan Django untuk autentikasi (username, password)                    | Jihan    |
+| UserProfile             | Data profil tambahan pengguna (nama, foto profil), relasi 1:1 dengan User     | Hafidz   |
+| Plant                   | Data master tanaman (nama, nama ilmiah, deskripsi, gambar, dll)               | Bobby    |
+| CultivationGuide        | Panduan budidaya suatu tanaman, relasi 1:1 dengan Plant                       | Nicholas |
+| PlantCollection         | Koleksi tanaman pribadi pengguna (foto, judul, deskripsi)                     | Zhafira  |
+| RecommendationHistory   | Snapshot hasil rekomendasi pengguna (termasuk semua datanya)                  | Jihan    |
 
 Model dan PIC masih dapat disesuaikan dengan kebutuhan implementasi.
 
@@ -125,11 +165,13 @@ Model dan PIC masih dapat disesuaikan dengan kebutuhan implementasi.
 
 Rencana penggunaan external API:
 
-- **Weather API** untuk memperoleh data suhu, kelembapan, dan curah hujan, seperti Open-Meteo.
-- **Location/Geolocation API** untuk memperoleh informasi lokasi pengguna, seperti Google Earth Engine.
-- Dataset atau sumber data tanaman untuk memperoleh informasi karakteristik dan kebutuhan tanaman.
+- **Open-Meteo API** — digunakan untuk memperoleh data lingkungan (suhu, kelembapan, dan curah hujan) berdasarkan koordinat lokasi pengguna, sebagai input untuk rule-based recommendation engine. Tidak memerlukan API key.
+  Sumber: https://open-meteo.com/en/docs
 
-**Tautan mock API:** TBD
+- **Perenual API** — digunakan sebagai sumber data awal (seed) untuk Plant Catalog, mencakup informasi kebutuhan cahaya (sunlight), kebutuhan air (watering), dan ukuran tanaman (dimensions). Data diambil satu kali untuk mengisi database lokal, bukan dipanggil pada setiap request, mengikuti batasan free tier (akses ke 3.000 spesies pertama dan 100 request/hari).
+  Sumber: https://perenual.com/docs/api
+
+**Tautan mock API:** Tidak diperlukan untuk saat ini, karena kebutuhan data tanaman telah terpenuhi melalui Perenual API sebagai sumber seed data.
 
 External API yang digunakan dapat berubah sesuai ketersediaan dan feasibility implementasi.
 
@@ -137,23 +179,32 @@ External API yang digunakan dapat berubah sesuai ketersediaan dan feasibility im
 
 ### USER ROLE DAN TARGET USER
 
+#### Guest
+
+Guest dapat:
+
+- Menggunakan fitur Rekomendasi Tanaman.
+
+Hasil rekomendasi untuk Guest tidak disimpan, dan Guest tidak dapat mengakses Katalog Tanaman, Detail Tanaman, Panduan Budidaya, Riwayat Rekomendasi, Profil, maupun Koleksi Tanaman.
+
 #### User
 
 User dapat:
 
-- Memasukkan kondisi lahan.
-- Melihat rekomendasi tanaman.
-- Melihat katalog dan detail tanaman.
-- Melihat riwayat rekomendasi.
+- Menggunakan fitur Rekomendasi Tanaman (hasil dapat disimpan sebagai riwayat).
+- Melihat, mencari, dan memfilter Katalog Tanaman.
+- Melihat Detail Tanaman beserta Panduan Budidaya.
+- CRUD Riwayat Rekomendasi (kecuali mengubah hasil rekomendasi secara manual).
+- CRUD Profil Pengguna.
+- CRUD Koleksi Tanaman.
 
 #### Admin
 
 Admin dapat:
 
-- Menambahkan data tanaman.
-- Mengubah data tanaman.
-- Menghapus data tanaman.
-- Mengelola informasi kebutuhan tanaman.
+- Menggunakan seluruh fitur User.
+- CRUD Katalog Tanaman.
+- CRUD Panduan Budidaya.
 
 #### Target User
 
