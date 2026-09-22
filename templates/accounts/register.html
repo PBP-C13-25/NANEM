@@ -1,0 +1,69 @@
+{% extends "base.html" %} 
+{% block title %}Daftar - Nanem{% endblock %} 
+{% block content %}
+<section class="auth-card">
+    <h1>Buat Akun</h1>
+
+    {% if form.non_field_errors %}
+        <ul class="form-errors">
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <!-- NAMA -->
+        <div class="form-group">
+            <label for="{{ form.first_name.id_for_label }}">Nama</label>
+            {{ form.first_name }} 
+            
+            {% for error in form.first_name.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <!-- USERNAME -->
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }} 
+
+            {% for error in form.username.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">Password</label>
+            {{ form.password1 }} 
+            
+            {% if form.password1.help_text %}
+                <p class="field-hint">{{ form.password1.help_text|safe }}</p>
+            {% endif %} 
+            
+            {% for error in form.password1.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <!-- KONFIRMASI PASSWORD -->
+        <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">Konfirmasi Password</label>
+            {{ form.password2 }} 
+            
+            {% for error in form.password2.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn--primary">Buat Akun</button>
+    </form>
+
+    <p class="auth-card__switch">
+        Sudah punya akun? <a href="{% url 'accounts:login' %}">Login di sini</a>
+    </p>
+</section>
+{% endblock %}

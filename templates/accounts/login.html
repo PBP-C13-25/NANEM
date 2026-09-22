@@ -1,0 +1,49 @@
+{% extends 'base.html' %} 
+{% block tittle %}Login - Nanem{% endblock %} 
+{% block content %}
+
+<section class="auth-card">
+    <h1>Login</h1>
+
+    {% if form.non_field_errors %}
+    <ul class="form-errors">
+        {% for error in form.non_field_errors %}
+            <li>{{ % error % }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <!-- USERNAME -->
+        <div class="form-group">
+            <label for="{{form.username.id_for_label}}">Username</label>
+            {{ form.username}} 
+
+            {% for error in form.username.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group">
+            <label for="{{ form.password.id_for_label}}">Password</label>
+            {{ form.password }} 
+            
+            {% for error in form.username.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <input type="hidden" name="next" value="{{ next }}" />
+
+        <button type="submit" class="btn btn--primary">Login</button>
+    </form>
+
+    <p class="auth-card__switch">
+        Belum punya akun? <a href="{% url 'accounts:register' %}">Daftar di sini</a>
+    </p>
+</section>
+
+{% endblock %}
