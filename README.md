@@ -244,5 +244,5 @@ Informasi praktis cara membudidayakan tanaman: cara menanam, media tanam, kebutu
 
 |                       | Tautan                                                                                                            |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| 🚀 **Deployment PWS** | https://jihan-nabiilah-config.pws.cs.ui.ac.id/                                                                    |
+| 🚀 **Deployment PWS** | https://jihan-nabiilah-nanem.pws.cs.ui.ac.id/                                                                     |
 | 🎨 **Figma (Low-Fi)** | [Buka Figma](https://www.figma.com/design/AwgBPy0JQrH6tXT4aN79Io/Main-Figma?node-id=0-1&p=f&t=HVUroBjAaXXzQvnn-0) |
