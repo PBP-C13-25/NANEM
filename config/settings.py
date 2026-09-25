@@ -151,7 +151,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # --- Redirect auth ---
 LOGIN_URL = "accounts:login"
-LOGIN_REDIRECT_URL = "recommendations:index"  # sesuaikan dengan name URL halaman utama
+LOGIN_REDIRECT_URL = "core:home"  
 LOGOUT_REDIRECT_URL = "accounts:login"
  
 # --- Session & cookie ---

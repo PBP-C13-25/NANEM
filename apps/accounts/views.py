@@ -66,7 +66,7 @@ class SecureLoginView(LoginView):
 class SecureLogoutView(LogoutView):
     """Logout hanya lewat POST (Django 5+), dilindungi CSRF."""
 
-    next_page = reverse_lazy("accounts:login")
+    next_page = reverse_lazy("core:home")
 
 
 class ChangePasswordView(PasswordChangeView):
