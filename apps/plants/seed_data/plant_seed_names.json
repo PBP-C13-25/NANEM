@@ -22,7 +22,7 @@
     },
     {
         "nama_id": "Pakcoy",
-        "query": "Brassica rapa chinensis",
+        "query": "Brassica rapa",
         "category": "sayur",
         "scientific_name": "Brassica rapa subsp. chinensis",
         "note": "Pakcoy/bok choy berbatang tebal-putih, juga disebut Brassica rapa Chinensis Group. Wajib review kelompok dan kultivar; bukan sawi putih pekinensis atau sawi berbunga. Hasil spesies generik belum cukup."
@@ -43,14 +43,14 @@
     },
     {
         "nama_id": "Kubis",
-        "query": "Brassica oleracea capitata",
+        "query": "Brassica oleracea",
         "category": "sayur",
         "scientific_name": "Brassica oleracea var. capitata",
         "note": "Kubis/kol pembentuk krop untuk sayur, juga disebut Capitata Group. Verifikasi kelompok capitata; bukan kailan, brokoli, kale hias atau Cordyline/cabbage palm. Kata cabbage dan spesies Brassica oleracea saja belum cukup."
     },
     {
         "nama_id": "Kailan",
-        "query": "Brassica oleracea alboglabra",
+        "query": "Brassica oleracea",
         "category": "sayur",
         "scientific_name": "Brassica oleracea var. alboglabra",
         "note": "Kailan/Chinese kale, juga disebut Alboglabra Group. Wajib membedakan kelompok ini dari kubis capitata dan kale Barat meskipun spesiesnya sama."
