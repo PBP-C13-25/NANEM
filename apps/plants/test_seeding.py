@@ -88,6 +88,33 @@ class SeedPlantsTests(SimpleTestCase):
             with self.subTest(status=status), self.assertRaises(CommandError):
                 self.command.fetch_candidates(session, "test-key", "test")
 
+    def test_quota_display_uses_response_headers_without_extra_requests(self):
+        for status, remaining in ((200, "91"), (429, "0")):
+            with self.subTest(status=status):
+                output = StringIO()
+                command = seed.Command(stdout=output)
+                session = Mock()
+                response = session.get.return_value
+                response.status_code = status
+                response.headers = {"X-RateLimit-Remaining": remaining, "X-RateLimit-Limit": "100"}
+                response.json.return_value = {"data": []}
+                if status == 429:
+                    with self.assertRaises(CommandError):
+                        command.fetch_candidates(session, "secret-key", "test")
+                else:
+                    command.fetch_candidates(session, "secret-key", "test")
+                session.get.assert_called_once()
+                self.assertIn(f"Sisa kuota: {remaining} / 100", output.getvalue())
+                self.assertNotIn("secret-key", output.getvalue())
+
+    def test_missing_quota_headers_do_not_guess_remaining(self):
+        session = Mock()
+        session.get.return_value.status_code = 200
+        session.get.return_value.headers = {}
+        session.get.return_value.json.return_value = {"data": []}
+        self.command.fetch_candidates(session, "secret-key", "test")
+        self.assertIn("Sisa kuota: tidak tersedia / tidak tersedia", self.command.stdout._out.getvalue())
+
     def test_api_errors_are_not_counted_as_empty_results(self):
         session = Mock()
         session.get.return_value.status_code = 200

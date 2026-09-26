@@ -187,6 +187,15 @@ class Command(BaseCommand):
         except requests.RequestException as exc:
             # Request exception text can contain the URL and secret API key.
             raise CommandError(f"Perenual request failed ({type(exc).__name__}); rerun --fetch to resume.") from None
+        # Read quota from this response only; never spend another request to check it.
+        quota = []
+        for header in ("X-RateLimit-Remaining", "X-RateLimit-Limit"):
+            value = response.headers.get(header)
+            quota.append(value if isinstance(value, str) and value.isascii() and value.isdecimal() else "tidak tersedia")
+        self.stdout.write(
+            f"Perenual HTTP {response.status_code} | Sisa kuota: {quota[0]} / {quota[1]} "
+            "request (menurut respons ini)"
+        )
         if response.status_code == 429:
             raise CommandError("Perenual rate limit reached (HTTP 429). Stop and retry later.")
         if response.status_code in (401, 403):

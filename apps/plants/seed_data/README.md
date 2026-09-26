@@ -29,6 +29,13 @@ Hasil disimpan ke `apps/plants/seed_data/plant_candidates.json`. File baru dibua
 saat fetch; tidak perlu membuatnya sendiri. Database tanaman tidak diubah.
 Setiap pencarian baru menggunakan satu request API, dengan jeda 0,75 detik.
 
+Setiap respons fetch menampilkan kuota dari header, misalnya
+`Perenual HTTP 200 | Sisa kuota: 91 / 100 request (menurut respons ini)`.
+Angka tersebut adalah sisa kuota pada saat respons diterima, bukan jumlah yang
+sudah terpakai. Header yang tidak disediakan ditampilkan sebagai `tidak tersedia`.
+Tidak ada request tambahan untuk memeriksa kuota; entri yang memakai cache dan
+mode impor offline tidak menampilkan pembaruan kuota.
+
 Semua kandidat pada **halaman pertama** respons disimpan beserta data yang
 diberikan API dan metadata pagination. Halaman berikutnya dan endpoint detail
 tidak diambil otomatis. Jika `pagination.last_page` lebih dari 1, kandidat di file
