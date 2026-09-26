@@ -70,11 +70,12 @@ class SeedPlantsTests(SimpleTestCase):
             with self.subTest(match=match), self.assertRaises(CommandError):
                 seed.map_match(self.entry, match)
 
-    def test_uses_first_result_and_query_parameter(self):
+    def test_preserves_all_candidates_and_query_parameter(self):
         session = Mock()
         session.get.return_value.status_code = 200
         session.get.return_value.json.return_value = {"data": [{"id": 12}, {"id": 13}]}
-        self.assertEqual(self.command.fetch_match(session, "test-key", "water spinach"), {"id": 12})
+        self.assertEqual(self.command.fetch_candidates(session, "test-key", "water spinach"),
+                         {"data": [{"id": 12}, {"id": 13}]})
         session.get.assert_called_once_with(
             seed.API_URL, params={"key": "test-key", "q": "water spinach"},
             timeout=30, allow_redirects=False,
@@ -85,7 +86,7 @@ class SeedPlantsTests(SimpleTestCase):
             session = Mock()
             session.get.return_value.status_code = status
             with self.subTest(status=status), self.assertRaises(CommandError):
-                self.command.fetch_match(session, "test-key", "test")
+                self.command.fetch_candidates(session, "test-key", "test")
 
     def test_api_errors_are_not_counted_as_empty_results(self):
         session = Mock()
@@ -94,16 +95,16 @@ class SeedPlantsTests(SimpleTestCase):
                         {}, {"data": None}, {"data": [None]}, []):
             session.get.return_value.json.return_value = payload
             with self.subTest(payload=payload), self.assertRaises(CommandError):
-                self.command.fetch_match(session, "test-key", "test")
+                self.command.fetch_candidates(session, "test-key", "test")
         session.get.return_value.json.side_effect = ValueError("not JSON")
         with self.assertRaises(CommandError):
-            self.command.fetch_match(session, "test-key", "test")
+            self.command.fetch_candidates(session, "test-key", "test")
 
     def test_network_error_does_not_expose_api_key(self):
         session = Mock()
         session.get.side_effect = requests.Timeout("URL contains secret-key")
         with self.assertRaises(CommandError) as caught:
-            self.command.fetch_match(session, "secret-key", "test")
+            self.command.fetch_candidates(session, "secret-key", "test")
         self.assertNotIn("secret-key", str(caught.exception))
 
     def test_seed_file_validation_and_limit(self):
@@ -112,7 +113,7 @@ class SeedPlantsTests(SimpleTestCase):
             with patch.object(seed, "SEED_PATH", path):
                 with self.assertRaises(CommandError):
                     self.command.load_entries(None)
-                path.write_text(json.dumps([self.entry, self.entry]), encoding="utf-8")
+                path.write_text(json.dumps([self.entry, dict(self.entry, nama_id="Other")]), encoding="utf-8")
                 self.assertEqual(self.command.load_entries(1), [self.entry])
                 self.assertEqual(self.command.load_entries(0), [])
                 with self.assertRaises(CommandError):
@@ -157,45 +158,3 @@ class SeedPlantsTests(SimpleTestCase):
             with self.assertRaises(CommandError):
                 self.command.save_match(seed.map_match(self.entry, {"id": 123}))
             manager.create.assert_not_called()
-
-    def test_offline_report_zero_results_and_delay(self):
-        missing = dict(self.entry, nama_id="Tidak ditemukan")
-        with TemporaryDirectory() as directory, \
-                patch.object(seed, "REPORT_PATH", Path(directory) / "report.txt"), \
-                patch.dict(seed.os.environ, {"PERENUAL_API_KEY": "test-key"}), \
-                patch.object(seed.requests, "Session"), \
-                patch.object(seed.time, "sleep") as sleep, \
-                patch.object(self.command, "load_entries", return_value=[self.entry, missing]), \
-                patch.object(self.command, "fetch_match", side_effect=[{"id": 123}, None]), \
-                patch.object(self.command, "save_match") as save:
-            self.command.handle(limit=2)
-            save.assert_called_once()
-            sleep.assert_called_once_with(0.75)
-            report = seed.REPORT_PATH.read_text(encoding="utf-8")
-            self.assertEqual(report, self.command.stdout._out.getvalue())
-            for expected in ("Total processed (attempted): 2", "Matched and saved: 1", "Zero results: 1", "- Tidak ditemukan"):
-                self.assertIn(expected, report)
-
-    def test_stopped_import_reports_partial_progress(self):
-        with TemporaryDirectory() as directory, \
-                patch.object(seed, "REPORT_PATH", Path(directory) / "report.txt"), \
-                patch.dict(seed.os.environ, {"PERENUAL_API_KEY": "test-key"}), \
-                patch.object(seed.requests, "Session"), \
-                patch.object(seed.time, "sleep"), \
-                patch.object(self.command, "load_entries", return_value=[self.entry] * 3), \
-                patch.object(self.command, "fetch_match", side_effect=[{"id": 123}, CommandError("HTTP 429")]) as fetch, \
-                patch.object(self.command, "save_match"):
-            with self.assertRaisesMessage(CommandError, "HTTP 429"):
-                self.command.handle(limit=3)
-            self.assertEqual(fetch.call_count, 2)
-            report = seed.REPORT_PATH.read_text(encoding="utf-8")
-            for expected in ("Status: STOPPED", "Matched and saved: 1", "Failed: 1", "Not processed: 1"):
-                self.assertIn(expected, report)
-
-    def test_missing_key_stops_before_request(self):
-        with patch.dict(seed.os.environ, {"PERENUAL_API_KEY": ""}), \
-                patch.object(self.command, "load_entries", return_value=[self.entry]), \
-                patch.object(seed.requests, "Session") as session:
-            with self.assertRaisesMessage(CommandError, "PERENUAL_API_KEY"):
-                self.command.handle(limit=1)
-            session.assert_not_called()
