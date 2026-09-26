@@ -1,5 +1,5 @@
 {% extends 'base.html' %} 
-{% block tittle %}Login - Nanem{% endblock %} 
+{% block title %}Login - Nanem{% endblock %}
 {% block content %}
 
 <section class="auth-card">
@@ -31,7 +31,7 @@
             <label for="{{ form.password.id_for_label}}">Password</label>
             {{ form.password }} 
             
-            {% for error in form.username.errors %}
+            {% for error in form.password.errors %}
                 <p class="field-error">{{ error }}</p>
             {% endfor %}
         </div>
