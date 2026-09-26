@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NANEM{% endblock %}</title>
+
+    {% comment %} CSS {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+
+</head>
+<body>
+    {% comment %} NAVBAR {% endcomment %}
+    {% include "components/navbar.html" %}
+
+    <main class="page-container">
+    {% comment %} FOR MESSAGGE OR ANOUNCEMNT {% endcomment %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="message message--{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% comment %} KONTEN {% endcomment %}
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% comment %} FOOTER {% endcomment %}
+    {% include "components/footer.html" %}
+
+    {% comment %} SCRIPTS {% endcomment %}
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
