@@ -9,7 +9,7 @@
 ![Open-Meteo](https://img.shields.io/badge/Open--Meteo-API-2E86C1?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-In%20Development-F39C12?style=for-the-badge)
 
-🌐 [**Live Demo (PWS)**](https://jihan-nabiilah-config.pws.cs.ui.ac.id/) &nbsp;|&nbsp; 🎨 [**Desain Figma (Low-Fi)**](https://www.figma.com/design/AwgBPy0JQrH6tXT4aN79Io/Main-Figma?node-id=0-1&p=f&t=HVUroBjAaXXzQvnn-0)
+🌐 [**Live Demo (PWS)**](https://jihan-nabiilah-nanem.pws.cs.ui.ac.id/) &nbsp;|&nbsp; 🎨 [**Desain Figma (Low-Fi)**](https://www.figma.com/design/AwgBPy0JQrH6tXT4aN79Io/Main-Figma?node-id=0-1&p=f&t=HVUroBjAaXXzQvnn-0)
 
 </div>
 
