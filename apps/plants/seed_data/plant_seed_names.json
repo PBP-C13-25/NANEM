@@ -1,0 +1,252 @@
+[
+    {
+        "nama_id": "Kangkung",
+        "query": "water spinach",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Bayam",
+        "query": "spinach",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Sawi",
+        "query": "bok choy",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Pokcoy",
+        "query": "pak choi",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Selada",
+        "query": "lettuce",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Seledri",
+        "query": "celery",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Kubis",
+        "query": "cabbage",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Kailan",
+        "query": "chinese kale",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Daun bawang",
+        "query": "scallion",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Kucai",
+        "query": "chives",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Tomat",
+        "query": "tomato",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Tomat ceri",
+        "query": "cherry tomato",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Cabai rawit",
+        "query": "chili pepper",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Cabai merah",
+        "query": "red chili pepper",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Terong",
+        "query": "eggplant",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Mentimun",
+        "query": "cucumber",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Paprika",
+        "query": "bell pepper",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Labu siam",
+        "query": "chayote",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Buncis",
+        "query": "green bean",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Kacang panjang",
+        "query": "yardlong bean",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Oyong",
+        "query": "luffa",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Wortel",
+        "query": "carrot",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Lobak",
+        "query": "radish",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Kemangi",
+        "query": "basil",
+        "category": "herbal"
+    },
+    {
+        "nama_id": "Jahe",
+        "query": "ginger",
+        "category": "herbal"
+    },
+    {
+        "nama_id": "Serai",
+        "query": "lemongrass",
+        "category": "herbal"
+    },
+    {
+        "nama_id": "Kunyit",
+        "query": "turmeric",
+        "category": "herbal"
+    },
+    {
+        "nama_id": "Daun mint",
+        "query": "mint",
+        "category": "herbal"
+    },
+    {
+        "nama_id": "Oregano",
+        "query": "oregano",
+        "category": "herbal"
+    },
+    {
+        "nama_id": "Rosemary",
+        "query": "rosemary",
+        "category": "herbal"
+    },
+    {
+        "nama_id": "Daun salam",
+        "query": "bay leaf",
+        "category": "herbal"
+    },
+    {
+        "nama_id": "Lengkuas",
+        "query": "galangal",
+        "category": "herbal"
+    },
+    {
+        "nama_id": "Singkong",
+        "query": "cassava",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Ketela rambat",
+        "query": "sweet potato",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Kentang",
+        "query": "potato",
+        "category": "sayur"
+    },
+    {
+        "nama_id": "Stroberi",
+        "query": "strawberry",
+        "category": "buah"
+    },
+    {
+        "nama_id": "Jeruk nipis",
+        "query": "lime",
+        "category": "buah"
+    },
+    {
+        "nama_id": "Pepaya",
+        "query": "dwarf papaya",
+        "category": "buah"
+    },
+    {
+        "nama_id": "Pisang",
+        "query": "dwarf banana",
+        "category": "buah"
+    },
+    {
+        "nama_id": "Anggur",
+        "query": "grape",
+        "category": "buah"
+    },
+    {
+        "nama_id": "Melon",
+        "query": "melon",
+        "category": "buah"
+    },
+    {
+        "nama_id": "Semangka",
+        "query": "watermelon",
+        "category": "buah"
+    },
+    {
+        "nama_id": "Lidah mertua",
+        "query": "snake plant",
+        "category": "hias"
+    },
+    {
+        "nama_id": "Sirih gading",
+        "query": "pothos",
+        "category": "hias"
+    },
+    {
+        "nama_id": "Monstera",
+        "query": "monstera",
+        "category": "hias"
+    },
+    {
+        "nama_id": "Kaktus",
+        "query": "cactus",
+        "category": "hias"
+    },
+    {
+        "nama_id": "Aglaonema",
+        "query": "chinese evergreen",
+        "category": "hias"
+    },
+    {
+        "nama_id": "Sukulen",
+        "query": "succulent",
+        "category": "hias"
+    },
+    {
+        "nama_id": "Peace lily",
+        "query": "peace lily",
+        "category": "hias"
+    },
+    {
+        "nama_id": "Calathea",
+        "query": "calathea",
+        "category": "hias"
+    }
+]
