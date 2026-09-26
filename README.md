@@ -9,7 +9,7 @@
 ![Open-Meteo](https://img.shields.io/badge/Open--Meteo-API-2E86C1?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-In%20Development-F39C12?style=for-the-badge)
 
-🌐 [**Live Demo (PWS)**](https://jihan-nabiilah-config.pws.cs.ui.ac.id/) &nbsp;|&nbsp; 🎨 [**Desain Figma (Low-Fi)**](https://www.figma.com/design/AwgBPy0JQrH6tXT4aN79Io/Main-Figma?node-id=0-1&p=f&t=HVUroBjAaXXzQvnn-0)
+🌐 [**Live Demo (PWS)**](https://jihan-nabiilah-nanem.pws.cs.ui.ac.id/) &nbsp;|&nbsp; 🎨 [**Desain Figma (Low-Fi)**](https://www.figma.com/design/AwgBPy0JQrH6tXT4aN79Io/Main-Figma?node-id=0-1&p=f&t=HVUroBjAaXXzQvnn-0)
 
 </div>
 
@@ -55,20 +55,27 @@
 
 Pengguna cukup memasukkan:
 
-| Input              | Keterangan                         |
-| ------------------ | ---------------------------------- |
-| 📍 **Lokasi**      | Latitude & longitude               |
-| 🪴 **Media tanam** | Tanah atau hidroponik (media lain) |
+| Input | Wajib? | Keterangan |
+| ----- | ------ | ---------- |
+| 📍 **Lokasi** | Ya | Latitude & longitude |
+| 🪴 **Media tanam** | Ya | Tanah atau hidroponik (media lain) |
+| 📐 **Luas lahan** | Tidak | Luas area tanam yang tersedia dalam m²; angka positif, boleh desimal |
+| ☀️ **Sunlight** | Tidak | Paparan sinar matahari pada area tanam; pilihan matahari penuh, sebagian, atau teduh |
+
+Luas lahan dan sunlight merupakan parameter opsional untuk memperinci kecocokan rekomendasi. Pengguna tetap bisa meminta rekomendasi dengan lokasi dan media tanam saja. Sunlight diisi berdasarkan kondisi area tanam pengguna, bukan diasumsikan dari cuaca lokasi.
+
+> Bagian ini merupakan spesifikasi fitur yang akan diimplementasikan. Form, model domain, dan mesin rekomendasi saat ini masih berupa skeleton; input opsional ini belum tersedia di halaman aplikasi.
 
 Setelah itu sistem akan:
 
 1. Mengambil data **suhu, kelembapan, dan curah hujan** dari koordinat tersebut lewat **Open-Meteo API**.
 2. Mencocokkan data cuaca dan media tanam dengan karakteristik tanaman di database menggunakan **rule-based recommendation engine** (bukan machine learning).
+   Jika diisi, luas lahan dicocokkan dengan kebutuhan ruang tanam dan sunlight dengan kebutuhan cahaya tanaman. Parameter kosong tidak dianggap nol atau teduh dan tidak mengurangi skor; faktor yang datanya belum tersedia tidak dinilai. Bobot dan aturan pencocokan ditentukan saat implementasi bersama PIC rekomendasi dan katalog.
 3. Menampilkan daftar tanaman beserta **tingkat kecocokan** dan informasi kebutuhannya.
 
 ```mermaid
 flowchart LR
-    A[📍 Input: Lokasi + Media Tanam] --> B[☁️ Ambil data cuaca<br/>Open-Meteo API]
+    A[📍 Input: Lokasi + Media Tanam<br/>Opsional: Luas Lahan + Sunlight] --> B[☁️ Ambil data cuaca<br/>Open-Meteo API]
     B --> C[⚙️ Rule-based Engine<br/>cocokkan dengan data Plant]
     C --> D[🌱 Output: Daftar tanaman<br/>+ tingkat kecocokan]
     D --> E{Sudah login?}
@@ -125,16 +132,16 @@ Mengelola autentikasi (register, login, logout), sistem rekomendasi tanaman berb
 
 | Tahap          | Detail                                                                                                               |
 | -------------- | -------------------------------------------------------------------------------------------------------------------- |
-| 📥 **Input**   | Lokasi (latitude & longitude) dan media tanam (tanah / hidroponik / lainnya)                                         |
-| ⚙️ **Proses**  | Ambil suhu, kelembapan, curah hujan dari Open-Meteo, lalu cocokkan dengan data `Plant` dan media tanam yang didukung |
-| 📤 **Output**  | Daftar tanaman rekomendasi + skor kecocokan + alasan singkat (faktor cuaca mana yang cocok / kurang cocok)           |
-| 💾 **Riwayat** | Khusus user login: hasil disimpan sebagai snapshot (input, data cuaca saat itu, dan daftar rekomendasi)              |
+| 📥 **Input**   | Wajib: lokasi (latitude & longitude) dan media tanam. Opsional: luas lahan (m²) dan sunlight |
+| ⚙️ **Proses**  | Cocokkan cuaca dari Open-Meteo dan media tanam dengan `Plant`; evaluasi ruang tanam dan cahaya jika input serta data pembanding tersedia |
+| 📤 **Output**  | Daftar tanaman + skor kecocokan + alasan per faktor yang dinilai; tandai faktor yang belum dapat dinilai |
+| 💾 **Riwayat** | Khusus user login: snapshot semua input (termasuk luas lahan dan sunlight, atau null jika kosong), data cuaca, faktor yang dinilai, dan hasil |
 
 **CRUD**
 
 | Operasi   | Deskripsi                                                                                     |
 | --------- | --------------------------------------------------------------------------------------------- |
-| ➕ Create | Generate rekomendasi dari input lokasi & media tanam, hasil disimpan sebagai snapshot riwayat |
+| ➕ Create | Generate rekomendasi dari lokasi & media tanam, ditambah luas lahan dan sunlight jika diisi; simpan snapshot riwayat |
 | 👁️ Read   | Melihat daftar riwayat dan detail satu riwayat                                                |
 | ✏️ Update | Mengubah nama lahan pada riwayat (hasil rekomendasi tidak bisa diubah manual)                 |
 | 🗑️ Delete | Menghapus riwayat rekomendasi                                                                 |
@@ -197,10 +204,10 @@ Informasi praktis cara membudidayakan tanaman: cara menanam, media tanam, kebutu
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | `User`                  | Model bawaan Django untuk autentikasi (username, password)                                                                         | Jihan    |
 | `UserProfile`           | Data profil tambahan (nama, foto profil), relasi 1:1 dengan `User`                                                                 | Hafidz   |
-| `Plant`                 | Data master tanaman (nama, nama ilmiah, deskripsi, gambar, rentang suhu/kelembapan/curah hujan ideal, media tanam yang cocok, dll) | Bobby    |
+| `Plant`                 | Data master tanaman: identitas, gambar, rentang cuaca ideal, media tanam, kebutuhan cahaya, dan kebutuhan ruang tanam sebagai pembanding input opsional | Bobby    |
 | `CultivationGuide`      | Panduan budidaya tanaman, relasi 1:1 dengan `Plant`                                                                                | Nicholas |
 | `PlantCollection`       | Koleksi tanaman pribadi pengguna (foto, judul, deskripsi)                                                                          | Zhafira  |
-| `RecommendationHistory` | Snapshot hasil rekomendasi (input, data cuaca, hasil)                                                                              | Jihan    |
+| `RecommendationHistory` | Snapshot input lokasi, media, luas lahan dan sunlight (nullable), data cuaca, faktor penilaian, dan hasil rekomendasi | Jihan    |
 
 > ⚠️ Model dan PIC masih dapat disesuaikan dengan kebutuhan implementasi.
 
