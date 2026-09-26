@@ -1,252 +1,359 @@
 [
     {
         "nama_id": "Kangkung",
-        "query": "water spinach",
-        "category": "sayur"
+        "query": "Ipomoea aquatica",
+        "category": "sayur",
+        "scientific_name": "Ipomoea aquatica",
+        "note": "Kangkung konsumsi. Cocokkan spesies; bukan Ipomoea hias atau tanaman lain yang hanya bernama spinach."
     },
     {
         "nama_id": "Bayam",
-        "query": "spinach",
-        "category": "sayur"
+        "query": "Amaranthus tricolor",
+        "category": "sayur",
+        "scientific_name": "Amaranthus tricolor",
+        "note": "Target awal bayam cabut hijau lokal dalam genus Amaranthus. Wajib review varietas hijau konsumsi, bukan kultivar hias; tolak Spinacia oleracea. Jangan query spinach polos. Amaranthus lain perlu konfirmasi sebelum mengganti target."
     },
     {
         "nama_id": "Sawi",
-        "query": "bok choy",
-        "category": "sayur"
+        "query": "Brassica rapa",
+        "category": "sayur",
+        "scientific_name": "Brassica rapa",
+        "note": "Sawi hijau/putih konsumsi dalam Brassica rapa sesuai brief. Wajib review kelompok budidaya, misalnya parachinensis atau pekinensis; bukan turnip atau tanaman hias. Jangan otomatis memilih pakcoy yang memiliki entri terpisah; spesies saja belum cukup membedakan kelompoknya."
     },
     {
-        "nama_id": "Pokcoy",
-        "query": "pak choi",
-        "category": "sayur"
+        "nama_id": "Pakcoy",
+        "query": "Brassica rapa chinensis",
+        "category": "sayur",
+        "scientific_name": "Brassica rapa subsp. chinensis",
+        "note": "Pakcoy/bok choy berbatang tebal-putih, juga disebut Brassica rapa Chinensis Group. Wajib review kelompok dan kultivar; bukan sawi putih pekinensis atau sawi berbunga. Hasil spesies generik belum cukup."
     },
     {
         "nama_id": "Selada",
-        "query": "lettuce",
-        "category": "sayur"
+        "query": "Lactuca sativa",
+        "category": "sayur",
+        "scientific_name": "Lactuca sativa",
+        "note": "Pilih selada daun/keriting untuk lalapan. Review kultivar; bukan selada air Nasturtium officinale."
     },
     {
         "nama_id": "Seledri",
-        "query": "celery",
-        "category": "sayur"
+        "query": "Apium graveolens",
+        "category": "sayur",
+        "scientific_name": "Apium graveolens var. secalinum",
+        "note": "Seledri daun/Chinese celery untuk taburan sup, juga disebut Secalinum Group. Wajib review varietas; bukan seledri batang besar Dulce Group atau celeriac. Hasil generik Apium graveolens belum cukup."
     },
     {
         "nama_id": "Kubis",
-        "query": "cabbage",
-        "category": "sayur"
+        "query": "Brassica oleracea capitata",
+        "category": "sayur",
+        "scientific_name": "Brassica oleracea var. capitata",
+        "note": "Kubis/kol pembentuk krop untuk sayur, juga disebut Capitata Group. Verifikasi kelompok capitata; bukan kailan, brokoli, kale hias atau Cordyline/cabbage palm. Kata cabbage dan spesies Brassica oleracea saja belum cukup."
     },
     {
         "nama_id": "Kailan",
-        "query": "chinese kale",
-        "category": "sayur"
+        "query": "Brassica oleracea alboglabra",
+        "category": "sayur",
+        "scientific_name": "Brassica oleracea var. alboglabra",
+        "note": "Kailan/Chinese kale, juga disebut Alboglabra Group. Wajib membedakan kelompok ini dari kubis capitata dan kale Barat meskipun spesiesnya sama."
     },
     {
         "nama_id": "Daun bawang",
-        "query": "scallion",
-        "category": "sayur"
+        "query": "Allium fistulosum",
+        "category": "sayur",
+        "scientific_name": "Allium fistulosum",
+        "note": "Daun bawang/bunching onion. Bukan bawang prei/leek dalam kelompok Allium ampeloprasum; cocokkan spesies, bukan hanya nama scallion."
     },
     {
         "nama_id": "Kucai",
-        "query": "chives",
-        "category": "sayur"
+        "query": "Allium tuberosum",
+        "category": "sayur",
+        "scientific_name": "Allium tuberosum",
+        "note": "PRIORITAS DISAMBIGUASI: garlic chives/kucai Asia. Wajib cocokkan scientific_name dengan Allium tuberosum; tolak Allium schoenoprasum (chives Barat). Jangan query chives polos atau menerima nama umum saja. Perlu review manual."
     },
     {
         "nama_id": "Tomat",
-        "query": "tomato",
-        "category": "sayur"
+        "query": "Solanum lycopersicum",
+        "category": "sayur",
+        "scientific_name": "Solanum lycopersicum",
+        "note": "Tomat sayur biasa berbuah ukuran normal. Review kultivar dan ukuran buah; tomat ceri punya entri terpisah. Nama lama Lycopersicon esculentum perlu dikenali sebagai sinonim saat review."
     },
     {
         "nama_id": "Tomat ceri",
-        "query": "cherry tomato",
-        "category": "sayur"
+        "query": "Solanum lycopersicum cerasiforme",
+        "category": "sayur",
+        "scientific_name": "Solanum lycopersicum var. cerasiforme",
+        "note": "Cherry tomato berbuah kecil. Wajib review varietas/kultivar dan ukuran buah; hasil generik Solanum lycopersicum tidak otomatis membedakannya dari tomat biasa."
     },
     {
         "nama_id": "Cabai rawit",
-        "query": "chili pepper",
-        "category": "sayur"
+        "query": "Capsicum frutescens",
+        "category": "sayur",
+        "scientific_name": "Capsicum frutescens",
+        "note": "Target sesuai brief: cabai kecil pedas dari Capsicum frutescens. Verifikasi spesies dan kultivar konsumsi; bukan cabai besar Capsicum annuum atau cabai hias."
     },
     {
         "nama_id": "Cabai merah",
-        "query": "red chili pepper",
-        "category": "sayur"
+        "query": "Capsicum annuum",
+        "category": "sayur",
+        "scientific_name": "Capsicum annuum",
+        "note": "Cabai besar/keriting pedas untuk konsumsi. Wajib review kultivar dan bentuk buah; bukan Capsicum frutescens atau bell pepper manis. Scientific_name Capsicum annuum saja tidak cukup karena paprika adalah spesies yang sama."
     },
     {
         "nama_id": "Terong",
-        "query": "eggplant",
-        "category": "sayur"
+        "query": "Solanum melongena",
+        "category": "sayur",
+        "scientific_name": "Solanum melongena",
+        "note": "Terong ungu/hijau konsumsi biasa. Pilih kultivar sayur, bukan Solanum hias atau spesies kerabat yang berbeda."
     },
     {
         "nama_id": "Mentimun",
-        "query": "cucumber",
-        "category": "sayur"
+        "query": "Cucumis sativus",
+        "category": "sayur",
+        "scientific_name": "Cucumis sativus",
+        "note": "Timun konsumsi biasa. Verifikasi spesies; bukan melon atau tanaman lain yang hanya disebut cucumber."
     },
     {
         "nama_id": "Paprika",
-        "query": "bell pepper",
-        "category": "sayur"
+        "query": "Capsicum annuum",
+        "category": "sayur",
+        "scientific_name": "Capsicum annuum",
+        "note": "PRIORITAS DISAMBIGUASI: wajib cocok spesies Capsicum annuum DAN ada bukti kultivar bell pepper/sweet pepper berbuah besar manis, misalnya kelompok Grossum. Spesies sama dengan cabai merah sehingga scientific_name saja belum cukup. Jangan auto-accept record generik atau cabai pedas; perlu review manual varietas/deskripsi/foto."
     },
     {
         "nama_id": "Labu siam",
-        "query": "chayote",
-        "category": "sayur"
+        "query": "Sechium edule",
+        "category": "sayur",
+        "scientific_name": "Sechium edule",
+        "note": "Chayote/labu siam konsumsi. Bukan labu kuning Cucurbita; gunakan identitas spesies, bukan kata squash saja."
     },
     {
         "nama_id": "Buncis",
-        "query": "green bean",
-        "category": "sayur"
+        "query": "Phaseolus vulgaris",
+        "category": "sayur",
+        "scientific_name": "Phaseolus vulgaris",
+        "note": "Pilih kultivar snap/green bean untuk polong muda sebagai sayur, bukan semata kultivar biji kering. Bukan kacang panjang Vigna unguiculata subsp. sesquipedalis."
     },
     {
         "nama_id": "Kacang panjang",
-        "query": "yardlong bean",
-        "category": "sayur"
+        "query": "Vigna unguiculata sesquipedalis",
+        "category": "sayur",
+        "scientific_name": "Vigna unguiculata subsp. sesquipedalis",
+        "note": "Yardlong/asparagus bean berpolong panjang, juga disebut Sesquipedalis Group. Verifikasi kelompok; bukan buncis Phaseolus vulgaris atau cowpea generik tanpa bukti kacang panjang."
     },
     {
         "nama_id": "Oyong",
-        "query": "luffa",
-        "category": "sayur"
+        "query": "Luffa acutangula",
+        "category": "sayur",
+        "scientific_name": "Luffa acutangula",
+        "note": "Oyong/gambas berusuk untuk sayur. Bukan pare Momordica charantia atau spesies Luffa lain."
     },
     {
         "nama_id": "Wortel",
-        "query": "carrot",
-        "category": "sayur"
+        "query": "Daucus carota sativus",
+        "category": "sayur",
+        "scientific_name": "Daucus carota subsp. sativus",
+        "note": "Wortel budidaya konsumsi. Verifikasi bentuk budidaya sativus; bukan wild carrot/Queen Anne's lace atau kultivar bunga hias."
     },
     {
         "nama_id": "Lobak",
-        "query": "radish",
-        "category": "sayur"
-    },
-    {
-        "nama_id": "Kemangi",
-        "query": "basil",
-        "category": "herbal"
-    },
-    {
-        "nama_id": "Jahe",
-        "query": "ginger",
-        "category": "herbal"
-    },
-    {
-        "nama_id": "Serai",
-        "query": "lemongrass",
-        "category": "herbal"
-    },
-    {
-        "nama_id": "Kunyit",
-        "query": "turmeric",
-        "category": "herbal"
-    },
-    {
-        "nama_id": "Daun mint",
-        "query": "mint",
-        "category": "herbal"
-    },
-    {
-        "nama_id": "Oregano",
-        "query": "oregano",
-        "category": "herbal"
-    },
-    {
-        "nama_id": "Rosemary",
-        "query": "rosemary",
-        "category": "herbal"
-    },
-    {
-        "nama_id": "Daun salam",
-        "query": "bay leaf",
-        "category": "herbal"
-    },
-    {
-        "nama_id": "Lengkuas",
-        "query": "galangal",
-        "category": "herbal"
+        "query": "Raphanus sativus",
+        "category": "sayur",
+        "scientific_name": "Raphanus sativus",
+        "note": "Lobak putih/daikon. Wajib review kultivar berakar putih panjang; bukan radish merah kecil atau wild radish."
     },
     {
         "nama_id": "Singkong",
-        "query": "cassava",
-        "category": "sayur"
+        "query": "Manihot esculenta",
+        "category": "sayur",
+        "scientific_name": "Manihot esculenta",
+        "note": "Singkong/cassava budidaya untuk konsumsi. Pilih kultivar pertanian, bukan Manihot hias."
     },
     {
         "nama_id": "Ketela rambat",
-        "query": "sweet potato",
-        "category": "sayur"
+        "query": "Ipomoea batatas",
+        "category": "sayur",
+        "scientific_name": "Ipomoea batatas",
+        "note": "Ubi jalar untuk konsumsi. Wajib review kultivar penghasil umbi, bukan ornamental sweet potato vine."
     },
     {
         "nama_id": "Kentang",
-        "query": "potato",
-        "category": "sayur"
+        "query": "Solanum tuberosum",
+        "category": "sayur",
+        "scientific_name": "Solanum tuberosum",
+        "note": "Kentang budidaya konsumsi biasa; bukan Solanum hias atau ubi jalar."
     },
     {
         "nama_id": "Stroberi",
-        "query": "strawberry",
-        "category": "buah"
+        "query": "Fragaria ananassa",
+        "category": "buah",
+        "scientific_name": "Fragaria × ananassa",
+        "note": "Target awal stroberi kebun hibrida untuk pot/taman. Nama API bisa memakai x atau tanpa tanda hibrida; verifikasi sinonim. Bukan mock strawberry Potentilla indica."
     },
     {
         "nama_id": "Jeruk nipis",
-        "query": "lime",
-        "category": "buah"
+        "query": "Citrus aurantiifolia",
+        "category": "buah",
+        "scientific_name": "Citrus × aurantiifolia",
+        "note": "Jeruk nipis dapur/key lime. Nama API bisa tanpa tanda hibrida; cocokkan takson. Tolak Citrus hystrix (jeruk purut/kaffir lime), lemon atau citrus lain yang hanya disebut lime."
+    },
+    {
+        "nama_id": "Mangga",
+        "query": "Mangifera indica",
+        "category": "buah",
+        "scientific_name": "Mangifera indica",
+        "note": "Varietas mangga konsumsi bebas. Prioritaskan kultivar dwarf/kompak untuk pot jika data kandidat mendukung; jika tidak, varietas biasa boleh. Jangan mengarang sifat dwarf."
     },
     {
         "nama_id": "Pepaya",
-        "query": "dwarf papaya",
-        "category": "buah"
+        "query": "Carica papaya",
+        "category": "buah",
+        "scientific_name": "Carica papaya",
+        "note": "Prioritaskan kultivar dwarf/pot jika jelas dari data kandidat; jika tidak ada, pepaya biasa boleh. Jangan mengasumsikan semua Carica papaya berukuran dwarf."
     },
     {
         "nama_id": "Pisang",
-        "query": "dwarf banana",
-        "category": "buah"
+        "query": "Musa acuminata",
+        "category": "buah",
+        "scientific_name": "Musa acuminata",
+        "note": "Target pencarian awal pisang buah budidaya turunan Musa acuminata, misalnya kultivar Cavendish; bukan klaim semua pisang satu spesies. Pilih kultivar konsumsi untuk pot/pekarangan, prioritaskan kompak jika ada bukti. Varietas bebas, tetapi hibrida Musa lain perlu konfirmasi sebelum mengganti target; jangan menerima pisang hias/berbiji hanya dari nama banana."
     },
     {
         "nama_id": "Anggur",
-        "query": "grape",
-        "category": "buah"
+        "query": "Vitis vinifera",
+        "category": "buah",
+        "scientific_name": "Vitis vinifera",
+        "note": "Target anggur meja konsumsi. Review kultivar buah segar, bukan hanya anggur wine atau tanaman rambat hias bernama grape."
     },
     {
         "nama_id": "Melon",
-        "query": "melon",
-        "category": "buah"
+        "query": "Cucumis melo",
+        "category": "buah",
+        "scientific_name": "Cucumis melo",
+        "note": "Melon buah manis konsumsi. Review kelompok/kultivar; bukan mentimun atau varietas hias."
     },
     {
         "nama_id": "Semangka",
-        "query": "watermelon",
-        "category": "buah"
+        "query": "Citrullus lanatus",
+        "category": "buah",
+        "scientific_name": "Citrullus lanatus",
+        "note": "Semangka konsumsi biasa. Verifikasi kultivar buah manis; bukan varietas hias atau kerabat berbuah pahit."
+    },
+    {
+        "nama_id": "Kemangi",
+        "query": "Ocimum africanum",
+        "category": "herbal",
+        "scientific_name": "Ocimum × africanum",
+        "note": "Target awal kemangi beraroma lemon untuk lalapan, juga dikenal sebagai lemon basil/Ocimum × citriodorum. Nama lokal kemangi dapat mencakup beberapa takson; wajib review kandidat dan sinonim, jangan mengganti ke Ocimum americanum tanpa konfirmasi. Bukan basil Italia berdaun besar Ocimum basilicum hanya karena nama umumnya basil."
+    },
+    {
+        "nama_id": "Jahe",
+        "query": "Zingiber officinale",
+        "category": "herbal",
+        "scientific_name": "Zingiber officinale",
+        "note": "Jahe dapur. Bukan ornamental ginger atau spesies Zingiber lain."
+    },
+    {
+        "nama_id": "Serai",
+        "query": "Cymbopogon citratus",
+        "category": "herbal",
+        "scientific_name": "Cymbopogon citratus",
+        "note": "Sereh dapur/culinary lemongrass. Bukan serai wangi citronella seperti Cymbopogon nardus atau Cymbopogon winterianus."
+    },
+    {
+        "nama_id": "Kunyit",
+        "query": "Curcuma longa",
+        "category": "herbal",
+        "scientific_name": "Curcuma longa",
+        "note": "Kunyit dapur biasa. Bukan temulawak atau Curcuma hias; cocokkan spesies."
+    },
+    {
+        "nama_id": "Daun mint",
+        "query": "Mentha piperita",
+        "category": "herbal",
+        "scientific_name": "Mentha × piperita",
+        "note": "Target awal peppermint untuk minuman; nama API bisa tanpa tanda hibrida. Mint mencakup beberapa spesies: Mentha spicata/spearmint perlu konfirmasi jika dipilih sebagai alternatif, bukan dianggap spesies yang sama."
+    },
+    {
+        "nama_id": "Oregano",
+        "query": "Origanum vulgare",
+        "category": "herbal",
+        "scientific_name": "Origanum vulgare",
+        "note": "Oregano untuk masakan. Bukan Cuban oregano atau Mexican oregano yang berbeda genus/spesies meskipun nama umumnya sama."
+    },
+    {
+        "nama_id": "Rosemary",
+        "query": "Salvia rosmarinus",
+        "category": "herbal",
+        "scientific_name": "Salvia rosmarinus",
+        "note": "Rosemary untuk masakan. Nama lama Rosmarinus officinalis adalah sinonim yang perlu dikenali saat review; jangan menerima Salvia lain."
+    },
+    {
+        "nama_id": "Daun salam",
+        "query": "Syzygium polyanthum",
+        "category": "herbal",
+        "scientific_name": "Syzygium polyanthum",
+        "note": "PRIORITAS DISAMBIGUASI: daun salam Indonesia. Wajib cocokkan scientific_name dengan Syzygium polyanthum; tolak Laurus nobilis (bay leaf Barat), yang berbeda spesies. Jangan query bay leaf polos atau menerima nama umum saja. Perlu review manual."
+    },
+    {
+        "nama_id": "Lengkuas",
+        "query": "Alpinia galanga",
+        "category": "herbal",
+        "scientific_name": "Alpinia galanga",
+        "note": "Lengkuas/laos dapur (greater galangal). Bukan kencur Kaempferia galanga atau lesser galangal Alpinia officinarum."
     },
     {
         "nama_id": "Lidah mertua",
-        "query": "snake plant",
-        "category": "hias"
+        "query": "Dracaena trifasciata",
+        "category": "hias",
+        "scientific_name": "Dracaena trifasciata",
+        "note": "Sinonim lama Sansevieria trifasciata boleh dipertimbangkan setelah verifikasi. Bukan semua Dracaena atau semua tanaman bernama snake plant."
     },
     {
         "nama_id": "Sirih gading",
-        "query": "pothos",
-        "category": "hias"
+        "query": "Epipremnum aureum",
+        "category": "hias",
+        "scientific_name": "Epipremnum aureum",
+        "note": "Sirih gading/golden pothos. Cocokkan spesies; bukan sirih konsumsi Piper betle atau Philodendron yang bentuk daunnya mirip."
     },
     {
         "nama_id": "Monstera",
-        "query": "monstera",
-        "category": "hias"
+        "query": "Monstera deliciosa",
+        "category": "hias",
+        "scientific_name": "Monstera deliciosa",
+        "note": "Target Monstera deliciosa. Tolak Monstera adansonii dan spesies Monstera lain meskipun sama-sama berdaun berlubang."
     },
     {
         "nama_id": "Kaktus",
         "query": "cactus",
-        "category": "hias"
+        "category": "hias",
+        "scientific_name": null,
+        "note": "PERLU REVIEW MANUAL: kategori besar dalam Cactaceae, bukan satu spesies pasti. Tetap cari kandidat; pilih spesies budidaya yang umum setelah review, bukan otomatis hasil pertama. Popularitas tidak bisa ditentukan dari urutan API. Tolak Euphorbia atau sukulen non-kaktus yang hanya disebut cactus. Nama ilmiah final mengikuti kandidat nyata yang dipilih."
     },
     {
         "nama_id": "Aglaonema",
-        "query": "chinese evergreen",
-        "category": "hias"
+        "query": "Aglaonema",
+        "category": "hias",
+        "scientific_name": null,
+        "note": "PERLU REVIEW MANUAL: genus dengan banyak spesies, hibrida, dan kultivar, bukan satu spesies pasti. Tetap cari kandidat dan prioritaskan varietas budidaya umum yang identitasnya jelas setelah review. Jangan auto-accept hasil pertama atau menebak popularitas dari ranking API; nama ilmiah final mengikuti kandidat terpilih."
     },
     {
         "nama_id": "Sukulen",
         "query": "succulent",
-        "category": "hias"
+        "category": "hias",
+        "scientific_name": null,
+        "note": "PERLU REVIEW MANUAL: kategori bentuk pertumbuhan lintas genus/famili, bukan satu spesies pasti. Tetap cari dan pilih satu kandidat nyata secara manual; utamakan non-kaktus agar berbeda dari entri Kaktus. Jangan auto-accept hasil pertama atau mengarang nama ilmiah tunggal untuk kategori ini."
     },
     {
         "nama_id": "Peace lily",
-        "query": "peace lily",
-        "category": "hias"
+        "query": "Spathiphyllum",
+        "category": "hias",
+        "scientific_name": "Spathiphyllum wallisii",
+        "note": "Target awal Spathiphyllum wallisii, peace lily yang umum dibudidayakan. Cari dalam genus Spathiphyllum lalu review spesies/kultivar; spesies lain perlu konfirmasi, bukan otomatis dipilih karena hasil pertama. Bukan Lilium atau calla lily."
     },
     {
         "nama_id": "Calathea",
-        "query": "calathea",
-        "category": "hias"
+        "query": "Calathea",
+        "category": "hias",
+        "scientific_name": null,
+        "note": "PERLU REVIEW MANUAL: genus dengan banyak spesies/kultivar, bukan satu spesies pasti; banyak tanaman hias berlabel Calathea kini ditempatkan dalam Goeppertia. Tetap cari kandidat dan verifikasi identitas serta sinonim per spesies. Jangan auto-accept hasil pertama atau mengarang nama ilmiah; jika kosong, review query sinonim sebelum mencari lagi."
     }
 ]
