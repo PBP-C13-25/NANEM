@@ -51,6 +51,20 @@ class SeedPlantsTests(SimpleTestCase):
         self.assertNotIn("space_needed", fields)
         self.assertNotIn("temp_min", fields)
 
+    def test_long_image_url_is_preserved(self):
+        url = "https://example.com/" + "a" * 300 + ".jpg"
+        fields = seed.map_match(self.entry, {
+            "id": 123, "default_image": {"original_url": url},
+        })
+        self.assertEqual(fields["image_url"], url)
+
+    def test_invalid_or_oversized_image_url_is_still_rejected(self):
+        for url in ("not-a-url", "https://example.com/" + "a" * 2048):
+            with self.subTest(url_length=len(url)), self.assertRaisesMessage(CommandError, "image_url"):
+                seed.map_match(self.entry, {
+                    "id": 123, "default_image": {"original_url": url},
+                })
+
     def test_invalid_match_id_is_rejected(self):
         for match in ({}, {"id": None}, {"id": True}, {"id": "wrong"}):
             with self.subTest(match=match), self.assertRaises(CommandError):
