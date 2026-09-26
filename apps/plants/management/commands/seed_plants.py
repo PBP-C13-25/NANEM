@@ -16,7 +16,7 @@ from apps.plants.models import Plant
 SEED_DIR = Path(__file__).resolve().parents[2] / "seed_data"
 SEED_PATH = SEED_DIR / "plant_seed_names.json"
 REPORT_PATH = SEED_DIR / "seed_report.txt"
-API_URL = "https://perenual.com/api/species-list"
+API_URL = "https://perenual.com/api/v2/species-list"
 REQUEST_DELAY = 0.75
 
 
