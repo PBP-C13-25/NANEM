@@ -1,12 +1,9 @@
-from django.test import TestCase
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.urls import reverse
-
-# Create your tests here.
 
 User = get_user_model()
 GOOD_PW = "Kopi-Susu-Enak-92"
@@ -30,7 +27,7 @@ class RegisterTests(Base):
 
     def test_register_ok_hashed_and_logged_in(self):
         r = self.client.post(self.url, self.data())
-        self.assertRedirects(r, "/home/", fetch_redirect_response=False)
+        self.assertRedirects(r, reverse("core:home"))
         u = User.objects.get(username="ani")
         self.assertNotEqual(u.password, GOOD_PW)
         self.assertTrue(u.password.startswith("pbkdf2_"))
@@ -68,7 +65,7 @@ class LoginLogoutTests(Base):
 
     def test_login_ok(self):
         r = self.client.post(self.url, {"username": "budi", "password": GOOD_PW})
-        self.assertRedirects(r, "/home/", fetch_redirect_response=False)
+        self.assertRedirects(r, reverse("core:home"))
 
     def test_session_key_rotates_on_login(self):
         self.client.get(self.url)
@@ -92,12 +89,13 @@ class LoginLogoutTests(Base):
         for nxt in ["https://evil.com/", "//evil.com/", "javascript:alert(1)"]:
             r = self.client.post(f"{self.url}?next={nxt}", {"username": "budi", "password": GOOD_PW})
             self.assertEqual(r.status_code, 302)
-            self.assertEqual(r["Location"], "/home/", nxt)
+            self.assertEqual(r["Location"], reverse("core:home"), nxt)
             self.client.logout()
 
     def test_safe_next_allowed(self):
-        r = self.client.post(f"{self.url}?next=/user/", {"username": "budi", "password": GOOD_PW})
-        self.assertEqual(r["Location"], "/user/")
+        next_url = reverse("accounts:password_change")
+        r = self.client.post(f"{self.url}?next={next_url}", {"username": "budi", "password": GOOD_PW})
+        self.assertRedirects(r, next_url)
 
     def test_lockout_after_5_failures_even_with_right_password(self):
         for _ in range(5):
@@ -146,6 +144,14 @@ class PasswordChangeTests(Base):
     url = reverse("accounts:password_change")
     new = "Teh-Manis-Dingin-55"
 
+    def test_form_renders_for_logged_in_user(self):
+        self.client.force_login(self.user)
+        r = self.client.get(self.url)
+        self.assertEqual(r.status_code, 200)
+        self.assertTemplateUsed(r, "accounts/change_password.html")
+        for name in ("old_password", "new_password1", "new_password2", "csrfmiddlewaretoken"):
+            self.assertContains(r, f'name="{name}"')
+
     def test_anonymous_redirected(self):
         r = self.client.get(self.url)
         self.assertEqual(r.status_code, 302)
@@ -155,7 +161,8 @@ class PasswordChangeTests(Base):
         self.client.force_login(self.user)
         r = self.client.post(self.url, {"old_password": GOOD_PW, "new_password1": self.new, "new_password2": self.new})
         self.assertEqual(r.status_code, 302)
-        self.assertEqual(self.client.get("/user/").status_code, 200)  # masih login
+        self.assertEqual(self.client.get(self.url).status_code, 200)
+        self.assertEqual(int(self.client.session["_auth_user_id"]), self.user.pk)
         self.client.logout()
         self.assertTrue(self.client.login(username="budi", password=self.new))
 
@@ -167,6 +174,7 @@ class PasswordChangeTests(Base):
         self.assertTrue(self.user.check_password(GOOD_PW))
 
 
+@override_settings(ROOT_URLCONF="apps.accounts.test_urls")
 class AuthorizationTests(Base):
     def test_guest_redirected_everywhere(self):
         for p in ["/user/", "/regular/", "/adminonly/", "/owned/"]:
