@@ -133,3 +133,8 @@ static_root/
 
 # Kalau nanti pakai frontend build tools (npm/node)
 node_modules/
+
+# Local artifacts generated while fetching and reviewing plant seed candidates
+apps/plants/seed_data/plant_candidates.json
+apps/plants/seed_data/seed_report.txt
+apps/plants/seed_data/curation_review.md
