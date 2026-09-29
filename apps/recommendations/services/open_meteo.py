@@ -59,18 +59,18 @@ def fetch_environment(latitude: float, longitude: float) -> dict:
     if not isinstance(payload, dict) or payload.get("error"):
         raise OpenMeteoError("Open-Meteo menolak permintaan.")
 
-    # map ke dict
     try:
         hourly = payload["hourly"]
         temps = hourly["temperature_2m"]
         humidities = hourly["relative_humidity_2m"]
         precipitation = hourly["precipitation"]
         valid_precip = [p for p in precipitation if p is not None]
+        # curah hujan per hari = total hujan / jumlah hari data
         days = max(len(valid_precip) / 24, 1)
         environment = {
             "temperature": round(_mean(temps), 1),
             "humidity": round(_mean(humidities), 1),
-            "rainfall": round(sum(valid_precip) / days, 1), # curah hujan per hari = total hujan / jumlah hari data
+            "rainfall": round(sum(valid_precip) / days, 1),
             "period_days": round(days),
             "source": "open-meteo",
             "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
