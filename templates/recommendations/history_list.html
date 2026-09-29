@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Riwayat Rekomendasi - Tanem{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Riwayat Rekomendasi</h1>
+
+    {% if histories %}
+        <div class="history-grid">
+        {% for history in histories %}
+            {% with top=history.recommended_plants|first %}
+            <article class="history-card">
+            <a href="{% url 'recommendations:history_detail' history.pk %}" class="history-card__title">
+                <strong>{{ history.land_name }}</strong>
+            </a>
+            <p class="field-hint">{{ history.latitude }}, {{ history.longitude }}</p>
+
+            {% if top %}
+                <p>Top rekomendasi: <strong>{{ top.plant_name }}</strong> &mdash; {{ top.match_percentage }}% cocok</p>
+            {% else %}
+                <p class="field-hint">Belum ada tanaman yang cocok saat itu.</p>
+            {% endif %}
+
+            <p class="field-hint">{{ history.created_at|date:"d M Y H:i" }}</p>
+
+            <div class="history-card__actions">
+                <button type="button" class="link-button"
+                        onclick="document.getElementById('edit-dialog-{{ history.pk }}').showModal()">
+                Ubah nama
+                </button>
+                <button type="button" class="link-button link-button--danger"
+                        onclick="document.getElementById('delete-dialog-{{ history.pk }}').showModal()">
+                Hapus
+                </button>
+            </div>
+            </article>
+
+            {# ---- Modal: ubah nama lahan (prefilled) ---- #}
+            <dialog id="edit-dialog-{{ history.pk }}" class="modal">
+            <form method="post" action="{% url 'recommendations:history_update' history.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{% url 'recommendations:history_list' %}">
+                <h2>Ubah Nama Lahan</h2>
+                <div class="form-group">
+                <label for="land_name-{{ history.pk }}">Nama lahan</label>
+                <input type="text" name="land_name" id="land_name-{{ history.pk }}"
+                        value="{{ history.land_name }}" maxlength="100" required>
+                </div>
+                <div class="modal__actions">
+                <button type="button" class="btn"
+                        onclick="document.getElementById('edit-dialog-{{ history.pk }}').close()">Batal</button>
+                <button type="submit" class="btn btn--primary">Simpan</button>
+                </div>
+            </form>
+            </dialog>
+
+            {# ---- Modal: konfirmasi hapus ---- #}
+            <dialog id="delete-dialog-{{ history.pk }}" class="modal">
+            <form method="post" action="{% url 'recommendations:history_delete' history.pk %}">
+                {% csrf_token %}
+                <h2>Hapus riwayat?</h2>
+                <p>Riwayat <strong>{{ history.land_name }}</strong> akan dihapus permanen.</p>
+                <div class="modal__actions">
+                <button type="button" class="btn"
+                        onclick="document.getElementById('delete-dialog-{{ history.pk }}').close()">Batal</button>
+                <button type="submit" class="btn btn--danger">Ya, hapus</button>
+                </div>
+            </form>
+            </dialog>
+            {% endwith %}
+        {% endfor %}
+        </div>
+
+        {% if is_paginated %}
+        <nav>
+            {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">&larr; Sebelumnya</a>{% endif %}
+            Halaman {{ page_obj.number }} dari {{ page_obj.paginator.num_pages }}
+            {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Berikutnya &rarr;</a>{% endif %}
+        </nav>
+        {% endif %}
+    {% else %}
+        <p>Belum ada riwayat. <a href="{% url 'recommendations:index' %}">Coba rekomendasi pertamamu</a>.</p>
+    {% endif %}
+</section>
+{% endblock %}
