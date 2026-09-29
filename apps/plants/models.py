@@ -7,18 +7,20 @@ class Plant(models.Model):
         ("herbal", "Herbal"),
         ("hias", "Hias"),
     ]
-    SUNLIGHT_CHOICES = [
-        ("full_sun", "Full sun"),
-        ("partial_shade", "Partial shade"),
-        ("shade", "Shade"),
-    ]
     SPACE_NEEDED_CHOICES = [
         ("small", "Small"),
         ("medium", "Medium"),
         ("large", "Large"),
     ]
 
-    perenual_id = models.IntegerField(null=True, blank=True)
+    # Django's auto-generated id is NANEM's primary key. This is only
+    # external-source metadata used to make API imports idempotent.
+    perenual_id = models.IntegerField(
+        null=True,
+        blank=True,
+        unique=True,
+        editable=False,
+    )
     name = models.CharField(max_length=200)
     scientific_name = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
@@ -35,7 +37,12 @@ class Plant(models.Model):
 
     supports_soil = models.BooleanField(default=True)
     supports_hydroponic = models.BooleanField(default=False)
-    sunlight = models.CharField(max_length=20, choices=SUNLIGHT_CHOICES)
+    sunlight = models.JSONField(default=list, blank=True)
+    watering = models.CharField(max_length=20, blank=True)
+    care_level = models.CharField(max_length=20, blank=True)
+    # Null means the API did not provide the value; it is different from False.
+    drought_tolerant = models.BooleanField(null=True, blank=True)
+    indoor = models.BooleanField(null=True, blank=True)
     space_needed = models.CharField(max_length=10, choices=SPACE_NEEDED_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
