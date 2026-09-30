@@ -218,9 +218,9 @@ Informasi praktis cara membudidayakan tanaman: cara menanam, media tanam, kebutu
 | API                                                 | Fungsi                                                                                        |    API Key     |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------- | :------------: |
 | ☁️ **[Open-Meteo](https://open-meteo.com/en/docs)** | Data suhu, kelembapan, dan curah hujan berdasarkan koordinat, sebagai input rule-based engine | ❌ Tidak perlu |
-| 🌿 **[Perenual](https://perenual.com/docs/api)**    | Sumber data awal (seed) katalog tanaman: sunlight, watering, dimensions                       |    ✅ Perlu    |
+| 🌿 **[Perenual](https://perenual.com/docs/api)**    | Sumber kandidat tanaman dan sebagian detail katalog (sunlight, watering, care level, dll.)   |    ✅ Perlu    |
 
-**Catatan Perenual:** data diambil **satu kali** untuk mengisi database lokal, tidak dipanggil di setiap request. Ini mengikuti batasan free tier (3.000 spesies pertama, 100 request/hari).
+**Catatan Perenual:** API dipakai saat seeding, bukan pada setiap halaman katalog. Paket gratis membatasi detail spesies ke ID 1–3000 dan 100 request/hari. Tanaman yang tidak punya match tepercaya tetap dapat dicatat sebagai data NANEM lokal. Lihat [alur kurasi katalog](apps/plants/seed_data/README.md).
 
 **Mock API:** tidak diperlukan untuk saat ini karena kebutuhan data tanaman sudah terpenuhi lewat seed dari Perenual.
 

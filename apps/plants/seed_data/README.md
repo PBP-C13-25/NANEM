@@ -1,138 +1,100 @@
-# Seeding tanaman: cari, review, lalu impor
+# Seeding katalog NANEM
 
-Command ini memiliki dua mode terpisah. Pemanggilan tanpa mode, termasuk
-`seed_plants --limit 10` yang lama, akan ditolak agar tidak langsung mengimpor
-hasil pertama. Jalankan command dari root project `NANEM` dengan environment aktif.
+Jalankan dari root project dengan environment Django aktif. Jangan jalankan
+proses fetch dan import bersamaan.
 
-## 1. Siapkan daftar pencarian
+## Berkas yang digunakan
 
-Edit `apps/plants/seed_data/plant_seed_names.json`:
+- `plant_seed_names.json`: 51 nama Indonesia, kategori, target nama ilmiah,
+  query pencarian, dan catatan disambiguasi.
+- `plant_selections.json`: keputusan final untuk setiap nama. Status
+  `approved` memakai ID Perenual yang sudah diperiksa; status `local_only`
+  memakai ID `null` dan alasan. Urutan kedua berkas harus sama.
+- `plant_details_curated.json`: ringkasan field detail yang diperoleh dari
+  Perenual dan aman disimpan di Git. Nilai kosong tidak diisi secara spekulatif.
+- `plant_candidates.json`, `plant_details.json`, dan `seed_report.txt`:
+  cache/laporan lokal yang di-ignore Git. File kandidat dan detail mentah dapat
+  berisi URL gambar sementara; jangan commit atau bagikan API key.
 
-- `nama_id`: nama Indonesia untuk ditampilkan; harus unik dalam daftar.
-- `query`: kata pencarian Perenual, sebaiknya nama ilmiah yang sudah diverifikasi.
-- `category`: `sayur`, `buah`, `herbal`, atau `hias`.
+## Ambil kandidat dan detail
 
-Jangan menebak kecocokan hanya dari urutan hasil pencarian API.
-
-## 2. Ambil kandidat ke file lokal
-
-Pastikan `PERENUAL_API_KEY` terbaca dari environment atau `.env`, lalu:
-
-```bash
-python manage.py seed_plants --fetch --limit 10
-```
-
-Ini membaca **10 entri pertama** dari daftar, bukan 10 entri baru setelah cache
-dilewati. Hilangkan `--limit` untuk memproses seluruh daftar.
-
-Hasil disimpan ke `apps/plants/seed_data/plant_candidates.json`. File baru dibuat
-saat fetch; tidak perlu membuatnya sendiri. Database tanaman tidak diubah.
-Setiap pencarian baru menggunakan satu request API, dengan jeda 0,75 detik.
-
-Setiap respons fetch menampilkan kuota dari header, misalnya
-`Perenual HTTP 200 | Sisa kuota: 91 / 100 request (menurut respons ini)`.
-Angka tersebut adalah sisa kuota pada saat respons diterima, bukan jumlah yang
-sudah terpakai. Header yang tidak disediakan ditampilkan sebagai `tidak tersedia`.
-Tidak ada request tambahan untuk memeriksa kuota; entri yang memakai cache dan
-mode impor offline tidak menampilkan pembaruan kuota.
-
-Semua kandidat pada **halaman pertama** respons disimpan beserta data yang
-diberikan API dan metadata pagination. Halaman berikutnya dan endpoint detail
-tidak diambil otomatis. Jika `pagination.last_page` lebih dari 1, kandidat di file
-belum mencakup seluruh hasil pencarian; persempit query jika belum ada yang tepat.
-Deskripsi atau sunlight yang tidak tersedia tetap kosong saat diimpor.
-
-Progres disimpan setelah setiap respons. Saat command diulang:
-
-- Query yang sama dan sudah selesai memakai cache, termasuk hasil kosong.
-- Query yang berubah dicari ulang; pilihan ID sebelumnya dibatalkan.
-- Koneksi gagal/timeout atau proses terputus dapat dicoba lagi dari entri yang
-  belum selesai, tanpa mengulang pencarian yang sudah tersimpan.
-- Error auth/rate limit menghentikan fetch. Perbaiki akses/tunggu kuota sebelum
-  mencoba lagi; command tidak melakukan retry otomatis.
-
-Untuk sengaja mencari ulang 10 entri pertama:
+Atur `PERENUAL_API_KEY` di `.env` atau environment. Fetch kandidat dari
+endpoint `/api/v2/species-list`:
 
 ```bash
-python manage.py seed_plants --fetch --refresh --limit 10
+python manage.py seed_plants --fetch
 ```
 
-`--refresh` mengganti kandidat dan mengosongkan pilihan lama untuk entri yang
-diproses, sehingga perlu review ulang. Cache entri lain tetap disimpan.
+Satu query baru memakai satu request; entri selesai dengan query yang sama
+memakai cache, termasuk hasil kosong. `--limit N` membatasi ke N entri
+pertama, bukan N request baru. `--refresh` memaksa request ulang untuk
+entri yang diproses.
 
-## 3. Pilih kandidat di file lokal
+Setelah ID pada `plant_selections.json` ditinjau, ambil detail untuk ID
+1–3000 sesuai cakupan paket gratis Perenual:
 
-Buka `plant_candidates.json` setelah fetch selesai. Periksa nama ilmiah, nama
-umum, dan data kandidat lain. Edit hanya `selected_perenual_id` untuk pilihan.
-
-Contoh bentuk record (ID dan nama kandidat di bawah **hanya ilustrasi**):
-
-```json
-{
-  "nama_id": "Nama tanaman lokal",
-  "query": "kata pencarian",
-  "category": "sayur",
-  "source_url": "https://perenual.com/api/v2/species-list",
-  "status": "needs_review",
-  "fetched_at": "2026-01-01T00:00:00+00:00",
-  "candidates": [
-    {"id": 123, "common_name": "Nama dari API", "scientific_name": ["Nama ilmiah"]}
-  ],
-  "selected_perenual_id": 123,
-  "pagination": {"current_page": 1, "last_page": 1}
-}
+```bash
+python manage.py seed_plants --fetch-details
 ```
 
-Gunakan ID dari kandidat asli sebagai angka (tanpa tanda kutip). Biarkan `null`
-jika belum yakin atau tidak ada yang cocok. Jangan mengarang ID atau mengubah
-data kandidat, query, maupun status di file hasil; ubah query di file seed, lalu
-fetch ulang. Jangan edit file kandidat saat fetch sedang berjalan, dan jangan
-menjalankan dua proses fetch/import sekaligus.
+Mode detail melewati entri `local_only` dan ID di atas 3000. Hasil lengkap
+disimpan setelah setiap respons dan dipakai ulang saat command dijalankan
+lagi. HTTP 401/403/429 menghentikan proses; 404 disimpan sebagai tidak
+tersedia. Kedua mode fetch hanya menulis cache, bukan tabel `Plant`.
+Mengambil detail baru **tidak otomatis** mengubah berkas kurasi yang dilacak
+Git: tinjau respons dan tambahkan hanya field yang benar ke
+`plant_details_curated.json`.
 
-`needs_review` berarti hasil fetch tersedia; pilihan ditentukan oleh
-`selected_perenual_id`, bukan dengan mengubah status. `no_results` berarti
-pencarian selesai tanpa hasil; `pending`/`failed` akan dicoba lagi saat fetch.
+Dokumentasi resmi: https://perenual.com/docs/api
+dan https://perenual.com/subscription-api-pricing
 
-## 4. Impor pilihan tanpa request API
+## Import offline
+
+Jalankan migration, lalu cek import:
+
+```bash
+python manage.py migrate
+python manage.py seed_plants --import-selected --dry-run
+```
+
+Dry-run melewati jalur tulis dalam transaksi yang dibatalkan. Setelah hasilnya
+benar:
 
 ```bash
 python manage.py seed_plants --import-selected
 ```
 
-Mode ini tidak memerlukan API key. Hanya pilihan untuk entri yang masih ada pada
-daftar seed yang diproses. Nama dan kategori menggunakan daftar seed terkini.
-Pilihan dari query yang sudah berubah, ID yang tidak ada pada kandidat, dan satu
-ID yang dipilih untuk beberapa nama akan ditolak sebelum menulis database.
+Import membaca manifest dan detail terkurasi. Bila ada cache detail lokal,
+field yang tersedia di sana juga dipakai. Tidak ada API request saat import.
+Semua 51 entri diproses, termasuk `local_only`. Tanaman dicocokkan menurut
+nama NANEM atau ID Perenual, lalu diperbarui agar rerun tidak menduplikasi
+data. ID utama `Plant.id` selalu milik NANEM. Satu batch dibatalkan bila
+ada konflik.
 
-Record cocok berdasarkan ID Perenual atau nama akan diperbarui, bukan ditambah
-duplikat. Jika dua record database berbeda cocok, impor dihentikan agar konflik
-diselesaikan manual. Seluruh batch impor menggunakan transaksi: jika gagal,
-perubahan batch itu dibatalkan. Nilai iklim, ruang, dan dukungan media pada record
-lama tidak ditimpa. Field API yang kosong dapat mengosongkan field API lama.
+Nilai `sunlight` disimpan sebagai list. Nilai `False` yang dikirim API
+dibedakan dari `null` yang berarti tidak diketahui. URL gambar dengan
+query bertanda waktu dan gambar `upgrade_access` ditolak; UI perlu memakai
+placeholder bila `image_url` kosong.
 
-Tanaman yang sudah masuk dari command versi sebelumnya tidak otomatis dihapus
-atau diperiksa ulang. Review record tersebut juga; memilih `null` tidak menghapus
-data tanaman yang sebelumnya sudah tersimpan.
+Rentang suhu, kelembapan, curah hujan, dan kebutuhan ruang belum tersedia
+dari data yang telah diverifikasi. Field itu tetap kosong sampai ditinjau
+manual dengan sumber yang jelas. Nilai dukungan media tanam memakai default
+model saat record baru dibuat; record lama tidak ditimpa untuk field ini.
+Pada respons detail akun gratis yang diperiksa, field
+`xTemperatureTolence` justru berisi pesan untuk upgrade ke Supreme, bukan
+angka suhu. Jangan menyalin pesan tersebut menjadi nilai tanaman.
 
-Kedua mode mencetak laporan dan mengganti `seed_report.txt` dengan laporan
-terbaru. File ini bukan sumber progres; sumber progres adalah file kandidat.
-Simpan salinan file kandidat/database sebelum perubahan besar bila perlu.
+## Status kurasi
 
-## Test offline
+Saat ini 26 tanaman memakai ID Perenual dan 25 menjadi data NANEM lokal.
+Pencarian ulang terhadap 11 query spesifik menyisakan tujuh query tanpa
+hasil: Cabai rawit, Labu siam, Kacang panjang, Oyong, Kemangi, Daun salam,
+dan Sukulen. Beberapa query lain menghasilkan tanaman yang salah nama
+umum, misalnya `cherry tomato` menghasilkan Hosta hias. Keputusan per
+tanaman dan alasannya ada di `plant_selections.json`.
 
-Tanpa API sungguhan, tanpa membuat database test, dan tanpa migration:
+Test:
 
 ```bash
-DJANGO_SETTINGS_MODULE=config.settings python - <<'PY'
-import django
-import unittest
-
-django.setup()
-suite = unittest.defaultTestLoader.loadTestsFromNames([
-    "apps.plants.test_seeding",
-    "apps.plants.test_seed_workflow",
-])
-result = unittest.TextTestRunner(verbosity=1).run(suite)
-raise SystemExit(not result.wasSuccessful())
-PY
+python manage.py test apps.plants.test_seeding apps.plants.test_seed_workflow
 ```
