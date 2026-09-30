@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
+
+class RegularUserRequiredMixin(UserPassesTestMixin):
+    """Mixin untuk memastikan hanya user biasa (bukan staff/admin) yang bisa mengakses halaman."""
+    def test_func(self):
+        return self.request.user.is_authenticated and not self.request.user.is_staff
+=======
 """
 Mixin authorization yang dipakai SEMUA module (Bob, Nicholas, Hafidz, Zhafira).
 
@@ -68,3 +77,4 @@ class OwnedQuerysetMixin:
 
     def get_queryset(self):
         return super().get_queryset().filter(**{self.owner_field: self.request.user})
+>>>>>>> db218f74883372ccc4c4764b22c75bea06bf01b3
