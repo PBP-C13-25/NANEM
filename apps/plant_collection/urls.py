@@ -6,6 +6,6 @@ from . import views
 app_name = "collection"
 
 urlpatterns = [
-    path("", views.collection_page(), name="index"),
+    path("", views.collection_page, name="index"),
 ]
 
