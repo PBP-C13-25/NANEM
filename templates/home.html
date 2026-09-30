@@ -1,0 +1,20 @@
+<!-- ! UNTUK LANDING PAGE MASIH BISA DIKEMBANGIN LGI LAYOUT DAN CSSNYA -->
+{% extends 'base.html' %}
+
+{% block title %}Nanem{% endblock %}
+ 
+{% block content %}
+<section class="landing">
+    <h1>Nanem</h1>
+    <p>Rekomendati tanaman yang cocok buat kondisi rumahmu!</p>
+
+    {% if user.is_authenticated %}
+        <p>Halo {{ user.first_name|default:user.username }}</p>
+    {% else %}
+        <div class="landing__actions">
+            <a href="{% url 'accounts:login' %}" class="btn btn--primary">Login</a>
+            <a href="{% url 'accounts:register' %}" class="btn">Daftar</a>
+        </div>
+    {% endif%}
+</section>
+{% endblock %}
