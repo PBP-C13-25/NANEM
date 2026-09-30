@@ -23,11 +23,9 @@ from apps.plant_collection.views import collection_page
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path("profile/", include("apps.profiles.urls")),
-    path('admin/', admin.site.urls),
     path("", include("apps.core.urls")),
-    path('accounts/', include("apps.accounts.urls") ),
+    path('accounts/', include("apps.accounts.urls")),
+    path("profile/", include("apps.profiles.urls")),
     path("collection/", include("apps.plant_collection.urls")),
     path("recommendation/", include("apps.recommendations.urls")),
     path("cultivation/", include("apps.cultivation.urls")),
