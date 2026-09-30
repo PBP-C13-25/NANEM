@@ -5,6 +5,10 @@
     border: 1px solid rgba(130, 149, 123, 0.15) !important;
     box-shadow: 0 10px 30px rgba(44, 62, 45, 0.08) !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 700px !important; /* Dikecilkan agar tidak terlalu lebar */
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .card-profile:hover {
@@ -63,4 +67,4 @@
 .form-control:focus {
     border-color: #5c7255 !important;
     box-shadow: 0 0 0 4px rgba(92, 114, 85, 0.15) !important;
-}   
+}

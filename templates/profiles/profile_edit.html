@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<!-- CSS profil -->
+<link rel="stylesheet" href="{% static 'css/pages/profile.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-7">
-            <div class="card p-4 p-md-5" style="background: #ffffff; border-radius: 20px; border: 1px solid rgba(130, 149, 123, 0.2); box-shadow: 0 10px 30px rgba(44, 62, 45, 0.08);">
-                <div class="card-body">
+        <div class="col-12">
+            <div class="card card-profile p-4 p-md-5">
+                <div class="card-body px-lg-5 py-lg-4">
                     <h2 class="fw-bold mb-1" style="color: #2c3e2d;">Edit Profil</h2>
                     <p class="text-muted small mb-4">Perbarui informasi akun dan data diri kamu di sini.</p>
                     <hr class="mb-4" style="border-color: #e2dfd4; opacity: 1;">
@@ -40,12 +46,15 @@
                             {% endif %}
                         </div>
                         
-                        <!-- action buttons -->
+                       <!-- action buttons -->
                         <div class="d-flex align-items-center justify-content-between mt-4 pt-2">
-                            <button type="submit" class="btn text-white fw-semibold px-4 py-2 shadow-sm" style="background-color: #5c7255; border-radius: 10px;">
+                            <!-- tombol simpan perubahan -->
+                            <button type="submit" class="btn btn-sage fw-semibold px-4 py-2 shadow-sm">
                                 Simpan Perubahan
                             </button>
-                            <a href="{% url 'profiles:profile' %}" class="btn btn-outline-secondary px-4 py-2" style="border-radius: 10px; font-weight: 500;">
+                            
+                            <!-- tombol batal -->
+                            <a href="{% url 'profiles:profile' %}" class="btn btn-brown fw-semibold px-4 py-2 shadow-sm text-center">
                                 Batal
                             </a>
                         </div>
