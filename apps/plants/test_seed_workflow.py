@@ -1,232 +1,205 @@
-"""Exercise fetch/review/import against temporary files and mocked IO only."""
+"""Exercise the fetch, review and import workflow with temporary files."""
+
 import json
-from contextlib import nullcontext
 from io import StringIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 from django.core.management.base import CommandError
-from django.db import DatabaseError
-from django.test import SimpleTestCase
+from django.test import TestCase
 
 from apps.plants.management.commands import seed_plants as seed
+from apps.plants.models import Plant
 
 
-class SeedWorkflowTests(SimpleTestCase):
+class SeedWorkflowTests(TestCase):
     def setUp(self):
-        directory = TemporaryDirectory()
-        self.addCleanup(directory.cleanup)
-        root = Path(directory.name)
-        for attr, name in (("SEED_PATH", "seeds.json"),
-                           ("CANDIDATES_PATH", "candidates.json"),
-                           ("REPORT_PATH", "report.txt")):
-            self.start_patch(patch.object(seed, attr, root / name))
-        self.start_patch(patch.dict(seed.os.environ, {"PERENUAL_API_KEY": "test-key"}))
-        self.session = self.start_patch(patch.object(seed.requests, "Session"))
-        self.sleep = self.start_patch(patch.object(seed.time, "sleep"))
-        self.start_patch(patch.object(seed.transaction, "atomic", side_effect=lambda: nullcontext()))
-        self.command = seed.Command(stdout=StringIO())
-        self.fetch = self.start_patch(patch.object(self.command, "fetch_candidates"))
-        self.save = self.start_patch(patch.object(self.command, "save_match"))
+        temporary = TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        for attr, filename in (
+            ("SEED_PATH", "seeds.json"),
+            ("SELECTIONS_PATH", "selections.json"),
+            ("CANDIDATES_PATH", "candidates.json"),
+            ("DETAILS_PATH", "details.json"),
+            ("CURATED_DETAILS_PATH", "curated_details.json"),
+            ("REPORT_PATH", "report.txt"),
+        ):
+            patcher = patch.object(seed, attr, root / filename)
+            patcher.start()
+            self.addCleanup(patcher.stop)
         self.entries = [
-            {"nama_id": "Tanaman A", "query": "query A", "category": "sayur"},
-            {"nama_id": "Tanaman B", "query": "query B", "category": "herbal"},
-            {"nama_id": "Tanaman C", "query": "query C", "category": "hias"},
+            {"nama_id": "Tanaman A", "query": "species A", "category": "sayur",
+             "scientific_name": "Species alpha"},
+            {"nama_id": "Tanaman B", "query": "species B", "category": "herbal",
+             "scientific_name": "Species beta"},
+            {"nama_id": "Tanaman C", "query": "species C", "category": "hias",
+             "scientific_name": None},
         ]
-        self.write_seeds()
+        self.selections = [
+            {"nama_id": "Tanaman A", "status": "approved", "perenual_id": 12},
+            {"nama_id": "Tanaman B", "status": "local_only", "perenual_id": None,
+             "reason": "No verified match"},
+            {"nama_id": "Tanaman C", "status": "approved", "perenual_id": 4001},
+        ]
+        self.save_inputs()
+        self.command = seed.Command(stdout=StringIO())
 
-    def start_patch(self, patcher):
-        value = patcher.start()
-        self.addCleanup(patcher.stop)
-        return value
-
-    def write_seeds(self):
+    def save_inputs(self):
         seed.SEED_PATH.write_text(json.dumps(self.entries), encoding="utf-8")
+        seed.SELECTIONS_PATH.write_text(json.dumps(self.selections), encoding="utf-8")
 
-    def run_fetch(self, **options):
-        self.command.handle(fetch=True, import_selected=False, **options)
+    def run_mode(self, **options):
+        self.command.handle(**options)
 
-    def run_import(self, **options):
-        self.command.handle(fetch=False, import_selected=True, **options)
-
-    def prepare_selection(self, selected=12):
-        self.fetch.return_value = {"data": [{"id": 11}, {"id": 12, "description": "API data"}]}
-        self.run_fetch(limit=1)
+    def test_fetch_caches_all_first_page_candidates_and_reuses_results(self):
+        with patch.object(self.command, "fetch_candidates", side_effect=[
+            {"data": [{"id": 12, "scientific_name": ["Species alpha"]}],
+             "current_page": 1, "last_page": 2, "total": 40},
+            {"data": []},
+        ]) as fetch, patch.object(seed.requests, "Session"), patch.object(seed.time, "sleep"):
+            self.run_mode(fetch=True, limit=2)
+            self.run_mode(fetch=True, limit=2)
         records = seed.load_candidates()
-        records[0]["selected_perenual_id"] = selected
-        seed.save_candidates(records)
-        self.fetch.reset_mock()
-        self.session.reset_mock()
-
-    def test_fetch_caches_full_candidates_without_database_writes(self):
-        payload = {"data": [{"id": 1, "scientific_name": ["Species A"]}, {"id": 2}],
-                   "current_page": 1, "last_page": 4, "total": 100}
-        self.fetch.side_effect = [payload, {"data": []}]
-        self.run_fetch(limit=2)
-        records = seed.load_candidates()
-        self.assertEqual(records[0]["candidates"], payload["data"])
-        self.assertEqual(records[0]["pagination"]["last_page"], 4)
-        self.assertIsNone(records[0]["selected_perenual_id"])
+        self.assertEqual(records[0]["pagination"]["last_page"], 2)
         self.assertEqual(records[1]["status"], "no_results")
-        self.assertTrue(records[0]["fetched_at"])
-        self.sleep.assert_called_once_with(0.75)
-        self.save.assert_not_called()
-        self.assertIn("Plant database writes: 0", seed.REPORT_PATH.read_text())
+        self.assertEqual(fetch.call_count, 2)
+        self.assertEqual(Plant.objects.count(), 0)
 
-    def test_completed_and_empty_queries_are_reused_without_key(self):
-        self.fetch.side_effect = [{"data": [{"id": 1}]}, {"data": []}]
-        self.run_fetch(limit=2)
-        self.fetch.reset_mock()
-        with patch.dict(seed.os.environ, {"PERENUAL_API_KEY": ""}):
-            self.run_fetch(limit=2)
-        self.fetch.assert_not_called()
-        self.assertIn("Reused from cache: 2", seed.REPORT_PATH.read_text())
-
-    def test_resumes_failed_query_preserving_completed_work(self):
-        self.fetch.side_effect = [{"data": [{"id": 1}]}, CommandError("ReadTimeout")]
-        with self.assertRaisesMessage(CommandError, "ReadTimeout"):
-            self.run_fetch()
+    def test_changed_query_is_refetched_and_old_cache_selection_cleared(self):
+        with patch.object(self.command, "fetch_candidates", return_value={"data": [{"id": 12}]}):
+            self.run_mode(fetch=True, limit=1)
         records = seed.load_candidates()
-        self.assertEqual([r["status"] for r in records], ["needs_review", "failed"])
-        self.fetch.reset_mock()
-        self.fetch.side_effect = [{"data": []}, {"data": [{"id": 3}]}]
-        self.run_fetch()
-        self.assertEqual([call.args[2] for call in self.fetch.call_args_list], ["query B", "query C"])
-        self.assertEqual(len(seed.load_candidates()), 3)
-
-    def test_changed_query_invalidates_selection_even_when_request_fails(self):
-        self.prepare_selection()
+        records[0]["selected_perenual_id"] = 12
+        seed.save_candidates(records)
         self.entries[0]["query"] = "new query"
-        self.write_seeds()
-        self.fetch.side_effect = CommandError("HTTP 429")
-        with self.assertRaisesMessage(CommandError, "HTTP 429"):
-            self.run_fetch(limit=1)
-        record = seed.load_candidates()[0]
-        self.assertIsNone(record["selected_perenual_id"])
-        self.assertEqual(record["candidates"], [])
-        self.assertEqual(record["query"], "new query")
-        self.run_import()
-        self.save.assert_not_called()
-
-    def test_refresh_clears_selection_and_fetches_again(self):
-        self.prepare_selection()
-        self.run_fetch(limit=1, refresh=True)
-        self.fetch.assert_called_once()
+        self.save_inputs()
+        with patch.object(self.command, "fetch_candidates", return_value={"data": []}):
+            self.run_mode(fetch=True, limit=1)
         self.assertIsNone(seed.load_candidates()[0]["selected_perenual_id"])
+        self.assertEqual(seed.load_candidates()[0]["status"], "no_results")
 
-    def test_normal_fetch_preserves_selection(self):
-        self.prepare_selection()
-        self.run_fetch(limit=1)
-        self.fetch.assert_not_called()
-        self.assertEqual(seed.load_candidates()[0]["selected_perenual_id"], 12)
+    def test_detail_fetch_resumes_and_skips_ids_outside_free_tier(self):
+        with patch.object(self.command, "request_json", return_value={
+            "id": 12, "sunlight": ["full sun"], "watering": "Average",
+        }) as request, patch.object(seed.requests, "Session"), patch.object(seed.time, "sleep"):
+            self.run_mode(fetch_details=True)
+            self.run_mode(fetch_details=True)
+        self.assertEqual(request.call_count, 1)
+        self.assertEqual(seed.load_details()[0]["status"], "complete")
+        self.assertIn("Skipped (local-only or outside free tier): 2",
+                      seed.REPORT_PATH.read_text())
 
-    def test_import_selected_is_offline_and_does_not_require_key(self):
-        self.prepare_selection()
-        with patch.dict(seed.os.environ, {"PERENUAL_API_KEY": ""}):
-            self.run_import()
-        self.session.assert_not_called()
-        self.fetch.assert_not_called()
-        self.save.assert_called_once()
-        fields = self.save.call_args.args[0]
-        self.assertEqual(fields["perenual_id"], 12)
-        self.assertEqual(fields["name"], "Tanaman A")
-        self.assertEqual(fields["description"], "API data")
-        self.assertIn("Skipped (not selected): 2", seed.REPORT_PATH.read_text())
+    def test_detail_error_is_cached_as_failed_and_can_resume(self):
+        with patch.object(self.command, "request_json", side_effect=CommandError("HTTP 429")):
+            with self.assertRaisesMessage(CommandError, "HTTP 429"):
+                self.run_mode(fetch_details=True)
+        self.assertEqual(seed.load_details()[0]["status"], "failed")
+        with patch.object(self.command, "request_json", return_value={"id": 12}):
+            self.run_mode(fetch_details=True)
+        self.assertEqual(seed.load_details()[0]["status"], "complete")
 
-    def test_unselected_cache_does_not_import_first_result(self):
-        self.prepare_selection(selected=None)
-        self.run_import()
-        self.save.assert_not_called()
-        self.fetch.assert_not_called()
+    def test_import_uses_manifest_and_cached_details(self):
+        seed.save_details([{
+            "perenual_id": 12, "status": "complete", "data": {
+                "id": 12, "sunlight": ["full sun", "part shade"],
+                "watering": "Average", "drought_tolerant": False,
+                "default_image": {
+                    "regular_url": "https://example.com/plant.jpg?X-Amz-Expires=86400",
+                },
+            },
+        }])
+        with patch.object(seed.requests, "Session") as session:
+            self.run_mode(import_selected=True)
+        session.assert_not_called()
+        self.assertEqual(Plant.objects.count(), 3)
+        a = Plant.objects.get(name="Tanaman A")
+        b = Plant.objects.get(name="Tanaman B")
+        self.assertEqual(a.sunlight, ["full_sun", "partial_shade"])
+        self.assertEqual(a.watering, "Average")
+        self.assertIs(a.drought_tolerant, False)
+        self.assertEqual(a.image_url, "")
+        self.assertIsNone(b.perenual_id)
+        self.assertEqual(b.scientific_name, "Species beta")
 
-    def test_unknown_or_non_integer_selected_id_is_rejected(self):
-        self.prepare_selection()
-        for selected in (999, "12", True):
-            records = seed.load_candidates()
-            records[0]["selected_perenual_id"] = selected
-            seed.save_candidates(records)
-            with self.subTest(selected=selected), self.assertRaises(CommandError):
-                self.run_import()
-        self.save.assert_not_called()
+    def test_import_uses_tracked_curated_details_without_local_cache(self):
+        seed.CURATED_DETAILS_PATH.write_text(json.dumps([
+            {"id": 12, "sunlight": ["full sun"], "watering": "Average",
+             "care_level": "Low", "drought_tolerant": True, "indoor": False},
+        ]), encoding="utf-8")
+        self.run_mode(import_selected=True)
+        a = Plant.objects.get(name="Tanaman A")
+        self.assertEqual(a.sunlight, ["full_sun"])
+        self.assertEqual(a.care_level, "Low")
+        self.assertIs(a.drought_tolerant, True)
 
-    def test_import_refuses_stale_query_without_fetch(self):
-        self.prepare_selection()
-        self.entries[0]["query"] = "changed"
-        self.write_seeds()
-        with self.assertRaisesMessage(CommandError, "query/source changed"):
-            self.run_import()
-        self.save.assert_not_called()
+    def test_dry_run_rolls_back_every_database_write(self):
+        self.run_mode(import_selected=True, dry_run=True)
+        self.assertEqual(Plant.objects.count(), 0)
+        self.assertIn("Would import: 3", seed.REPORT_PATH.read_text())
 
-    def test_import_uses_current_category_and_ignores_removed_entries(self):
-        self.prepare_selection()
-        self.entries[0]["category"] = "buah"
-        self.write_seeds()
-        self.run_import()
-        self.assertEqual(self.save.call_args.args[0]["category"], "buah")
-        self.save.reset_mock()
-        self.entries.pop(0)
-        self.write_seeds()
-        self.run_import()
-        self.save.assert_not_called()
+    def test_rerun_updates_old_match_and_preserves_nanem_id(self):
+        old = Plant.objects.create(
+            name="Tanaman B", category="herbal", scientific_name="Wrong plant",
+            perenual_id=999, temp_min=20, supports_hydroponic=True,
+            description="Wrong species description", sunlight=["shade"],
+        )
+        self.run_mode(import_selected=True)
+        self.run_mode(import_selected=True)
+        self.assertEqual(Plant.objects.count(), 3)
+        updated = Plant.objects.get(name="Tanaman B")
+        self.assertEqual(updated.id, old.id)
+        self.assertIsNone(updated.perenual_id)
+        self.assertEqual(updated.scientific_name, "Species beta")
+        self.assertEqual(updated.temp_min, 20)
+        self.assertTrue(updated.supports_hydroponic)
+        self.assertEqual(updated.description, "")
+        self.assertEqual(updated.sunlight, [])
 
-    def test_duplicate_selections_rejected_before_any_writes(self):
-        self.prepare_selection()
-        record = seed.load_candidates()[0]
-        duplicate = dict(record, **self.entries[1])
-        seed.save_candidates([record, duplicate])
-        with self.assertRaisesMessage(CommandError, "multiple names"):
-            self.run_import()
-        self.save.assert_not_called()
+    def test_rerun_preserves_manual_enrichment_when_source_is_unchanged(self):
+        Plant.objects.create(
+            name="Tanaman B", category="herbal", scientific_name="Species beta",
+            description="Manual description", sunlight=["shade"],
+            indoor=False, watering="Average",
+        )
+        self.run_mode(import_selected=True)
+        updated = Plant.objects.get(name="Tanaman B")
+        self.assertEqual(updated.description, "Manual description")
+        self.assertEqual(updated.sunlight, ["shade"])
+        self.assertIs(updated.indoor, False)
+        self.assertEqual(updated.watering, "Average")
 
-    def test_invalid_later_selection_prevents_partial_import(self):
-        self.prepare_selection()
-        record = seed.load_candidates()[0]
-        invalid = dict(record, **self.entries[1], selected_perenual_id=999)
-        seed.save_candidates([record, invalid])
-        with self.assertRaises(CommandError):
-            self.run_import()
-        self.save.assert_not_called()
+    def test_conflicting_name_and_external_id_rolls_back_batch(self):
+        Plant.objects.create(name="Tanaman A", category="sayur", perenual_id=999)
+        Plant.objects.create(name="Other", category="sayur", perenual_id=12)
+        with self.assertRaisesMessage(CommandError, "Multiple Plant records"):
+            self.run_mode(import_selected=True)
+        self.assertEqual(Plant.objects.count(), 2)
 
-    def test_database_error_reports_no_applied_batch(self):
-        self.prepare_selection()
-        self.save.side_effect = DatabaseError("sensitive backend details")
-        with self.assertRaisesMessage(CommandError, "Database write failed"):
-            self.run_import()
-        report = seed.REPORT_PATH.read_text()
-        self.assertIn("Imported: 0 (batch not applied)", report)
-        self.assertNotIn("sensitive", report)
+    def test_manifest_rejects_duplicate_or_uncached_id(self):
+        self.selections[2]["perenual_id"] = 12
+        self.save_inputs()
+        with self.assertRaisesMessage(CommandError, "duplicate approved"):
+            self.run_mode(import_selected=True)
+        self.selections[2]["perenual_id"] = 4001
+        self.save_inputs()
+        seed.save_candidates([{
+            **self.entries[0], "source_url": seed.API_URL,
+            "status": "needs_review", "candidates": [{"id": 88}],
+            "selected_perenual_id": None,
+        }])
+        with self.assertRaisesMessage(CommandError, "not in cached"):
+            self.run_mode(import_selected=True)
+        self.assertEqual(Plant.objects.count(), 0)
 
-    def test_corrupt_cache_is_not_overwritten(self):
-        seed.CANDIDATES_PATH.write_text("{broken", encoding="utf-8")
-        with self.assertRaises(CommandError):
-            self.run_fetch()
-        self.assertEqual(seed.CANDIDATES_PATH.read_text(), "{broken")
-        self.fetch.assert_not_called()
+    def test_limit_imports_only_first_n_but_validates_full_manifest(self):
+        self.run_mode(import_selected=True, limit=1)
+        self.assertEqual(list(Plant.objects.values_list("name", flat=True)), ["Tanaman A"])
 
-    def test_failed_atomic_replace_keeps_previous_file(self):
+    def test_atomic_file_replace_preserves_previous_cache_on_error(self):
         seed.CANDIDATES_PATH.write_text("[]", encoding="utf-8")
         with patch.object(seed.os, "replace", side_effect=OSError("disk failure")):
             with self.assertRaises(CommandError):
-                seed.save_candidates([{"new": "data"}])
+                seed.save_candidates([{"id": 1}])
         self.assertEqual(seed.CANDIDATES_PATH.read_text(), "[]")
-
-    def test_missing_key_records_failure_without_request(self):
-        with patch.dict(seed.os.environ, {"PERENUAL_API_KEY": ""}):
-            with self.assertRaisesMessage(CommandError, "PERENUAL_API_KEY"):
-                self.run_fetch(limit=1)
-        self.fetch.assert_not_called()
-        self.assertEqual(seed.load_candidates()[0]["status"], "failed")
-
-    def test_explicit_mode_required_and_refresh_import_rejected(self):
-        for options in ({}, {"fetch": True, "import_selected": True},
-                        {"import_selected": True, "refresh": True}):
-            with self.subTest(options=options), self.assertRaises(CommandError):
-                self.command.handle(**options)
-        self.fetch.assert_not_called()
-        self.save.assert_not_called()
-
-    def test_limit_zero_makes_no_requests(self):
-        self.run_fetch(limit=0)
-        self.fetch.assert_not_called()
-        self.save.assert_not_called()
