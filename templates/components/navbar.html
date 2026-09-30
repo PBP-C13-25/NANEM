@@ -9,12 +9,10 @@
 
         {% if user.is_authenticated %}
             <a href="#">Katalog</a>
-            <a href="#">Riwayat</a>
-            <a href="#">Koleksi Saya</a>
-            <a href="{% url 'profiles:profile' %}">Profil</a
+            <a href="{% url 'recommendations:history_list' %}">Riwayat</a>
+            <a href="{% url 'profiles:profile' %}">Profil</a>
             <a href="{% url 'cultivation:landing_page' %}">Panduan Budidaya</a>
             <a href="{% url 'collection:index' %}">Koleksi Saya</a>
-            <a href="#">Profil</a>
 
             {% if user.is_staff %}
                 <a href="#">Kelola Tanaman</a>
