@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Kelola Panduan Budidaya - NANEM{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/pages/cultivation.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="kp-header">
+        <h1>Kelola Panduan Budidaya</h1>
+        <a href="#" class="btn btn--primary kp-add-button">+ Tambah Panduan</a>
+    </div>
+
+    <div class="kp-table-wrapper">
+        <table class="kp-table">
+            <thead>
+                <tr>
+                    <th>Nama Tanaman</th>
+                    <th>Media Tanam</th>
+                    <th>Kebutuhan Air</th>
+                    <th>Kebutuhan Cahaya</th>
+                    <th>Pemupukan</th>
+                    <th>Waktu Panen</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for guide in guides %}
+                <tr>
+                    <td>{{ guide.nama_tanaman }}</td>
+                    <td>{{ guide.media_tanam }}</td>
+                    <td>{{ guide.kebutuhan_air }}</td>
+                    <td>{{ guide.kebutuhan_cahaya }}</td>
+                    <td>{{ guide.pemupukan }}</td>
+                    <td>{{ guide.waktu_panen }}</td>
+                    <td class="kp-actions">
+                        <a href="#" class="kp-action-link">Lihat Langkah</a>
+                        <a href="#" class="kp-action-link">Edit</a>
+                        <a href="#" class="kp-action-link kp-action-link--danger">Hapus</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="kp-empty">Belum ada panduan budidaya yang ditambahkan.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
