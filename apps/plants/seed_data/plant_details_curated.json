@@ -1,0 +1,16 @@
+[
+  {"id": 755, "sunlight": ["full sun"], "watering": "Average", "care_level": null, "drought_tolerant": true, "indoor": false},
+  {"id": 1330, "sunlight": ["full sun", "part shade"], "watering": "Average", "care_level": "Medium", "drought_tolerant": false, "indoor": false},
+  {"id": 1322, "sunlight": ["full sun"], "watering": "Average", "care_level": "Medium", "drought_tolerant": false, "indoor": false},
+  {"id": 671, "sunlight": ["full sun"], "watering": "Frequent", "care_level": "Medium", "drought_tolerant": false, "indoor": false},
+  {"id": 697, "sunlight": ["full sun", "part shade"], "watering": "Average", "care_level": "Medium", "drought_tolerant": true, "indoor": false},
+  {"id": 2251, "sunlight": ["full sun"], "watering": "Average", "care_level": "Medium", "drought_tolerant": false, "indoor": false},
+  {"id": 1602, "sunlight": ["Full sun"], "watering": "Average", "care_level": null, "drought_tolerant": false, "indoor": false},
+  {"id": 2320, "sunlight": ["full sun"], "watering": "Average", "care_level": "Medium", "drought_tolerant": false, "indoor": false},
+  {"id": 1678, "sunlight": ["Full sun"], "watering": "Average", "care_level": "Medium", "drought_tolerant": false, "indoor": false},
+  {"id": 1885, "sunlight": ["full sun"], "watering": "Average", "care_level": "Medium", "drought_tolerant": true, "indoor": false},
+  {"id": 2280, "sunlight": ["Full sun"], "watering": "Average", "care_level": null, "drought_tolerant": true, "indoor": false},
+  {"id": 2270, "sunlight": ["Full sun", "part shade"], "watering": "Frequent", "care_level": null, "drought_tolerant": true, "indoor": false},
+  {"id": 731, "sunlight": ["full sun", "part shade"], "watering": "Average", "care_level": "Medium", "drought_tolerant": false, "indoor": false},
+  {"id": 2773, "sunlight": ["part sun/part shade"], "watering": "Average", "care_level": null, "drought_tolerant": false, "indoor": true}
+]

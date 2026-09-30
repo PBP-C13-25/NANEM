@@ -78,14 +78,14 @@
     },
     {
         "nama_id": "Tomat ceri",
-        "query": "Solanum lycopersicum cerasiforme",
+        "query": "cherry tomato",
         "category": "sayur",
         "scientific_name": "Solanum lycopersicum var. cerasiforme",
         "note": "Cherry tomato berbuah kecil. Wajib review varietas/kultivar dan ukuran buah; hasil generik Solanum lycopersicum tidak otomatis membedakannya dari tomat biasa."
     },
     {
         "nama_id": "Cabai rawit",
-        "query": "Capsicum frutescens",
+        "query": "bird's eye chili",
         "category": "sayur",
         "scientific_name": "Capsicum frutescens",
         "note": "Target sesuai brief: cabai kecil pedas dari Capsicum frutescens. Verifikasi spesies dan kultivar konsumsi; bukan cabai besar Capsicum annuum atau cabai hias."
@@ -120,7 +120,7 @@
     },
     {
         "nama_id": "Labu siam",
-        "query": "Sechium edule",
+        "query": "chayote",
         "category": "sayur",
         "scientific_name": "Sechium edule",
         "note": "Chayote/labu siam konsumsi. Bukan labu kuning Cucurbita; gunakan identitas spesies, bukan kata squash saja."
@@ -134,21 +134,21 @@
     },
     {
         "nama_id": "Kacang panjang",
-        "query": "Vigna unguiculata sesquipedalis",
+        "query": "yardlong bean",
         "category": "sayur",
         "scientific_name": "Vigna unguiculata subsp. sesquipedalis",
         "note": "Yardlong/asparagus bean berpolong panjang, juga disebut Sesquipedalis Group. Verifikasi kelompok; bukan buncis Phaseolus vulgaris atau cowpea generik tanpa bukti kacang panjang."
     },
     {
         "nama_id": "Oyong",
-        "query": "Luffa acutangula",
+        "query": "ridge gourd",
         "category": "sayur",
         "scientific_name": "Luffa acutangula",
         "note": "Oyong/gambas berusuk untuk sayur. Bukan pare Momordica charantia atau spesies Luffa lain."
     },
     {
         "nama_id": "Wortel",
-        "query": "Daucus carota sativus",
+        "query": "carrot",
         "category": "sayur",
         "scientific_name": "Daucus carota subsp. sativus",
         "note": "Wortel budidaya konsumsi. Verifikasi bentuk budidaya sativus; bukan wild carrot/Queen Anne's lace atau kultivar bunga hias."
@@ -190,14 +190,14 @@
     },
     {
         "nama_id": "Jeruk nipis",
-        "query": "Citrus aurantiifolia",
+        "query": "key lime",
         "category": "buah",
         "scientific_name": "Citrus × aurantiifolia",
         "note": "Jeruk nipis dapur/key lime. Nama API bisa tanpa tanda hibrida; cocokkan takson. Tolak Citrus hystrix (jeruk purut/kaffir lime), lemon atau citrus lain yang hanya disebut lime."
     },
     {
         "nama_id": "Mangga",
-        "query": "Mangifera indica",
+        "query": "mango",
         "category": "buah",
         "scientific_name": "Mangifera indica",
         "note": "Varietas mangga konsumsi bebas. Prioritaskan kultivar dwarf/kompak untuk pot jika data kandidat mendukung; jika tidak, varietas biasa boleh. Jangan mengarang sifat dwarf."
@@ -239,7 +239,7 @@
     },
     {
         "nama_id": "Kemangi",
-        "query": "Ocimum africanum",
+        "query": "lemon basil",
         "category": "herbal",
         "scientific_name": "Ocimum × africanum",
         "note": "Target awal kemangi beraroma lemon untuk lalapan, juga dikenal sebagai lemon basil/Ocimum × citriodorum. Nama lokal kemangi dapat mencakup beberapa takson; wajib review kandidat dan sinonim, jangan mengganti ke Ocimum americanum tanpa konfirmasi. Bukan basil Italia berdaun besar Ocimum basilicum hanya karena nama umumnya basil."
@@ -288,7 +288,7 @@
     },
     {
         "nama_id": "Daun salam",
-        "query": "Syzygium polyanthum",
+        "query": "Indonesian bay leaf",
         "category": "herbal",
         "scientific_name": "Syzygium polyanthum",
         "note": "PRIORITAS DISAMBIGUASI: daun salam Indonesia. Wajib cocokkan scientific_name dengan Syzygium polyanthum; tolak Laurus nobilis (bay leaf Barat), yang berbeda spesies. Jangan query bay leaf polos atau menerima nama umum saja. Perlu review manual."
@@ -302,7 +302,7 @@
     },
     {
         "nama_id": "Lidah mertua",
-        "query": "Dracaena trifasciata",
+        "query": "snake plant",
         "category": "hias",
         "scientific_name": "Dracaena trifasciata",
         "note": "Sinonim lama Sansevieria trifasciata boleh dipertimbangkan setelah verifikasi. Bukan semua Dracaena atau semua tanaman bernama snake plant."
@@ -326,21 +326,21 @@
         "query": "cactus",
         "category": "hias",
         "scientific_name": null,
-        "note": "PERLU REVIEW MANUAL: kategori besar dalam Cactaceae, bukan satu spesies pasti. Tetap cari kandidat; pilih spesies budidaya yang umum setelah review, bukan otomatis hasil pertama. Popularitas tidak bisa ditentukan dari urutan API. Tolak Euphorbia atau sukulen non-kaktus yang hanya disebut cactus. Nama ilmiah final mengikuti kandidat nyata yang dipilih."
+        "note": "Kategori besar dalam Cactaceae, bukan satu spesies pasti. Dipertahankan sebagai entri NANEM lokal tanpa ID Perenual atau nama ilmiah tunggal."
     },
     {
         "nama_id": "Aglaonema",
         "query": "Aglaonema",
         "category": "hias",
         "scientific_name": null,
-        "note": "PERLU REVIEW MANUAL: genus dengan banyak spesies, hibrida, dan kultivar, bukan satu spesies pasti. Tetap cari kandidat dan prioritaskan varietas budidaya umum yang identitasnya jelas setelah review. Jangan auto-accept hasil pertama atau menebak popularitas dari ranking API; nama ilmiah final mengikuti kandidat terpilih."
+        "note": "Genus dengan banyak spesies, hibrida, dan kultivar. Dipertahankan sebagai entri NANEM lokal tanpa memaksakan satu ID Perenual atau spesies."
     },
     {
         "nama_id": "Sukulen",
         "query": "succulent",
         "category": "hias",
         "scientific_name": null,
-        "note": "PERLU REVIEW MANUAL: kategori bentuk pertumbuhan lintas genus/famili, bukan satu spesies pasti. Tetap cari dan pilih satu kandidat nyata secara manual; utamakan non-kaktus agar berbeda dari entri Kaktus. Jangan auto-accept hasil pertama atau mengarang nama ilmiah tunggal untuk kategori ini."
+        "note": "Kategori bentuk pertumbuhan lintas genus dan famili. Dipertahankan sebagai entri NANEM lokal tanpa ID Perenual atau nama ilmiah tunggal."
     },
     {
         "nama_id": "Peace lily",
@@ -354,6 +354,6 @@
         "query": "Calathea",
         "category": "hias",
         "scientific_name": null,
-        "note": "PERLU REVIEW MANUAL: genus dengan banyak spesies/kultivar, bukan satu spesies pasti; banyak tanaman hias berlabel Calathea kini ditempatkan dalam Goeppertia. Tetap cari kandidat dan verifikasi identitas serta sinonim per spesies. Jangan auto-accept hasil pertama atau mengarang nama ilmiah; jika kosong, review query sinonim sebelum mencari lagi."
+        "note": "Genus dengan banyak spesies dan kultivar; sebagian memiliki sinonim Goeppertia. Dipertahankan sebagai entri NANEM lokal tanpa memaksakan satu ID Perenual atau spesies."
     }
 ]
