@@ -1,3 +1,6 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
+
 """
 Mixin authorization yang dipakai SEMUA module (Bob, Nicholas, Hafidz, Zhafira).
 
@@ -68,3 +71,4 @@ class OwnedQuerysetMixin:
 
     def get_queryset(self):
         return super().get_queryset().filter(**{self.owner_field: self.request.user})
+

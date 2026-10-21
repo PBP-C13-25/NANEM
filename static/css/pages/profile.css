@@ -1,0 +1,70 @@
+/* styling utama halaman profil & edit */
+.card-profile {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(130, 149, 123, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(44, 62, 45, 0.08) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 700px !important; /* Dikecilkan agar tidak terlalu lebar */
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.card-profile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(44, 62, 45, 0.12) !important;
+}
+
+/* tombol sage (primary) */
+.btn-sage {
+    background-color: #5c7255 !important;
+    border-color: #5c7255 !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 4px 10px rgba(92, 114, 85, 0.25);
+}
+
+.btn-sage:hover {
+    background-color: #4a5d44 !important;
+    border-color: #4a5d44 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(92, 114, 85, 0.35);
+}
+
+/* tombol brown (secondary) */
+.btn-brown {
+    background-color: #9c7b4a !important;
+    border-color: #9c7b4a !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 4px 10px rgba(156, 123, 74, 0.25);
+}
+
+.btn-brown:hover {
+    background-color: #84673d !important;
+    border-color: #84673d !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(156, 123, 74, 0.35);
+}
+
+/* Custom Form Control agar tidak flat */
+.form-control {
+    border-radius: 10px !important;
+    border: 1.5px solid #d3d0c5 !important;
+    padding: 12px 15px !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #5c7255 !important;
+    box-shadow: 0 0 0 4px rgba(92, 114, 85, 0.15) !important;
+}

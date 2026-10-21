@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Ubah Nama Lahan - Tanem{% endblock %}
+
+{% block content %}
+<section class="auth-card">
+  <h1>Ubah Nama Lahan</h1>
+  <p class="field-hint">Halaman cadangan -- biasanya ini dibuka lewat modal dari daftar riwayat.</p>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="{{ form.land_name.id_for_label }}">Nama lahan</label>
+      {{ form.land_name }}
+      {% for error in form.land_name.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+    </div>
+    <button type="submit" class="btn btn--primary">Simpan</button>
+  </form>
+
+  <p class="auth-card__switch"><a href="{% url 'recommendations:history_detail' history.pk %}">Batal</a></p>
+</section>
+{% endblock %}

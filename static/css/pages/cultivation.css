@@ -1,0 +1,217 @@
+/* --- Hero image placeholder --- */
+.cg-hero-image {
+  width: 100%;
+  aspect-ratio: 21 / 6;
+  background: #eee;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 0.9em;
+  margin-bottom: 24px;
+}
+
+/* --- CTA grid (Katalog / Tanaman Saya) --- */
+.cg-cta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.cg-cta-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.cg-cta-card .icon {
+  font-size: 1.3em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.cg-cta-card h3 {
+  font-size: 1.1em;
+  margin: 0 0 6px;
+}
+
+.cg-cta-card p {
+  color: #555;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .cg-cta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Hero --- */
+.cg-hero {
+  padding: 32px 0 24px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 24px;
+}
+
+.cg-hero__kicker {
+  display: inline-block;
+  font-size: 0.75em;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #2f6d3c;
+  background: #dff5e1;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.cg-hero h1 {
+  font-size: 1.8em;
+  line-height: 1.25;
+  margin: 0 0 12px;
+  max-width: 34em;
+}
+
+.cg-hero p {
+  color: #555;
+  max-width: 40em;
+  margin: 0;
+}
+
+/* --- Section headings --- */
+.cg-section {
+  margin-bottom: 32px;
+}
+
+.cg-section__title {
+  font-size: 1.2em;
+  margin: 0 0 6px;
+}
+
+.cg-section__subtitle {
+  color: #555;
+  margin: 0 0 16px;
+  max-width: 42em;
+}
+
+/* --- Feature grid --- */
+.cg-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.cg-feature-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+
+.cg-feature-card .icon {
+  font-size: 1.3em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.cg-feature-card h3 {
+  font-size: 1em;
+  margin: 0 0 4px;
+}
+
+.cg-feature-card p {
+  color: #555;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.cg-feature-card .field-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.78em;
+  font-weight: bold;
+  color: #2f6d3c;
+  background: #dff5e1;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* kelola_panduan.css — halaman admin Kelola Panduan Budidaya. */
+
+.kp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.kp-header h1 {
+  font-size: 1.4em;
+  margin: 0;
+}
+
+.kp-add-button {
+  display: inline-block;
+  width: auto;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.kp-table-wrapper {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.kp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92em;
+}
+
+.kp-table th,
+.kp-table td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.kp-table th {
+  background: #fafafa;
+  color: #555;
+  font-weight: bold;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.kp-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.kp-actions {
+  white-space: nowrap;
+}
+
+.kp-action-link {
+  margin-right: 12px;
+  font-size: 0.9em;
+}
+
+.kp-action-link--danger {
+  color: #c0392b;
+}
+
+.kp-empty {
+  text-align: center;
+  color: #888;
+  padding: 24px 14px;
+}

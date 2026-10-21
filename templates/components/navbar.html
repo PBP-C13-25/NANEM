@@ -5,17 +5,18 @@
     <a href="#" class="navbar__brand"> NANEM</a>
 
     <nav class="navbar__links">
-        <a href="#">Rekomendasi</a>
+        <a href="{% url 'recommendations:index' %}">Rekomendasi</a>
 
         {% if user.is_authenticated %}
             <a href="#">Katalog</a>
-            <a href="#">Riwayat</a>
-            <a href="#">Koleksi Saya</a>
-            <a href="#">Profil</a>
+            <a href="{% url 'recommendations:history_list' %}">Riwayat</a>
+            <a href="{% url 'profiles:profile' %}">Profil</a>
+            <a href="{% url 'cultivation:landing_page' %}">Panduan Budidaya</a>
+            <a href="{% url 'collection:index' %}">Koleksi Saya</a>
 
             {% if user.is_staff %}
                 <a href="#">Kelola Tanaman</a>
-                <a href="#">Kelola Panduan</a>
+                <a href="{% url 'cultivation:kelola_panduan' %}">Kelola Panduan</a>
             {% endif %}
 
         <span class="navbar__user">Halo, {{ user.first_name|default:user.username }}</span>

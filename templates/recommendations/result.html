@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Hasil Rekomendasi - Tanem{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Hasil untuk "{{ result.land_name }}"</h1>
+
+    <h2>Analisis lingkungan</h2>
+    <ul>
+        <li>Lokasi: {{ result.latitude }}, {{ result.longitude }}</li>
+        <li>Luas lahan: {{ result.land_area }} m²</li>
+        <li>Media tanam: {{ medium_label }}</li>
+        <li>Suhu: {{ result.environment.raw.temperature }} °C &middot; {{ result.environment.summary.temperature_label }}</li>
+        <li>Kelembapan: {{ result.environment.raw.humidity }} % &middot; {{ result.environment.summary.humidity_label }}</li>
+        <li>Curah hujan: {{ result.environment.raw.rainfall }} mm/hari &middot; {{ result.environment.summary.rainfall_label }}</li>
+    </ul>
+    <p class="field-hint">
+        Rata-rata dari {{ result.environment.raw.period_days }} hari terakhir (sumber: Open-Meteo).
+    </p>
+
+    <h2>Top {{ result.plants|length }} Tanaman Paling Cocok</h2>
+    {% if result.plants %}
+        <ol>
+        {% for plant in result.plants %}
+            <li>
+            {% url 'plants:detail' plant.plant_id as detail_url %}
+            <strong>
+                {% if detail_url %}<a href="{{ detail_url }}">{{ plant.plant_name }}</a>{% else %}{{ plant.plant_name }}{% endif %}
+            </strong>
+            {% if plant.scientific_name %}<em>({{ plant.scientific_name }})</em>{% endif %}
+            &mdash; <strong>{{ plant.match_percentage }}% cocok</strong>
+            <ul>
+                {% for reason in plant.reasons %}<li class="field-hint">{{ reason }}</li>{% endfor %}
+            </ul>
+            </li>
+        {% endfor %}
+        </ol>
+    {% else %}
+        <p>Belum ada tanaman yang cocok dengan lahan dan media tanam ini.</p>
+    {% endif %}
+
+    <hr>
+
+    {% if can_save %}
+        {% if saved_history_id %}
+        <p>Hasil ini sudah disimpan. <a href="{% url 'recommendations:history_detail' saved_history_id %}">Lihat di riwayat</a></p>
+        {% else %}
+        <form method="post" action="{% url 'recommendations:save' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn--primary">Simpan ke Riwayat</button>
+        </form>
+        {% endif %}
+    {% elif user.is_authenticated %}
+        <p class="field-hint">Akun admin tidak memiliki riwayat rekomendasi.</p>
+    {% else %}
+        <p>
+        Mau menyimpan hasil ini?
+        <a href="{% url 'accounts:login' %}?next={% url 'recommendations:result' %}">Login</a>
+        atau <a href="{% url 'accounts:register' %}">daftar</a> dulu.
+        </p>
+    {% endif %}
+
+    <p><a href="{% url 'recommendations:index' %}">&larr; Cari lagi</a></p>
+</section>
+{% endblock %}
