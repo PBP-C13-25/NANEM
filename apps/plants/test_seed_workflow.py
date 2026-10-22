@@ -24,6 +24,7 @@ class SeedWorkflowTests(TestCase):
             ("CANDIDATES_PATH", "candidates.json"),
             ("DETAILS_PATH", "details.json"),
             ("CURATED_DETAILS_PATH", "curated_details.json"),
+            ("RESEARCH_PATH", "research.json"),
             ("REPORT_PATH", "report.txt"),
         ):
             patcher = patch.object(seed, attr, root / filename)
@@ -49,6 +50,14 @@ class SeedWorkflowTests(TestCase):
     def save_inputs(self):
         seed.SEED_PATH.write_text(json.dumps(self.entries), encoding="utf-8")
         seed.SELECTIONS_PATH.write_text(json.dumps(self.selections), encoding="utf-8")
+        seed.RESEARCH_PATH.write_text(json.dumps([
+            {
+                "name": entry["nama_id"],
+                "category": entry["category"],
+                "scientific_name": entry["scientific_name"],
+            }
+            for entry in self.entries
+        ]), encoding="utf-8")
 
     def run_mode(self, **options):
         self.command.handle(**options)
@@ -133,6 +142,41 @@ class SeedWorkflowTests(TestCase):
         self.assertEqual(a.sunlight, ["full_sun"])
         self.assertEqual(a.care_level, "Low")
         self.assertIs(a.drought_tolerant, True)
+
+    def test_research_overrides_api_and_maps_documented_null_fallbacks(self):
+        research = json.loads(seed.RESEARCH_PATH.read_text(encoding="utf-8"))
+        research[0].update({
+            "scientific_name": None,
+            "temp_min": 18,
+            "rainfall_min": 1.6,
+            "supports_hydroponic": None,
+            "sunlight": ["full_sun", "partial_shade"],
+            "taxon_scope": "group",
+            "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+            "rainfall_annual_min_mm": 600,
+            "humidity_basis": "controlled_environment",
+        })
+        seed.RESEARCH_PATH.write_text(json.dumps(research), encoding="utf-8")
+        seed.save_details([{
+            "perenual_id": 12,
+            "status": "complete",
+            "data": {"id": 12, "sunlight": ["full shade"]},
+        }])
+        self.run_mode(import_selected=True)
+        plant = Plant.objects.get(name="Tanaman A")
+        self.assertEqual(plant.scientific_name, "")
+        self.assertEqual(plant.temp_min, 18)
+        self.assertEqual(plant.rainfall_min, 1.6)
+        self.assertIs(plant.supports_hydroponic, False)
+        self.assertEqual(plant.sunlight, ["full_sun", "partial_shade"])
+        self.assertFalse(hasattr(plant, "taxon_scope"))
+
+    def test_research_rejects_unknown_fields_instead_of_importing_metadata_typos(self):
+        research = json.loads(seed.RESEARCH_PATH.read_text(encoding="utf-8"))
+        research[0]["rainfall_annual_typo"] = 600
+        seed.RESEARCH_PATH.write_text(json.dumps(research), encoding="utf-8")
+        with self.assertRaisesMessage(CommandError, "unknown research fields"):
+            self.run_mode(import_selected=True)
 
     def test_dry_run_rolls_back_every_database_write(self):
         self.run_mode(import_selected=True, dry_run=True)

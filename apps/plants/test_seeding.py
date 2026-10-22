@@ -85,6 +85,22 @@ class FieldMappingTests(SimpleTestCase):
         with self.assertRaisesMessage(CommandError, "scientific_name"):
             seed.map_match(entry, self.selection)
 
+    def test_research_metadata_is_not_mapped_to_model_fields(self):
+        fields = seed.map_match(self.entry, self.selection, research={
+            "scientific_name": None,
+            "supports_hydroponic": None,
+            "rainfall_min": 2.5,
+            "taxon_scope": "group",
+            "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+            "rainfall_annual_min_mm": 900,
+            "humidity_basis": "controlled_environment",
+        })
+        self.assertEqual(fields["scientific_name"], "")
+        self.assertIs(fields["supports_hydroponic"], False)
+        self.assertEqual(fields["rainfall_min"], 2.5)
+        for metadata in seed.RESEARCH_METADATA_FIELDS:
+            self.assertNotIn(metadata, fields)
+
 
 class RequestHandlingTests(SimpleTestCase):
     def setUp(self):

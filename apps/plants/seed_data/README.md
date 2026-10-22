@@ -12,6 +12,8 @@ proses fetch dan import bersamaan.
   memakai ID `null` dan alasan. Urutan kedua berkas harus sama.
 - `plant_details_curated.json`: ringkasan field detail yang diperoleh dari
   Perenual dan aman disimpan di Git. Nilai kosong tidak diisi secara spekulatif.
+- `nanem_plant_research.json`: data kurasi 51 tanaman beserta sumber dan
+  metadata metodologi. Hanya field pada whitelist importer yang masuk ke model.
 - `plant_candidates.json`, `plant_details.json`, dan `seed_report.txt`:
   cache/laporan lokal yang di-ignore Git. File kandidat dan detail mentah dapat
   berisi URL gambar sementara; jangan commit atau bagikan API key.
@@ -64,8 +66,10 @@ benar:
 python manage.py seed_plants --import-selected
 ```
 
-Import membaca manifest dan detail terkurasi. Bila ada cache detail lokal,
-field yang tersedia di sana juga dipakai. Tidak ada API request saat import.
+Import membaca manifest, detail Perenual terkurasi, dan data riset NANEM. Bila
+ada cache detail lokal, field yang tersedia di sana juga dipakai, lalu data
+riset menjadi sumber final untuk field yang sudah dikurasi. Tidak ada API
+request saat import.
 Semua 51 entri diproses, termasuk `local_only`. Tanaman dicocokkan menurut
 nama NANEM atau ID Perenual, lalu diperbarui agar rerun tidak menduplikasi
 data. ID utama `Plant.id` selalu milik NANEM. Satu batch dibatalkan bila
@@ -76,10 +80,25 @@ dibedakan dari `null` yang berarti tidak diketahui. URL gambar dengan
 query bertanda waktu dan gambar `upgrade_access` ditolak; UI perlu memakai
 placeholder bila `image_url` kosong.
 
-Rentang suhu, kelembapan, curah hujan, dan kebutuhan ruang belum tersedia
-dari data yang telah diverifikasi. Field itu tetap kosong sampai ditinjau
-manual dengan sumber yang jelas. Nilai dukungan media tanam memakai default
-model saat record baru dibuat; record lama tidak ditimpa untuk field ini.
+Mapping khusus data riset:
+
+- `supports_hydroponic: null` berarti bukti belum cukup, bukan terbukti tidak
+  cocok. Karena field model saat ini tidak nullable, importer menyimpannya
+  sebagai fallback `False`.
+- `scientific_name: null` untuk kelompok taksa disimpan sebagai string kosong
+  karena field model tidak nullable.
+- `rainfall_min/max` tetap masuk ke model dalam mm/hari. Nilainya merupakan
+  ekuivalen rata-rata dari curah hujan optimal tahunan FAO EcoCrop, bukan
+  kebutuhan hujan, irigasi, atau penyiraman harian. Nilai tahunan asli ada di
+  metadata `rainfall_annual_min_mm/max` dan asal konversinya ada di
+  `rainfall_basis`.
+- `humidity_basis: controlled_environment` menandai rentang RH yang berasal
+  dari greenhouse/protected cropping.
+- Metadata `taxon_scope`, `derived_fields`, `rainfall_basis`,
+  `rainfall_annual_min_mm/max`, `humidity_basis`, `image_attribution`,
+  `sources`, dan `notes` hanya untuk audit/provenance dan sengaja tidak
+  diimport ke model.
+
 Pada respons detail akun gratis yang diperiksa, field
 `xTemperatureTolence` justru berisi pesan untuk upgrade ke Supreme, bukan
 angka suhu. Jangan menyalin pesan tersebut menjadi nilai tanaman.
