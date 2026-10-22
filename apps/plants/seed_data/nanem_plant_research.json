@@ -34,13 +34,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 15–35 °C, hujan tahunan 2000–2500 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 15–35 °C, hujan tahunan 2000–2500 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://ecommons.cornell.edu/entities/publication/cbcd3c5d-1ade-4988-9426-0e5cc8bbf97b",
@@ -65,15 +65,19 @@
         "notes": "Identitas gambar, fotografer Prenn dan lisensi CC BY-SA 3.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 2000–2500 mm/tahun. Tanaman menyukai kondisi basah; toleransi kekeringan berkepanjangan tidak diasumsikan dari kemungkinan tumbuh pada lahan kering. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Toleransi kekeringan pada tanaman dewasa tidak dapat dibuktikan cukup jelas dari sumber yang digunakan, sehingga drought_tolerant=null. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 2000,
-    "annual_rainfall_max_mm": 2500,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 2000–2500 mm/tahun. Tanaman menyukai kondisi basah; toleransi kekeringan berkepanjangan tidak diasumsikan dari kemungkinan tumbuh pada lahan kering. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Toleransi kekeringan pada tanaman dewasa tidak dapat dibuktikan cukup jelas dari sumber yang digunakan, sehingga drought_tolerant=null. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 5.5,
+    "rainfall_max": 6.8,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 2000,
+    "rainfall_annual_max_mm": 2500,
+    "humidity_basis": null
   },
   {
     "name": "Bayam",
@@ -110,13 +114,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 22–30 °C, hujan tahunan 1200–1500 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 22–30 °C, hujan tahunan 1200–1500 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://ejournal.universitastabanan.ac.id/index.php/majalah-ilmiah-untab/article/view/118",
@@ -140,15 +144,19 @@
         "notes": "Identitas gambar, fotografer Kurt Stüber dan lisensi CC BY-SA 3.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 22–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1200–1500 mm/tahun. Referensi hidroponik khusus bayam merah tetap berada pada spesies Amaranthus tricolor; belum diekstrapolasi menjadi jaminan pemeliharaan indoor semua varietas. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1200,
-    "annual_rainfall_max_mm": 1500,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 22–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1200–1500 mm/tahun. Referensi hidroponik khusus bayam merah tetap berada pada spesies Amaranthus tricolor; belum diekstrapolasi menjadi jaminan pemeliharaan indoor semua varietas. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 3.3,
+    "rainfall_max": 4.1,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1200,
+    "rainfall_annual_max_mm": 1500,
+    "humidity_basis": null
   },
   {
     "name": "Sawi",
@@ -180,13 +188,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 20–25 °C, hujan tahunan 900–1400 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 20–25 °C, hujan tahunan 900–1400 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://jurnal.umsrappang.ac.id/index.php/plantklopedia/article/view/1656",
@@ -205,23 +213,24 @@
         "publisher": "University of Minnesota Extension",
         "accessed_at": "2026-10-22",
         "supports_fields": [
-          "supports_hydroponic",
-          "indoor",
-          "space_needed",
-          "care_level"
+          "supports_hydroponic"
         ],
-        "notes": "Halaman membahas mustard greens/Brassica sebagai tanaman yang dapat ditanam dalam sistem hidroponik skala kecil. Digunakan sebagai dukungan praktis untuk hidroponik dan klasifikasi katalog, bukan sebagai sumber rentang iklim."
+        "notes": "Halaman menyatakan tanaman famili Brassica, termasuk mustard, tumbuh baik secara hidroponik sepanjang tahun. Sumber ini hanya dipakai untuk supports_hydroponic, bukan rentang iklim atau klasifikasi ruang/perawatan."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 900–1400 mm/tahun. Brassica rapa memiliki banyak kelompok budidaya; FAO EcoCrop yang digunakan adalah kelompok Gaisin (caisim), bukan akar turnip. Studi hidroponik sawi hijau menggunakan var. parachinensis. Studi mencatat sensitivitas terhadap cahaya yang terlalu intens. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 900,
-    "annual_rainfall_max_mm": 1400,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 900–1400 mm/tahun. Brassica rapa memiliki banyak kelompok budidaya; FAO EcoCrop yang digunakan adalah kelompok Gaisin (caisim), bukan akar turnip. Studi hidroponik sawi hijau menggunakan var. parachinensis. Studi mencatat sensitivitas terhadap cahaya yang terlalu intens. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 2.5,
+    "rainfall_max": 3.8,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 900,
+    "rainfall_annual_max_mm": 1400,
+    "humidity_basis": null
   },
   {
     "name": "Pakcoy",
@@ -258,13 +267,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 20–25 °C, hujan tahunan 900–1400 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 20–25 °C, hujan tahunan 900–1400 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://www.pubs.ext.vt.edu/content/pubs_ext_vt_edu/en/SPES/spes-463/spes-463.html",
@@ -289,15 +298,19 @@
         "notes": "Identitas gambar, fotografer ChrisInMilton dan lisensi CC BY-SA 4.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 900–1400 mm/tahun. FAO menggunakan istilah Pak Choi Group untuk anggota Brassica rapa yang sesuai; nama subspesies tetap seperti input. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 900,
-    "annual_rainfall_max_mm": 1400,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 900–1400 mm/tahun. FAO menggunakan istilah Pak Choi Group untuk anggota Brassica rapa yang sesuai; nama subspesies tetap seperti input. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 2.5,
+    "rainfall_max": 3.8,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 900,
+    "rainfall_annual_max_mm": 1400,
+    "humidity_basis": null
   },
   {
     "name": "Selada",
@@ -334,13 +347,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 12–21 °C, hujan tahunan 1100–1400 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 12–21 °C, hujan tahunan 1100–1400 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/small-scale-hydroponics",
@@ -388,15 +401,19 @@
         "notes": "Identitas gambar, fotografer Comedora dan lisensi CC BY-SA 4.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 12–21 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1100–1400 mm/tahun. FAO EcoCrop mengacu pada selada kepala (var. capitata) sebagai proksi spesies Lactuca sativa. Literatur greenhouse melaporkan RH 65–80%, dan suhu siang greenhouse lebih tinggi daripada kisaran optimal ekologi FAO; konteks keduanya berbeda. Selada sensitif terhadap kekurangan air pada fase pertumbuhan. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1100,
-    "annual_rainfall_max_mm": 1400,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 12–21 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1100–1400 mm/tahun. FAO EcoCrop mengacu pada selada kepala (var. capitata) sebagai proksi spesies Lactuca sativa. Literatur greenhouse melaporkan RH 65–80%, dan suhu siang greenhouse lebih tinggi daripada kisaran optimal ekologi FAO; konteks keduanya berbeda. Selada sensitif terhadap kekurangan air pada fase pertumbuhan. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 3,
+    "rainfall_max": 3.8,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1100,
+    "rainfall_annual_max_mm": 1400,
+    "humidity_basis": "controlled_environment"
   },
   {
     "name": "Seledri",
@@ -428,13 +445,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 15–21 °C, hujan tahunan 700–1300 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 15–21 °C, hujan tahunan 700–1300 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://iris.unipa.it/handle/10447/699037",
@@ -449,16 +466,20 @@
         "notes": "Percobaan dua musim seledri DAUN var. secalinum sistem hidroponik ebb-and-flow menghasilkan baby leaf; menyebut budidaya tradisional di tanah."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–21 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 700–1300 mm/tahun. Suhu 15–21°C dan curah hujan FAO merujuk ke Apium graveolens tingkat spesies, bukan khusus var. secalinum; penelitian seledri daun 2026 juga menyebut kecocokan suhu rata-rata 15–21°C. Hidroponik teruji untuk panen baby leaf; indoor dikaitkan lingkungan tumbuh terkendali dengan pencahayaan cukup, bukan hanya semai. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 700,
-    "annual_rainfall_max_mm": 1300,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–21 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 700–1300 mm/tahun. Suhu 15–21°C dan curah hujan FAO merujuk ke Apium graveolens tingkat spesies, bukan khusus var. secalinum; penelitian seledri daun 2026 juga menyebut kecocokan suhu rata-rata 15–21°C. Hidroponik teruji untuk panen baby leaf; indoor dikaitkan lingkungan tumbuh terkendali dengan pencahayaan cukup, bukan hanya semai. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 1.9,
+    "rainfall_max": 3.6,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 700,
+    "rainfall_annual_max_mm": 1300,
+    "humidity_basis": null
   },
   {
     "name": "Kubis",
@@ -490,25 +511,29 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 15–24 °C, hujan tahunan 500–1000 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 15–24 °C, hujan tahunan 500–1000 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–24 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 500–1000 mm/tahun. Tidak ada bukti memadai yang berhasil diverifikasi mengenai hidroponik PRAKTIS/lazim sampai pembentukan kepala kubis matang; hidroponik untuk bibit/daun muda saja tidak cukup untuk mengisi true. Nilai null menunjukkan bukti praktik yang belum memadai dan bukan ketidakmungkinan biologis. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 500,
-    "annual_rainfall_max_mm": 1000,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–24 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 500–1000 mm/tahun. Tidak ada bukti memadai yang berhasil diverifikasi mengenai hidroponik PRAKTIS/lazim sampai pembentukan kepala kubis matang; hidroponik untuk bibit/daun muda saja tidak cukup untuk mengisi true. Nilai null menunjukkan bukti praktik yang belum memadai dan bukan ketidakmungkinan biologis. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 1.4,
+    "rainfall_max": 2.7,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 500,
+    "rainfall_annual_max_mm": 1000,
+    "humidity_basis": null
   },
   {
     "name": "Kailan",
@@ -540,13 +565,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 15–22 °C, hujan tahunan 450–1000 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 15–22 °C, hujan tahunan 450–1000 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://repository.unida.ac.id/2073/",
@@ -564,23 +589,24 @@
         "publisher": "University of Minnesota Extension",
         "accessed_at": "2026-10-22",
         "supports_fields": [
-          "supports_hydroponic",
-          "indoor",
-          "space_needed",
-          "care_level"
+          "supports_hydroponic"
         ],
-        "notes": "Halaman membahas kale/Brassica sebagai tanaman yang dapat ditanam dalam sistem hidroponik skala kecil. Digunakan sebagai dukungan praktis, bukan sumber angka iklim khusus Brassica oleracea var. alboglabra."
+        "notes": "Halaman menyatakan tanaman famili Brassica, termasuk kale, tumbuh baik secara hidroponik sepanjang tahun. Sumber ini hanya dipakai untuk supports_hydroponic, bukan rentang iklim khusus varietas atau klasifikasi ruang/perawatan."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–22 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 450–1000 mm/tahun. EcoCrop id 3867 memakai pengelompokan Brassica oleracea var. acephala dan mencantumkan Chinese kale/kailan; rentang iklim tersebut merupakan proksi kelompok kale, bukan hasil pengukuran khusus var. alboglabra. Hidroponik didukung riset yang secara eksplisit memakai varietas alboglabra. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 450,
-    "annual_rainfall_max_mm": 1000,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–22 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 450–1000 mm/tahun. EcoCrop id 3867 memakai pengelompokan Brassica oleracea var. acephala dan mencantumkan Chinese kale/kailan; rentang iklim tersebut merupakan proksi kelompok kale, bukan hasil pengukuran khusus var. alboglabra. Hidroponik didukung riset yang secara eksplisit memakai varietas alboglabra. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.2,
+    "rainfall_max": 2.7,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 450,
+    "rainfall_annual_max_mm": 1000,
+    "humidity_basis": null
   },
   {
     "name": "Daun bawang",
@@ -612,13 +638,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 12–25 °C, hujan tahunan 850–1600 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 12–25 °C, hujan tahunan 850–1600 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://jurnal.fp.umi.ac.id/index.php/agrotekmas/article/view/603",
@@ -642,15 +668,19 @@
         "notes": "Mencantumkan A. fistulosum dan A. tuberosum ditumbuhkan hidroponik di ruang tumbuh hingga panen pada umur 49, 63, dan 77 hari."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 12–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 850–1600 mm/tahun. Penelitian Allium pada ruang tumbuh mengonfirmasi panen biomassa A. fistulosum secara indoor; ini mengandaikan cahaya buatan memadai. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 850,
-    "annual_rainfall_max_mm": 1600,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 12–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 850–1600 mm/tahun. Penelitian Allium pada ruang tumbuh mengonfirmasi panen biomassa A. fistulosum secara indoor; ini mengandaikan cahaya buatan memadai. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 2.3,
+    "rainfall_max": 4.4,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 850,
+    "rainfall_annual_max_mm": 1600,
+    "humidity_basis": null
   },
   {
     "name": "Kucai",
@@ -682,13 +712,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 10–20 °C, hujan tahunan 850–2200 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 10–20 °C, hujan tahunan 850–2200 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://researchers.westernsydney.edu.au/en/publications/biomass-flavonol-levels-and-sensory-characteristics-of-allium-cul/",
@@ -716,15 +746,19 @@
         "notes": "Mencantumkan full sun, tahan kekeringan, cocok pot/lahan kecil, dan dapat tumbuh di tanah yang drainasenya baik."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 10–20 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 850–2200 mm/tahun. Toleransi kekeringan berlaku bagi rumpun yang sudah tumbuh; bukan anjuran membiarkan bibit tanpa air. Sumber NC State memberi pernyataan eksplisit ketahanan kekeringan dan kecocokan untuk pot. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 850,
-    "annual_rainfall_max_mm": 2200,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 10–20 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 850–2200 mm/tahun. Toleransi kekeringan berlaku bagi rumpun yang sudah tumbuh; bukan anjuran membiarkan bibit tanpa air. Sumber NC State memberi pernyataan eksplisit ketahanan kekeringan dan kecocokan untuk pot. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 2.3,
+    "rainfall_max": 6,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 850,
+    "rainfall_annual_max_mm": 2200,
+    "humidity_basis": null
   },
   {
     "name": "Tomat",
@@ -761,13 +795,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 20–27 °C, hujan tahunan 600–1300 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 20–27 °C, hujan tahunan 600–1300 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/small-scale-hydroponics",
@@ -775,12 +809,9 @@
         "publisher": "University of Minnesota Extension",
         "accessed_at": "2026-10-22",
         "supports_fields": [
-          "supports_hydroponic",
-          "indoor",
-          "space_needed",
-          "care_level"
+          "supports_hydroponic"
         ],
-        "notes": "Halaman membahas tomat sebagai tanaman hidroponik yang membutuhkan sistem, ruang, dan pencahayaan lebih besar daripada sayuran daun. Digunakan untuk klasifikasi praktis hidroponik/ruang/perawatan, bukan sebagai sumber rentang iklim."
+        "notes": "Halaman menyebut tomat sebagai pilihan hidroponik populer; penanaman indoor memerlukan panas dan cahaya tambahan dan dapat terlalu mahal bagi kebanyakan orang. Sumber ini hanya dipakai untuk supports_hydroponic."
       },
       {
         "url": "https://horticulture.oregonstate.edu/oregon-vegetables/tomato-greenhouse",
@@ -815,15 +846,19 @@
         "notes": "Identitas gambar, fotografer Petar43 dan lisensi CC BY-SA 4.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–27 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1300 mm/tahun. EcoCrop mencatat spesies dengan sinonim Lycopersicon esculentum. RH 60–80% adalah rekomendasi siang hari produksi greenhouse Oregon State; ulasan Energies 2019 menyebut 50–60% untuk kondisi greenhouse lain, sehingga terdapat perbedaan rekomendasi antarsumber. Kebutuhan suhu dan ruang dapat bergantung pada kultivar. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 600,
-    "annual_rainfall_max_mm": 1300,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–27 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1300 mm/tahun. EcoCrop mencatat spesies dengan sinonim Lycopersicon esculentum. RH 60–80% adalah rekomendasi siang hari produksi greenhouse Oregon State; ulasan Energies 2019 menyebut 50–60% untuk kondisi greenhouse lain, sehingga terdapat perbedaan rekomendasi antarsumber. Kebutuhan suhu dan ruang dapat bergantung pada kultivar. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.6,
+    "rainfall_max": 3.6,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 600,
+    "rainfall_annual_max_mm": 1300,
+    "humidity_basis": "controlled_environment"
   },
   {
     "name": "Tomat ceri",
@@ -855,13 +890,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 20–27 °C, hujan tahunan 600–1300 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 20–27 °C, hujan tahunan 600–1300 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://ejurnal.uij.ac.id/index.php/AGR/article/view/3667",
@@ -895,15 +930,19 @@
         "notes": "Kajian merangkum kisaran RH greenhouse untuk tomat 50–60%, berbeda dari rekomendasi Oregon State University 60–80% RH yang digunakan pada record. Dicantumkan untuk mendokumentasikan perbedaan sumber, bukan untuk mendukung angka 60–80%."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–27 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1300 mm/tahun. Suhu, curah hujan, dan RH diwariskan secara hati-hati dari referensi tingkat spesies tomat S. lycopersicum, bukan percobaan khusus var. cerasiforme. RH 60–80% dari panduan Oregon State berbeda dengan 50–60% pada ulasan greenhouse Energies 2019. Indoor dibiarkan null karena bergantung pada kultivar kerdil dan pencahayaan tambahan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 600,
-    "annual_rainfall_max_mm": 1300,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–27 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1300 mm/tahun. Suhu, curah hujan, dan RH diwariskan secara hati-hati dari referensi tingkat spesies tomat S. lycopersicum, bukan percobaan khusus var. cerasiforme. RH 60–80% dari panduan Oregon State berbeda dengan 50–60% pada ulasan greenhouse Energies 2019. Indoor dibiarkan null karena bergantung pada kultivar kerdil dan pencahayaan tambahan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.6,
+    "rainfall_max": 3.6,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 600,
+    "rainfall_annual_max_mm": 1300,
+    "humidity_basis": "controlled_environment"
   },
   {
     "name": "Cabai rawit",
@@ -935,13 +974,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 18–30 °C, hujan tahunan 600–1500 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 18–30 °C, hujan tahunan 600–1500 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://mjfas.utm.my/index.php/mjfas/article/view/3383",
@@ -954,15 +993,19 @@
         "notes": "Abstrak penelitian mengidentifikasi spesies C. frutescens, varietas cili padi, ditanam hidroponik substrat cocopeat sampai pengamatan hasil buah. Halaman jurnal membatasi akses penampil otomatis."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 18–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1500 mm/tahun. Angka RH yang tersedia untuk peppers umum atau C. annuum tidak dipaksakan untuk C. frutescens. Riset cili padi C. frutescens memakai hidroponik substrat hingga fase hasil. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 600,
-    "annual_rainfall_max_mm": 1500,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 18–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1500 mm/tahun. Angka RH yang tersedia untuk peppers umum atau C. annuum tidak dipaksakan untuk C. frutescens. Riset cili padi C. frutescens memakai hidroponik substrat hingga fase hasil. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.6,
+    "rainfall_max": 4.1,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 600,
+    "rainfall_annual_max_mm": 1500,
+    "humidity_basis": null
   },
   {
     "name": "Cabai merah",
@@ -994,13 +1037,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 17–30 °C, hujan tahunan 600–1250 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 17–30 °C, hujan tahunan 600–1250 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://accscience.com/journal/EER/2/3/10.36922/EER025250050",
@@ -1024,15 +1067,19 @@
         "notes": "Kajian mengulas kelembapan udara untuk Cabai merah di greenhouse, dengan RH pertumbuhan 60–65%; bukan kelembapan tanah atau penyimpanan pascapanen."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 17–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1250 mm/tahun. C. annuum juga mencakup paprika, tetapi keduanya tetap record terpisah sesuai permintaan. RH 60–65% berasal dari kategori peppers pada studi greenhouse, bukan pengujian eksklusif kultivar cabai merah. Indoor belum dapat dipastikan untuk semua kultivar. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 600,
-    "annual_rainfall_max_mm": 1250,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 17–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1250 mm/tahun. C. annuum juga mencakup paprika, tetapi keduanya tetap record terpisah sesuai permintaan. RH 60–65% berasal dari kategori peppers pada studi greenhouse, bukan pengujian eksklusif kultivar cabai merah. Indoor belum dapat dipastikan untuk semua kultivar. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.6,
+    "rainfall_max": 3.4,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 600,
+    "rainfall_annual_max_mm": 1250,
+    "humidity_basis": null
   },
   {
     "name": "Terong",
@@ -1064,13 +1111,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 20–35 °C, hujan tahunan 1200–1600 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 20–35 °C, hujan tahunan 1200–1600 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://journal.ipb.ac.id/index.php/bulagron/article/view/24750/0",
@@ -1094,16 +1141,20 @@
         "notes": "Kajian mengulas kelembapan udara untuk Terong di greenhouse, dengan RH pertumbuhan 65–75%; bukan kelembapan tanah atau penyimpanan pascapanen."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1200–1600 mm/tahun. RH 65–75% berasal dari ulasan kebutuhan greenhouse khusus eggplant; suhu EcoCrop adalah kisaran optimal ekologi yang lebih luas dari target suhu siang greenhouse. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1200,
-    "annual_rainfall_max_mm": 1600,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1200–1600 mm/tahun. RH 65–75% berasal dari ulasan kebutuhan greenhouse khusus eggplant; suhu EcoCrop adalah kisaran optimal ekologi yang lebih luas dari target suhu siang greenhouse. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 3.3,
+    "rainfall_max": 4.4,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1200,
+    "rainfall_annual_max_mm": 1600,
+    "humidity_basis": null
   },
   {
     "name": "Mentimun",
@@ -1140,13 +1191,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 18–32 °C, hujan tahunan 1000–1200 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 18–32 °C, hujan tahunan 1000–1200 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://www.aces.edu/blog/topics/crop-production/greenhouse-cucumber-production/",
@@ -1183,16 +1234,20 @@
         "notes": "Identitas gambar, fotografer Affitisciuto dan lisensi CC BY-SA 4.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 18–32 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1000–1200 mm/tahun. Panduan Alabama Extension memilih RH 60–70% karena RH lebih tinggi dapat meningkatkan masalah penyakit. Ulasan Energies 2019 menyebut RH 80–90% untuk cucumber greenhouse; konflik antarsumber dicatat dan tidak dirata-ratakan. Tanaman tidak sesuai dengan kekeringan berkepanjangan pada fase berbuah. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1000,
-    "annual_rainfall_max_mm": 1200,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 18–32 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1000–1200 mm/tahun. Panduan Alabama Extension memilih RH 60–70% karena RH lebih tinggi dapat meningkatkan masalah penyakit. Ulasan Energies 2019 menyebut RH 80–90% untuk cucumber greenhouse; konflik antarsumber dicatat dan tidak dirata-ratakan. Tanaman tidak sesuai dengan kekeringan berkepanjangan pada fase berbuah. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 2.7,
+    "rainfall_max": 3.3,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1000,
+    "rainfall_annual_max_mm": 1200,
+    "humidity_basis": null
   },
   {
     "name": "Paprika",
@@ -1229,13 +1284,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 17–30 °C, hujan tahunan 600–1250 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 17–30 °C, hujan tahunan 600–1250 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://accscience.com/journal/EER/2/3/10.36922/EER025250050",
@@ -1270,15 +1325,19 @@
         "notes": "Identitas gambar, fotografer Filo gèn' dan lisensi CC BY-SA 4.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 17–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1250 mm/tahun. Berbagi nama ilmiah dengan cabai merah sesuai input, tetapi beda kelompok kultivar. Angka EcoCrop pada tingkat spesies dan RH 60–65% untuk peppers greenhouse, bukan khusus paprika manis. Hidroponik ditunjang bukti produksi C. annuum, tetapi perbedaan kultivar dapat memengaruhi kesesuaian sistem. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 600,
-    "annual_rainfall_max_mm": 1250,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 17–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1250 mm/tahun. Berbagi nama ilmiah dengan cabai merah sesuai input, tetapi beda kelompok kultivar. Angka EcoCrop pada tingkat spesies dan RH 60–65% untuk peppers greenhouse, bukan khusus paprika manis. Hidroponik ditunjang bukti produksi C. annuum, tetapi perbedaan kultivar dapat memengaruhi kesesuaian sistem. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.6,
+    "rainfall_max": 3.4,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 600,
+    "rainfall_annual_max_mm": 1250,
+    "humidity_basis": null
   },
   {
     "name": "Labu siam",
@@ -1315,13 +1374,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 19–30 °C, hujan tahunan 800–2000 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 19–30 °C, hujan tahunan 800–2000 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Sechium_edule_-_Fruits.jpg",
@@ -1335,16 +1394,20 @@
         "notes": "Identitas gambar, fotografer Filo gèn' dan lisensi CC BY-SA 4.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 19–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 800–2000 mm/tahun. Sulur labu siam dewasa dapat menjalar sangat luas sehingga dikelompokkan large. Bukti budidaya hidroponik praktis sampai hasil panen belum dapat diverifikasi; nilai false tidak berarti mustahil secara biologis. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 800,
-    "annual_rainfall_max_mm": 2000,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 19–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 800–2000 mm/tahun. Sulur labu siam dewasa dapat menjalar sangat luas sehingga dikelompokkan large. Bukti budidaya hidroponik praktis sampai hasil panen belum dapat diverifikasi; nilai false tidak berarti mustahil secara biologis. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 2.2,
+    "rainfall_max": 5.5,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 800,
+    "rainfall_annual_max_mm": 2000,
+    "humidity_basis": null
   },
   {
     "name": "Buncis",
@@ -1376,13 +1439,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 16–25 °C, hujan tahunan 500–2000 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 16–25 °C, hujan tahunan 500–2000 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://www.ars.usda.gov/research/publications/publication/?seqNo115=62154",
@@ -1395,15 +1458,19 @@
         "notes": "Ringkasan arsip USDA melaporkan 60 tanaman Phaseolus vulgaris hidroponik sampai membentuk polong 98,8 gram bobot segar per tanaman; laman arsip dapat memerlukan akses ulang."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 16–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 500–2000 mm/tahun. Penelitian USDA menguji produksi polong buncis Phaseolus vulgaris pada sistem hidroponik, bukan hanya persemaian. Kelembapan udara 70–80% untuk beans di tabel greenhouse tidak dipakai karena jenis kacang tidak dijelaskan secara pasti. Tipe semak dan panjat memiliki kebutuhan ruang berbeda. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 500,
-    "annual_rainfall_max_mm": 2000,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 16–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 500–2000 mm/tahun. Penelitian USDA menguji produksi polong buncis Phaseolus vulgaris pada sistem hidroponik, bukan hanya persemaian. Kelembapan udara 70–80% untuk beans di tabel greenhouse tidak dipakai karena jenis kacang tidak dijelaskan secara pasti. Tipe semak dan panjat memiliki kebutuhan ruang berbeda. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.4,
+    "rainfall_max": 5.5,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 500,
+    "rainfall_annual_max_mm": 2000,
+    "humidity_basis": null
   },
   {
     "name": "Kacang panjang",
@@ -1435,13 +1502,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal: suhu udara 20–35 °C, hujan tahunan 1500–2000 mm, tekstur tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
+        "notes": "Kolom Optimal: suhu udara 20–35 °C, hujan tahunan 1500–2000 mm, tekstur tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan nilai optimal tahunan asli dalam mm/tahun; kategori full_sun dipetakan konservatif dari cahaya sangat terang/clear skies; bagian tanaman yang dimanfaatkan dijelaskan pada halaman."
       },
       {
         "url": "https://ideas.repec.org/a/caa/jnlhor/v52y2025i4id1-2025-hortsci.html",
@@ -1455,16 +1522,20 @@
         "notes": "Penelitian 2025 tanaman kacang panjang varietas yang sesuai secara hidroponik hingga pembentukan polong (20,81 polong/tanaman dengan formulasi terbaik)."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1500–2000 mm/tahun. FAO menulis subspesies sebagai ssp. sesquipedalis; nama ilmiah user dipertahankan subsp. Penelitian hidroponik 2025 mendukung produksi polong matang. Tanaman memerlukan ruang vertikal/rambatan; medium adalah kelas praktis, bukan kebutuhan 5–20 m² per tanaman. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1500,
-    "annual_rainfall_max_mm": 2000,
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1500–2000 mm/tahun. FAO menulis subspesies sebagai ssp. sesquipedalis; nama ilmiah user dipertahankan subsp. Penelitian hidroponik 2025 mendukung produksi polong matang. Tanaman memerlukan ruang vertikal/rambatan; medium adalah kelas praktis, bukan kebutuhan 5–20 m² per tanaman. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 4.1,
+    "rainfall_max": 5.5,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1500,
+    "rainfall_annual_max_mm": 2000,
+    "humidity_basis": null
   },
   {
     "name": "Oyong",
@@ -1501,13 +1572,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 20–32 °C; curah hujan tahunan 1200–2000 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 20–32 °C; curah hujan tahunan 1200–2000 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Luffa_acutangula.jpg",
@@ -1521,16 +1592,20 @@
         "notes": "Foto diidentifikasi sebagai Luffa acutangula; halaman asal memuat kreator SarKaLay စာကလေး dan lisensi CC BY-SA 4.0. Special:FilePath adalah tautan stabil ke berkas Wikimedia Commons."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 20–32 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1200–2000 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Tumbuhan merambat memerlukan ruang rambatan sehingga medium; ketiadaan bukti hidroponik hingga panen yang praktis membuat supports_hydroponic=null. Toleransi kekeringan dewasa tidak ditemukan bukti yang cukup sehingga drought_tolerant=null. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 1200,
-    "annual_rainfall_max_mm": 2000,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 20–32 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1200–2000 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Tumbuhan merambat memerlukan ruang rambatan sehingga medium; ketiadaan bukti hidroponik hingga panen yang praktis membuat supports_hydroponic=null. Toleransi kekeringan dewasa tidak ditemukan bukti yang cukup sehingga drought_tolerant=null. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 3.3,
+    "rainfall_max": 5.5,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1200,
+    "rainfall_annual_max_mm": 2000,
+    "humidity_basis": null
   },
   {
     "name": "Wortel",
@@ -1567,13 +1642,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 15–24 °C; curah hujan tahunan 600–1200 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 15–24 °C; curah hujan tahunan 600–1200 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Daucus_carota_subsp._sativus%2CKarotten.JPG",
@@ -1597,16 +1672,20 @@
         "notes": "Abstrak penelitian 2026 memverifikasi budidaya wortel dalam Deep-Water Culture (DWC) hingga menghasilkan biomassa akar panen. Penulis menyatakan metode masih perlu optimasi agar efisien dan kompetitif dibanding penanaman di tanah; tidak menyamakan percobaan ini dengan praktik hidroponik yang umum."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 15–24 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 600–1200 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Nama ilmiah sumber FAO hanya tingkat spesies Daucus carota; nilai iklim digeneralisasikan secara eksplisit ke subsp. sativus tanpa mengubah scientific_name. Hidroponik terbukti membentuk akar panen dalam riset DWC 2026 tetapi masih eksperimental yang masih memerlukan optimasi hasil. Toleransi kekeringan dewasa belum cukup diverifikasi => null. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 600,
-    "annual_rainfall_max_mm": 1200,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 15–24 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 600–1200 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Nama ilmiah sumber FAO hanya tingkat spesies Daucus carota; nilai iklim digeneralisasikan secara eksplisit ke subsp. sativus tanpa mengubah scientific_name. Hidroponik terbukti membentuk akar panen dalam riset DWC 2026 tetapi masih eksperimental yang masih memerlukan optimasi hasil. Toleransi kekeringan dewasa belum cukup diverifikasi => null. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 1.6,
+    "rainfall_max": 3.3,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 600,
+    "rainfall_annual_max_mm": 1200,
+    "humidity_basis": null
   },
   {
     "name": "Lobak",
@@ -1643,13 +1722,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 12–26 °C; curah hujan tahunan 1000–1500 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 12–26 °C; curah hujan tahunan 1000–1500 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Raphanus_sativus_00.jpg",
@@ -1673,16 +1752,20 @@
         "notes": "Studi membandingkan budidaya Raphanus sativus dengan tanah dan NFT/DWC/wick hingga akar lobak yang dapat dipanen, bukan hanya semai."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 12–26 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1000–1500 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Praktik hidroponik yang menghasilkan akar panen sudah diuji dalam penelitian; tidak otomatis berarti lazim untuk semua sistem hidroponik. Toleransi kekeringan tanaman dewasa tidak dapat dipastikan dari sumber pertumbuhan, sehingga null. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1000,
-    "annual_rainfall_max_mm": 1500,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 12–26 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1000–1500 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Praktik hidroponik yang menghasilkan akar panen sudah diuji dalam penelitian; tidak otomatis berarti lazim untuk semua sistem hidroponik. Toleransi kekeringan tanaman dewasa tidak dapat dipastikan dari sumber pertumbuhan, sehingga null. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 2.7,
+    "rainfall_max": 4.1,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1000,
+    "rainfall_annual_max_mm": 1500,
+    "humidity_basis": null
   },
   {
     "name": "Singkong",
@@ -1719,13 +1802,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 20–29 °C; curah hujan tahunan 1000–1500 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 20–29 °C; curah hujan tahunan 1000–1500 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Manihot_esculenta_3zz.jpg",
@@ -1750,16 +1833,20 @@
         "notes": "FAO menyatakan singkong yang sudah mapan dapat bertahan 6–8 bulan pada kondisi kekeringan; produksi dapat turun."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 20–29 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1000–1500 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. FAO menegaskan toleransi kekeringan terutama setelah tanaman mapan; produktivitas tetap turun bila kekeringan berat. Karena belum ada bukti praktik hidroponik yang layak menghasilkan akar simpan saat panen, supports_hydroponic=null. medium menggambarkan perdu dan ruang akar tanaman kebun, tidak mengasumsikan kebutuhan lahan komersial. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 1000,
-    "annual_rainfall_max_mm": 1500,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 20–29 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1000–1500 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. FAO menegaskan toleransi kekeringan terutama setelah tanaman mapan; produktivitas tetap turun bila kekeringan berat. Karena belum ada bukti praktik hidroponik yang layak menghasilkan akar simpan saat panen, supports_hydroponic=null. medium menggambarkan perdu dan ruang akar tanaman kebun, tidak mengasumsikan kebutuhan lahan komersial. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 2.7,
+    "rainfall_max": 4.1,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1000,
+    "rainfall_annual_max_mm": 1500,
+    "humidity_basis": null
   },
   {
     "name": "Ketela rambat",
@@ -1796,13 +1883,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 18–28 °C; curah hujan tahunan 750–2000 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 18–28 °C; curah hujan tahunan 750–2000 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Ipomoea_batatas_1zz.jpg",
@@ -1836,16 +1923,20 @@
         "notes": "Sistem NFT hidroponik khusus menunjukkan hasil umbi simpan sampai 1.790 g/tanaman; bukan bukti sistem rumahan umum."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 18–28 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 750–2000 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Hidroponik sudah menghasilkan umbi simpan hingga siap panen memakai NFT khusus pada riset NASA/Tuskegee, bukan bukti sistem rumahan standar. Toleransi kekeringan berarti ketahanan relatif saat tumbuh; tanaman tetap bisa turun hasilnya. medium merepresentasikan kebiasaan menjalar dan ruang bagi umbi. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 750,
-    "annual_rainfall_max_mm": 2000,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 18–28 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 750–2000 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Hidroponik sudah menghasilkan umbi simpan hingga siap panen memakai NFT khusus pada riset NASA/Tuskegee, bukan bukti sistem rumahan standar. Toleransi kekeringan berarti ketahanan relatif saat tumbuh; tanaman tetap bisa turun hasilnya. medium merepresentasikan kebiasaan menjalar dan ruang bagi umbi. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 2.1,
+    "rainfall_max": 5.5,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 750,
+    "rainfall_annual_max_mm": 2000,
+    "humidity_basis": null
   },
   {
     "name": "Kentang",
@@ -1882,13 +1973,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 15–25 °C; curah hujan tahunan 500–800 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 15–25 °C; curah hujan tahunan 500–800 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Potato_tubers.jpg",
@@ -1923,16 +2014,20 @@
         "notes": "Kentang disebut sensitif terhadap stres kekurangan air terutama saat pembentukan dan pembesaran umbi; variabelnya soil moisture, BUKAN RH udara."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 15–25 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 500–800 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Hidroponik didukung produksi minituber benih tersertifikasi memakai NFT oleh Michigan State University, tidak berarti semua teknik hidroponik layak untuk kentang konsumsi. Sumber stres kekurangan air adalah kelembapan TANAH, tidak dimasukkan ke field humidity udara. Foto menggambarkan umbi kentang, bukan pola tanam. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 500,
-    "annual_rainfall_max_mm": 800,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 15–25 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 500–800 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Hidroponik didukung produksi minituber benih tersertifikasi memakai NFT oleh Michigan State University, tidak berarti semua teknik hidroponik layak untuk kentang konsumsi. Sumber stres kekurangan air adalah kelembapan TANAH, tidak dimasukkan ke field humidity udara. Foto menggambarkan umbi kentang, bukan pola tanam. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 1.4,
+    "rainfall_max": 2.2,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 500,
+    "rainfall_annual_max_mm": 800,
+    "humidity_basis": null
   },
   {
     "name": "Stroberi",
@@ -1969,13 +2064,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 11–24 °C; curah hujan tahunan 600–900 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 11–24 °C; curah hujan tahunan 600–900 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Fragaria_x_ananassa_(2274774126).jpg",
@@ -2024,15 +2119,19 @@
         "notes": "Tabel 1 mencantumkan RH optimum 50–65% untuk stroberi dalam konteks tanaman greenhouse/protected cropping; angka ini tidak digeneralisasikan sebagai RH optimum lapangan terbuka."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 11–24 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 600–900 mm/tahun. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. FAO menulis simbol hibrida sebagai x dan user menggunakan ×; identitas hibrida sama dan scientific_name tetap persis. Indoor=true HANYA realistis dengan cahaya buatan/LED yang memadai dan kendali lingkungan, terbukti sampai berbuah di vertical farm; bukan berarti layak di ruangan gelap. Tanaman berakar dangkal sensitif defisit air. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. humidity_min=50 dan humidity_max=65 berlaku untuk kondisi greenhouse/protected cropping berdasarkan ulasan Energies 2019, bukan klaim universal untuk lapangan terbuka.",
-    "annual_rainfall_min_mm": 600,
-    "annual_rainfall_max_mm": 900,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 11–24 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 600–900 mm/tahun. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. FAO menulis simbol hibrida sebagai x dan user menggunakan ×; identitas hibrida sama dan scientific_name tetap persis. Indoor=true HANYA realistis dengan cahaya buatan/LED yang memadai dan kendali lingkungan, terbukti sampai berbuah di vertical farm; bukan berarti layak di ruangan gelap. Tanaman berakar dangkal sensitif defisit air. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. humidity_min=50 dan humidity_max=65 berlaku untuk kondisi greenhouse/protected cropping berdasarkan ulasan Energies 2019, bukan klaim universal untuk lapangan terbuka.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.6,
+    "rainfall_max": 2.5,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 600,
+    "rainfall_annual_max_mm": 900,
+    "humidity_basis": "controlled_environment"
   },
   {
     "name": "Jeruk nipis",
@@ -2069,13 +2168,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 26–32 °C; curah hujan tahunan 2200–2700 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 26–32 °C; curah hujan tahunan 2200–2700 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Citrus_%C3%97_aurantiifolia.jpg",
@@ -2104,16 +2203,20 @@
         "notes": "Jeruk nipis Key lime: pohon kecil sampai 4,1 m; butuh full sun; pohon >=4 tahun tidak butuh sering disiram dan baru mendapat manfaat penyiraman pada musim kering sangat panjang; ukuran, buah, tanah dan ruang tanam dijelaskan."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 26–32 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 2200–2700 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. EcoCrop/IFAS menggunakan Citrus aurantifolia sebagai variasi ejaan atau sinonim takson untuk Citrus × aurantiifolia; input tidak diubah. Pohon mapan dapat melewati periode kering tetapi anakan butuh air; drought_tolerant=true KHUSUS pohon dewasa. medium didasarkan ukuran pohon Key lime yang relatif kecil dan kemungkinan pembatasan tajuk; ruang riil berbeda menurut jarak tanam. Hidroponik buah hingga panen praktis tidak terkonfirmasi. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 2200,
-    "annual_rainfall_max_mm": 2700,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 26–32 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 2200–2700 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. EcoCrop/IFAS menggunakan Citrus aurantifolia sebagai variasi ejaan atau sinonim takson untuk Citrus × aurantiifolia; input tidak diubah. Pohon mapan dapat melewati periode kering tetapi anakan butuh air; drought_tolerant=true KHUSUS pohon dewasa. medium didasarkan ukuran pohon Key lime yang relatif kecil dan kemungkinan pembatasan tajuk; ruang riil berbeda menurut jarak tanam. Hidroponik buah hingga panen praktis tidak terkonfirmasi. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 6,
+    "rainfall_max": 7.4,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 2200,
+    "rainfall_annual_max_mm": 2700,
+    "humidity_basis": null
   },
   {
     "name": "Mangga",
@@ -2150,13 +2253,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 24–30 °C; curah hujan tahunan 600–1500 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 24–30 °C; curah hujan tahunan 600–1500 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Mangifera_indica_29zz.jpg",
@@ -2182,16 +2285,20 @@
         "notes": "Tabel 10 menyatakan Mangifera indica tahan kekeringan dan suhu pertumbuhan optimum 75–86°F ≈ 23,9–30°C; sesuai kisaran EcoCrop."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 24–30 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 600–1500 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. IFAS menyatakan mangga toleran kekeringan dalam jangka hari hingga minggu bergantung ukuran pohon; meski tahan hidup, pembungaan atau produksi bisa menurun. Umumnya butuh lahan luas hingga tajuk dewasa. Tidak ada bukti praktik hidroponik produktif sampai buah yang layak; supports_hydroponic=null. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 600,
-    "annual_rainfall_max_mm": 1500,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 24–30 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 600–1500 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. IFAS menyatakan mangga toleran kekeringan dalam jangka hari hingga minggu bergantung ukuran pohon; meski tahan hidup, pembungaan atau produksi bisa menurun. Umumnya butuh lahan luas hingga tajuk dewasa. Tidak ada bukti praktik hidroponik produktif sampai buah yang layak; supports_hydroponic=null. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 1.6,
+    "rainfall_max": 4.1,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 600,
+    "rainfall_annual_max_mm": 1500,
+    "humidity_basis": null
   },
   {
     "name": "Pepaya",
@@ -2228,13 +2335,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute): suhu udara 21–30 °C; curah hujan tahunan 1500–2500 mm; ekologi tanah dan intensitas cahaya. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal (bukan Absolute): suhu udara 21–30 °C; curah hujan tahunan 1500–2500 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://commons.wikimedia.org/wiki/File:Carica_papaya_fruit.jpg",
@@ -2271,16 +2378,20 @@
         "notes": "Artikel menyatakan RH udara memadai 60–85% untuk budidaya pepaya dan suhu ideal lebih sempit 22–26°C; EcoCrop memberi kisaran optimal 21–30°C yang digunakan untuk konsistensi antar tanaman."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 21–30 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1500–2500 mm/tahun. Relative humidity UDARA untuk pertumbuhan pepaya 60–85% berdasarkan artikel Scientia Agricola; kelembapan penyimpanan tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. PENYIMPANGAN SUMBER suhu: EcoCrop optimal 21–30°C; artikel SciELO menyebut ideal lebih sempit 22–26°C dan IFAS memberi sekitar 25–33°C, sehingga EcoCrop dipakai konsisten untuk katalog tanpa menggabung angka secara arbitrer. RH 60–85% berasal dari konteks pertumbuhan pepaya, bukan pascapanen. IFAS eksplisit menyebut drought intolerant. Hidroponik bibit/pembibitan saja tidak memenuhi syarat bukti tanaman menghasilkan buah hingga panen, sehingga nilainya dibiarkan null. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 1500,
-    "annual_rainfall_max_mm": 2500,
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 21–30 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1500–2500 mm/tahun. Relative humidity UDARA untuk pertumbuhan pepaya 60–85% berdasarkan artikel Scientia Agricola; kelembapan penyimpanan tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. PENYIMPANGAN SUMBER suhu: EcoCrop optimal 21–30°C; artikel SciELO menyebut ideal lebih sempit 22–26°C dan IFAS memberi sekitar 25–33°C, sehingga EcoCrop dipakai konsisten untuk katalog tanpa menggabung angka secara arbitrer. RH 60–85% berasal dari konteks pertumbuhan pepaya, bukan pascapanen. IFAS eksplisit menyebut drought intolerant. Hidroponik bibit/pembibitan saja tidak memenuhi syarat bukti tanaman menghasilkan buah hingga panen, sehingga nilainya dibiarkan null. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 4.1,
+    "rainfall_max": 6.8,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1500,
+    "rainfall_annual_max_mm": 2500,
+    "humidity_basis": null
   },
   {
     "name": "Pisang",
@@ -2317,13 +2428,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 23–33 °C dan rainfall ANNUAL 1200–3600 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
+        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 23–33 °C dan rainfall ANNUAL 1200–3600 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
       },
       {
         "url": "https://ask.ifas.ufl.edu/publication/MG040",
@@ -2352,16 +2463,20 @@
         "notes": "Halaman berkas memuat fotografer Apurv013 dan lisensi CC0 1.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
       }
     ],
-    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1200–3600 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. supports_hydroponic=null: tidak ada bukti memadai budidaya hidroponik pisang skala praktis hingga panen buah; pembibitan in-vitro bukan produksi buah. indoor=false merujuk produksi buah dalam rumah biasa, bukan greenhouse komersial. Sumber UF IFAS membahas pula hibrida M. acuminata × M. balbisiana, sehingga klaim toleransi kekeringan dirujuk khusus sensitivitas M. acuminata; varietas pisang komersial tidak seluruhnya spesies murni. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 1200,
-    "annual_rainfall_max_mm": 3600,
+    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1200–3600 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. supports_hydroponic=null: tidak ada bukti memadai budidaya hidroponik pisang skala praktis hingga panen buah; pembibitan in-vitro bukan produksi buah. indoor=false merujuk produksi buah dalam rumah biasa, bukan greenhouse komersial. Sumber UF IFAS membahas pula hibrida M. acuminata × M. balbisiana, sehingga klaim toleransi kekeringan dirujuk khusus sensitivitas M. acuminata; varietas pisang komersial tidak seluruhnya spesies murni. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 3.3,
+    "rainfall_max": 9.9,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1200,
+    "rainfall_annual_max_mm": 3600,
+    "humidity_basis": null
   },
   {
     "name": "Anggur",
@@ -2398,13 +2513,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 18–30 °C dan rainfall ANNUAL 700–850 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
+        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 18–30 °C dan rainfall ANNUAL 700–850 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
       },
       {
         "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/cropView?id=2160",
@@ -2454,16 +2569,20 @@
         "notes": "Halaman berkas memuat fotografer Aitzolete dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
       }
     ],
-    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 700–850 mm/tahun. Anggur biasa tetap diberi supports_hydroponic=null dan indoor=false dalam konteks rekomendasi pekarangan/rumah: penelitian CSIRO 2024 memakai MICROVINES kerdil dan sistem LED khusus, belum bukti cara lazim untuk sulur anggur normal. Drought_tolerant=true hanya pada tanaman yang sudah MAPAN. Ruang medium didasarkan pergola sekitar 50–100 kaki persegi; sulur tak dipangkas bisa jauh lebih panjang. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian. Setelah audit sumber, klaim RH 60–80% tidak cukup didukung oleh halaman FAO yang dicantumkan; humidity_min dan humidity_max dikembalikan menjadi null.",
-    "annual_rainfall_min_mm": 700,
-    "annual_rainfall_max_mm": 850,
+    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 700–850 mm/tahun. Anggur biasa tetap diberi supports_hydroponic=null dan indoor=false dalam konteks rekomendasi pekarangan/rumah: penelitian CSIRO 2024 memakai MICROVINES kerdil dan sistem LED khusus, belum bukti cara lazim untuk sulur anggur normal. Drought_tolerant=true hanya pada tanaman yang sudah MAPAN. Ruang medium didasarkan pergola sekitar 50–100 kaki persegi; sulur tak dipangkas bisa jauh lebih panjang. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian. Setelah audit sumber, klaim RH 60–80% tidak cukup didukung oleh halaman FAO yang dicantumkan; humidity_min dan humidity_max dikembalikan menjadi null.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 1.9,
+    "rainfall_max": 2.3,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 700,
+    "rainfall_annual_max_mm": 850,
+    "humidity_basis": null
   },
   {
     "name": "Melon",
@@ -2500,13 +2619,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 18–30 °C dan rainfall ANNUAL 1000–1300 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
+        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 18–30 °C dan rainfall ANNUAL 1000–1300 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
       },
       {
         "url": "https://journal.ipb.ac.id/JIPI/article/view/66090",
@@ -2544,16 +2663,20 @@
         "notes": "Halaman berkas memuat fotografer Krzysztof Golik dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
       }
     ],
-    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1000–1300 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. supports_hydroponic=true berdasarkan hasil buah matang melalui Dutch bucket, bukan hanya fase bibit. RH 30–59,3% yang tercatat di greenhouse penelitian IPB ialah KONDISI TERUKUR saat percobaan, bukan interval ideal dan tidak dipindahkan ke humidity_min/max. Drought_tolerant=null karena tidak ada bukti cukup toleransi kekeringan signifikan pada tanaman produktif. Ruang medium mengandaikan perambatan atau ajir di lahan sekitar 5–20m². Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1000,
-    "annual_rainfall_max_mm": 1300,
+    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1000–1300 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. supports_hydroponic=true berdasarkan hasil buah matang melalui Dutch bucket, bukan hanya fase bibit. RH 30–59,3% yang tercatat di greenhouse penelitian IPB ialah KONDISI TERUKUR saat percobaan, bukan interval ideal dan tidak dipindahkan ke humidity_min/max. Drought_tolerant=null karena tidak ada bukti cukup toleransi kekeringan signifikan pada tanaman produktif. Ruang medium mengandaikan perambatan atau ajir di lahan sekitar 5–20m². Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 2.7,
+    "rainfall_max": 3.6,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1000,
+    "rainfall_annual_max_mm": 1300,
+    "humidity_basis": null
   },
   {
     "name": "Semangka",
@@ -2590,13 +2713,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 20–35 °C dan rainfall ANNUAL 500–700 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
+        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 20–35 °C dan rainfall ANNUAL 500–700 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
       },
       {
         "url": "https://www.nature.com/articles/s41598-025-07250-9",
@@ -2633,16 +2756,20 @@
         "notes": "Halaman berkas memuat fotografer Mark Marathon dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
       }
     ],
-    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 500–700 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. Hydroponic=true didukung studi hingga buah dipanen. Watering Average sebagai ringkasan kebutuhan air berkala yang sangat tergantung tahap pertumbuhan, bukan menyiratkan toleransi kekeringan. Meski EcoCrop menyebut kisaran hujan optimal relatif rendah, itu TIDAK membuktikan drought_tolerant; nilainya null. Space medium cocok untuk petak merambat 5–20 m² dengan pembatasan sulur. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 500,
-    "annual_rainfall_max_mm": 700,
+    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 500–700 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. Hydroponic=true didukung studi hingga buah dipanen. Watering Average sebagai ringkasan kebutuhan air berkala yang sangat tergantung tahap pertumbuhan, bukan menyiratkan toleransi kekeringan. Meski EcoCrop menyebut kisaran hujan optimal relatif rendah, itu TIDAK membuktikan drought_tolerant; nilainya null. Space medium cocok untuk petak merambat 5–20 m² dengan pembatasan sulur. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 1.4,
+    "rainfall_max": 1.9,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 500,
+    "rainfall_annual_max_mm": 700,
+    "humidity_basis": null
   },
   {
     "name": "Kemangi",
@@ -2730,14 +2857,18 @@
       }
     ],
     "notes": "Tidak ada rentang suhu udara ideal yang cukup terverifikasi khusus takson ini; temp_min/temp_max = null (hasil satu titik eksperimen bukan rentang ideal). Tidak ada rentang hujan optimal tahunan/harian yang terverifikasi khusus takson ini; rainfall_min/rainfall_max = null. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. PENTING TAKSONOMI: nama identitas tetap Ocimum × africanum, bukan diganti dengan Ocimum × citriodorum yang merupakan SINONIM; sumber NParks menjelaskan keduanya identik. EcoCrop Ocimum americanum TIDAK digunakan sebagai proksi numerik karena merupakan spesies induk berbeda. Studi greenhouse lemon basil pada 26°C dan uji sekitar 29°C tidak menyatakan batas rentang optimum, demikian juga RH 89% fase perkecambahan BUKAN RH ideal tanaman dewasa. indoor=true didukung sumber basil secara umum, sehingga merupakan generalisasi untuk hibrida kemangi dengan cahaya memadai. Drought_tolerant=null tanpa bukti spesifik. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   },
   {
     "name": "Jahe",
@@ -2775,13 +2906,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 19–29 °C dan rainfall ANNUAL 1400–3000 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
+        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 19–29 °C dan rainfall ANNUAL 1400–3000 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
       },
       {
         "url": "https://www.nparks.gov.sg/florafaunaweb/flora/2/5/2573",
@@ -2821,15 +2952,19 @@
         "notes": "Halaman berkas memuat fotografer Schlaghecken Josef dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
       }
     ],
-    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1400–3000 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. Hidroponik=true hanya dalam makna kultur substrat TANPA TANAH dengan fertigasi nutrisi, sesuai riset hasil rimpang 2026; jangan diartikan jahe umum dibudidayakan sistem NFT air penuh. Indoor=null: greenhouse terlindung penelitian tidak otomatis berarti realistis menghasilkan rimpang dalam ruangan rumah. Drought_tolerant=null: kebutuhan penyiraman sedang tidak membuktikan batas toleransi kekeringan. Filter small mengasumsikan budidaya satu rumpun dalam pot besar/planter, bukan skala hamparan. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1400,
-    "annual_rainfall_max_mm": 3000,
+    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1400–3000 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. Hidroponik=true hanya dalam makna kultur substrat TANPA TANAH dengan fertigasi nutrisi, sesuai riset hasil rimpang 2026; jangan diartikan jahe umum dibudidayakan sistem NFT air penuh. Indoor=null: greenhouse terlindung penelitian tidak otomatis berarti realistis menghasilkan rimpang dalam ruangan rumah. Drought_tolerant=null: kebutuhan penyiraman sedang tidak membuktikan batas toleransi kekeringan. Filter small mengasumsikan budidaya satu rumpun dalam pot besar/planter, bukan skala hamparan. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 3.8,
+    "rainfall_max": 8.2,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1400,
+    "rainfall_annual_max_mm": 3000,
+    "humidity_basis": null
   },
   {
     "name": "Serai",
@@ -2866,13 +3001,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 24–30 °C dan rainfall ANNUAL 1500–3000 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
+        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 24–30 °C dan rainfall ANNUAL 1500–3000 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
       },
       {
         "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/9/1918",
@@ -2921,15 +3056,19 @@
         "notes": "Halaman berkas memuat fotografer Prathvi Acharya dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
       }
     ],
-    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1500–3000 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. Serai hidroponik=true berdasarkan percobaan tanaman dewasa sampai biomassa 2025, meski skala komersial belum dibuktikan. indoor=true hanya untuk pemeliharaan rumpun dan daun dengan penerangan kuat, bukan klaim produksi pangkal batang maksimal indoor. Drought_tolerant=null karena NParks toleransi tanah bervariasi dan moderate water tidak sama dengan toleransi kekeringan. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1500,
-    "annual_rainfall_max_mm": 3000,
+    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1500–3000 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. Serai hidroponik=true berdasarkan percobaan tanaman dewasa sampai biomassa 2025, meski skala komersial belum dibuktikan. indoor=true hanya untuk pemeliharaan rumpun dan daun dengan penerangan kuat, bukan klaim produksi pangkal batang maksimal indoor. Drought_tolerant=null karena NParks toleransi tanah bervariasi dan moderate water tidak sama dengan toleransi kekeringan. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 4.1,
+    "rainfall_max": 8.2,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1500,
+    "rainfall_annual_max_mm": 3000,
+    "humidity_basis": null
   },
   {
     "name": "Kunyit",
@@ -2967,13 +3106,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 20–28 °C dan rainfall ANNUAL 1000–2000 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
+        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 20–28 °C dan rainfall ANNUAL 1000–2000 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
       },
       {
         "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/9/1904",
@@ -3012,15 +3151,19 @@
         "notes": "Halaman berkas memuat fotografer Raghbirkhanna dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
       }
     ],
-    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1000–2000 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. supports_hydroponic=null sebagai filter kelayakan praktik rumahan: riset hidroponik yang dibaca meneliti AKLIMATISASI BIBIT, belum bukti cukup untuk produksi rimpang matang lazim/praktis; kultur hidroponik skala riset sedang dikembangkan, sehingga nilainya dibiarkan null sampai tersedia bukti yang memadai. indoor=null untuk produksi rimpang indoor belum diverifikasi; greenhouse tidak disamakan dengan ruang rumah. Drought_tolerant=null karena banyak air bukan bukti eksplisit intoleransi/toleransi kekeringan. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 1000,
-    "annual_rainfall_max_mm": 2000,
+    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1000–2000 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. supports_hydroponic=null sebagai filter kelayakan praktik rumahan: riset hidroponik yang dibaca meneliti AKLIMATISASI BIBIT, belum bukti cukup untuk produksi rimpang matang lazim/praktis; kultur hidroponik skala riset sedang dikembangkan, sehingga nilainya dibiarkan null sampai tersedia bukti yang memadai. indoor=null untuk produksi rimpang indoor belum diverifikasi; greenhouse tidak disamakan dengan ruang rumah. Drought_tolerant=null karena banyak air bukan bukti eksplisit intoleransi/toleransi kekeringan. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 2.7,
+    "rainfall_max": 5.5,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1000,
+    "rainfall_annual_max_mm": 2000,
+    "humidity_basis": null
   },
   {
     "name": "Daun mint",
@@ -3058,13 +3201,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 15–25 °C dan rainfall ANNUAL 1000–2200 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
+        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 15–25 °C dan rainfall ANNUAL 1000–2200 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
       },
       {
         "url": "https://www.nparks.gov.sg/florafaunaweb/flora/4/8/4858",
@@ -3113,15 +3256,19 @@
         "notes": "Halaman berkas memuat fotografer David J. Stang dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
       }
     ],
-    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1000–2200 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. FAO menyebut nama Mentha piperita TANPA simbol ×, NParks menyebut Mentha × piperita; identitas diminta tetap persis. RH numerik optimal tidak dapat diverifikasi; jangan gunakan soil moisture sebagai humidity. Drought_tolerant=null karena lots of water dan moist soil tidak otomatis membuktikan batas tahan kekeringan tanaman mapan. Care Medium merangkum kebutuhan air tinggi dan kecenderungan rambat menyebar, kendati daun mudah dipanen dalam pot. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 1000,
-    "annual_rainfall_max_mm": 2200,
+    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 1000–2200 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. FAO menyebut nama Mentha piperita TANPA simbol ×, NParks menyebut Mentha × piperita; identitas diminta tetap persis. RH numerik optimal tidak dapat diverifikasi; jangan gunakan soil moisture sebagai humidity. Drought_tolerant=null karena lots of water dan moist soil tidak otomatis membuktikan batas tahan kekeringan tanaman mapan. Care Medium merangkum kebutuhan air tinggi dan kecenderungan rambat menyebar, kendati daun mudah dipanen dalam pot. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 2.7,
+    "rainfall_max": 6,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 1000,
+    "rainfall_annual_max_mm": 2200,
+    "humidity_basis": null
   },
   {
     "name": "Oregano",
@@ -3158,13 +3305,13 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight",
           "description"
         ],
-        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 17–28 °C dan rainfall ANNUAL 700–1300 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
+        "notes": "Kolom Optimal (bukan Absolute) memberikan suhu udara 17–28 °C dan rainfall ANNUAL 700–1300 mm/tahun; memuat jenis tanah, cahaya dan bentuk/hasil tanaman. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun, bukan kebutuhan penyiraman harian."
       },
       {
         "url": "https://www.nparks.gov.sg/florafaunaweb/flora/5/1/5191",
@@ -3215,15 +3362,19 @@
         "notes": "Halaman berkas memuat fotografer Jose Angel Urquia Goitia dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
       }
     ],
-    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 700–1300 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. Drought_tolerant=true khusus tanaman yang telah tumbuh mapan, menurut NParks. Hydroponic=true didukung percobaan pot perlit + larutan nutrisi pada O. vulgare; tidak disamakan dengan tanaman di tanah yang hanya ditetesi pupuk. Indoor=true memerlukan jendela terang/lampu tanam dan untuk pertumbuhan daun, bukan bunga/biji. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 700,
-    "annual_rainfall_max_mm": 1300,
+    "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 700–1300 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. Drought_tolerant=true khusus tanaman yang telah tumbuh mapan, menurut NParks. Hydroponic=true didukung percobaan pot perlit + larutan nutrisi pada O. vulgare; tidak disamakan dengan tanaman di tanah yang hanya ditetesi pupuk. Indoor=true memerlukan jendela terang/lampu tanam dan untuk pertumbuhan daun, bukan bunga/biji. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.9,
+    "rainfall_max": 3.6,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 700,
+    "rainfall_annual_max_mm": 1300,
+    "humidity_basis": null
   },
   {
     "name": "Rosemary",
@@ -3261,8 +3412,8 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight"
         ],
@@ -3320,15 +3471,19 @@
         "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
       }
     ],
-    "notes": "Data optimal FAO tercatat dengan nama sinonim Rosmarinus officinalis; identitas input Salvia rosmarinus dipertahankan. RH ideal numerik tidak ditemukan. Hidroponik dibuktikan penelitian WVU, tetapi memerlukan kendali aerasi dan pemberian nutrisi; indoor hanya realistis dengan pencahayaan cukup. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
-    "annual_rainfall_min_mm": 600,
-    "annual_rainfall_max_mm": 1400,
+    "notes": "Data optimal FAO tercatat dengan nama sinonim Rosmarinus officinalis; identitas input Salvia rosmarinus dipertahankan. RH ideal numerik tidak ditemukan. Hidroponik dibuktikan penelitian WVU, tetapi memerlukan kendali aerasi dan pemberian nutrisi; indoor hanya realistis dengan pencahayaan cukup. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": 1.6,
+    "rainfall_max": 3.8,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 600,
+    "rainfall_annual_max_mm": 1400,
+    "humidity_basis": null
   },
   {
     "name": "Daun salam",
@@ -3387,15 +3542,19 @@
       }
     ],
     "notes": "Tidak disamakan dengan bay laurel (Laurus nobilis). Karena ini pohon yang tumbuh besar, indoor=false berarti tidak realistis dipelihara di dalam ruangan hingga ukuran dewasa; bibit dapat saja ditaruh sementara di pot. Tidak ada angka optimal spesifik terverifikasi untuk suhu udara, RH atau curah hujan. Toleransi kekeringan dewasa belum didukung memadai; supports_hydroponic=null karena belum ditemukan praktik produktif yang layak untuk pohon dewasa. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   },
   {
     "name": "Lengkuas",
@@ -3433,12 +3592,12 @@
         "supports_fields": [
           "temp_min",
           "temp_max",
-          "annual_rainfall_min_mm",
-          "annual_rainfall_max_mm",
+          "rainfall_annual_min_mm",
+          "rainfall_annual_max_mm",
           "supports_soil",
           "sunlight"
         ],
-        "notes": "Kolom Optimal: suhu 27–32 °C dan curah hujan 2500–3000 mm/tahun; field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan angka tahunan asli dalam mm/tahun."
+        "notes": "Kolom Optimal: suhu 27–32 °C dan curah hujan 2500–3000 mm/tahun; field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan angka tahunan asli dalam mm/tahun."
       },
       {
         "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1644",
@@ -3466,16 +3625,20 @@
         "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
       }
     ],
-    "notes": "FAO mencantumkan suhu optimal 27–32 °C untuk spesies ini. Sumber UF IFAS untuk kelompok jahe/lengkuas/kunyit menyebut 70–85°F (~21–29°C) lebih umum; data spesies FAO diprioritaskan tanpa membuat rata-rata antar sumber. RH optimal tidak terverifikasi. Bukti hidroponik praktis hingga panen rimpang spesies yang memadai tidak ditemukan. Field annual_rainfall_min_mm dan annual_rainfall_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": 2500,
-    "annual_rainfall_max_mm": 3000,
+    "notes": "FAO mencantumkan suhu optimal 27–32 °C untuk spesies ini. Sumber UF IFAS untuk kelompok jahe/lengkuas/kunyit menyebut 70–85°F (~21–29°C) lebih umum; data spesies FAO diprioritaskan tanpa membuat rata-rata antar sumber. RH optimal tidak terverifikasi. Bukti hidroponik praktis hingga panen rimpang spesies yang memadai tidak ditemukan. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed",
       "indoor"
-    ]
+    ],
+    "rainfall_min": 6.8,
+    "rainfall_max": 8.2,
+    "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
+    "rainfall_annual_min_mm": 2500,
+    "rainfall_annual_max_mm": 3000,
+    "humidity_basis": null
   },
   {
     "name": "Lidah mertua",
@@ -3536,14 +3699,18 @@
       }
     ],
     "notes": "Nilai suhu, RH, dan curah hujan optimal spesifik tidak diverifikasi; toleransi terhadap suhu ~50°F dan udara kering bukan rentang kondisi ideal. Bentuk indoor dalam pot dapat dijaga kecil. supports_hydroponic=null: kemampuan stek berakar dalam air saja tidak mencukupi syarat praktik hidroponik hingga pertumbuhan relevan. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   },
   {
     "name": "Sirih gading",
@@ -3627,14 +3794,18 @@
       }
     ],
     "notes": "Rentang 18–30°C didukung RHS pada tingkat genus Epipremnum, bukan uji spesifik semua kultivar Epipremnum aureum. RH ideal numerik dan rainfall taman/ruangan tidak tersedia, maka null. Sukulen pada pot gantung kecil tetapi sulur dapat sangat panjang; space small merujuk jejak pot, bukan panjang maksimal sulur. Hidroponik memiliki bukti NFT riset dan penggunaan sistem tumbuh terbatas; bukan klaim bahwa semua konfigurasi rumahan sama berhasil.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   },
   {
     "name": "Monstera",
@@ -3695,14 +3866,18 @@
       }
     ],
     "notes": "Konversi suhu dari NCSU: (60–32)*5/9=15,56°C, (85–32)*5/9=29,44°C; ditulis bulat 16–29°C tanpa presisi palsu. RH tinggi tidak diberi persentase spesifik. Karena tumbuh memanjat dan daun besar, space medium berdasarkan penyangga/ukuran dewasa indoor; bentuk muda dalam pot dapat kecil. Data curah hujan luar habitat tidak dikonversi dari praktik indoor. supports_hydroponic=null karena tidak ada verifikasi budidaya praktis hingga fase relevan dari sumber utama yang diperiksa. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   },
   {
     "name": "Kaktus",
@@ -3771,14 +3946,18 @@
       }
     ],
     "notes": "CAKUPAN TAKSON: Cactaceae adalah famili, bukan satu spesies. KELOMPOK LUAS: Cactaceae berisi kaktus gurun, tropis/epifit, kecil berpot dan besar berbentuk pohon. Karena tidak ada satu angka suhu optimal, RH udara optimal atau rainfall tahunan representatif yang bertanggung jawab, semuanya null. Drought_tolerant=null karena ketahanan kekeringan kaktus gurun tidak berlaku sama pada kaktus hutan; full_sun dan partial_shade adalah PILIHAN UNTUK JENIS BERBEDA, bukan dua syarat seragam. Watering Minimum dan space small adalah profil mayoritas kaktus hias kecil dalam pot; pengecualian perlu pencatatan spesies. Indoor true bagi jenis yang bisa hidup dalam pot dengan pencahayaan cukup. Hidroponik null: bukti praktis yang berlaku lintas famili tidak ditemukan. UMN menyebut RH rendah 10–30% dapat ditoleransi oleh banyak jenis; itu BUKAN kelembapan ideal seluruh Cactaceae. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
     "taxon_scope": "family",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   },
   {
     "name": "Aglaonema",
@@ -3840,14 +4019,18 @@
       }
     ],
     "notes": "CAKUPAN TAKSON: Aglaonema spp. menunjukkan genus dengan banyak spesies, bukan satu spesies. KELOMPOK GENUS: mempertahankan identitas Aglaonema spp., tidak memilih spesies arbitrer. NCSU memberi suhu siang favorit pada profil Aglaonema umum 70–80°F => (70–32)*5/9=21,1°C, (80–32)*5/9=26,7°C, dibulatkan 21–27°C; proksi konservatif AGLOANEMA HIAS INDOOR umum, bukan batas mutlak semua spesies. Variasi antarspesies dan kultivar menghalangi satu angka RH optimum meski secara umum suka kelembapan tinggi; RH dan curah hujan null. Foto hanya contoh A. commutatum, bukan penetapan identitas kelompok. Drought_tolerant null: toleransi udara kering bukan bukti toleransi kekeringan tanah; hydroponic=null karena tidak ada bukti cukup untuk praktik luas lintas spesies. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
     "taxon_scope": "genus",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   },
   {
     "name": "Sukulen",
@@ -3905,14 +4088,18 @@
       }
     ],
     "notes": "CAKUPAN TAKSON: Sukulen adalah kelompok bentuk tumbuh lintas banyak famili dan tidak memiliki satu scientific_name. KELOMPOK UMUM NONTAKSONOMI: \"Succulent plants\" mencakup banyak famili termasuk Cactaceae; tidak diwakili oleh satu spesies. Suhu, RH, curah hujan optimum dan toleransi kekeringan tidak boleh disamaratakan, semua null untuk parameter tersebut. Sunlight full_sun dan partial_shade adalah pilihan yang sesuai UNTUK SPESIES BERBEDA. Minimum, Low, indoor=true dan space=small hanya default kelompok sukulen hias dalam pot; sebagian sukulen pohon atau tropis memerlukan ruang, cahaya dan air berbeda. Tidak ada bukti hidroponik yang sah untuk seluruh kelompok. Foto menampilkan beberapa sukulen, bukan satu spesies acuan. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
     "taxon_scope": "group",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   },
   {
     "name": "Peace lily",
@@ -3995,14 +4182,18 @@
       }
     ],
     "notes": "Suhu 68–85°F dari panduan NCSU genus Spathiphyllum dikonversi menjadi 20–29°C, dipakai sebagai proksi untuk S. wallisii. RH tinggi dianjurkan tetapi persentase ideal spesifik tidak dipublikasikan, maka null. Curah hujan optimal tahunan untuk lingkungan indoor tidak dapat diberi angka mm/tahun yang sah. Frequent berarti kelembapan media relatif konsisten saat tumbuh, bukan membuat media tergenang. Praktik hidroponik berdasarkan penelitian spesies di IPB. Toleransi kekeringan dewasa tidak diverifikasi, maka null.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   },
   {
     "name": "Calathea",
@@ -4085,14 +4276,18 @@
         "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
       }
     ],
-    "notes": "CAKUPAN TAKSON: Calathea dalam katalog ini adalah kelompok ornamental yang juga mencakup Goeppertia; tidak ada satu scientific_name yang mewakili seluruh kelompok. KELOMPOK GENUS GABUNGAN: teks gabungan Calathea/Goeppertia spp. tidak disimpan sebagai scientific_name; tidak memilih spesies arbitrer. Referensi NCSU menunjukkan perbedaan kebutuhan: G. picturata ~60–70% RH, G. bachemiana ~50–60%, dan G. lietzei >60%; suhu pun bervariasi. Tidak ada satu rentang optimal yang cukup mewakili seluruh anggota, sehingga temp_min/max, humidity_min/max, annual_rainfall_min_mm/annual_rainfall_max_mm = null. Watering Frequent dan High mewakili kelompok ornamental berdaun hutan lembap yang memerlukan kelembapan media dan kondisi stabil; tidak berarti semua spesies identik. Drought_tolerant null, hydroponic=null karena tidak ada bukti budidaya praktis lintas kelompok. Foto berupa tanaman Goeppertia, contoh visual bukan spesies acuan seluruh kelompok. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
-    "annual_rainfall_min_mm": null,
-    "annual_rainfall_max_mm": null,
+    "notes": "CAKUPAN TAKSON: Calathea dalam katalog ini adalah kelompok ornamental yang juga mencakup Goeppertia; tidak ada satu scientific_name yang mewakili seluruh kelompok. KELOMPOK GENUS GABUNGAN: teks gabungan Calathea/Goeppertia spp. tidak disimpan sebagai scientific_name; tidak memilih spesies arbitrer. Referensi NCSU menunjukkan perbedaan kebutuhan: G. picturata ~60–70% RH, G. bachemiana ~50–60%, dan G. lietzei >60%; suhu pun bervariasi. Tidak ada satu rentang optimal yang cukup mewakili seluruh anggota, sehingga temp_min/max, humidity_min/max, rainfall_annual_min_mm/rainfall_annual_max_mm = null. Watering Frequent dan High mewakili kelompok ornamental berdaun hutan lembap yang memerlukan kelembapan media dan kondisi stabil; tidak berarti semua spesies identik. Drought_tolerant null, hydroponic=null karena tidak ada bukti budidaya praktis lintas kelompok. Foto berupa tanaman Goeppertia, contoh visual bukan spesies acuan seluruh kelompok. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "group",
     "derived_fields": [
       "watering",
       "care_level",
       "space_needed"
-    ]
+    ],
+    "rainfall_min": null,
+    "rainfall_max": null,
+    "rainfall_basis": null,
+    "rainfall_annual_min_mm": null,
+    "rainfall_annual_max_mm": null,
+    "humidity_basis": null
   }
 ]
