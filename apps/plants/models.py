@@ -24,7 +24,7 @@ class Plant(models.Model):
     name = models.CharField(max_length=200)
     scientific_name = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
-    image_url = models.URLField(blank=True)
+    image_url = models.URLField(max_length=2048, blank=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
 
     # Temperature in Celsius, humidity in percent, rainfall in mm/day.
