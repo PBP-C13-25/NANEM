@@ -1,0 +1,46 @@
+{% comment %}
+  Modal ubah nama lahan.
+
+  Contoh:
+    {% url 'recommendations:history_update' h.pk as rename_url %}
+    {% with pk=h.pk|stringformat:"s" %}
+    {% include "components/rename_modal.html" with id="ubah-"|add:pk action=rename_url value=h.land_name next=request.get_full_path %}
+    {% endwith %}
+
+  Parameter:
+    id     : id unik modal
+    action : URL tujuan POST (view ubah nama)
+    value  : nama lahan sekarang
+    next   : (opsional) URL tujuan setelah simpan, mis. request.get_full_path
+             supaya user tetap di halaman daftar. Kosong = ke halaman detail.
+{% endcomment %}
+
+<dialog class="modal" id="{{ id }}" aria-labelledby="{{ id }}-title">
+    <button type="button" class="modal__close" data-modal-close aria-label="Tutup">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+
+    <form method="post" action="{{ action }}" class="dialog">
+        {% csrf_token %}
+        {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+
+        <div class="dialog__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </div>
+
+        <h2 class="dialog__title" id="{{ id }}-title">Ubah Nama Lahan</h2>
+        <p class="dialog__text">Nama ini cuma buat penanda di riwayatmu.</p>
+
+        <div class="dialog__body">
+            <div class="form-group">
+                <label for="{{ id }}-input">Nama lahan</label>
+                <input type="text" id="{{ id }}-input" name="land_name" value="{{ value }}" maxlength="100" required>
+            </div>
+        </div>
+
+        <div class="dialog__actions">
+            <button type="button" class="btn btn--outline" data-modal-close>Batal</button>
+            <button type="submit" class="btn btn--primary">Simpan</button>
+        </div>
+    </form>
+</dialog>
