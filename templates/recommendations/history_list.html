@@ -1,7 +1,9 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Riwayat Rekomendasi - Tanem{% endblock %}
-
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/history.css' %}"> 
+{% endblock %}
 {% block content %}
 <section>
     <h1>Riwayat Rekomendasi</h1>
@@ -80,7 +82,8 @@
         </nav>
         {% endif %}
     {% else %}
-        <p>Belum ada riwayat. <a href="{% url 'recommendations:index' %}">Coba rekomendasi pertamamu</a>.</p>
+        {% url 'recommendations:index' as cta_url %}
+        {% include "components/empty_state.html" with icon="history" title="Belum ada riwayat" text="Hasil rekomendasi yang kamu simpan bakal muncul di sini." action_url=cta_url action_label="Cari Rekomendasi" %}
     {% endif %}
 </section>
 {% endblock %}

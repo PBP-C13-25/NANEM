@@ -1,7 +1,9 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}{{ history.land_name }} - Riwayat{% endblock %}
-
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/history.css' %}"> 
+{% endblock %}
 {% block content %}
 <section>
     <div class="history-detail__header">
