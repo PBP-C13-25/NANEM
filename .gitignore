@@ -143,3 +143,7 @@ apps/plants/seed_data/curation_review.md
 
 #Repost seeding
 apps/plants/seed_data/
+
+
+# file seed mock
+apps/plants/management/commands/seed_mock_plants.py
