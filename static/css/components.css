@@ -884,117 +884,132 @@ body:has(.modal[open]) {
 /* ================= Toast (django.contrib.messages) ================= */
 .toaster {
   position: fixed;
-  top: calc(var(--nav-h) + 16px);
-  right: 16px;
+  right: 20px;
+  bottom: 20px;
   z-index: 60;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* toast terbaru muncul paling bawah */
   gap: 10px;
   width: min(380px, calc(100% - 32px));
   margin: 0;
   padding: 0;
   list-style: none;
-  pointer-events: none;
+  pointer-events: none; /* area kosong di sekitar toast tetap bisa diklik */
 }
 
 .toast {
-  --toast-color: var(--color-primary);
+  --toast-bg: #2f7a35;
+  --toast-duration: 5000ms;
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 14px 12px 14px 20px;
+  gap: 14px;
+  padding: 16px 12px 20px 16px;
   overflow: hidden;
-  background: var(--color-surface);
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(20, 30, 15, 0.12);
+  background: var(--toast-bg);
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(20, 30, 15, 0.22);
   pointer-events: auto;
   animation: toast-in 0.25s ease-out;
 }
 
-/* garis warna di kiri */
-.toast::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 10px;
-  bottom: 10px;
-  width: 4px;
-  border-radius: 4px;
-  background: var(--toast-color);
-}
-
+/* warna per jenis */
 .toast--success {
-  --toast-color: #2f9e5b;
+  --toast-bg: #2f7a35;
+}
+.toast--error {
+  --toast-bg: #c0392b;
 }
 .toast--info,
 .toast--debug {
-  --toast-color: #2b7bbf;
+  --toast-bg: #2b6cb0;
 }
 .toast--warning {
-  --toast-color: #e39b12;
-}
-.toast--error {
-  --toast-color: var(--color-danger);
-}
+  --toast-bg: #f2c14e;
+  color: #3d2e00;
+} /* kuning: teks gelap biar terbaca */
 
+/* ikon: lingkaran putih, simbol berwarna */
 .toast__icon {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--toast-color);
-  color: #fff;
+  background: #fff;
+  color: var(--toast-bg);
+}
+.toast--warning .toast__icon {
+  color: #b7791f;
 }
 
 .toast__body {
   flex: 1;
   min-width: 0;
-  padding-top: 3px;
+  padding-top: 2px;
 }
 
 .toast__title {
   margin: 0 0 2px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-text);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: inherit;
 }
 
 .toast__text {
   margin: 0;
   font-size: 0.88rem;
   line-height: 1.45;
-  color: var(--color-muted);
+  color: inherit;
+  opacity: 0.92;
 }
 
 .toast__close {
   flex-shrink: 0;
   width: 28px;
   height: 28px;
+  margin: -4px -2px 0 0;
   display: grid;
   place-items: center;
   border: 0;
   border-radius: 8px;
   background: none;
-  color: #9a9ba1;
+  color: inherit;
+  opacity: 0.85;
   cursor: pointer;
 }
 .toast__close:hover {
-  background: var(--nav-hover);
-  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.18);
+  opacity: 1;
+}
+
+/* garis waktu di bawah: memendek sampai toast hilang */
+.toast__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.45);
+  transform-origin: left;
+  animation: toast-progress var(--toast-duration) linear forwards;
+}
+.toast.is-paused .toast__progress {
+  animation-play-state: paused;
 }
 
 /* animasi keluar (class ditambah lewat JS) */
 .toast.is-leaving {
-  animation: toast-out 0.2s ease-in forwards;
+  animation: toast-out 0.4s ease-in forwards;
+  pointer-events: none;
 }
 
 @keyframes toast-in {
   from {
     opacity: 0;
-    transform: translateX(16px);
+    transform: translateX(calc(100% + 32px));
   }
   to {
     opacity: 1;
@@ -1002,26 +1017,51 @@ body:has(.modal[open]) {
   }
 }
 @keyframes toast-out {
-  to {
+  0% {
+    transform: none;
+    opacity: 1;
+    max-height: var(--toast-h, 200px);
+  }
+  60% {
+    transform: translateX(calc(100% + 32px));
     opacity: 0;
-    transform: translateX(16px);
+    max-height: var(--toast-h, 200px);
+    margin-top: 0;
+    padding-top: 16px;
+    padding-bottom: 20px;
+  }
+  100% {
+    transform: translateX(calc(100% + 32px));
+    opacity: 0;
+    max-height: 0;
+    margin-top: -10px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+@keyframes toast-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
   }
 }
 
-/* mobile: toast di bawah layar*/
+/* mobile: selebar layar, tetap di bawah */
 @media (max-width: 600px) {
   .toaster {
-    top: auto;
-    bottom: 16px;
     left: 16px;
     right: 16px;
+    bottom: 16px;
     width: auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .toast,
-  .toast.is-leaving {
+  .toast.is-leaving,
+  .toast__progress {
     animation: none;
   }
 }
@@ -1035,8 +1075,8 @@ body:has(.modal[open]) {
   margin: 32px auto;
   padding: 48px 28px;
   text-align: center;
-  background: #f4f8ef;
-  border: 2px dashed #c9d6b4;
+  background: var(--color-surface);
+  border: 2px dashed #aebd93;
   border-radius: 20px;
 }
 
@@ -1049,7 +1089,6 @@ body:has(.modal[open]) {
   border-radius: 50%;
   background: var(--color-surface);
   color: var(--color-primary);
-  box-shadow: 0 6px 18px rgba(95, 106, 59, 0.15);
 }
 
 .empty-state__title {

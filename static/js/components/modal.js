@@ -42,17 +42,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Tutup kalau klik area gelap di luar kotak modal
-  document.querySelectorAll("dialog.modal").forEach((modal) => {
-    modal.addEventListener("click", (e) => {
-      if (e.target !== modal) return;
-      const r = modal.getBoundingClientRect();
-      const outside =
-        e.clientX < r.left ||
-        e.clientX > r.right ||
-        e.clientY < r.top ||
-        e.clientY > r.bottom;
-      if (outside) modal.close();
-    });
+  document.addEventListener("click", (e) => {
+    const modal = e.target;
+    if (
+      !(modal instanceof HTMLDialogElement) ||
+      !modal.classList.contains("modal")
+    )
+      return;
+    const r = modal.getBoundingClientRect();
+    const outside =
+      e.clientX < r.left ||
+      e.clientX > r.right ||
+      e.clientY < r.top ||
+      e.clientY > r.bottom;
+    if (outside) modal.close();
   });
 
   // Tombol Esc sudah otomatis menutup <dialog>, tidak perlu kode tambahan.
