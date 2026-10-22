@@ -133,3 +133,6 @@ static_root/
 
 # Kalau nanti pakai frontend build tools (npm/node)
 node_modules/
+
+#Repost seeding
+apps/plants/seed_data/
