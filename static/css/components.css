@@ -881,6 +881,41 @@ body:has(.modal[open]) {
   overflow: hidden;
 }
 
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.spinner--sm {
+  width: 18px;
+  height: 18px;
+  border-width: 2px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.modal--loading {
+  max-width: 340px;
+  padding: 32px 24px 28px;
+}
+.modal--loading .spinner {
+  margin: 0 auto 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2s;
+  }
+}
+
 /* ================= Toast (django.contrib.messages) ================= */
 .toaster {
   position: fixed;

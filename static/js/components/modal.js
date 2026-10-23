@@ -41,24 +41,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Tutup kalau klik area gelap di luar kotak modal
-  document.addEventListener("click", (e) => {
-    const modal = e.target;
-    if (
-      !(modal instanceof HTMLDialogElement) ||
-      !modal.classList.contains("modal")
-    )
-      return;
-    const r = modal.getBoundingClientRect();
-    const outside =
-      e.clientX < r.left ||
-      e.clientX > r.right ||
-      e.clientY < r.top ||
-      e.clientY > r.bottom;
-    if (outside) modal.close();
-  });
+  // Modal statis (mis. loading) tidak boleh ditutup user lewat Esc
+  document
+    .querySelectorAll("dialog.modal[data-modal-static]")
+    .forEach((modal) => {
+      modal.addEventListener("cancel", (e) => e.preventDefault());
+    });
 
-  // Tombol Esc sudah otomatis menutup <dialog>, tidak perlu kode tambahan.
+  // Tutup kalau klik area gelap di luar kotak modal (kecuali modal statis)
+  document
+    .querySelectorAll("dialog.modal:not([data-modal-static])")
+    .forEach((modal) => {
+      modal.addEventListener("click", (e) => {
+        if (e.target !== modal) return;
+        const r = modal.getBoundingClientRect();
+        const outside =
+          e.clientX < r.left ||
+          e.clientX > r.right ||
+          e.clientY < r.top ||
+          e.clientY > r.bottom;
+        if (outside) modal.close();
+      });
+    });
+
+  // Tombol Esc sudah otomatis menutup <dialog> biasa, tidak perlu kode tambahan.
 
   // Modal yang ada error validasi dari server langsung dibuka lagi
   document
