@@ -94,6 +94,10 @@ Mapping khusus data riset:
   `rainfall_basis`.
 - `humidity_basis: controlled_environment` menandai rentang RH yang berasal
   dari greenhouse/protected cropping.
+- `humidity_basis: open_field` menandai rentang RH yang berasal dari syarat
+  tumbuh atau budidaya lapangan terbuka.
+- `humidity_basis: land_suitability_s1` menandai rentang kelembapan kelas S1
+  pada evaluasi kesesuaian lahan; nilainya bukan rentang optimal fisiologis.
 - Metadata `taxon_scope`, `derived_fields`, `rainfall_basis`,
   `rainfall_annual_min_mm/max`, `humidity_basis`, `image_attribution`,
   `sources`, dan `notes` hanya untuk audit/provenance dan sengaja tidak
