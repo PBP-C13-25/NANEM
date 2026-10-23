@@ -1030,9 +1030,25 @@
     "indoor": null,
     "space_needed": "medium",
     "description": "Tomat ceri menghasilkan buah kecil yang umumnya tersusun dalam tandan. Ukuran buah dan pola tumbuhnya bervariasi menurut kultivar.",
-    "image_url": null,
-    "image_attribution": null,
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/TomatecerejaDSC7969.jpg",
+    "image_attribution": {
+      "creator": "CostaPPPR",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:TomatecerejaDSC7969.jpg"
+    },
     "sources": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:TomatecerejaDSC7969.jpg",
+        "title": "File:TomatecerejaDSC7969.jpg",
+        "publisher": "Wikimedia Commons",
+        "accessed_at": "2026-10-23",
+        "supports_fields": [
+          "image_url",
+          "image_attribution"
+        ],
+        "notes": "Foto buah tomat ceri segar. Deskripsi dan structured data Commons menyebut Solanum lycopersicum var. cerasiforme/cherry tomato, tetapi halaman juga memiliki kategori Unidentified Solanum. Pencipta CostaPPPR; lisensi CC BY-SA 4.0."
+      },
       {
         "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=1379",
         "title": "EcoCrop Data Sheet — Lycopersicon esculentum (syn. Solanum lycopersicum)",
@@ -1081,7 +1097,7 @@
         "notes": "Kajian merangkum kisaran RH greenhouse untuk tomat 50–60%, berbeda dari rekomendasi Oregon State University 60–80% RH yang digunakan pada record. Dicantumkan untuk mendokumentasikan perbedaan sumber, bukan untuk mendukung angka 60–80%."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–27 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1300 mm/tahun. Suhu, curah hujan, dan RH diwariskan secara hati-hati dari referensi tingkat spesies tomat S. lycopersicum, bukan percobaan khusus var. cerasiforme. RH 60–80% dari panduan Oregon State berbeda dengan 50–60% pada ulasan greenhouse Energies 2019. Indoor dibiarkan null karena bergantung pada kultivar kerdil dan pencahayaan tambahan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–27 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1300 mm/tahun. Suhu, curah hujan, dan RH diwariskan secara hati-hati dari referensi tingkat spesies tomat S. lycopersicum, bukan percobaan khusus var. cerasiforme. RH 60–80% dari panduan Oregon State berbeda dengan 50–60% pada ulasan greenhouse Energies 2019. Indoor dibiarkan null karena bergantung pada kultivar kerdil dan pencahayaan tambahan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
