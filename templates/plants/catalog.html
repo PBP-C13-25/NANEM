@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Katalog Tanaman - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/catalog.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="catalog-page" aria-labelledby="catalog-title">
+    <header class="catalog-header">
+        <h1 id="catalog-title">Katalog Tanaman</h1>
+        <p>Temukan tanaman berdasarkan nama, media tanam, cahaya, dan ruang yang tersedia.</p>
+    </header>
+
+    <form method="get" class="catalog-filter" aria-label="Pencarian dan filter tanaman">
+        <div class="catalog-search">
+            <label class="visually-hidden" for="catalog-query">Cari tanaman</label>
+            <input
+                id="catalog-query"
+                type="search"
+                name="q"
+                value="{{ filters.q }}"
+                placeholder="Cari nama tanaman atau nama ilmiah"
+            >
+            <button type="submit" class="catalog-button catalog-button--primary">Cari</button>
+        </div>
+
+        <fieldset class="catalog-categories">
+            <legend>Kategori</legend>
+            <label class="catalog-chip">
+                <input type="radio" name="category" value="" {% if not filters.category %}checked{% endif %}>
+                <span>Semua</span>
+            </label>
+            {% for value, label in category_choices %}
+            <label class="catalog-chip">
+                <input type="radio" name="category" value="{{ value }}" {% if filters.category == value %}checked{% endif %}>
+                <span>{{ label }}</span>
+            </label>
+            {% endfor %}
+        </fieldset>
+
+        <div class="catalog-selects">
+            <label>
+                <span>Media tanam</span>
+                <select name="medium">
+                    <option value="">Semua media</option>
+                    <option value="soil" {% if filters.medium == 'soil' %}selected{% endif %}>Tanah</option>
+                    <option value="hydroponic" {% if filters.medium == 'hydroponic' %}selected{% endif %}>Hidroponik</option>
+                </select>
+            </label>
+
+            <label>
+                <span>Kebutuhan cahaya</span>
+                <select name="sunlight">
+                    <option value="">Semua cahaya</option>
+                    {% for value, label in sunlight_choices %}
+                    <option value="{{ value }}" {% if filters.sunlight == value %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                <span>Kebutuhan ruang</span>
+                <select name="space">
+                    <option value="">Semua ruang</option>
+                    {% for value, label in space_choices %}
+                    <option value="{{ value }}" {% if filters.space == value %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+
+        <input type="hidden" name="sort" value="{{ filters.sort }}">
+        <div class="catalog-filter__actions">
+            <button type="submit" class="catalog-button catalog-button--primary">Terapkan filter</button>
+            <a href="{% url 'plants:index' %}" class="catalog-button catalog-button--quiet">Reset</a>
+        </div>
+    </form>
+
+    <div class="catalog-results-bar">
+        <p><strong>{{ page_obj.paginator.count }}</strong> tanaman ditemukan</p>
+        <form method="get" class="catalog-sort">
+            {% if filters.q %}<input type="hidden" name="q" value="{{ filters.q }}">{% endif %}
+            {% if filters.category %}<input type="hidden" name="category" value="{{ filters.category }}">{% endif %}
+            {% if filters.medium %}<input type="hidden" name="medium" value="{{ filters.medium }}">{% endif %}
+            {% if filters.sunlight %}<input type="hidden" name="sunlight" value="{{ filters.sunlight }}">{% endif %}
+            {% if filters.space %}<input type="hidden" name="space" value="{{ filters.space }}">{% endif %}
+            <label for="catalog-sort">Urutkan</label>
+            <select id="catalog-sort" name="sort" onchange="this.form.submit()">
+                <option value="name" {% if filters.sort == 'name' %}selected{% endif %}>Nama A–Z</option>
+                <option value="name_desc" {% if filters.sort == 'name_desc' %}selected{% endif %}>Nama Z–A</option>
+                <option value="category" {% if filters.sort == 'category' %}selected{% endif %}>Kategori</option>
+            </select>
+            <noscript><button type="submit" class="catalog-button catalog-button--quiet">Urutkan</button></noscript>
+        </form>
+    </div>
+
+    {% if plants %}
+    <div class="plant-grid">
+        {% for plant in plants %}
+        <article class="plant-card">
+            <div class="plant-card__image">
+                {% if plant.image_url %}
+                <img src="{{ plant.image_url }}" alt="{{ plant.name }}" loading="lazy">
+                {% else %}
+                <div class="plant-card__placeholder" aria-label="Gambar belum tersedia">
+                    <small>Gambar belum tersedia</small>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="plant-card__body">
+                <div class="plant-card__heading">
+                    <span class="plant-card__category">{{ plant.get_category_display }}</span>
+                    <h2>{{ plant.name }}</h2>
+                    <p class="plant-card__scientific">
+                        {% if plant.scientific_name %}<i>{{ plant.scientific_name }}</i>{% else %}Kelompok tanaman{% endif %}
+                    </p>
+                </div>
+
+                <dl class="plant-card__facts">
+                    <div><dt>Media</dt><dd>{{ plant.media_label }}</dd></div>
+                    <div><dt>Cahaya</dt><dd>{{ plant.sunlight_label }}</dd></div>
+                    <div><dt>Ruang</dt><dd>{{ plant.get_space_needed_display }}</dd></div>
+                </dl>
+
+                <a href="{% url 'plants:detail' plant.pk %}" class="catalog-button catalog-button--card">Lihat detail</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="catalog-empty">
+        <h2>Tanaman tidak ditemukan</h2>
+        <p>Coba gunakan kata kunci lain atau kurangi filter yang dipilih.</p>
+        <a href="{% url 'plants:index' %}" class="catalog-button catalog-button--primary">Lihat semua tanaman</a>
+    </div>
+    {% endif %}
+
+    {% if page_obj.paginator.num_pages > 1 %}
+    <nav class="catalog-pagination" aria-label="Halaman katalog">
+        {% if page_obj.has_previous %}
+        <a href="?{% if query_string %}{{ query_string }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">Sebelumnya</a>
+        {% endif %}
+
+        <span>Halaman {{ page_obj.number }} dari {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+        <a href="?{% if query_string %}{{ query_string }}&amp;{% endif %}page={{ page_obj.next_page_number }}">Berikutnya</a>
+        {% endif %}
+    </nav>
+    {% endif %}
+</section>
+{% endblock %}

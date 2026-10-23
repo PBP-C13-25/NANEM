@@ -27,6 +27,7 @@ urlpatterns = [
     path('accounts/', include("apps.accounts.urls")),
     path("profile/", include("apps.profiles.urls")),
     path("collection/", include("apps.plant_collection.urls")),
+    path("catalog/", include("apps.plants.urls")),
     path("recommendation/", include("apps.recommendations.urls")),
     path("cultivation/", include("apps.cultivation.urls")),
 ]
