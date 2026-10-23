@@ -1,5 +1,39 @@
-/* Low-fi base.css — cuma reset dasar + struktur, belum styling final.
-   Tim styling silakan timpa/lanjutin file ini atau pecah per pages/. */
+/* ================================================================
+   base.css — reset, variabel, tipografi, layout umum, utility.
+   Dimuat di semua halaman lewat base.html.
+   JANGAN taruh style komponen/halaman di sini.
+   ================================================================ */
+
+/* ---------- Variabel global ---------- */
+:root {
+  /* Dasar */
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-border: #e4e6dc;
+
+  /* Teks */
+  --color-text: #1a1a1a; /* teks & judul: hitam */
+  --color-ghost: rgb(
+    76 46 5 / 0.35
+  ); /* Deep Walnut transparan, buat teks dekoratif */
+  --color-muted: #6b6c72; /* Rosy Granite versi gelap */
+
+  /* Brand */
+  --color-primary: #566246; /* Dusty Olive versi gelap: tombol, link */
+  --color-primary-hover: #4c5530;
+  --color-primary-soft: #bee7b8; /* Celadon: pill aktif, badge */
+  --color-accent: #7a8450; /* Dusty Olive asli: ikon, ilustrasi */
+  --color-sage: #aebd93; /* Dry Sage: garis, grafik */
+  --color-neutral: #95969d; /* Rosy Granite: border tebal, ikon nonaktif */
+
+  /* Status */
+  --color-danger: #c0392b;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+}
 
 * {
   box-sizing: border-box;
@@ -8,220 +42,34 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  color: #1a1a1a;
-  background: #fafafa;
+  color: var(--color-text);
+  background: var(--color-bg);
+  min-height: 100vh;
+  min-height: 100dvh; /* ukuran layar yang lebih pas di HP */
+  display: flex;
+  flex-direction: column;
 }
 
 a {
-  color: #2f6d3c;
+  color: var(--color-primary);
 }
 
-/* --- Navbar --- */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 12px 20px;
-  background: #ffffff;
-  border-bottom: 1px solid #ddd;
-}
-
-.navbar__brand {
-  font-weight: bold;
-  text-decoration: none;
-  color: #1a1a1a;
-}
-
-.navbar__links {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.navbar__user {
-  color: #555;
-  font-size: 0.9em;
-}
-
-.link-button {
-  background: none;
-  border: none;
-  padding: 0;
-  color: #2f6d3c;
-  text-decoration: underline;
-  cursor: pointer;
-  font: inherit;
-}
-
-.navbar__logout-form {
-  margin: 0;
-  display: inline;
-}
-
-/* --- Layout --- */
 .page-container {
-  max-width: 900px;
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 24px 20px;
 }
 
-.site-footer {
-  text-align: center;
-  padding: 16px;
-  color: #888;
-  font-size: 0.85em;
-}
-
-/* --- Messages (django.contrib.messages) --- */
-.messages {
-  list-style: none;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
   padding: 0;
-  margin: 0 0 16px;
-}
-
-.message {
-  padding: 10px 14px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  background: #eee;
-}
-
-.message--success {
-  background: #dff5e1;
-}
-.message--error {
-  background: #fbdcdc;
-}
-.message--warning {
-  background: #fff3cd;
-}
-
-/* --- Auth pages (login / register) --- */
-.auth-card {
-  max-width: 380px;
-  margin: 40px auto;
-  padding: 24px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-}
-
-.form-group {
-  margin-bottom: 16px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 0.9em;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.field-error {
-  color: #c0392b;
-  font-size: 0.85em;
-  margin: 4px 0 0;
-}
-
-.field-hint {
-  color: #777;
-  font-size: 0.8em;
-  margin: 4px 0 0;
-}
-
-.form-errors {
-  color: #c0392b;
-  padding-left: 18px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1em;
-}
-
-.btn--primary {
-  background: #2f6d3c;
-  color: #fff;
-  width: 100%;
-}
-
-.auth-card__switch {
-  text-align: center;
-  margin-top: 16px;
-  font-size: 0.9em;
-}
-
-/* --- Modal (pakai elemen <dialog> asli, low-fi) --- */
-.modal {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 20px;
-  max-width: 380px;
-  width: 90%;
-}
-
-.modal::backdrop {
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.modal__actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.btn--danger {
-  background: #c0392b;
-  color: #fff;
-}
-
-.link-button--danger {
-  color: #c0392b;
-}
-
-/* --- History list (card grid) --- */
-.history-grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-}
-
-.history-card {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 16px;
-  background: #fff;
-}
-
-.history-card__title {
-  text-decoration: none;
-  color: inherit;
-}
-
-.history-card__actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.history-detail__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }

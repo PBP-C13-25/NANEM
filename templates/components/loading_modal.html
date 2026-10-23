@@ -1,0 +1,22 @@
+{% comment %}
+  Modal loading (spinner + teks). Tidak bisa ditutup user (Esc / klik luar),
+  hilang sendiri saat halaman berikutnya terbuka.
+
+  Contoh:
+    {% include "components/loading_modal.html" with id="loading-rekomendasi" title="Mencari tanaman yang cocok…" text="Mengambil data cuaca dari Open-Meteo." %}
+
+  Buka lewat JS: document.getElementById('loading-rekomendasi').showModal();
+
+  Parameter:
+    id    : id unik modal (wajib)
+    title : judul (opsional, default "Memproses…")
+    text  : keterangan kecil (opsional)
+{% endcomment %}
+
+<dialog class="modal modal--loading" id="{{ id }}" data-modal-static aria-labelledby="{{ id }}-title" aria-busy="true">
+    <div class="dialog">
+        <div class="spinner" aria-hidden="true"></div>
+        <h2 class="dialog__title" id="{{ id }}-title">{{ title|default:"Memproses…" }}</h2>
+        {% if text %}<p class="dialog__text">{{ text }}</p>{% endif %}
+    </div>
+</dialog>

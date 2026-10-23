@@ -1,0 +1,58 @@
+{% comment %}
+  Kartu "Analisis lahan" — dipakai di halaman hasil & detail riwayat.
+
+  Parameter:
+    env          : environment_snapshot / result.environment  (punya .raw & .summary)
+    latitude     : lintang
+    longitude    : bujur
+    land_area    : luas lahan (m²)
+    medium_label : nama media tanam (teks)
+{% endcomment %}
+
+<article class="card detail__card">
+    <h2 class="detail__card-title">Analisis lahan</h2>
+    <p class="detail__card-sub">
+        Rata-rata cuaca {{ env.raw.period_days|floatformat:0|default:"90" }} hari terakhir
+        {% if period_start %}({{ period_start|date:"d M" }} – {{ period_end|date:"d M Y" }}){% endif %}
+        · sumber Open-Meteo
+    </p>
+
+    <div class="stats">
+        <div class="stat stat--temp">
+            <span class="stat__icon">{% include "components/icon.html" with name="thermometer" size=20 %}</span>
+            <span class="stat__label">Suhu</span>
+            <span class="stat__value">{{ env.raw.temperature }}<small>°C</small></span>
+            <span class="stat__meter" aria-hidden="true"><span style="width: {% widthratio env.raw.temperature 40 100 %}%"></span></span>
+            {% if env.summary.temperature_label %}<span class="stat__tag">{{ env.summary.temperature_label }}</span>{% endif %}
+        </div>
+        <div class="stat stat--humidity">
+            <span class="stat__icon">{% include "components/icon.html" with name="droplets" size=20 %}</span>
+            <span class="stat__label">Kelembapan</span>
+            <span class="stat__value">{{ env.raw.humidity }}<small>%</small></span>
+            <span class="stat__meter" aria-hidden="true"><span style="width: {% widthratio env.raw.humidity 100 100 %}%"></span></span>
+            {% if env.summary.humidity_label %}<span class="stat__tag">{{ env.summary.humidity_label }}</span>{% endif %}
+        </div>
+        <div class="stat stat--rain">
+            <span class="stat__icon">{% include "components/icon.html" with name="cloud-rain" size=20 %}</span>
+            <span class="stat__label">Curah hujan</span>
+            <span class="stat__value">{{ env.raw.rainfall }}<small>mm/hari</small></span>
+            <span class="stat__meter" aria-hidden="true"><span style="width: {% widthratio env.raw.rainfall 20 100 %}%"></span></span>
+            {% if env.summary.rainfall_label %}<span class="stat__tag">{{ env.summary.rainfall_label }}</span>{% endif %}
+        </div>
+    </div>
+
+    <dl class="facts">
+        <div class="facts__row">
+            <dt>{% include "components/icon.html" with name="map-pin" size=16 %}Lokasi</dt>
+            <dd>{{ latitude|floatformat:"-4" }} / {{ longitude|floatformat:"-4" }}</dd>
+        </div>
+        <div class="facts__row">
+            <dt>{% include "components/icon.html" with name="maximize" size=16 %}Luas lahan</dt>
+            <dd>{{ land_area }} m²</dd>
+        </div>
+        <div class="facts__row">
+            <dt>{% include "components/icon.html" with name="layers" size=16 %}Media tanam</dt>
+            <dd>{{ medium_label }}</dd>
+        </div>
+    </dl>
+</article>

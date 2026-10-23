@@ -1,0 +1,532 @@
+/* Untuk page hasil */
+.result__save-form {
+  margin: 0;
+}
+
+/* label "Tersimpan" setelah hasil disimpan */
+.result__saved {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #e3f1df;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2f7a35;
+}
+
+/* catatan kecil untuk tamu / admin */
+.result__note {
+  margin: -12px 0 20px;
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+
+/* HP: tombol aksi selebar layar, bertumpuk */
+@media (max-width: 520px) {
+  .result .detail__actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  .result .detail__actions > *,
+  .result .result__save-form .detail__btn {
+    width: 100%;
+  }
+  .result .result__saved {
+    justify-content: center;
+  }
+}
+
+/* PAGE DETAIL HISTORY */
+.detail {
+  max-width: none;
+  margin: 0 auto;
+}
+
+/* Header */
+.detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-decoration: none;
+}
+.detail__back:hover {
+  color: var(--color-primary);
+}
+
+.detail__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.detail__heading {
+  min-width: 0;
+}
+
+.detail__title {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+.detail__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detail__actions {
+  display: flex;
+  gap: 8px;
+}
+.detail__btn {
+  height: 38px;
+  padding: 0 14px;
+  font-size: 0.88rem;
+}
+.detail__btn--danger {
+  color: var(--color-danger);
+}
+.detail__btn--danger:hover {
+  background: #fde8e5;
+  border-color: #f2b8b0;
+}
+
+/* Grid 2 kolom  */
+.detail__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.detail__card {
+  padding: 24px;
+}
+
+.detail__card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.detail__card-title {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.detail__card-sub {
+  margin: 4px 0 18px;
+  font-size: 0.86rem;
+  color: var(--color-muted);
+}
+
+.detail__count {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--color-primary-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+.detail__highlight {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin: 12px 0 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #f3f8ef;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+.detail__highlight .icon {
+  color: #2f7a35;
+}
+.detail__highlight strong {
+  color: var(--color-text);
+}
+.detail__highlight-pct {
+  font-weight: 800;
+  color: #2f7a35;
+}
+
+/* KOTAK CUACA */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stat {
+  --stat-color: var(--color-primary);
+  --stat-bg: #f3f8ef;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 12px;
+  border-radius: 14px;
+  background: var(--stat-bg);
+}
+.stat--temp {
+  --stat-color: #c2571a;
+  --stat-bg: #fdf1e8;
+}
+.stat--humidity {
+  --stat-color: #2b6cb0;
+  --stat-bg: #ebf3fb;
+}
+.stat--rain {
+  --stat-color: #3b7d8c;
+  --stat-bg: #e9f4f5;
+}
+
+.stat__icon {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 4px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--stat-color);
+}
+
+.stat__label {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+.stat__value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+.stat__value small {
+  margin-left: 2px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.stat__tag {
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--stat-color);
+}
+.stat__meter {
+  display: block;
+  height: 4px;
+  margin-top: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+}
+.stat__meter span {
+  display: block;
+  height: 100%;
+  max-width: 100%;
+  border-radius: inherit;
+  background: var(--stat-color);
+  opacity: 0.75;
+}
+
+/* INFO LAHAN */
+.facts {
+  margin: 18px 0 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.facts__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.92rem;
+}
+.facts__row:last-child {
+  border-bottom: 0;
+}
+.facts dt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-muted);
+}
+.facts dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+  color: var(--color-text);
+}
+
+/* ---------- Daftar tanaman ---------- */
+.plants {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plant {
+  --plant-color: var(--color-primary);
+  --plant-soft: #e7f2df;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  transition: border-color 0.15s;
+  padding: 0;
+}
+.plant__link {
+  display: block;
+  padding: 14px 16px;
+  border-radius: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+.plant:hover {
+  border-color: var(--plant-color);
+  box-shadow: 0 6px 18px rgba(30, 40, 20, 0.07);
+}
+
+.plant__link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.plant__chevron {
+  flex-shrink: 0;
+  display: inline-flex;
+  margin-right: -4px;
+  color: var(--color-muted);
+  transition:
+    transform 0.15s,
+    color 0.15s;
+}
+.plant:hover .plant__chevron {
+  transform: translateX(3px);
+  color: var(--plant-color);
+}
+.plant--high {
+  --plant-color: #2f7a35;
+  --plant-soft: #e3f1df;
+}
+.plant--mid {
+  --plant-color: #a8730f;
+  --plant-soft: #fbf0d9;
+}
+.plant--low {
+  --plant-color: #7a7b80;
+  --plant-soft: #efefef;
+}
+
+.plant__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.plant__rank {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--plant-soft);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--plant-color);
+}
+
+.plant__names {
+  flex: 1;
+  min-width: 0;
+}
+
+.plant__name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.plant__latin {
+  margin: 1px 0 0;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+.plant__percent {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--plant-color);
+}
+
+/* bar kecocokan */
+.plant__bar {
+  height: 6px;
+  margin: 12px 0 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--plant-soft);
+}
+.plant__bar span {
+  display: block;
+  height: 100%;
+  max-width: 100%;
+  border-radius: inherit;
+  background: var(--plant-color);
+}
+
+.plant__reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--color-muted);
+}
+.plant__reasons li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.plant__reasons .icon {
+  margin-top: 3px;
+  color: var(--plant-color);
+}
+
+/* empty state di dalam kartu: tanpa margin besar */
+.detail__card .empty-state {
+  margin: 0;
+  max-width: none;
+}
+
+.plant--top {
+  border-color: #cfe3c4;
+  background: #f6faf3;
+}
+.plant__badge {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #2f7a35;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  .detail__grid {
+    /* analisis atas, rekomendasi bawah */
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .detail__card {
+    padding: 18px;
+  }
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  .stat {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "icon label tag"
+      "icon value tag";
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 0;
+  }
+  .stat__icon {
+    grid-area: icon;
+    margin: 0;
+  }
+  .stat__label {
+    grid-area: label;
+  }
+  .stat__value {
+    grid-area: value;
+  }
+  .stat__tag {
+    grid-area: tag;
+    align-self: center;
+    margin: 0;
+  }
+
+  .detail__btn-label {
+    display: none; /* tombol hapus jadi ikon saja */
+  }
+}
+
+@media (min-width: 861px) {
+  .plants {
+    max-height: min(65vh, 560px);
+    overflow-y: auto;
+    padding-right: 6px; /* jarak supaya scrollbar tidak menempel */
+    scrollbar-width: thin;
+    scrollbar-color: #c9d6b4 transparent;
+  }
+  .plants::-webkit-scrollbar {
+    width: 6px;
+  }
+  .plants::-webkit-scrollbar-thumb {
+    background: #c9d6b4;
+    border-radius: 999px;
+  }
+}
+
+@media (max-width: 520px) {
+  .stat {
+    grid-template-areas:
+      "icon label tag"
+      "icon value tag"
+      "icon meter tag";
+  }
+  .stat__meter {
+    grid-area: meter;
+    margin-top: 4px;
+  }
+  .plant__badge {
+    display: none;
+  }
+}
