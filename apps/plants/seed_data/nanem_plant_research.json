@@ -1220,9 +1220,25 @@
     "indoor": null,
     "space_needed": "small",
     "description": "Cabai merah merupakan kelompok kultivar Capsicum annuum yang biasanya menghasilkan buah memanjang dan merah saat matang. Buahnya digunakan sebagai bumbu makanan.",
-    "image_url": null,
-    "image_attribution": null,
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Capsicum_annuum_%27de_Cayenne%27_003.JPG",
+    "image_attribution": {
+      "creator": "H. Zell",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Capsicum_annuum_%27de_Cayenne%27_003.JPG"
+    },
     "sources": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Capsicum_annuum_%27de_Cayenne%27_003.JPG",
+        "title": "File:Capsicum annuum 'de Cayenne' 003.JPG",
+        "publisher": "Wikimedia Commons",
+        "accessed_at": "2026-10-23",
+        "supports_fields": [
+          "image_url",
+          "image_attribution"
+        ],
+        "notes": "Foto cabai merah memanjang pada tanaman; deskripsi Commons menyebut kultivar Capsicum annuum 'de Cayenne'. Pencipta H. Zell; lisensi CC BY-SA 3.0."
+      },
       {
         "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=618",
         "title": "EcoCrop Data Sheet — Capsicum annuum",
@@ -1261,7 +1277,7 @@
         "notes": "Kajian mengulas kelembapan udara untuk Cabai merah di greenhouse, dengan RH pertumbuhan 60–65%; bukan kelembapan tanah atau penyimpanan pascapanen."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 17–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1250 mm/tahun. C. annuum juga mencakup paprika, tetapi keduanya tetap record terpisah sesuai permintaan. RH 60–65% berasal dari kategori peppers pada studi greenhouse, bukan pengujian eksklusif kultivar cabai merah. Indoor belum dapat dipastikan untuk semua kultivar. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 17–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1250 mm/tahun. C. annuum juga mencakup paprika, tetapi keduanya tetap record terpisah sesuai permintaan. RH 60–65% berasal dari kategori peppers pada studi greenhouse, bukan pengujian eksklusif kultivar cabai merah. Indoor belum dapat dipastikan untuk semua kultivar. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
