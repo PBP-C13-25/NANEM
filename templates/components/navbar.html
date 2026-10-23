@@ -8,7 +8,7 @@
         <a href="{% url 'recommendations:index' %}">Rekomendasi</a>
 
         {% if user.is_authenticated %}
-            <a href="#">Katalog</a>
+            <a href="{% url 'plants:index' %}">Katalog</a>
             <a href="{% url 'recommendations:history_list' %}">Riwayat</a>
             <a href="{% url 'profiles:profile' %}">Profil</a>
             <a href="{% url 'cultivation:landing_page' %}">Panduan Budidaya</a>
