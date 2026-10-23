@@ -746,9 +746,25 @@
     "indoor": true,
     "space_needed": "small",
     "description": "Daun bawang tumbuh berumpun dengan helaian daun tubular yang berongga dan tidak membentuk umbi besar. Daun serta pangkalnya digunakan sebagai penyedap masakan.",
-    "image_url": null,
-    "image_attribution": null,
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Beijing_scallions.jpg",
+    "image_attribution": {
+      "creator": "Fumikas Sagisavas",
+      "license": "CC0 1.0 Universal Public Domain Dedication",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Beijing_scallions.jpg"
+    },
     "sources": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Beijing_scallions.jpg",
+        "title": "File:Beijing scallions.jpg",
+        "publisher": "Wikimedia Commons",
+        "accessed_at": "2026-10-23",
+        "supports_fields": [
+          "image_url",
+          "image_attribution"
+        ],
+        "notes": "Foto daun bawang segar dengan akar; kategori dan structured data Commons mengidentifikasi Allium fistulosum. Pencipta Fumikas Sagisavas; dedikasi CC0 1.0."
+      },
       {
         "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=365",
         "title": "EcoCrop Data Sheet — Allium fistulosum",
@@ -787,7 +803,7 @@
         "notes": "Mencantumkan A. fistulosum dan A. tuberosum ditumbuhkan hidroponik di ruang tumbuh hingga panen pada umur 49, 63, dan 77 hari."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 12–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 850–1600 mm/tahun. Penelitian Allium pada ruang tumbuh mengonfirmasi panen biomassa A. fistulosum secara indoor; ini mengandaikan cahaya buatan memadai. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 12–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 850–1600 mm/tahun. Penelitian Allium pada ruang tumbuh mengonfirmasi panen biomassa A. fistulosum secara indoor; ini mengandaikan cahaya buatan memadai. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
