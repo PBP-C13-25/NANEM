@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.views.generic import DetailView, ListView
+from django.views.generic import ListView
 
 from apps.core.mixins import ActiveUserRequiredMixin
 
@@ -99,12 +99,3 @@ class PlantCatalogView(ActiveUserRequiredMixin, ListView):
             query_string=query.urlencode(),
         )
         return context
-
-
-class PlantDetailView(ActiveUserRequiredMixin, DetailView):
-    model = Plant
-    template_name = "plants/detail.html"
-    context_object_name = "plant"
-
-    def get_object(self, queryset=None):
-        return prepare_plant_display(super().get_object(queryset))

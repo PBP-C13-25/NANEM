@@ -126,7 +126,8 @@
                     <div><dt>Ruang</dt><dd>{{ plant.get_space_needed_display }}</dd></div>
                 </dl>
 
-                <a href="{% url 'plants:detail' plant.pk %}" class="catalog-button catalog-button--card">Lihat detail</a>
+                {# Integration point: replace with {% url 'cultivation:detail' plant.pk %} after Nicholas adds the per-plant guide route. #}
+                <span class="catalog-button catalog-button--card catalog-button--disabled" aria-disabled="true">Panduan belum tersedia</span>
             </div>
         </article>
         {% endfor %}

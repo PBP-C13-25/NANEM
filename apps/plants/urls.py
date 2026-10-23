@@ -7,5 +7,4 @@ app_name = "plants"
 
 urlpatterns = [
     path("", views.PlantCatalogView.as_view(), name="index"),
-    path("<int:pk>/", views.PlantDetailView.as_view(), name="detail"),
 ]
