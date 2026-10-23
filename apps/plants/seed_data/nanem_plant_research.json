@@ -657,9 +657,25 @@
     "indoor": true,
     "space_needed": "small",
     "description": "Kailan atau Chinese kale adalah sayuran hijau dengan batang relatif tebal dan daun yang lebar. Daun serta batang mudanya dimanfaatkan sebagai sayuran.",
-    "image_url": null,
-    "image_attribution": null,
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/95_-_CIMG2751.jpg",
+    "image_attribution": {
+      "creator": "Susan Slater",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:95_-_CIMG2751.jpg"
+    },
     "sources": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:95_-_CIMG2751.jpg",
+        "title": "File:95 - CIMG2751.jpg",
+        "publisher": "Wikimedia Commons",
+        "accessed_at": "2026-10-23",
+        "supports_fields": [
+          "image_url",
+          "image_attribution"
+        ],
+        "notes": "Foto kailan segar dipanen; deskripsi menyebut Chinese broccoli/gai-lan/kai-lan dan kategori Commons adalah Brassica oleracea var. alboglabra. Pencipta Susan Slater; lisensi CC BY-SA 4.0."
+      },
       {
         "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=3867",
         "title": "EcoCrop Data Sheet — Brassica oleracea var. acephala (Chinese kale/kailan)",
@@ -697,7 +713,7 @@
         "notes": "Halaman menyatakan tanaman famili Brassica, termasuk kale, tumbuh baik secara hidroponik sepanjang tahun. Sumber ini hanya dipakai untuk supports_hydroponic, bukan rentang iklim khusus varietas atau klasifikasi ruang/perawatan."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–22 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 450–1000 mm/tahun. EcoCrop id 3867 memakai pengelompokan Brassica oleracea var. acephala dan mencantumkan Chinese kale/kailan; rentang iklim tersebut merupakan proksi kelompok kale, bukan hasil pengukuran khusus var. alboglabra. Hidroponik didukung riset yang secara eksplisit memakai varietas alboglabra. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–22 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 450–1000 mm/tahun. EcoCrop id 3867 memakai pengelompokan Brassica oleracea var. acephala dan mencantumkan Chinese kale/kailan; rentang iklim tersebut merupakan proksi kelompok kale, bukan hasil pengukuran khusus var. alboglabra. Hidroponik didukung riset yang secara eksplisit memakai varietas alboglabra. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
