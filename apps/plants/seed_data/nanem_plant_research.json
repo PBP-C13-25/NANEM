@@ -1310,9 +1310,25 @@
     "indoor": false,
     "space_needed": "small",
     "description": "Terong adalah tanaman sayur buah dari famili Solanaceae dengan bentuk buah mulai dari bulat hingga panjang. Warna kulitnya bervariasi, termasuk ungu dan hijau.",
-    "image_url": null,
-    "image_attribution": null,
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Eggplant_(Solanum_melongena).JPG",
+    "image_attribution": {
+      "creator": "David Adam Kess",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Eggplant_(Solanum_melongena).JPG"
+    },
     "sources": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Eggplant_(Solanum_melongena).JPG",
+        "title": "File:Eggplant (Solanum melongena).JPG",
+        "publisher": "Wikimedia Commons",
+        "accessed_at": "2026-10-23",
+        "supports_fields": [
+          "image_url",
+          "image_attribution"
+        ],
+        "notes": "Foto terong segar dipanen; deskripsi Commons mengidentifikasi Solanum melongena. Pencipta David Adam Kess; lisensi CC BY-SA 4.0."
+      },
       {
         "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=1965",
         "title": "EcoCrop Data Sheet — Solanum melongena",
@@ -1351,7 +1367,7 @@
         "notes": "Kajian mengulas kelembapan udara untuk Terong di greenhouse, dengan RH pertumbuhan 65–75%; bukan kelembapan tanah atau penyimpanan pascapanen."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1200–1600 mm/tahun. RH 65–75% berasal dari ulasan kebutuhan greenhouse khusus eggplant; suhu EcoCrop adalah kisaran optimal ekologi yang lebih luas dari target suhu siang greenhouse. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1200–1600 mm/tahun. RH 65–75% berasal dari ulasan kebutuhan greenhouse khusus eggplant; suhu EcoCrop adalah kisaran optimal ekologi yang lebih luas dari target suhu siang greenhouse. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
