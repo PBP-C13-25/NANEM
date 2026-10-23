@@ -188,9 +188,25 @@
     "indoor": true,
     "space_needed": "small",
     "description": "Sawi merupakan sayuran daun Brassica rapa berdaun hijau dan bertangkai lunak. Dalam katalog ini nama sawi merujuk pada kelompok sawi hijau/caisim, dibedakan dari pakcoy.",
-    "image_url": null,
-    "image_attribution": null,
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Choi_Sum_stalks.JPG",
+    "image_attribution": {
+      "creator": "Earth100",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Choi_Sum_stalks.JPG"
+    },
     "sources": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Choi_Sum_stalks.JPG",
+        "title": "File:Choi Sum stalks.JPG",
+        "publisher": "Wikimedia Commons",
+        "accessed_at": "2026-10-23",
+        "supports_fields": [
+          "image_url",
+          "image_attribution"
+        ],
+        "notes": "Foto caisim (Choi Sum) tumbuh; kategori Commons mengidentifikasi Brassica rapa subsp. chinensis var. parachinensis. Pencipta Earth100; lisensi CC BY-SA 3.0."
+      },
       {
         "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=3877",
         "title": "EcoCrop Data Sheet — Brassica rapa Gaisin gr.",
@@ -240,7 +256,7 @@
         "notes": "Bukti: Kelembaban udara antara 80%-90% merupakan kelembaban udara yang optimal terhadap pertumbuhan tanaman sawi manis Lokasi bukti: Pendahuluan, hlm. 141. Jurnal peer-reviewed. Kalimat bersumber dari Cahyono (2003). Taksonnya sawi hijau/sawi manis (Brassica rapa kelompok chinensis/parachinensis), masih dalam spesies Brassica rapa. Konteks budidaya lapangan pada berbagai ketinggian tempat."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 900–1400 mm/tahun. Brassica rapa memiliki banyak kelompok budidaya; FAO EcoCrop yang digunakan adalah kelompok Gaisin (caisim), bukan akar turnip. Studi hidroponik sawi hijau menggunakan var. parachinensis. Studi mencatat sensitivitas terhadap cahaya yang terlalu intens. Rentang RH 80–90% berasal dari syarat tumbuh sawi hijau/manis (Brassica chinensis) di lahan terbuka; penerapannya pada record Brassica rapa dicatat pada sumber dan humidity_basis=open_field. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar berlisensi dan memiliki provenance pasti untuk spesies ini belum dipilih; image_url/image_attribution = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 900–1400 mm/tahun. Brassica rapa memiliki banyak kelompok budidaya; FAO EcoCrop yang digunakan adalah kelompok Gaisin (caisim), bukan akar turnip. Studi hidroponik sawi hijau menggunakan var. parachinensis. Studi mencatat sensitivitas terhadap cahaya yang terlalu intens. Rentang RH 80–90% berasal dari syarat tumbuh sawi hijau/manis (Brassica chinensis) di lahan terbuka; penerapannya pada record Brassica rapa dicatat pada sumber dan humidity_basis=open_field. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
