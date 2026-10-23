@@ -1,66 +1,80 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Hasil Rekomendasi - Tanem{% endblock %}
+{% block title %}Hasil Rekomendasi - Nanem{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/history-detail.css' %}">
+{% endblock %}
 
 {% block content %}
-<section>
-    <h1>Hasil untuk "{{ result.land_name }}"</h1>
+{% with env=result.environment plants=result.plants %}
+<section class="detail result">
 
-    <h2>Analisis lingkungan</h2>
-    <ul>
-        <li>Lokasi: {{ result.latitude }}, {{ result.longitude }}</li>
-        <li>Luas lahan: {{ result.land_area }} m²</li>
-        <li>Media tanam: {{ medium_label }}</li>
-        <li>Suhu: {{ result.environment.raw.temperature }} °C &middot; {{ result.environment.summary.temperature_label }}</li>
-        <li>Kelembapan: {{ result.environment.raw.humidity }} % &middot; {{ result.environment.summary.humidity_label }}</li>
-        <li>Curah hujan: {{ result.environment.raw.rainfall }} mm/hari &middot; {{ result.environment.summary.rainfall_label }}</li>
-    </ul>
-    <p class="field-hint">
-        Rata-rata dari {{ result.environment.raw.period_days }} hari terakhir (sumber: Open-Meteo).
-    </p>
+    {# ================= Header ================= #}
+    <a href="{% url 'recommendations:index' %}?ubah=1" class="detail__back">
+        {% include "components/icon.html" with name="arrow-left" size=16 %}Ubah data lahan
+    </a>
 
-    <h2>Top {{ result.plants|length }} Tanaman Paling Cocok</h2>
-    {% if result.plants %}
-        <ol>
-        {% for plant in result.plants %}
-            <li>
-            {% url 'plants:detail' plant.plant_id as detail_url %}
-            <strong>
-                {% if detail_url %}<a href="{{ detail_url }}">{{ plant.plant_name }}</a>{% else %}{{ plant.plant_name }}{% endif %}
-            </strong>
-            {% if plant.scientific_name %}<em>({{ plant.scientific_name }})</em>{% endif %}
-            &mdash; <strong>{{ plant.match_percentage }}% cocok</strong>
-            <ul>
-                {% for reason in plant.reasons %}<li class="field-hint">{{ reason }}</li>{% endfor %}
-            </ul>
-            </li>
-        {% endfor %}
-        </ol>
-    {% else %}
-        <p>Belum ada tanaman yang cocok dengan lahan dan media tanam ini.</p>
-    {% endif %}
+    <header class="detail__header">
+        <div class="detail__heading">
+            <h1 class="detail__title">Hasil untuk "{{ result.land_name }}"</h1>
 
-    <hr>
+            {% if plants %}
+                {% with top=plants|first %}
+                <p class="detail__highlight">
+                    {% include "components/icon.html" with name="sprout" size=18 %}
+                    Paling cocok: <strong>{{ top.plant_name }}</strong>
+                    <span class="detail__highlight-pct">{{ top.match_percentage|floatformat:0 }}%</span>
+                </p>
+                {% endwith %}
+            {% endif %}
+        </div>
 
-    {% if can_save %}
-        {% if saved_history_id %}
-        <p>Hasil ini sudah disimpan. <a href="{% url 'recommendations:history_detail' saved_history_id %}">Lihat di riwayat</a></p>
-        {% else %}
-        <form method="post" action="{% url 'recommendations:save' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn--primary">Simpan ke Riwayat</button>
-        </form>
-        {% endif %}
-    {% elif user.is_authenticated %}
-        <p class="field-hint">Akun admin tidak memiliki riwayat rekomendasi.</p>
-    {% else %}
-        <p>
-        Mau menyimpan hasil ini?
-        <a href="{% url 'accounts:login' %}?next={% url 'recommendations:result' %}">Login</a>
-        atau <a href="{% url 'accounts:register' %}">daftar</a> dulu.
+        {# ---- Aksi: simpan / sudah disimpan / ajak login ---- #}
+        <div class="detail__actions">
+            {% if can_save %}
+                {% if saved_history_id %}
+                    <span class="result__saved">
+                        {% include "components/icon.html" with name="check" size=16 %}Tersimpan
+                    </span>
+                    <a href="{% url 'recommendations:history_detail' saved_history_id %}" class="btn btn--outline detail__btn">
+                        Lihat di riwayat
+                    </a>
+                {% else %}
+                    <form method="post" action="{% url 'recommendations:save' %}" class="result__save-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn--primary detail__btn">
+                            {% include "components/icon.html" with name="bookmark" size=16 %}Simpan ke riwayat
+                        </button>
+                    </form>
+                {% endif %}
+            {% elif not user.is_authenticated %}
+                <a href="{% url 'accounts:login' %}?next={% url 'recommendations:result' %}" class="btn btn--primary detail__btn">
+                    {% include "components/icon.html" with name="bookmark" size=16 %}Masuk untuk menyimpan
+                </a>
+            {% endif %}
+
+            <a href="{% url 'recommendations:index' %}" class="btn btn--outline detail__btn">
+                {% include "components/icon.html" with name="search" size=16 %}Cari lagi
+            </a>
+        </div>
+    </header>
+
+    {# catatan kecil untuk tamu / admin #}
+    {% if not user.is_authenticated %}
+        <p class="result__note">
+            Belum punya akun? <a href="{% url 'accounts:register' %}">Daftar gratis</a> supaya hasil ini bisa disimpan ke riwayat.
         </p>
+    {% elif not can_save %}
+        <p class="result__note">Akun admin tidak memiliki riwayat rekomendasi.</p>
     {% endif %}
 
-    <p><a href="{% url 'recommendations:index' %}">&larr; Cari lagi</a></p>
+    {# ================= Isi: analisis | rekomendasi ================= #}
+    <div class="detail__grid">
+        {% include "recommendations/_analysis_card.html" with env=env latitude=result.latitude longitude=result.longitude land_area=result.land_area medium_label=medium_label %}
+        {% include "recommendations/_plants_rec_card.html" with plants=plants %}
+    </div>
 </section>
+{% endwith %}
 {% endblock %}

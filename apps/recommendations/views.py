@@ -6,6 +6,7 @@ from django.views import View
 from django.views.generic import DeleteView, DetailView, FormView, ListView, TemplateView, UpdateView
 from django.http import JsonResponse
 from apps.core.mixins import OwnedQuerysetMixin, RegularUserRequiredMixin
+from datetime import timedelta
 
 from .konstan import MEDIUM_CHOICES, summarize_environment
 from .forms import HistoryLandNameForm, RecommendationForm
@@ -36,6 +37,15 @@ class RecommendationFormView(FormView):
     form_class = RecommendationForm
     success_url = reverse_lazy("recommendations:result")
 
+    def get_initial(self):
+        # dari tombol "Ubah data lahan" (?ubah=1): isi form dengan data terakhir
+        initial = super().get_initial()
+        result = self.request.session.get(SESSION_KEY)
+        if self.request.GET.get("ubah") and result:
+            for field in ("land_name", "latitude", "longitude", "land_area", "planting_medium"):
+                initial[field] = result.get(field)
+        return initial
+    
     def form_valid(self, form):
         data = form.cleaned_data
         latitude, longitude = data["latitude"], data["longitude"]
@@ -143,6 +153,17 @@ class HistoryDetailView(RegularUserRequiredMixin, OwnedQuerysetMixin, DetailView
     model = RecommendationHistory
     template_name = "recommendations/history_detail.html"
     context_object_name = "history"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        snapshot = self.object.environment_snapshot or {}
+        raw = snapshot.get("raw", {})
+        summary = snapshot.get("summary", {})
+        
+        days = raw.get("period_days") or summary.get("period_days") or 90
+        context["period_days"] = round(days)
+        context["period_start"] = self.object.created_at - timedelta(days=round(days))
+        return context
 
 
 #* UNTUK UPDATE HISTORY
