@@ -930,12 +930,12 @@
     "indoor": false,
     "space_needed": "medium",
     "description": "Tomat adalah tanaman dari famili Solanaceae yang menghasilkan buah berdaging dengan banyak biji. Buahnya digunakan segar maupun sebagai bahan olahan.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Solanum_lycopersicum_cc.JPG",
+    "image_url": "https://cdn.pixabay.com/photo/2021/09/10/21/18/tomatoes-6614242_1280.jpg",
     "image_attribution": {
-      "creator": "Petar43",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Solanum_lycopersicum_cc.JPG"
+      "creator": "planet_fox",
+      "license": "Pixabay Content License",
+      "license_url": "https://pixabay.com/service/license-summary/",
+      "source_page": "https://pixabay.com/photos/tomatoes-tomato-plant-garden-6614242/"
     },
     "sources": [
       {
@@ -986,15 +986,15 @@
         "notes": "Kajian merangkum kisaran RH greenhouse untuk tomat 50–60%, berbeda dari rekomendasi Oregon State University 60–80% RH yang digunakan pada record. Dicantumkan untuk mendokumentasikan perbedaan sumber, bukan untuk mendukung angka 60–80%."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Solanum_lycopersicum_cc.JPG",
-        "title": "Wikimedia Commons — File:Solanum lycopersicum cc.JPG",
-        "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "url": "https://pixabay.com/photos/tomatoes-tomato-plant-garden-6614242/",
+        "title": "Pixabay — Tomatoes, Tomato plant, Garden",
+        "publisher": "Pixabay",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Identitas gambar, fotografer Petar43 dan lisensi CC BY-SA 4.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
+        "notes": "Foto tanaman tomat dengan buah merah dan hijau diverifikasi pada halaman foto Pixabay; kreator planet_fox dan Pixabay Content License tercantum. URL CDN hanya untuk tahap proyek kampus: dokumentasi Pixabay melarang hotlink permanen, jadi sebelum publikasi jangka panjang gambar harus di-host sendiri."
       }
     ],
     "notes": "EcoCrop menyatakan suhu OPTIMAL 20–27 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1300 mm/tahun. EcoCrop mencatat spesies dengan sinonim Lycopersicon esculentum. RH 60–80% adalah rekomendasi siang hari produksi greenhouse Oregon State; ulasan Energies 2019 menyebut 50–60% untuk kondisi greenhouse lain, sehingga terdapat perbedaan rekomendasi antarsumber. Kebutuhan suhu dan ruang dapat bergantung pada kultivar. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
@@ -1986,12 +1986,12 @@
     "indoor": false,
     "space_needed": "small",
     "description": "Lobak adalah sayuran akar dari famili Brassicaceae yang membentuk akar membesar, dengan bentuk dan warna berbeda menurut varietas. Akar umumnya dimakan segar maupun dimasak.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Raphanus_sativus_00.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Daikon.jpg",
     "image_attribution": {
-      "creator": "WeFt",
-      "license": "CC BY-SA 2.5",
-      "license_url": "https://creativecommons.org/licenses/by-sa/2.5/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Raphanus_sativus_00.jpg"
+      "creator": "Kinori",
+      "license": "Public domain (PD-user)",
+      "license_url": "https://commons.wikimedia.org/wiki/Template:PD-user",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Daikon.jpg"
     },
     "sources": [
       {
@@ -2011,15 +2011,15 @@
         "notes": "Kolom Optimal (bukan Absolute): suhu udara 12–26 °C; curah hujan tahunan 1000–1500 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Raphanus_sativus_00.jpg",
-        "title": "File:Raphanus_sativus_00.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Daikon.jpg",
+        "title": "Wikimedia Commons — File:Daikon.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Foto diidentifikasi sebagai Raphanus sativus; halaman asal memuat kreator WeFt dan lisensi CC BY-SA 2.5. Special:FilePath adalah tautan stabil ke berkas Wikimedia Commons."
+        "notes": "Foto daikon di lahan merupakan Raphanus sativus; kreator Kinori melepaskan foto ke public domain pada halaman Wikimedia Commons. Akar tetap tampak pada crop katalog."
       },
       {
         "url": "https://researcher.manipal.edu/en/publications/effect-of-fluid-mechanics-system-in-growth-of-vegetable-crops-usi/",
@@ -2539,12 +2539,12 @@
     "indoor": false,
     "space_needed": "large",
     "description": "Mangga adalah pohon buah tropis berkayu dengan tajuk yang dapat tumbuh besar. Buah berdagingnya memiliki rasa dan aroma beragam menurut varietas dan dimakan segar maupun diolah.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Mangifera_indica_29zz.jpg",
+    "image_url": "https://images.pexels.com/photos/34951165/pexels-photo-34951165/free-photo-of-mangga-hijau-segar-di-pohon-dalam-suasana-tropis.jpeg?cs=tinysrgb&dpr=1&w=500",
     "image_attribution": {
-      "creator": "David J. Stang",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Mangifera_indica_29zz.jpg"
+      "creator": "Jeffry Surianto",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/id-id/foto/mangga-hijau-segar-di-pohon-dalam-suasana-tropis-34951165/"
     },
     "sources": [
       {
@@ -2564,15 +2564,15 @@
         "notes": "Kolom Optimal (bukan Absolute): suhu udara 24–30 °C; curah hujan tahunan 600–1500 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Mangifera_indica_29zz.jpg",
-        "title": "File:Mangifera_indica_29zz.jpg",
-        "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "url": "https://www.pexels.com/id-id/foto/mangga-hijau-segar-di-pohon-dalam-suasana-tropis-34951165/",
+        "title": "Pexels — Mangga hijau segar di pohon",
+        "publisher": "Pexels",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Foto diidentifikasi sebagai Mangifera indica; halaman asal memuat kreator David J. Stang dan lisensi CC BY-SA 4.0. Special:FilePath adalah tautan stabil ke berkas Wikimedia Commons."
+        "notes": "Foto gerombol mangga hijau dan crop katalog diperiksa dari URL gambar yang diberikan pengguna. Nama fotografer Jeffry Surianto berasal dari keterangan pengguna; halaman foto spesifik menolak akses otomatis saat audit, sedangkan ketentuan lisensi umum Pexels terverifikasi."
       },
       {
         "url": "https://ask.ifas.ufl.edu/publication/HS1499",
