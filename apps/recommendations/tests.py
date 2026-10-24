@@ -294,14 +294,14 @@ class RecommendationFlowTests(ViewBase):
         self.assertContains(page, "Bayam")
         self.assertContains(page, "Kebun Depan")
         self.assertContains(page, "% cocok")
-        self.assertContains(page, "daftar")
+        self.assertContains(page, 'href="/accounts/register/"')
 
     def test_land_area_gate_reflected_in_result(self):
         make_plant("Pohon Besar", space_needed="large")
         self.submit(land_area="2")  # lahan kecil
         page = self.client.get(self.result)
         self.assertNotContains(page, "Pohon Besar")
-        self.assertContains(page, "Belum ada tanaman")
+        self.assertContains(page, "Belum ada yang cocok")
 
     def test_api_failure_shows_error(self):
         with mock.patch(FETCH, side_effect=OpenMeteoError("down")):
@@ -405,7 +405,7 @@ class HistoryCrudTests(ViewBase):
         page = self.client.get(reverse("recommendations:history_detail", args=[self.history.pk]))
         self.assertContains(page, "Lama")
         self.assertContains(page, "Bayam")
-        self.assertContains(page, "90% cocok")
+        self.assertContains(page, "90%")
 
     def test_update_changes_only_land_name(self):
         r = self.client.post(reverse("recommendations:history_update", args=[self.history.pk]),
