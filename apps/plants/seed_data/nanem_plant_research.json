@@ -98,12 +98,12 @@
     "indoor": null,
     "space_needed": "small",
     "description": "Bayam adalah sayuran daun kelompok amaranth yang memiliki tipe berdaun hijau, merah, atau kombinasi keduanya. Daun dan batang mudanya dimanfaatkan sebagai sayuran.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Amaranthus_tricolor1.jpg",
+    "image_url": "https://faperta.umsu.ac.id/wp-content/uploads/2023/06/spinach-g9f5f48ea3_1280.jpg",
     "image_attribution": {
-      "creator": "Kurt Stüber",
-      "license": "CC BY-SA 3.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Amaranthus_tricolor1.jpg"
+      "creator": null,
+      "license": null,
+      "license_url": null,
+      "source_page": "https://faperta.umsu.ac.id/manfaat-sayur-bayam-untuk-kesehatan/"
     },
     "sources": [
       {
@@ -133,15 +133,14 @@
         "notes": "Penelitian produksi bayam merah A. tricolor menggunakan sistem hidroponik NFT; berlaku untuk spesies yang sama."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Amaranthus_tricolor1.jpg",
-        "title": "Wikimedia Commons — File:Amaranthus tricolor1.jpg",
-        "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "url": "https://faperta.umsu.ac.id/manfaat-sayur-bayam-untuk-kesehatan/",
+        "title": "Fakultas Pertanian UMSU — Manfaat Sayur Bayam Untuk Kesehatan",
+        "publisher": "Fakultas Pertanian UMSU",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
-          "image_url",
-          "image_attribution"
+          "image_url"
         ],
-        "notes": "Identitas gambar, fotografer Kurt Stüber dan lisensi CC BY-SA 3.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
+        "notes": "Foto daun bayam pada artikel UMSU terlihat cocok untuk katalog dan URL gambar aktif. Fotografer, lisensi penggunaan ulang, dan identifikasi spesies tepat pada foto tidak dicantumkan; status penggunaan sementara untuk proyek kampus dan harus ditinjau sebelum publikasi umum."
       },
       {
         "url": "https://eprints.umm.ac.id/id/eprint/2340/3/3.%20BAB%20II.pdf",
@@ -1744,12 +1743,12 @@
     "indoor": false,
     "space_needed": "medium",
     "description": "Kacang panjang adalah kerabat kacang tunggak yang merambat dan menghasilkan polong panjang yang menggantung. Polong mudanya lazim digunakan sebagai sayuran.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Vigna_unguiculata_subsp._sesquipedalis_JRVdH_01.jpg",
+    "image_url": "https://gapoktansekarsari.wordpress.com/wp-content/uploads/2016/09/kacang-panjang-gapoktan-sekarsari.jpg",
     "image_attribution": {
-      "creator": "Cephas",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Vigna_unguiculata_subsp._sesquipedalis_JRVdH_01.jpg"
+      "creator": null,
+      "license": null,
+      "license_url": null,
+      "source_page": "https://gapoktansekarsari.wordpress.com/2016/09/19/panduan-budidaya-tanaman-kacang-panjang/"
     },
     "sources": [
       {
@@ -1780,18 +1779,17 @@
         "notes": "Penelitian 2025 tanaman kacang panjang varietas yang sesuai secara hidroponik hingga pembentukan polong (20,81 polong/tanaman dengan formulasi terbaik)."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Vigna_unguiculata_subsp._sesquipedalis_JRVdH_01.jpg",
-        "title": "File:Vigna unguiculata subsp. sesquipedalis JRVdH 01.jpg",
-        "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-23",
+        "url": "https://gapoktansekarsari.wordpress.com/2016/09/19/panduan-budidaya-tanaman-kacang-panjang/",
+        "title": "Gapoktan Sekarsari — Panduan Budidaya Tanaman Kacang Panjang",
+        "publisher": "Gapoktan Sekarsari",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
-          "image_url",
-          "image_attribution"
+          "image_url"
         ],
-        "notes": "Halaman file mengidentifikasi Vigna unguiculata subsp. sesquipedalis, pencipta Cephas, dan lisensi CC BY-SA 4.0."
+        "notes": "Foto polong kacang panjang menggantung tampak jelas setelah crop katalog dan URL gambar aktif. Artikel asal tidak mencantumkan fotografer maupun izin penggunaan ulang; status penggunaan sementara untuk proyek kampus dan harus ditinjau sebelum publikasi umum."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1500–2000 mm/tahun. FAO menulis subspesies sebagai ssp. sesquipedalis; nama ilmiah user dipertahankan subsp. Penelitian hidroponik 2025 mendukung produksi polong matang. Tanaman memerlukan ruang vertikal/rambatan; medium adalah kelas praktis, bukan kebutuhan 5–20 m² per tanaman. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1500–2000 mm/tahun. FAO menulis subspesies sebagai ssp. sesquipedalis; nama ilmiah user dipertahankan subsp. Penelitian hidroponik 2025 mendukung produksi polong matang. Tanaman memerlukan ruang vertikal/rambatan; medium adalah kelas praktis, bukan kebutuhan 5–20 m² per tanaman. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Foto katalog sementara dari Gapoktan Sekarsari; fotografer dan izin penggunaan ulang belum terverifikasi. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
@@ -2905,12 +2903,12 @@
     "indoor": false,
     "space_needed": "medium",
     "description": "Melon adalah tanaman semusim dari keluarga labu-labuan yang tumbuh menjalar atau memanjat dengan sulur. Buahnya memiliki daging manis dan aroma bervariasi, umumnya dimakan segar.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Fruit_of_Cucumis_melo.jpg",
+    "image_url": "https://disperta.mojokertokab.go.id/storage/tenantdisperta/app/gambar/artikel/betani-asyik-tanpa-takut-kotor-budidaya-melon-hidroponik-20231207_144955.jpeg",
     "image_attribution": {
-      "creator": "Krzysztof Golik",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Fruit_of_Cucumis_melo.jpg"
+      "creator": null,
+      "license": null,
+      "license_url": null,
+      "source_page": "https://disperta.mojokertokab.go.id/detail-artikel/betani-asyik-tanpa-takut-kotor-budidaya-melon-hidroponik-1701938419"
     },
     "sources": [
       {
@@ -2954,15 +2952,14 @@
         "notes": "Melon perlu kelembapan tanah terkendali selama pertumbuhan dan pembesaran buah, dengan manajemen penyiraman yang berubah mendekati pematangan; habitus merambat butuh ruang."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Fruit_of_Cucumis_melo.jpg",
-        "title": "File:Fruit_of_Cucumis_melo.jpg",
-        "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "url": "https://disperta.mojokertokab.go.id/detail-artikel/betani-asyik-tanpa-takut-kotor-budidaya-melon-hidroponik-1701938419",
+        "title": "Dinas Pertanian Kabupaten Mojokerto — Budidaya Melon Hidroponik",
+        "publisher": "Dinas Pertanian Kabupaten Mojokerto",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
-          "image_url",
-          "image_attribution"
+          "image_url"
         ],
-        "notes": "Halaman berkas memuat fotografer Krzysztof Golik dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
+        "notes": "Foto buah melon pada tanaman hidroponik sesuai artikel resmi dan URL gambar aktif. Halaman tidak menyatakan lisensi penggunaan ulang foto; status penggunaan sementara untuk proyek kampus dan harus ditinjau sebelum publikasi umum."
       },
       {
         "url": "http://eprints.umm.ac.id/1104/3/BAB%202.pdf",
