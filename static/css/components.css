@@ -1,0 +1,1163 @@
+/* ================================================================
+   components.css — komponen yang dipakai di lebih dari satu halaman.
+   Dimuat di semua halaman lewat base.html.
+   Isi: Button, Judul, Navbar, Footer, Messages, Form, Card, Dialog, Modal
+   ================================================================ */
+
+/* ================= Button ================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--radius-lg);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn--primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn--danger {
+  background: var(--color-danger);
+  color: #fff;
+}
+.btn--danger:hover {
+  background: #a8301f;
+}
+
+/* tombol gelap (hitam) */
+.btn--dark {
+  background: var(--color-text);
+  color: #fff;
+}
+.btn--dark:hover {
+  background: #333;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text);
+}
+.btn--ghost:hover {
+  background: var(--nav-hover);
+}
+
+/* tombol bergaris, mis. "Batal" di modal */
+.btn--outline {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+.btn--outline:hover {
+  background: var(--nav-hover);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* tombol yang tampil seperti link (mis. hapus di kartu riwayat) */
+.link-button {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-button--danger {
+  color: var(--color-danger);
+}
+
+/* ================= Judul bertingkat ================= */
+.display-title {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.display-title__ghost {
+  display: block;
+  color: var(--color-ghost);
+}
+
+/* ================= Navbar ================= */
+:root {
+  --nav-h: 68px;
+  --nav-bg: var(--color-surface);
+  --nav-border: var(--color-border);
+  --nav-text: var(--color-text);
+  --nav-muted: var(--color-muted);
+  --nav-hover: #f3f5ee;
+  --nav-accent: var(--color-primary);
+  --nav-accent-soft: var(--color-primary-soft);
+  --nav-radius: 12px;
+  --nav-drawer-w: min(320px, 85vw);
+}
+
+header.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: block;
+  padding: 0;
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.navbar__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  height: var(--nav-h);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--nav-bg);
+}
+
+.navbar .icon {
+  flex-shrink: 0;
+}
+
+/* ---------- Brand ---------- */
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--nav-text);
+  text-decoration: none;
+}
+.navbar__logo {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* ---------- Menu (tengah + kanan) ---------- */
+.navbar__menu {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar__links {
+  align-self: stretch;
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  margin: 0 auto; /* efek space-between: brand | links | akun */
+}
+
+/* ---------- Link (desktop): ikon + teks, garis bawah saat aktif ---------- */
+.navbar .nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.93rem;
+  font-weight: 500;
+  color: var(--nav-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+/* garis bawah (seperti tab bar) */
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--nav-accent);
+  opacity: 0;
+  transform: scaleX(0.4);
+  transition:
+    opacity 0.15s,
+    transform 0.2s;
+}
+
+.navbar .nav-link:hover {
+  color: var(--nav-accent);
+}
+.navbar .nav-link:hover::after {
+  opacity: 0.35;
+  transform: scaleX(1);
+}
+
+.navbar .nav-link.is-active {
+  color: var(--nav-accent);
+  font-weight: 600;
+}
+.navbar .nav-link.is-active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* ---------- Area akun ---------- */
+.navbar__auth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--nav-accent);
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ---------- Dropdown (pakai <details>, jalan walau tanpa JS) ---------- */
+.dropdown {
+  position: relative;
+}
+.dropdown > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+.dropdown__caret {
+  display: inline-flex;
+  transition: transform 0.2s;
+}
+.dropdown[open] > summary .dropdown__caret {
+  transform: rotate(180deg);
+}
+
+/* dropdown di dalam deretan link ("Kelola") ikut setinggi bar */
+.dropdown--nav {
+  display: flex;
+}
+
+/* pemicu menu akun: avatar + panah */
+.dropdown--user__trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 999px;
+  color: var(--nav-muted);
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+.dropdown--user__trigger:hover,
+.dropdown--user[open] > .dropdown--user__trigger {
+  background: var(--nav-hover);
+  color: var(--nav-text);
+}
+
+.dropdown__panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 5;
+  min-width: 210px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  background: var(--nav-bg);
+  border: 1px solid var(--nav-border);
+  border-radius: var(--nav-radius);
+  box-shadow: 0 14px 36px rgba(16, 24, 40, 0.1);
+}
+.dropdown--nav > .dropdown__panel {
+  top: 100%;
+}
+.dropdown__panel--right {
+  left: auto;
+  right: 0;
+}
+
+.dropdown__header {
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--nav-border);
+}
+.dropdown__header strong {
+  display: block;
+  color: var(--nav-text);
+}
+.dropdown__header span {
+  font-size: 0.82rem;
+  color: var(--nav-muted);
+}
+
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  font: inherit;
+  font-size: 0.92rem;
+  text-align: left;
+  color: var(--nav-text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.dropdown__item .icon {
+  color: var(--nav-muted);
+}
+.dropdown__item:hover {
+  background: var(--nav-hover);
+}
+.dropdown__item--danger,
+.dropdown__item--danger .icon {
+  color: #d23c3c;
+}
+.dropdown__divider {
+  height: 1px;
+  margin: 6px 0;
+  background: var(--nav-border);
+}
+.navbar__logout-form {
+  margin: 0;
+}
+
+.label-mobile {
+  display: none;
+}
+
+/* ---------- Hamburger ---------- */
+.navbar__toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  margin-left: auto;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid var(--nav-border);
+  border-radius: 10px;
+  background: var(--nav-bg);
+  cursor: pointer;
+}
+.navbar__toggle span {
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--nav-text);
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+}
+.navbar.is-open .navbar__toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.navbar.is-open .navbar__toggle span:nth-child(2) {
+  opacity: 0;
+}
+.navbar.is-open .navbar__toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* latar gelap sidebar (desktop: tidak dipakai) */
+.navbar__backdrop {
+  display: none;
+}
+
+/* ================= Navbar mobile: sidebar dari kanan ================= */
+@media (max-width: 1100px) {
+  .navbar__toggle {
+    display: inline-flex;
+  }
+
+  /* panel menempel di kanan, di bawah bar atas */
+  .navbar__menu {
+    position: fixed;
+    top: var(--nav-h);
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    width: var(--nav-drawer-w);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 16px 14px 24px;
+    overflow-y: auto;
+    background: var(--nav-bg);
+    border-left: 1px solid var(--nav-border);
+    box-shadow: -16px 0 40px rgba(16, 24, 40, 0.12);
+    transform: translateX(100%);
+    visibility: hidden;
+    transition:
+      transform 0.25s ease,
+      visibility 0s linear 0.25s;
+  }
+  .navbar.is-open .navbar__menu {
+    transform: none;
+    visibility: visible;
+    transition:
+      transform 0.25s ease,
+      visibility 0s;
+  }
+
+  /* latar gelap di sisi kiri sidebar */
+  .navbar__backdrop {
+    display: block;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background: rgba(20, 25, 15, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .navbar.is-open .navbar__backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* daftar link bertumpuk */
+  .navbar__links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    margin: 0;
+  }
+
+  .navbar .nav-link {
+    height: auto;
+    padding: 12px 14px;
+    gap: 12px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+  }
+  .navbar .nav-link > span:not(.dropdown__caret) {
+    flex: 1; /* teks melebar, panah dorong ke kanan */
+  }
+
+  /* di sidebar: garis jadi di kiri, aktif pakai latar lembut */
+  .navbar .nav-link::after {
+    left: 0;
+    right: auto;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    height: auto;
+    border-radius: 0 3px 3px 0;
+    transform: none;
+  }
+  .navbar .nav-link:hover {
+    background: var(--nav-hover);
+  }
+  .navbar .nav-link:hover::after {
+    opacity: 0;
+  }
+  .navbar .nav-link.is-active {
+    background: var(--nav-hover);
+  }
+  .navbar .nav-link.is-active::after {
+    opacity: 1;
+  }
+
+  .dropdown--nav {
+    display: block;
+  }
+  .dropdown > summary.nav-link {
+    display: flex;
+  }
+
+  /* isi dropdown di sidebar: menjorok, tanpa kotak */
+  .dropdown__panel,
+  .dropdown--nav > .dropdown__panel {
+    position: static;
+    min-width: 0;
+    padding: 2px 0 6px;
+    border: 0;
+    box-shadow: none;
+  }
+
+  /* sub-menu pakai titik kecil (seperti referensi) */
+  .dropdown__item--sub {
+    padding-left: 44px;
+    position: relative;
+    color: var(--nav-muted);
+  }
+  .dropdown__item--sub::before {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    margin-top: -2.5px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  /* area akun di bawah sidebar */
+  .navbar__auth {
+    margin-top: auto; /* dorong ke paling bawah */
+    padding-top: 14px;
+    border-top: 1px solid var(--nav-border);
+  }
+
+  /* tamu: dua tombol bertumpuk */
+  .navbar--guest .navbar__auth {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .navbar--guest .navbar__auth .btn {
+    height: 44px;
+  }
+  .navbar--guest .btn--ghost {
+    border: 1px solid var(--nav-border);
+  }
+
+  /* login: avatar + nama + panah, menu terbuka di bawahnya */
+  .navbar--app .navbar__auth {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .label-mobile {
+    display: inline;
+  }
+  .dropdown--user__trigger {
+    gap: 12px;
+    padding: 8px 14px 8px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    color: var(--nav-text);
+  }
+  .dropdown--user__trigger .label-mobile {
+    flex: 1;
+  }
+  .dropdown--user .avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+  .dropdown--user .dropdown__header {
+    display: none;
+  }
+  .dropdown--user .dropdown__item {
+    padding-left: 20px;
+  }
+
+  /* halaman di belakang tidak ikut ter-scroll saat sidebar terbuka */
+  body.nav-open {
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__menu,
+  .navbar__backdrop,
+  .navbar .nav-link::after {
+    transition: none;
+  }
+}
+
+/* ================= Messages (django.contrib.messages) ================= */
+.messages {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.message {
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border-radius: var(--radius-sm);
+  background: #eee;
+}
+.message--success {
+  background: #dff5e1;
+}
+.message--error {
+  background: #fbdcdc;
+}
+.message--warning {
+  background: #fff3cd;
+}
+
+/* ================= Form ================= */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  background: #f3f5ee;
+  font: inherit;
+  color: var(--color-text);
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+.form-group textarea {
+  height: auto;
+  min-height: 110px;
+  padding: 12px 14px;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: #fff;
+}
+
+.field-hint ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+.field-hint li {
+  margin-bottom: 2px;
+}
+
+.field-error {
+  margin: 6px 0 0;
+  font-size: 0.85em;
+  color: var(--color-danger);
+}
+
+.field-hint {
+  margin: 6px 0 0;
+  font-size: 0.8em;
+  color: var(--color-muted);
+}
+
+.form-errors {
+  margin: 0 0 16px;
+  padding: 10px 14px 10px 30px;
+  border-radius: var(--radius-lg);
+  background: #fbe6e3;
+  color: var(--color-danger);
+}
+
+.form-group input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px #f3f5ee inset;
+  -webkit-text-fill-color: var(--color-text);
+}
+
+/* ================= Card =================
+   Kartu umum: form biasa, konfirmasi hapus, dll.
+   Pakai: <section class="card card--narrow"> ... </section>
+   ========================================== */
+.card {
+  padding: 28px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(30, 40, 20, 0.06);
+}
+
+/* kartu sempit & di tengah (konfirmasi, form pendek) */
+.card--narrow {
+  max-width: 420px;
+  margin: 40px auto;
+}
+
+/* kartu form sedang & di tengah (mis. form rekomendasi) */
+.card--form {
+  max-width: 560px;
+  margin: 24px auto;
+}
+
+.card__title {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+}
+
+.card__text {
+  margin: 0 0 20px;
+  color: var(--color-muted);
+}
+
+/* baris tombol di bawah kartu */
+.card__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+.card__actions form {
+  margin: 0;
+}
+
+/* teks kecil di tengah bawah, mis. "Belum punya akun? Daftar" */
+.card__footer {
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* ================= Dialog =================
+   Pola ISI untuk konfirmasi & form singkat.
+   Dipakai di dalam <dialog class="modal"> MAUPUN <section class="card card--narrow">,
+   jadi modal dan halaman cadangan tampil sama persis. */
+.dialog {
+  text-align: center;
+}
+
+.dialog__icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+.dialog__icon--danger {
+  background: #fde8e5;
+  color: var(--color-danger);
+}
+
+.dialog__title {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.dialog__text {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+.dialog__text strong {
+  color: var(--color-text);
+}
+
+/* form di dalam dialog: rata kiri */
+.dialog__body {
+  margin-top: 18px;
+  text-align: left;
+}
+
+/* dua tombol sama lebar, berdampingan */
+.dialog__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 22px;
+}
+.dialog__actions form {
+  margin: 0;
+  display: contents;
+}
+.dialog__actions .btn {
+  width: 100%;
+}
+
+/* ================= Modal (pakai <dialog> asli) =================
+   Wadah melayang. Isinya pakai pola .dialog di atas.
+*/
+.modal {
+  width: calc(100% - 32px);
+  max-width: 400px;
+  padding: 28px 24px 24px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 24px 60px rgba(20, 30, 15, 0.18);
+}
+
+.modal::backdrop {
+  background: rgba(20, 25, 15, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.modal[open] {
+  animation: modal-in 0.18s ease-out;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* tombol X di pojok kanan atas */
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+.modal__close:hover {
+  background: var(--nav-hover);
+  color: var(--color-text);
+}
+
+/* cegah halaman di belakang ikut ter-scroll saat modal terbuka */
+body:has(.modal[open]) {
+  overflow: hidden;
+}
+
+/* ================= Toast (django.contrib.messages) ================= */
+.toaster {
+  position: fixed;
+  top: calc(var(--nav-h) + 16px);
+  right: 16px;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(380px, calc(100% - 32px));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.toast {
+  --toast-color: var(--color-primary);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 12px 14px 20px;
+  overflow: hidden;
+  background: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(20, 30, 15, 0.12);
+  pointer-events: auto;
+  animation: toast-in 0.25s ease-out;
+}
+
+/* garis warna di kiri */
+.toast::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 4px;
+  background: var(--toast-color);
+}
+
+.toast--success {
+  --toast-color: #2f9e5b;
+}
+.toast--info,
+.toast--debug {
+  --toast-color: #2b7bbf;
+}
+.toast--warning {
+  --toast-color: #e39b12;
+}
+.toast--error {
+  --toast-color: var(--color-danger);
+}
+
+.toast__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--toast-color);
+  color: #fff;
+}
+
+.toast__body {
+  flex: 1;
+  min-width: 0;
+  padding-top: 3px;
+}
+
+.toast__title {
+  margin: 0 0 2px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.toast__text {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--color-muted);
+}
+
+.toast__close {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: #9a9ba1;
+  cursor: pointer;
+}
+.toast__close:hover {
+  background: var(--nav-hover);
+  color: var(--color-text);
+}
+
+/* animasi keluar (class ditambah lewat JS) */
+.toast.is-leaving {
+  animation: toast-out 0.2s ease-in forwards;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+
+/* mobile: toast di bawah layar*/
+@media (max-width: 600px) {
+  .toaster {
+    top: auto;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .toast.is-leaving {
+    animation: none;
+  }
+}
+
+/* ================= Empty State ================= */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 480px;
+  margin: 32px auto;
+  padding: 48px 28px;
+  text-align: center;
+  background: #f4f8ef;
+  border: 2px dashed #c9d6b4;
+  border-radius: 20px;
+}
+
+.empty-state__icon {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: 0 6px 18px rgba(95, 106, 59, 0.15);
+}
+
+.empty-state__title {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.empty-state__text {
+  max-width: 320px;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.empty-state .btn {
+  margin-top: 22px;
+}
+/* ================= Footer ================= */
+.site-footer {
+  margin-top: 48px;
+  padding: 40px 20px 28px;
+  background: #f6f7f2;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.site-footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--color-text);
+}
+
+.site-footer__logo {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.site-footer__team {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.site-footer__divider {
+  max-width: 900px;
+  height: 1px;
+  margin: 24px auto 18px;
+  border: 0;
+  background: var(--color-border);
+}
+
+.site-footer__copy {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+/* ================= Pengaman dari Bootstrap =================
+   Beberapa halaman memuat Bootstrap SETELAH components.css.
+   Selector di bawah sengaja dibuat lebih spesifik supaya tetap menang.
+   (Pengaman navbar sudah ada di bagian Navbar.)
+   ============================================================ */
+
+/* modal */
+dialog.modal {
+  position: fixed;
+  inset: 0;
+  height: fit-content;
+  margin: auto;
+  overflow: visible;
+  z-index: 1000;
+}
+dialog.modal:not([open]) {
+  display: none;
+}
+dialog.modal[open] {
+  display: block;
+}
+
+/* toast */
+ul.toaster .toast {
+  display: flex;
+  width: auto;
+  max-width: none;
+  border: 0;
+  font-size: inherit;
+  opacity: 1;
+}

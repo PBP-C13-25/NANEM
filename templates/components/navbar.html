@@ -1,35 +1,116 @@
-{# Ini navbar masih sederhana, link ke modul yg belum jadi masih "#". ntar ganti #}
-{# pakai {% url 'namespace:name' %} kalo modulnya udh punya url  #}
+{% comment %}
+  Navbar Nanem
+  - Tamu        : Rekomendasi                                    | Masuk, Daftar Gratis
+  - Sudah login : Rekomendasi, Katalog, Panduan, Koleksi Saya, Riwayat (+ Kelola untuk staff)
+                  | avatar -> Profil Saya, Ganti Password, Logout
+  - Desktop     : ikon + teks, aktif = warna hijau + garis bawah
+  - Mobile      : sidebar dari kanan
+  Link yang belum punya URL masih "#". Ganti pakai {% url 'namespace:name' %} kalau sudah ada.
+{% endcomment %}
 
-<header class="navbar">
-    <a href="#" class="navbar__brand"> NANEM</a>
+{% with ns=request.resolver_match.namespace url_name=request.resolver_match.url_name %}
+<header class="navbar {% if user.is_authenticated %}navbar--app{% else %}navbar--guest{% endif %}" data-navbar>
+    <div class="navbar__inner">
 
-    <nav class="navbar__links">
-        <a href="{% url 'recommendations:index' %}">Rekomendasi</a>
+        {# BRAND #}
+        <a href="/" class="navbar__brand">
+            <span class="navbar__logo">{% include "components/icon.html" with name="leaf" %}</span>
+            Nanem
+        </a>
 
-        {% if user.is_authenticated %}
-            <a href="#">Katalog</a>
-            <a href="{% url 'recommendations:history_list' %}">Riwayat</a>
-            <a href="{% url 'profiles:profile' %}">Profil</a>
-            <a href="{% url 'cultivation:landing_page' %}">Panduan Budidaya</a>
-            <a href="{% url 'collection:index' %}">Koleksi Saya</a>
+        {# Tombol hamburger #}
+        <button type="button" class="navbar__toggle" data-navbar-toggle
+                aria-controls="navbar-menu" aria-expanded="false" aria-label="Buka menu">
+            <span></span><span></span><span></span>
+        </button>
 
-            {% if user.is_staff %}
-                <a href="#">Kelola Tanaman</a>
-                <a href="{% url 'cultivation:kelola_panduan' %}">Kelola Panduan</a>
-            {% endif %}
+        <div class="navbar__menu" id="navbar-menu">
 
-        <span class="navbar__user">Halo, {{ user.first_name|default:user.username }}</span>
+            {# NAVIGASI #}
+            <nav class="navbar__links" aria-label="Navigasi utama">
+                {# Rekomendasi & Riwayat sama-sama namespace "recommendations", dibedakan lewat url_name #}
+                <a href="{% url 'recommendations:index' %}"
+                   class="nav-link {% if ns == 'recommendations' and 'history' not in url_name %}is-active{% endif %}">
+                    {% include "components/icon.html" with name="sprout" %}<span>Rekomendasi</span>
+                </a>
 
-        <a href="{% url 'accounts:password_change' %}">Ganti Password</a>
-        <form action="{% url 'accounts:logout' %}" method="post" class="navbar__logout-form">
-            {% csrf_token %}
-            <button type="submit" class="link-button">Logout</button>
-        </form>
+                {% if user.is_authenticated %}
+                    <a href="#" class="nav-link">
+                        {% include "components/icon.html" with name="book-open" %}<span>Katalog</span>
+                    </a>
 
-        {% else %}
-            <a href="{% url 'accounts:login' %}">Login</a>
-            <a href="{% url 'accounts:register' %}">Daftar</a>
-        {% endif %}
-    </nav>
+                    <a href="{% url 'cultivation:landing_page' %}"
+                       class="nav-link {% if ns == 'cultivation' and url_name != 'kelola_panduan' %}is-active{% endif %}">
+                        {% include "components/icon.html" with name="clipboard-list" %}<span>Panduan</span>
+                    </a>
+
+                    <a href="{% url 'collection:index' %}"
+                       class="nav-link {% if ns == 'collection' %}is-active{% endif %}">
+                        {% include "components/icon.html" with name="layout-grid" %}<span>Koleksi Saya</span>
+                    </a>
+
+                    <a href="{% url 'recommendations:history_list' %}"
+                       class="nav-link {% if ns == 'recommendations' and 'history' in url_name %}is-active{% endif %}">
+                        {% include "components/icon.html" with name="history" %}<span>Riwayat</span>
+                    </a>
+
+                    {% if user.is_staff %}
+                        <details class="dropdown dropdown--nav">
+                            <summary class="nav-link {% if url_name == 'kelola_panduan' %}is-active{% endif %}">
+                                {% include "components/icon.html" with name="sliders" %}<span>Kelola</span>
+                                <span class="dropdown__caret">{% include "components/icon.html" with name="chevron-down" size=16 %}</span>
+                            </summary>
+                            <div class="dropdown__panel">
+                                <a href="#" class="dropdown__item dropdown__item--sub">Kelola Tanaman</a>
+                                <a href="{% url 'cultivation:kelola_panduan' %}" class="dropdown__item dropdown__item--sub">Kelola Panduan</a>
+                            </div>
+                        </details>
+                    {% endif %}
+                {% endif %}
+            </nav>
+
+            {# AKUN #}
+            <div class="navbar__auth">
+                {% if user.is_authenticated %}
+
+                    {# Semua urusan akun dikumpulkan di menu avatar #}
+                    <details class="dropdown dropdown--user">
+                        <summary class="dropdown--user__trigger" aria-label="Menu akun">
+                            <span class="avatar">{{ user.first_name|default:user.username|first }}</span>
+                            <span class="label-mobile">{{ user.first_name|default:user.username }}</span>
+                            <span class="dropdown__caret">{% include "components/icon.html" with name="chevron-down" size=16 %}</span>
+                        </summary>
+                        <div class="dropdown__panel dropdown__panel--right">
+                            <div class="dropdown__header">
+                                <strong>Halo, {{ user.first_name|default:user.username }}</strong>
+                                <span>@{{ user.username }}</span>
+                            </div>
+                            <a href="{% url 'profiles:profile' %}" class="dropdown__item">
+                                {% include "components/icon.html" with name="user" size=16 %}Profil Saya
+                            </a>
+                            <a href="{% url 'accounts:password_change' %}" class="dropdown__item">
+                                {% include "components/icon.html" with name="lock" size=16 %}Ganti Password
+                            </a>
+                            <div class="dropdown__divider"></div>
+                            <form action="{% url 'accounts:logout' %}" method="post" class="navbar__logout-form">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown__item dropdown__item--danger">
+                                    {% include "components/icon.html" with name="log-out" size=16 %}Logout
+                                </button>
+                            </form>
+                        </div>
+                    </details>
+
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="btn btn--ghost">Masuk</a>
+                    <a href="{% url 'accounts:register' %}" class="btn btn--primary">Daftar Gratis</a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    {# Latar gelap di belakang sidebar mobile; klik untuk menutup #}
+    <div class="navbar__backdrop" data-navbar-close aria-hidden="true"></div>
 </header>
+{% endwith %}

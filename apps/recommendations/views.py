@@ -152,7 +152,7 @@ class HistoryUpdateView(RegularUserRequiredMixin, OwnedQuerysetMixin, UpdateView
 #* DELETE HISTORY
 class HistoryDeleteView(RegularUserRequiredMixin, OwnedQuerysetMixin, DeleteView):
     model = RecommendationHistory
-    template_name = "recommendations/history_confirm_delete.html"
+    template_name = "recommendations/history_confirm_modal.html"
     context_object_name = "history"
     success_url = reverse_lazy("recommendations:history_list")
 

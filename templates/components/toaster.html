@@ -1,0 +1,43 @@
+{% comment %}
+  Toast untuk django.contrib.messages.
+  Sudah di-include di base.html, jadi cukup panggil di views:
+      messages.success(request, "Rekomendasi disimpan ke riwayat.")
+      messages.error(request, "Data cuaca belum bisa diambil.")
+      messages.warning(...) / messages.info(...)
+  Toast hilang sendiri setelah 5 detik (error: 8 detik), atau ditutup dengan tombol X.
+{% endcomment %}
+
+{% if messages %}
+<ul class="toaster" aria-live="polite">
+    {% for message in messages %}
+    <li class="toast toast--{{ message.level_tag|default:'info' }}"
+        role="{% if message.level_tag == 'error' %}alert{% else %}status{% endif %}"
+        data-toast data-toast-timeout="{% if message.level_tag == 'error' %}8000{% else %}5000{% endif %}">
+
+        <span class="toast__icon" aria-hidden="true">
+            {% if message.level_tag == 'success' %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            {% elif message.level_tag == 'warning' or message.level_tag == 'error' %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6M12 17h.01"/></svg>
+            {% else %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11v6M12 7h.01"/></svg>
+            {% endif %}
+        </span>
+
+        <div class="toast__body">
+            <p class="toast__title">
+                {% if message.level_tag == 'success' %}Berhasil!
+                {% elif message.level_tag == 'error' %}Ups, ada masalah
+                {% elif message.level_tag == 'warning' %}Perhatian
+                {% else %}Info{% endif %}
+            </p>
+            <p class="toast__text">{{ message }}</p>
+        </div>
+
+        <button type="button" class="toast__close" data-toast-close aria-label="Tutup notifikasi">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
