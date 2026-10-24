@@ -289,12 +289,12 @@
     "indoor": true,
     "space_needed": "small",
     "description": "Pakcoy memiliki helai daun lebar yang tersusun membentuk roset dengan tangkai daun tebal. Daun dan tangkainya umum dimanfaatkan sebagai sayuran.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/170_Brassica_rapa_subspecies_chinensis_Pak_Choi.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Pak_choi_(4701360954).jpg",
     "image_attribution": {
-      "creator": "ChrisInMilton",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:170_Brassica_rapa_subspecies_chinensis_Pak_Choi.jpg"
+      "creator": "Jeremy Keith",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Pak_choi_(4701360954).jpg"
     },
     "sources": [
       {
@@ -325,15 +325,15 @@
         "notes": "Menyebut pak choi sebagai salah satu sayuran daun yang ditampilkan pada produksi NFT; penggunaan dalam lingkungan terlindung/terkendali."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:170_Brassica_rapa_subspecies_chinensis_Pak_Choi.jpg",
-        "title": "Wikimedia Commons — File:170 Brassica rapa subspecies chinensis Pak Choi.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Pak_choi_(4701360954).jpg",
+        "title": "Wikimedia Commons — File:Pak_choi_(4701360954).jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Identitas gambar, fotografer ChrisInMilton dan lisensi CC BY-SA 4.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
+        "notes": "Foto Pakcoy dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       },
       {
         "url": "https://repository.ub.ac.id/id/eprint/11322/5/C.%20Bab%20II%20PDF.pdf",
@@ -1130,12 +1130,12 @@
     "indoor": null,
     "space_needed": "small",
     "description": "Cabai rawit merupakan jenis cabai yang menghasilkan buah relatif kecil dan umumnya berasa sangat pedas. Buahnya dimanfaatkan sebagai bumbu segar maupun olahan.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cabai_rawit_merah.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Capsicum_frutescens_fruits_green.jpg",
     "image_attribution": {
-      "creator": "Raflinoer32",
+      "creator": "Sanu N",
       "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Cabai_rawit_merah.jpg"
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Capsicum_frutescens_fruits_green.jpg"
     },
     "sources": [
       {
@@ -1176,15 +1176,15 @@
         "notes": "Bukti: Kelembaban udara yang baik untuk pertumbuhan tanaman cabai rawit adalah berkisar 60% - 80% Lokasi bukti: Bab II, hlm. 7. Spesies cocok (Capsicum frutescens). Mengutip Rukmana (2004). Konteks budidaya lapangan dataran rendah hingga 1400 mdpl. Repositori UPN Jatim (hanya snippet) juga menyebut 60-80%."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Cabai_rawit_merah.jpg",
-        "title": "File:Cabai rawit merah.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Capsicum_frutescens_fruits_green.jpg",
+        "title": "Wikimedia Commons — File:Capsicum_frutescens_fruits_green.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-23",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman file dan kategorinya mengidentifikasi cabai rawit sebagai Capsicum frutescens, pencipta Raflinoer32, dan lisensi CC BY-SA 4.0."
+        "notes": "Foto Cabai rawit dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "EcoCrop menyatakan suhu OPTIMAL 18–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 600–1500 mm/tahun. Angka RH yang tersedia untuk peppers umum atau C. annuum tidak dipaksakan untuk C. frutescens. Riset cili padi C. frutescens memakai hidroponik substrat hingga fase hasil. Rentang RH 60–80% berasal dari syarat tumbuh Capsicum frutescens di lahan terbuka dan disimpan dengan humidity_basis=open_field; data RH spesies cabai lain tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
@@ -1654,12 +1654,12 @@
     "indoor": null,
     "space_needed": "medium",
     "description": "Buncis adalah tanaman kacang-kacangan yang memiliki tipe tumbuh tegak seperti semak maupun memanjat. Polong mudanya dimanfaatkan sebagai sayuran.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Beans_-_Mercato_Orientale_-_Genoa,_Italy_-_DSC02472.JPG",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Phaseolus_Vulgaris.jpg",
     "image_attribution": {
-      "creator": "Daderot",
-      "license": "CC0",
-      "license_url": "https://creativecommons.org/publicdomain/zero/1.0",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Beans_-_Mercato_Orientale_-_Genoa,_Italy_-_DSC02472.JPG"
+      "creator": "Aldrina A Manashe",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Phaseolus_Vulgaris.jpg"
     },
     "sources": [
       {
@@ -1700,15 +1700,15 @@
         "notes": "Bukti: Kelembaban udara dan kelembaban tanah yang dikehendaki tanaman buncis berkisar antara 50 - 60%. Lokasi bukti: Subbab 2.2 Syarat Tumbuh Tanaman Buncis, hlm. 5. Mengutip Cahyono (2003). Kalimat menggabungkan RH udara dan kelembapan tanah, tetapi RH udara disebut eksplisit. Halaman yang sama menyatakan penanaman harus di tempat terbuka (open field). SOP Buncis Ditjen Hortikultura (hanya snippet) menyebut sekitar 55%, konsisten."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Beans_-_Mercato_Orientale_-_Genoa,_Italy_-_DSC02472.JPG",
-        "title": "File:Beans - Mercato Orientale - Genoa, Italy - DSC02472.JPG",
+        "url": "https://commons.wikimedia.org/wiki/File:Phaseolus_Vulgaris.jpg",
+        "title": "Wikimedia Commons — File:Phaseolus_Vulgaris.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-23",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman file mengategorikan objek sebagai Phaseolus vulgaris, pencipta Daderot, dan lisensi CC0."
+        "notes": "Foto Buncis dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "EcoCrop menyatakan suhu OPTIMAL 16–25 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 500–2000 mm/tahun. Penelitian USDA menguji produksi polong buncis Phaseolus vulgaris pada sistem hidroponik, bukan hanya persemaian. Kelembapan udara 70–80% untuk beans di tabel greenhouse tidak dipakai karena jenis kacang tidak dijelaskan secara pasti. Tipe semak dan panjat memiliki kebutuhan ruang berbeda. Rentang 50–60% berasal dari syarat tumbuh lahan terbuka yang menyebut kelembapan udara dan tanah secara bersamaan; caveat tersebut dipertahankan pada sumber dan humidity_basis=open_field. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Kelayakan indoor hingga fase panen dewasa belum cukup terbukti untuk semua bentuk/kultivar, sehingga indoor = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
@@ -2147,12 +2147,12 @@
     "indoor": false,
     "space_needed": "medium",
     "description": "Ketela rambat atau ubi jalar merupakan tanaman menjalar yang membentuk umbi akar sebagai cadangan makanan. Umbinya digunakan sebagai bahan pangan, sedangkan daun mudanya juga dapat dimakan.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Ipomoea_batatas_1zz.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Ipomoea_batatas_-_Tubers.jpg",
     "image_attribution": {
-      "creator": "David J. Stang",
+      "creator": "Filo gèn'",
       "license": "CC BY-SA 4.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Ipomoea_batatas_1zz.jpg"
+      "source_page": "https://commons.wikimedia.org/wiki/File:Ipomoea_batatas_-_Tubers.jpg"
     },
     "sources": [
       {
@@ -2172,15 +2172,15 @@
         "notes": "Kolom Optimal (bukan Absolute): suhu udara 18–28 °C; curah hujan tahunan 750–2000 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Ipomoea_batatas_1zz.jpg",
-        "title": "File:Ipomoea_batatas_1zz.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Ipomoea_batatas_-_Tubers.jpg",
+        "title": "Wikimedia Commons — File:Ipomoea_batatas_-_Tubers.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Foto diidentifikasi sebagai Ipomoea batatas; halaman asal memuat kreator David J. Stang dan lisensi CC BY-SA 4.0. Special:FilePath adalah tautan stabil ke berkas Wikimedia Commons."
+        "notes": "Foto Ketela rambat dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       },
       {
         "url": "https://www.scielo.org.za/scielo.php?pid=S0038-23532015000600011&script=sci_arttext",
@@ -2248,12 +2248,12 @@
     "indoor": false,
     "space_needed": "small",
     "description": "Kentang adalah tanaman herba yang menghasilkan umbi batang di bawah permukaan media. Umbinya menjadi bahan pangan utama untuk beragam olahan.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Potato_tubers.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Potato_tubers_in_pail.jpg",
     "image_attribution": {
-      "creator": "Spiritia",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Potato_tubers.jpg"
+      "creator": "Ruslan V. Albitsky (pauk)",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Potato_tubers_in_pail.jpg"
     },
     "sources": [
       {
@@ -2273,15 +2273,15 @@
         "notes": "Kolom Optimal (bukan Absolute): suhu udara 15–25 °C; curah hujan tahunan 500–800 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Potato_tubers.jpg",
-        "title": "File:Potato_tubers.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Potato_tubers_in_pail.jpg",
+        "title": "Wikimedia Commons — File:Potato_tubers_in_pail.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Foto diidentifikasi sebagai Solanum tuberosum; halaman asal memuat kreator Spiritia dan lisensi CC BY-SA 4.0. Special:FilePath adalah tautan stabil ke berkas Wikimedia Commons."
+        "notes": "Foto Kentang dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       },
       {
         "url": "https://msu-prod.dotcms.cloud/potatobg/Services/msu-certified-seed-mini-tuber-production-nutrient-film-technology-nft",
@@ -2454,12 +2454,12 @@
     "indoor": false,
     "space_needed": "medium",
     "description": "Jeruk nipis merupakan pohon buah kecil yang menghasilkan jeruk berkulit hijau hingga kekuningan dengan sari buah sangat asam dan beraroma kuat. Air buahnya banyak digunakan sebagai penyedap makanan dan minuman.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Citrus_%C3%97_aurantiifolia.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Starr_080610-8303_Citrus_aurantiifolia.jpg",
     "image_attribution": {
-      "creator": "Boesenbergia",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Citrus_%C3%97_aurantiifolia.jpg"
+      "creator": "Forest & Kim Starr",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Starr_080610-8303_Citrus_aurantiifolia.jpg"
     },
     "sources": [
       {
@@ -2479,15 +2479,15 @@
         "notes": "Kolom Optimal (bukan Absolute): suhu udara 26–32 °C; curah hujan tahunan 2200–2700 mm; ekologi tanah dan intensitas cahaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli dalam mm/tahun."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Citrus_%C3%97_aurantiifolia.jpg",
-        "title": "File:Citrus_×_aurantiifolia.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Starr_080610-8303_Citrus_aurantiifolia.jpg",
+        "title": "Wikimedia Commons — File:Starr_080610-8303_Citrus_aurantiifolia.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Foto diidentifikasi sebagai Citrus × aurantiifolia; halaman asal memuat kreator Boesenbergia dan lisensi CC BY-SA 4.0. Special:FilePath adalah tautan stabil ke berkas Wikimedia Commons."
+        "notes": "Foto Jeruk nipis dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       },
       {
         "url": "https://ask.ifas.ufl.edu/publication/CH092",
@@ -2799,12 +2799,12 @@
     "indoor": false,
     "space_needed": "medium",
     "description": "Anggur adalah tanaman buah berkayu yang merambat dengan sulur dan menghasilkan buah beri dalam tandan. Buah dapat berwarna hijau, merah, atau ungu sesuai varietas, serta dikonsumsi segar maupun diolah.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Vitis_vinifera_ULB.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Crimson_seedless_on_the_vine.jpg",
     "image_attribution": {
-      "creator": "Aitzolete",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Vitis_vinifera_ULB.jpg"
+      "creator": "Bob Nichols, USDA Agricultural Research Service",
+      "license": "Public domain (USDA ARS)",
+      "license_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USDA-ARS",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Crimson_seedless_on_the_vine.jpg"
     },
     "sources": [
       {
@@ -2860,15 +2860,15 @@
         "notes": "Penelitian 2024 menunjukkan buah awal pada anggur mikro dalam sistem hidroponik LED indoor eksperimental, bukan bukti hidroponik yang lazim/praktis untuk anggur merambat ukuran normal; dicatat sebagai pengecualian."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Vitis_vinifera_ULB.jpg",
-        "title": "File:Vitis_vinifera_ULB.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Crimson_seedless_on_the_vine.jpg",
+        "title": "Wikimedia Commons — File:Crimson_seedless_on_the_vine.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman berkas memuat fotografer Aitzolete dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
+        "notes": "Foto Anggur dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 700–850 mm/tahun. Anggur biasa tetap diberi supports_hydroponic=null dan indoor=false dalam konteks rekomendasi pekarangan/rumah: penelitian CSIRO 2024 memakai MICROVINES kerdil dan sistem LED khusus, belum bukti cara lazim untuk sulur anggur normal. Drought_tolerant=true hanya pada tanaman yang sudah MAPAN. Ruang medium didasarkan pergola sekitar 50–100 kaki persegi; sulur tak dipangkas bisa jauh lebih panjang. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian. Setelah audit sumber, klaim RH 60–80% tidak cukup didukung oleh halaman FAO yang dicantumkan; humidity_min dan humidity_max dikembalikan menjadi null.",
@@ -3010,12 +3010,12 @@
     "indoor": false,
     "space_needed": "medium",
     "description": "Semangka adalah tanaman semusim yang merambat dekat permukaan tanah dengan daun berlekuk dan buah besar berdaging berair. Daging buah umumnya merah atau kuning, dengan kulit relatif tebal.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Citrullus_lanatus_plant.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Watermelon_Bahar1.jpg",
     "image_attribution": {
-      "creator": "Mark Marathon",
+      "creator": "Shams948",
       "license": "CC BY-SA 4.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Citrullus_lanatus_plant.jpg"
+      "source_page": "https://commons.wikimedia.org/wiki/File:Watermelon_Bahar1.jpg"
     },
     "sources": [
       {
@@ -3058,15 +3058,15 @@
         "notes": "Kebutuhan air penting saat pembentukan bunga dan buah; kekurangan air menurunkan hasil, kelebihan air dekat matang merugikan; air diberikan berkala sesuai fase bukan disimpulkan dari curah hujan tahunan."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Citrullus_lanatus_plant.jpg",
-        "title": "File:Citrullus_lanatus_plant.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Watermelon_Bahar1.jpg",
+        "title": "Wikimedia Commons — File:Watermelon_Bahar1.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman berkas memuat fotografer Mark Marathon dan lisensi CC BY-SA 4.0; Special:FilePath mengarah ke gambar asli Wikimedia Commons dan bukan URL sementara."
+        "notes": "Foto Semangka dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "Rentang suhu diisi dari kolom OPTIMAL suhu udara FAO EcoCrop (bukan ambang hidup/kecambah). FAO EcoCrop memberikan curah hujan OPTIMAL TAHUNAN 500–700 mm/tahun. Kelembapan relatif udara (RH) ideal belum didukung sumber numerik memadai; humidity_min/humidity_max = null, tidak ditukar dengan kelembapan media, nursery atau pascapanen. Hydroponic=true didukung studi hingga buah dipanen. Watering Average sebagai ringkasan kebutuhan air berkala yang sangat tergantung tahap pertumbuhan, bukan menyiratkan toleransi kekeringan. Meski EcoCrop menyebut kisaran hujan optimal relatif rendah, itu TIDAK membuktikan drought_tolerant; nilainya null. Space medium cocok untuk petak merambat 5–20 m² dengan pembatasan sulur. Kategori watering, care_level, indoor, space_needed adalah filter katalog yang disarikan dari habitus, kebutuhan sumber, dan budidaya yang didukung; bukan panduan teknis. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
@@ -3915,12 +3915,12 @@
     "indoor": false,
     "space_needed": "medium",
     "description": "Lengkuas adalah herba tropis keluarga jahe-jahean dengan rimpang beraroma tajam yang banyak digunakan pada masakan Asia Tenggara. Daunnya memanjang dan batang semunya dapat tumbuh tinggi.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Alpinia_galanga_at_Nativeplants_Botanical_Garden.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Thai_ginger_(Alpinia_galanga).jpg",
     "image_attribution": {
-      "creator": "Nativeplants garden",
+      "creator": "Susan Slater",
       "license": "CC BY-SA 4.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Alpinia_galanga_at_Nativeplants_Botanical_Garden.jpg"
+      "source_page": "https://commons.wikimedia.org/wiki/File:Thai_ginger_(Alpinia_galanga).jpg"
     },
     "sources": [
       {
@@ -3953,15 +3953,15 @@
         "notes": "Mengonfirmasi nama lengkuas, rimpang kuliner, tinggi sampai 3,5m, sun/full-semi shade, moderate water; space medium adalah kelas praktis kebun rumpun."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Alpinia_galanga_at_Nativeplants_Botanical_Garden.jpg",
-        "title": "Wikimedia Commons — File:Alpinia_galanga_at_Nativeplants_Botanical_Garden.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Thai_ginger_(Alpinia_galanga).jpg",
+        "title": "Wikimedia Commons — File:Thai_ginger_(Alpinia_galanga).jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
+        "notes": "Foto Lengkuas dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "FAO mencantumkan suhu optimal 27–32 °C untuk spesies ini. Sumber UF IFAS untuk kelompok jahe/lengkuas/kunyit menyebut 70–85°F (~21–29°C) lebih umum; data spesies FAO diprioritaskan tanpa membuat rata-rata antar sumber. RH optimal tidak terverifikasi. Bukti hidroponik praktis hingga panen rimpang spesies yang memadai tidak ditemukan. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
@@ -3999,12 +3999,12 @@
     "indoor": true,
     "space_needed": "small",
     "description": "Lidah mertua merupakan tanaman hias berdaun tegak, kaku, dan bercorak garis hijau yang kerap ditanam dalam pot. Tanaman ini juga dikenal dengan nama lama Sansevieria trifasciata.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Sansevieria_trifasciata-buds.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Sansevieria_in_pot.jpg",
     "image_attribution": {
-      "creator": "Tommy Kronkvist",
-      "license": "CC BY-SA 3.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Sansevieria_trifasciata-buds.jpg"
+      "creator": "Mokkie",
+      "license": "Public domain (PD-self)",
+      "license_url": "https://commons.wikimedia.org/wiki/Template:PD-self",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Sansevieria_in_pot.jpg"
     },
     "sources": [
       {
@@ -4026,15 +4026,15 @@
         "notes": "Nama ilmiah kini Dracaena trifasciata (dahulu Sansevieria trifasciata), tanaman indoor dalam pot, toleran kondisi kering/cahaya redup; suhu 50°F pada sumber adalah toleransi, BUKAN suhu optimum."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Sansevieria_trifasciata-buds.jpg",
-        "title": "Wikimedia Commons — File:Sansevieria_trifasciata-buds.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Sansevieria_in_pot.jpg",
+        "title": "Wikimedia Commons — File:Sansevieria_in_pot.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
+        "notes": "Foto Lidah mertua dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "Nilai suhu, RH, dan curah hujan optimal spesifik tidak diverifikasi; toleransi terhadap suhu ~50°F dan udara kering bukan rentang kondisi ideal. Bentuk indoor dalam pot dapat dijaga kecil. supports_hydroponic=null: kemampuan stek berakar dalam air saja tidak mencukupi syarat praktik hidroponik hingga pertumbuhan relevan. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
@@ -4166,12 +4166,12 @@
     "indoor": true,
     "space_needed": "medium",
     "description": "Monstera adalah tanaman tropis merambat dengan daun besar yang pada fase dewasa memiliki belahan dan lubang khas. Tanaman ini populer sebagai elemen dekoratif ruangan dan tumbuh dengan akar udara serta batang pemanjat.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Monstera_deliciosa.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Feuille_Monstera_deliciosa.jpg",
     "image_attribution": {
-      "creator": "Peter A. Mansfeld",
-      "license": "CC BY-SA 3.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Monstera_deliciosa.jpg"
+      "creator": "Anne Jea.",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Feuille_Monstera_deliciosa.jpg"
     },
     "sources": [
       {
@@ -4193,15 +4193,15 @@
         "notes": "Menjelaskan rata-rata suhu hangat 60–85°F (~16–29°C), cahaya sedang tidak langsung, kelembapan tinggi (tanpa RH numerik), habitus merambat, pot indoor, dukungan batang dan air secukupnya."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Monstera_deliciosa.jpg",
-        "title": "Wikimedia Commons — File:Monstera_deliciosa.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Feuille_Monstera_deliciosa.jpg",
+        "title": "Wikimedia Commons — File:Feuille_Monstera_deliciosa.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
+        "notes": "Foto Monstera dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "Konversi suhu dari NCSU: (60–32)*5/9=15,56°C, (85–32)*5/9=29,44°C; ditulis bulat 16–29°C tanpa presisi palsu. RH tinggi tidak diberi persentase spesifik. Karena tumbuh memanjat dan daun besar, space medium berdasarkan penyangga/ukuran dewasa indoor; bentuk muda dalam pot dapat kecil. Data curah hujan luar habitat tidak dikonversi dari praktik indoor. supports_hydroponic=null karena tidak ada verifikasi budidaya praktis hingga fase relevan dari sumber utama yang diperiksa. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
@@ -4238,12 +4238,12 @@
     "indoor": true,
     "space_needed": "small",
     "description": "Kaktus merupakan kelompok tanaman dari famili Cactaceae dengan beragam bentuk batang penyimpan air; sebagian memiliki duri dan sebagian lainnya tumbuh sebagai epifit. Banyak jenis dijadikan tanaman hias dalam pot.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cactus_Nursery_At_Anuradhapura.jpeg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/An_Echinocactus_grusonii.jpg",
     "image_attribution": {
-      "creator": "Buddhika Wijerathne",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Cactus_Nursery_At_Anuradhapura.jpeg"
+      "creator": "Clément Bardot",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:An_Echinocactus_grusonii.jpg"
     },
     "sources": [
       {
@@ -4273,15 +4273,15 @@
         "notes": "Kaktus liburan epifit dari hutan lembap menyukai kondisi dan intensitas cahaya berbeda dari banyak kaktus gurun; bukti bahwa seluruh famili tidak memiliki satu nilai iklim/kekeringan yang sama."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Cactus_Nursery_At_Anuradhapura.jpeg",
-        "title": "Wikimedia Commons — File:Cactus_Nursery_At_Anuradhapura.jpeg",
+        "url": "https://commons.wikimedia.org/wiki/File:An_Echinocactus_grusonii.jpg",
+        "title": "Wikimedia Commons — File:An_Echinocactus_grusonii.jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
+        "notes": "Foto Kaktus dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "CAKUPAN TAKSON: Cactaceae adalah famili, bukan satu spesies. KELOMPOK LUAS: Cactaceae berisi kaktus gurun, tropis/epifit, kecil berpot dan besar berbentuk pohon. Karena tidak ada satu angka suhu optimal, RH udara optimal atau rainfall tahunan representatif yang bertanggung jawab, semuanya null. Drought_tolerant=null karena ketahanan kekeringan kaktus gurun tidak berlaku sama pada kaktus hutan; full_sun dan partial_shade adalah PILIHAN UNTUK JENIS BERBEDA, bukan dua syarat seragam. Watering Minimum dan space small adalah profil mayoritas kaktus hias kecil dalam pot; pengecualian perlu pencatatan spesies. Indoor true bagi jenis yang bisa hidup dalam pot dengan pencahayaan cukup. Hidroponik null: bukti praktis yang berlaku lintas famili tidak ditemukan. UMN menyebut RH rendah 10–30% dapat ditoleransi oleh banyak jenis; itu BUKAN kelembapan ideal seluruh Cactaceae. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
@@ -4318,12 +4318,12 @@
     "indoor": true,
     "space_needed": "small",
     "description": "Aglaonema merupakan kelompok tanaman hias tropis berdaun lebar dengan kombinasi corak hijau, perak, merah, atau merah muda. Banyak varietas dimanfaatkan sebagai tanaman dekoratif di dalam ruangan.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Aglaonema_commutatum0.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Aglaonema_sp_(red_leaves).jpg",
     "image_attribution": {
-      "creator": "Kurt Stüber",
-      "license": "CC BY-SA 3.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Aglaonema_commutatum0.jpg"
+      "creator": "Mokkie",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Aglaonema_sp_(red_leaves).jpg"
     },
     "sources": [
       {
@@ -4346,15 +4346,15 @@
         "notes": "Profil genus Aglaonema (26 spesies dan banyak kultivar) yang lazim sebagai houseplant; suhu siang disukai 70–80°F, udara lembap tanpa RH persen, cahaya tidak langsung dan media pot cukup lembap. Rentang suhu berlaku sebagai proksi untuk Aglaonema hias indoor umum, bukan semua spesies liar."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Aglaonema_commutatum0.jpg",
-        "title": "Wikimedia Commons — File:Aglaonema_commutatum0.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Aglaonema_sp_(red_leaves).jpg",
+        "title": "Wikimedia Commons — File:Aglaonema_sp_(red_leaves).jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
+        "notes": "Foto Aglaonema dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "CAKUPAN TAKSON: Aglaonema spp. menunjukkan genus dengan banyak spesies, bukan satu spesies. KELOMPOK GENUS: mempertahankan identitas Aglaonema spp., tidak memilih spesies arbitrer. NCSU memberi suhu siang favorit pada profil Aglaonema umum 70–80°F => (70–32)*5/9=21,1°C, (80–32)*5/9=26,7°C, dibulatkan 21–27°C; proksi konservatif AGLOANEMA HIAS INDOOR umum, bukan batas mutlak semua spesies. Variasi antarspesies dan kultivar menghalangi satu angka RH optimum meski secara umum suka kelembapan tinggi; RH dan curah hujan null. Foto hanya contoh A. commutatum, bukan penetapan identitas kelompok. Drought_tolerant null: toleransi udara kering bukan bukti toleransi kekeringan tanah; hydroponic=null karena tidak ada bukti cukup untuk praktik luas lintas spesies. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
@@ -4460,12 +4460,12 @@
     "indoor": true,
     "space_needed": "small",
     "description": "Peace lily merupakan tanaman hias tropis dengan daun hijau mengilap dan seludang bunga putih yang mengelilingi tongkol kecil. Bentuknya merumpun dan cocok sebagai penghias ruangan.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Spathiphyllum_wallisii_a3.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Peace_Lilies_(Spathiphyllum_wallisii)_(52432120770).jpg",
     "image_attribution": {
-      "creator": "Jerzy Opioła",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Spathiphyllum_wallisii_a3.jpg"
+      "creator": "Bernard DUPONT",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Peace_Lilies_(Spathiphyllum_wallisii)_(52432120770).jpg"
     },
     "sources": [
       {
@@ -4509,15 +4509,15 @@
         "notes": "Penelitian IPB spesies Spathiphyllum wallisii pada media hidroponik arang sekam, zeolit dan batu apung serta larutan nutrisi; menilai pertumbuhan dan keawetan bunga, bukan sekadar rooting."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Spathiphyllum_wallisii_a3.jpg",
-        "title": "Wikimedia Commons — File:Spathiphyllum_wallisii_a3.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Peace_Lilies_(Spathiphyllum_wallisii)_(52432120770).jpg",
+        "title": "Wikimedia Commons — File:Peace_Lilies_(Spathiphyllum_wallisii)_(52432120770).jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
+        "notes": "Foto Peace lily dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "Suhu 68–85°F dari panduan NCSU genus Spathiphyllum dikonversi menjadi 20–29°C, dipakai sebagai proksi untuk S. wallisii. RH tinggi dianjurkan tetapi persentase ideal spesifik tidak dipublikasikan, maka null. Curah hujan optimal tahunan untuk lingkungan indoor tidak dapat diberi angka mm/tahun yang sah. Frequent berarti kelembapan media relatif konsisten saat tumbuh, bukan membuat media tergenang. Praktik hidroponik berdasarkan penelitian spesies di IPB. Toleransi kekeringan dewasa tidak diverifikasi, maka null.",
@@ -4554,12 +4554,12 @@
     "indoor": true,
     "space_needed": "small",
     "description": "Calathea merupakan sebutan kelompok tanaman hias keluarga Marantaceae yang banyak memiliki daun berornamen garis atau bercak kontras. Sebagian tanaman yang dulu masuk marga Calathea kini diklasifikasikan sebagai Goeppertia.",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Goeppertia.jpg",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Goeppertia_makoyana_in_Lyon_Botanical_Garden_(1).jpg",
     "image_attribution": {
-      "creator": "Raflinoer32",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Goeppertia.jpg"
+      "creator": "Tournasol7",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Goeppertia_makoyana_in_Lyon_Botanical_Garden_(1).jpg"
     },
     "sources": [
       {
@@ -4604,15 +4604,15 @@
         "notes": "Contoh spesies/kultivar dengan RH lebih dari 60% dan suhu 65–75°F; sensitif terhadap kualitas air dan kelembapan, sehingga perawatan sebagian anggota kelompok lebih khusus."
       },
       {
-        "url": "https://commons.wikimedia.org/wiki/File:Goeppertia.jpg",
-        "title": "Wikimedia Commons — File:Goeppertia.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Goeppertia_makoyana_in_Lyon_Botanical_Garden_(1).jpg",
+        "title": "Wikimedia Commons — File:Goeppertia_makoyana_in_Lyon_Botanical_Garden_(1).jpg",
         "publisher": "Wikimedia Commons",
-        "accessed_at": "2026-10-22",
+        "accessed_at": "2026-10-24",
         "supports_fields": [
           "image_url",
           "image_attribution"
         ],
-        "notes": "Halaman berkas memuat foto, nama pembuat dan ketentuan lisensi yang dapat diverifikasi; URL gambar memakai Special:FilePath stabil. Untuk kelompok tanaman, foto hanya contoh visual, bukan cakupan semua spesies."
+        "notes": "Foto Calathea dipilih setelah pemeriksaan subjek dan crop katalog; identitas berkas, kreator, serta lisensi tercantum pada halaman Wikimedia Commons."
       }
     ],
     "notes": "CAKUPAN TAKSON: Calathea dalam katalog ini adalah kelompok ornamental yang juga mencakup Goeppertia; tidak ada satu scientific_name yang mewakili seluruh kelompok. KELOMPOK GENUS GABUNGAN: teks gabungan Calathea/Goeppertia spp. tidak disimpan sebagai scientific_name; tidak memilih spesies arbitrer. Referensi NCSU menunjukkan perbedaan kebutuhan: G. picturata ~60–70% RH, G. bachemiana ~50–60%, dan G. lietzei >60%; suhu pun bervariasi. Tidak ada satu rentang optimal yang cukup mewakili seluruh anggota, sehingga temp_min/max, humidity_min/max, rainfall_annual_min_mm/rainfall_annual_max_mm = null. Watering Frequent dan High mewakili kelompok ornamental berdaun hutan lembap yang memerlukan kelembapan media dan kondisi stabil; tidak berarti semua spesies identik. Drought_tolerant null, hydroponic=null karena tidak ada bukti budidaya praktis lintas kelompok. Foto berupa tanaman Goeppertia, contoh visual bukan spesies acuan seluruh kelompok. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
