@@ -1,85 +1,64 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}{{ history.land_name }} - Riwayat{% endblock %}
+
+{% block title %}{{ history.land_name }} - Riwayat - Nanem{% endblock %}
+
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/pages/history.css' %}"> 
+<link rel="stylesheet" href="{% static 'css/pages/history-detail.css' %}">
 {% endblock %}
+
 {% block content %}
-<section>
-    <div class="history-detail__header">
-        <h1>{{ history.land_name }}</h1>
-        <div class="history-card__actions">
-        <button type="button" class="link-button" onclick="document.getElementById('edit-dialog').showModal()">
-            Ubah nama
-        </button>
-        <button type="button" class="link-button link-button--danger" onclick="document.getElementById('delete-dialog').showModal()">
-            Hapus
-        </button>
+{% with env=history.environment_snapshot plants=history.recommended_plants %}
+<section class="detail">
+
+    {# ================= Header ================= #}
+    <a href="{% url 'recommendations:history_list' %}" class="detail__back">
+        {% include "components/icon.html" with name="arrow-left" size=16 %}Semua riwayat
+    </a>
+
+    <header class="detail__header">
+        <div class="detail__heading">
+            <h1 class="detail__title">{{ history.land_name }}</h1>
+            <p class="detail__meta">
+                <span>{% include "components/icon.html" with name="calendar" size=15 %}Disimpan {{ history.created_at|date:"d M Y · H:i" }}</span>
+            </p>
+
+            {% if plants %}
+                {% with top=plants|first %}
+                <p class="detail__highlight">
+                    {% include "components/icon.html" with name="sprout" size=18 %}
+                    Paling cocok: <strong>{{ top.plant_name }}</strong>
+                    <span class="detail__highlight-pct">{{ top.match_percentage|floatformat:0 }}%</span>
+                </p>
+                {% endwith %}
+            {% endif %}
         </div>
+
+        <div class="detail__actions">
+            <a href="{% url 'recommendations:history_update' history.pk %}" data-modal-open="ubah-detail"
+               class="btn btn--outline detail__btn">
+                {% include "components/icon.html" with name="pencil" size=16 %}Ubah nama
+            </a>
+            <a href="{% url 'recommendations:history_delete' history.pk %}" data-modal-open="hapus-detail"
+               class="btn btn--outline detail__btn detail__btn--danger" aria-label="Hapus riwayat">
+                {% include "components/icon.html" with name="trash" size=16 %}<span class="detail__btn-label">Hapus</span>
+            </a>
+        </div>
+    </header>
+
+    {# ================= Isi: analisis | rekomendasi ================= #}
+    <div class="detail__grid">
+
+        {% include "recommendations/_analysis_card.html" with env=env latitude=history.latitude longitude=history.longitude land_area=history.land_area medium_label=history.get_planting_medium_display period_start=period_start period_end=history.created_at %}
+        {% include "recommendations/_plants_rec_card.html" with plants=plants %}
     </div>
-    <p class="field-hint">Disimpan {{ history.created_at|date:"d M Y H:i" }}</p>
+</section>
 
-    <h2>Kondisi saat itu</h2>
-    <ul>
-        <li>Lokasi: {{ history.latitude }}, {{ history.longitude }}</li>
-        <li>Luas lahan: {{ history.land_area }} m²</li>
-        <li>Media tanam: {{ history.get_planting_medium_display }}</li>
-        <li>Suhu: {{ history.environment_snapshot.raw.temperature }} °C &middot; {{ history.environment_snapshot.summary.temperature_label }}</li>
-        <li>Kelembapan: {{ history.environment_snapshot.raw.humidity }} % &middot; {{ history.environment_snapshot.summary.humidity_label }}</li>
-        <li>Curah hujan: {{ history.environment_snapshot.raw.rainfall }} mm/hari &middot; {{ history.environment_snapshot.summary.rainfall_label }}</li>
-    </ul>
-
-    <h2>Tanaman yang direkomendasikan ({{ history.recommended_plants|length }})</h2>
-    {% if history.recommended_plants %}
-        <ol>
-        {% for plant in history.recommended_plants %}
-            <li>
-            {% url 'plants:detail' plant.plant_id as detail_url %}
-            <strong>
-                {% if detail_url %}<a href="{{ detail_url }}">{{ plant.plant_name }}</a>{% else %}{{ plant.plant_name }}{% endif %}
-            </strong>
-            {% if plant.scientific_name %}<em>({{ plant.scientific_name }})</em>{% endif %}
-            &mdash; <strong>{{ plant.match_percentage }}% cocok</strong>
-            <ul>
-                {% for reason in plant.reasons %}<li class="field-hint">{{ reason }}</li>{% endfor %}
-            </ul>
-            </li>
-        {% endfor %}
-        </ol>
-    {% else %}
-        <p>Saat itu tidak ada tanaman yang cocok.</p>
-    {% endif %}
-
-    <p><a href="{% url 'recommendations:history_list' %}">&larr; Semua riwayat</a></p>
-    </section>
-
-    {# ---- Modal: ubah nama lahan (prefilled) ---- #}
-    <dialog id="edit-dialog" class="modal">
-    <form method="post" action="{% url 'recommendations:history_update' history.pk %}">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{% url 'recommendations:history_detail' history.pk %}">
-        <h2>Ubah Nama Lahan</h2>
-        <div class="form-group">
-        <label for="land_name">Nama lahan</label>
-        <input type="text" name="land_name" id="land_name" value="{{ history.land_name }}" maxlength="100" required>
-        </div>
-        <div class="modal__actions">
-        <button type="button" class="btn" onclick="document.getElementById('edit-dialog').close()">Batal</button>
-        <button type="submit" class="btn btn--primary">Simpan</button>
-        </div>
-    </form>
-    </dialog>
-
-    {# ---- Modal: konfirmasi hapus ---- #}
-    <dialog id="delete-dialog" class="modal">
-    <form method="post" action="{% url 'recommendations:history_delete' history.pk %}">
-        {% csrf_token %}
-        <h2>Hapus riwayat?</h2>
-        <p>Riwayat <strong>{{ history.land_name }}</strong> akan dihapus permanen.</p>
-        <div class="modal__actions">
-        <button type="button" class="btn" onclick="document.getElementById('delete-dialog').close()">Batal</button>
-        <button type="submit" class="btn btn--danger">Ya, hapus</button>
-        </div>
-    </form>
-</dialog>
+{# ================= Modal ================= #}
+{% url 'recommendations:history_update' history.pk as rename_url %}
+{% url 'recommendations:history_delete' history.pk as delete_url %}
+{% url 'recommendations:history_detail' history.pk as detail_page %}
+{% include "components/rename_modal.html" with id="ubah-detail" action=rename_url value=history.land_name next=detail_page %}
+{% include "components/confirm_modal.html" with id="hapus-detail" title="Hapus riwayat?" message="Riwayat ini akan dihapus permanen:" item=history.land_name action=delete_url confirm_label="Ya, hapus" danger=True %}
+{% endwith %}
 {% endblock %}

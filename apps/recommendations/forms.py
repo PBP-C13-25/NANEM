@@ -14,6 +14,19 @@ class RecommendationForm(forms.Form):
     )
     planting_medium = forms.ChoiceField(label="Media tanam", choices=MEDIUM_CHOICES)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # contoh isian (placeholder) & keyboard angka di HP
+        self.fields["latitude"].widget.attrs.update({"placeholder": "-90 sampai 90"})
+        self.fields["longitude"].widget.attrs.update({"placeholder": "-180 sampai 180"})
+        self.fields["land_name"].widget.attrs.update({
+            "placeholder": "Contoh: Kebun Jojon",
+        })
+        self.fields["land_area"].widget.attrs.update({
+            "placeholder": "Contoh: 20",
+            "inputmode": "decimal",
+        })
+
 
 #* Update form nama
 class HistoryLandNameForm(forms.ModelForm):

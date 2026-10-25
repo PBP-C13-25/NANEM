@@ -1,28 +1,214 @@
-/* CARD GRID */
-.history-grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+.history {
+  max-width: 820px;
+  margin: 0 auto;
 }
 
-.history-card {
-  padding: 16px;
+/* header*/
+.history__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.history__title {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.history__subtitle {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* pencarian */
+.history-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.history-search__icon {
+  position: absolute;
+  left: 16px;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+.history-search input {
+  width: 100%;
+  height: 48px;
+  padding: 0 80px 0 46px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  font: inherit;
+  color: var(--color-text);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+.history-search input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(95, 106, 59, 0.15);
+}
+
+.history-search__clear {
+  position: absolute;
+  right: 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* 1 row periwayat */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px 10px 20px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 14px;
+  transition:
+    box-shadow 0.15s,
+    transform 0.15s;
+}
+.history-row:hover {
+  box-shadow: 0 8px 24px rgba(30, 40, 20, 0.08);
 }
 
-.history-card__title {
-  color: inherit;
-  text-decoration: none;
+.history-row__main {
+  min-width: 0;
 }
 
-.history-card__actions {
+.history-row__date {
+  margin-bottom: 2px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.history-row__name {
   display: flex;
-  gap: 12px;
-  margin-top: 12px;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.3;
+}
+.history-row__name .history-row__icon-btn {
+  width: 28px;
+  height: 28px;
+  margin: -4px 0;
+  border-radius: 8px;
+}
+.history-row__name .history-row__icon-btn svg {
+  width: 15px;
+  height: 15px;
+}
+.history-row__name > a:first-child {
+  overflow: hidden;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.history-row__name > a:first-child:hover {
+  color: var(--color-primary);
 }
 
+.history-row__top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  line-height: 1.3;
+  color: var(--color-muted);
+}
+.history-row__top strong {
+  color: var(--color-text);
+}
+.history-row__top--none {
+  font-style: italic;
+}
+
+.history-row__match {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* tombol kanan */
+.history-row__side {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.history-row__detail {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 0.85rem;
+}
+
+/* tombol ikon (pensil & tong sampah) */
+.history-row__icon-btn {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  color: var(--color-muted);
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+.history-row__icon-btn:hover {
+  background: var(--nav-hover);
+  color: var(--color-primary);
+}
+.history-row__icon-btn--danger:hover {
+  background: #fde8e5;
+  color: var(--color-danger);
+}
+
+/* mobile: tombol detail disembunyikan  */
+@media (max-width: 560px) {
+  .history-row {
+    align-items: flex-start;
+    padding: 16px 14px 16px 18px;
+  }
+  .history-row__detail {
+    display: none;
+  }
+}
+
+/* ---------- Detail ---------- */
 .history-detail__header {
   display: flex;
   align-items: center;

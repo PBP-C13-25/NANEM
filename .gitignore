@@ -139,3 +139,11 @@ apps/plants/seed_data/plant_candidates.json
 apps/plants/seed_data/plant_details.json
 apps/plants/seed_data/seed_report.txt
 apps/plants/seed_data/curation_review.md
+
+
+#Repost seeding
+apps/plants/seed_data/
+
+
+# file seed mock
+apps/plants/management/commands/seed_mock_plants.py
