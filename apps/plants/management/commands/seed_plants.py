@@ -23,6 +23,7 @@ CANDIDATES_PATH = SEED_DIR / "plant_candidates.json"
 SELECTIONS_PATH = SEED_DIR / "plant_selections.json"
 DETAILS_PATH = SEED_DIR / "plant_details.json"
 CURATED_DETAILS_PATH = SEED_DIR / "plant_details_curated.json"
+RESEARCH_PATH = SEED_DIR / "nanem_plant_research.json"
 API_URL = "https://perenual.com/api/v2/species-list"
 DETAILS_URL = "https://perenual.com/api/v2/species/details"
 REQUEST_DELAY = 0.75
@@ -31,6 +32,17 @@ OPTIONAL_ENRICHMENT_FIELDS = (
     "description", "image_url", "sunlight",
     "watering", "care_level", "drought_tolerant", "indoor",
 )
+RESEARCH_IMPORT_FIELDS = (
+    "scientific_name", "description", "image_url", "temp_min", "temp_max",
+    "humidity_min", "humidity_max", "rainfall_min", "rainfall_max",
+    "supports_soil", "supports_hydroponic", "sunlight", "watering",
+    "care_level", "drought_tolerant", "indoor", "space_needed",
+)
+RESEARCH_METADATA_FIELDS = {
+    "image_attribution", "sources", "notes", "taxon_scope", "derived_fields",
+    "rainfall_basis", "rainfall_annual_min_mm", "rainfall_annual_max_mm",
+    "humidity_basis",
+}
 
 
 def write_atomic(path, text):
@@ -132,6 +144,27 @@ def load_curated_details():
     return result
 
 
+def load_research(entries):
+    """Load curated research while keeping provenance metadata out of Plant."""
+    records = load_json_array(RESEARCH_PATH, "plant research")
+    if len(records) != len(entries):
+        raise CommandError("Plant research must contain exactly one row per seed entry.")
+    result = {}
+    allowed = {"name", "category", *RESEARCH_IMPORT_FIELDS, *RESEARCH_METADATA_FIELDS}
+    for entry, record in zip(entries, records):
+        if not isinstance(record, dict) or record.get("name") != entry["nama_id"]:
+            raise CommandError("Plant research names/order must match the seed list.")
+        if record.get("category") != entry["category"]:
+            raise CommandError(f"{entry['nama_id']}: research category does not match seed data.")
+        unknown = set(record) - allowed
+        if unknown:
+            raise CommandError(
+                f"{entry['nama_id']}: unknown research fields: {', '.join(sorted(unknown))}."
+            )
+        result[entry["nama_id"]] = record
+    return result
+
+
 def validate_candidates(candidates):
     if not isinstance(candidates, list) or any(
         not isinstance(item, dict) or type(item.get("id")) is not int
@@ -209,7 +242,7 @@ def stable_image_url(image):
     return ""
 
 
-def map_match(entry, selection, detail=None):
+def map_match(entry, selection, detail=None, research=None):
     species_id = selection["perenual_id"]
     if detail is not None and detail.get("id") != species_id:
         raise CommandError(f"{entry['nama_id']}: detail id does not match selection.")
@@ -227,6 +260,18 @@ def map_match(entry, selection, detail=None):
         "drought_tolerant": detail.get("drought_tolerant") if type(detail.get("drought_tolerant")) is bool else None,
         "indoor": detail.get("indoor") if type(detail.get("indoor")) is bool else None,
     }
+    if research is not None:
+        for name in RESEARCH_IMPORT_FIELDS:
+            if name not in research:
+                continue
+            value = research[name]
+            if name in ("scientific_name", "description", "image_url") and value is None:
+                value = ""
+            elif name == "supports_hydroponic" and value is None:
+                # Plant is non-nullable. Research null means evidence is insufficient,
+                # so the current model stores its conservative False fallback.
+                value = False
+            fields[name] = value
     for name, value in fields.items():
         try:
             Plant._meta.get_field(name).clean(value, None)
@@ -514,6 +559,7 @@ class Command(BaseCommand):
     def run_import(self, entries, selections, dry_run):
         details = {record["perenual_id"]: record for record in load_details()}
         curated = load_curated_details()
+        research = load_research(self.load_entries(None))
         prepared = []
         local_only = 0
         with_details = 0
@@ -528,7 +574,9 @@ class Command(BaseCommand):
                     payload = {**(payload or {}), **record["data"]}
                 if payload is not None:
                     with_details += 1
-                prepared.append(map_match(entry, selection, payload))
+                prepared.append(map_match(
+                    entry, selection, payload, research.get(entry["nama_id"]),
+                ))
             if dry_run:
                 with transaction.atomic():
                     # Exercise the same write path while guaranteeing rollback.
@@ -552,5 +600,6 @@ class Command(BaseCommand):
             f"Local-only: {local_only}",
             f"With Perenual id: {len(prepared) - local_only}",
             f"With plant details: {with_details}",
+            f"With curated research: {len(prepared)}",
             "API requests: 0",
         ])

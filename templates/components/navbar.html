@@ -35,7 +35,8 @@
                 </a>
 
                 {% if user.is_authenticated %}
-                    <a href="#" class="nav-link">
+                    <a href="{% url 'plants:index' %}"
+                       class="nav-link {% if ns == 'plants' %}is-active{% endif %}">
                         {% include "components/icon.html" with name="book-open" %}<span>Katalog</span>
                     </a>
 
