@@ -1,22 +1,32 @@
 {% extends "base.html" %}
 
-{% block title %}Ubah Nama Lahan - Tanem{% endblock %}
+{% block title %}Ubah Nama Lahan - Nanem{% endblock %}
 
 {% block content %}
-<section class="auth-card">
-  <h1>Ubah Nama Lahan</h1>
-  <p class="field-hint">Halaman cadangan -- biasanya ini dibuka lewat modal dari daftar riwayat.</p>
+{# Halaman cadangan: biasanya dibuka lewat modal dari daftar riwayat. Tampilannya sengaja sama dengan modal. #}
+<section class="card card--narrow">
+    <form method="post" novalidate class="dialog">
+        {% csrf_token %}
 
-  <form method="post" novalidate>
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="{{ form.land_name.id_for_label }}">Nama lahan</label>
-      {{ form.land_name }}
-      {% for error in form.land_name.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
-    </div>
-    <button type="submit" class="btn btn--primary">Simpan</button>
-  </form>
+        <div class="dialog__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </div>
 
-  <p class="auth-card__switch"><a href="{% url 'recommendations:history_detail' history.pk %}">Batal</a></p>
+        <h1 class="dialog__title">Ubah Nama Lahan</h1>
+        <p class="dialog__text">Nama ini cuma buat penanda di riwayatmu.</p>
+
+        <div class="dialog__body">
+            <div class="form-group">
+                <label for="{{ form.land_name.id_for_label }}">Nama lahan</label>
+                {{ form.land_name }}
+                {% for error in form.land_name.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+        </div>
+
+        <div class="dialog__actions">
+            <a href="{% url 'recommendations:history_detail' history.pk %}" class="btn btn--outline">Batal</a>
+            <button type="submit" class="btn btn--primary">Simpan</button>
+        </div>
+    </form>
 </section>
 {% endblock %}

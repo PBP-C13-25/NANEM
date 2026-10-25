@@ -1,69 +1,53 @@
-{% extends "base.html" %} 
-{% block title %}Daftar - Nanem{% endblock %} 
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Daftar - Nanem{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
+{% endblock %}
+
 {% block content %}
-<section class="auth-card">
-    <h1>Buat Akun</h1>
+<section class="auth">
 
-    {% if form.non_field_errors %}
-        <ul class="form-errors">
-            {% for error in form.non_field_errors %}
-                <li>{{ error }}</li>
+    {# ===== Panel kiri ===== #}
+    <div class="auth__panel">
+        <h2 class="auth__panel-title">Sudah punya akun?</h2>
+        <p class="auth__panel-text">Masuk lagi buat lihat riwayat dan koleksi tanamanmu.</p>
+        <a href="{% url 'accounts:login' %}" class="btn btn--outline-light">Masuk</a>
+    </div>
+
+    {# ===== Panel kanan: form ===== #}
+    <div class="auth__form">
+        <h1 class="auth__title">Buat Akun</h1>
+        <p class="auth__subtitle">Daftar gratis untuk mulai dapat rekomendasi tanaman.</p>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <ul class="form-errors">
+                    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+                </ul>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
             {% endfor %}
-        </ul>
-    {% endif %}
 
-    <form method="post" novalidate>
-        {% csrf_token %}
+            <button type="submit" class="btn btn--primary auth__submit">Daftar</button>
+        </form>
 
-        <!-- NAMA -->
-        <div class="form-group">
-            <label for="{{ form.first_name.id_for_label }}">Nama</label>
-            {{ form.first_name }} 
-            
-            {% for error in form.first_name.errors %}
-                <p class="field-error">{{ error }}</p>
-            {% endfor %}
-        </div>
+        <p class="auth__switch-mobile">
+            Sudah punya akun? <a href="{% url 'accounts:login' %}">Masuk</a>
+        </p>
+    </div>
 
-        <!-- USERNAME -->
-        <div class="form-group">
-            <label for="{{ form.username.id_for_label }}">Username</label>
-            {{ form.username }} 
-
-            {% for error in form.username.errors %}
-                <p class="field-error">{{ error }}</p>
-            {% endfor %}
-        </div>
-
-        <!-- PASSWORD -->
-        <div class="form-group">
-            <label for="{{ form.password1.id_for_label }}">Password</label>
-            {{ form.password1 }} 
-            
-            {% if form.password1.help_text %}
-                <p class="field-hint">{{ form.password1.help_text|safe }}</p>
-            {% endif %} 
-            
-            {% for error in form.password1.errors %}
-                <p class="field-error">{{ error }}</p>
-            {% endfor %}
-        </div>
-
-        <!-- KONFIRMASI PASSWORD -->
-        <div class="form-group">
-            <label for="{{ form.password2.id_for_label }}">Konfirmasi Password</label>
-            {{ form.password2 }} 
-            
-            {% for error in form.password2.errors %}
-                <p class="field-error">{{ error }}</p>
-            {% endfor %}
-        </div>
-
-        <button type="submit" class="btn btn--primary">Buat Akun</button>
-    </form>
-
-    <p class="auth-card__switch">
-        Sudah punya akun? <a href="{% url 'accounts:login' %}">Login di sini</a>
-    </p>
 </section>
 {% endblock %}

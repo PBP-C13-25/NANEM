@@ -1,0 +1,48 @@
+{% comment %}
+  Toast untuk django.contrib.messages (muncul di kanan bawah).
+  Sudah di-include di base.html, jadi cukup panggil di views:
+      messages.success(request, "Rekomendasi disimpan ke riwayat.")
+      messages.error(request, "Data cuaca belum bisa diambil.")
+      messages.warning(...) / messages.info(...)
+  Dari JavaScript (mis. setelah AJAX):  window.showToast("success", "Riwayat dihapus.")
+  Toast hilang sendiri (5 detik, error 8 detik); berhenti sementara saat kursor di atasnya.
+{% endcomment %}
+
+<ul class="toaster" aria-live="polite">
+    {% for message in messages %}
+    {% with level=message.level_tag|default:"info" %}
+    <li class="toast toast--{{ level }}"
+        role="{% if level == 'error' %}alert{% else %}status{% endif %}"
+        data-toast data-toast-timeout="{% if level == 'error' %}8000{% else %}5000{% endif %}">
+
+        <span class="toast__icon" aria-hidden="true">
+            {% if level == 'success' %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            {% elif level == 'error' %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            {% elif level == 'warning' %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6M12 17h.01"/></svg>
+            {% else %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11v6M12 7h.01"/></svg>
+            {% endif %}
+        </span>
+
+        <div class="toast__body">
+            <p class="toast__title">
+                {% if level == 'success' %}Berhasil!
+                {% elif level == 'error' %}Gagal!
+                {% elif level == 'warning' %}Perhatian!
+                {% else %}Info{% endif %}
+            </p>
+            <p class="toast__text">{{ message }}</p>
+        </div>
+
+        <button type="button" class="toast__close" data-toast-close aria-label="Tutup notifikasi">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+
+        <span class="toast__progress" aria-hidden="true"></span>
+    </li>
+    {% endwith %}
+    {% endfor %}
+</ul>

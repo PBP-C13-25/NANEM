@@ -32,10 +32,11 @@ def supports_medium(plant, medium: str) -> bool:
     return False
 
 def fits_land_area(plant, land_area: float) -> bool:
+    if plant.space_needed not in SPACE_ORDER:
+        return False
     capacity = land_area_to_capacity(land_area)
     # bandingin dari index kalo lebih kecil dari yg dibutuhkan masih aman
     return SPACE_ORDER.index(plant.space_needed) <= SPACE_ORDER.index(capacity)
-
 
 def _range_score(value: float, low, high) -> float:
     if low is not None and high is not None:
