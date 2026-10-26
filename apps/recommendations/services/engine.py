@@ -10,8 +10,8 @@ from ..konstan import (
     land_area_to_capacity,
 )
 
-# Top five hasil rekomendasi
-TOP_N = 5
+# Top 10 hasil rekomendasi (5 tampil dulu, sisanya lewat tombol "Lihat lainnya")
+TOP_N = 10
 
 # Kriteria untuk rule basedmnya
 CLIMATE_CRITERIA = [
@@ -58,6 +58,8 @@ def _range_score(value: float, low, high) -> float:
 def score_plant(plant, environment: dict):
     weighted_total = 0.0
     weight_total = 0.0
+    criteria_count = 0   # kriteria yg dimiliki tanaman ini
+    matched_count = 0    # count kriteria yg msh dalam rentang syarat
     reasons = []
 
     for key, min_field, max_field, label, unit in CLIMATE_CRITERIA:
@@ -66,8 +68,11 @@ def score_plant(plant, environment: dict):
         if low is None and high is None:
             continue
 
+        criteria_count += 1
         value = environment[key]
         criterion_score = _range_score(value, low, high)
+        if criterion_score >= 100:
+            matched_count += 1
         weight = CRITERIA_WEIGHTS.get(key, 1)
         weighted_total += weight * criterion_score
         weight_total += weight
@@ -78,23 +83,29 @@ def score_plant(plant, environment: dict):
             target = f"target minimal {_fmt(low)} {unit}"
         else:
             target = f"target maksimal {_fmt(high)} {unit}"
-        reasons.append(
-            f"{label}: {round(criterion_score)}% cocok ({_fmt(value)} {unit}, "
-            f"{target}, bobot {weight:g})"
-        )
+        reasons.append({
+            "text": f"{label}: {round(criterion_score)}% cocok ({_fmt(value)} {unit}, "
+                    f"{target})",
+            "matched": criterion_score >= 100,
+        })
 
     if weight_total == 0:
         return None
 
     overall = round(weighted_total / weight_total)
-    return {"score": overall, "reasons": reasons}
+    return {
+        "score": overall,
+        "criteria_count": criteria_count,
+        "matched_count": matched_count,
+        "reasons": reasons,
+    }
 
 
 def recommend(environment: dict, medium: str, land_area: float) -> list:
     """
     ini bakal return hasil rekomendasi tanaman
     """
-    
+
     candidates = []
 
     for plant in Plant.objects.all():
@@ -113,9 +124,12 @@ def recommend(environment: dict, medium: str, land_area: float) -> list:
                 "plant_name": plant.name,
                 "scientific_name": plant.scientific_name,
                 "match_percentage": scored["score"],
+                "criteria_count": scored["criteria_count"],
+                "matched_count": scored["matched_count"],
+                "total_criteria": len(CLIMATE_CRITERIA),
                 "reasons": scored["reasons"],
             }
         )
 
-    candidates.sort(key=lambda c: (-c["match_percentage"], c["plant_name"]))
+    candidates.sort(key=lambda c: (-c["match_percentage"], -c["matched_count"], c["plant_name"]))
     return candidates[:TOP_N]
