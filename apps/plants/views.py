@@ -1,8 +1,12 @@
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from apps.core.mixins import ActiveUserRequiredMixin
+from apps.core.mixins import ActiveUserRequiredMixin, AdminRequiredMixin
 
+from .forms import PlantForm
 from .models import Plant
 
 
@@ -10,6 +14,24 @@ SUNLIGHT_LABELS = {
     "full_sun": "Matahari penuh",
     "partial_shade": "Teduh sebagian",
     "shade": "Teduh",
+}
+
+PLANT_COMPLETENESS_FIELDS = {
+    "scientific_name": "nama ilmiah",
+    "description": "deskripsi",
+    "image_url": "gambar",
+    "temp_min": "suhu minimum",
+    "temp_max": "suhu maksimum",
+    "humidity_min": "kelembapan minimum",
+    "humidity_max": "kelembapan maksimum",
+    "rainfall_min": "curah hujan minimum",
+    "rainfall_max": "curah hujan maksimum",
+    "sunlight": "cahaya",
+    "watering": "kebutuhan air",
+    "care_level": "tingkat perawatan",
+    "drought_tolerant": "toleransi kekeringan",
+    "indoor": "dukungan indoor",
+    "space_needed": "kebutuhan ruang",
 }
 
 
@@ -24,6 +46,29 @@ def prepare_plant_display(plant):
         SUNLIGHT_LABELS.get(value, value.replace("_", " ").title())
         for value in (plant.sunlight or [])
     ) or "Belum ditentukan"
+    return plant
+
+
+def get_missing_plant_fields(plant):
+    missing = []
+    for field_name, label in PLANT_COMPLETENESS_FIELDS.items():
+        value = getattr(plant, field_name)
+        if value is None or value == "" or value == []:
+            missing.append(label)
+    if not (plant.supports_soil or plant.supports_hydroponic):
+        missing.append("media tanam")
+    return missing
+
+
+def prepare_plant_manage_display(plant):
+    prepare_plant_display(plant)
+    plant.missing_fields = get_missing_plant_fields(plant)
+    plant.data_status = "incomplete" if plant.missing_fields else "complete"
+    plant.data_status_label = (
+        f"Kurang {len(plant.missing_fields)} field"
+        if plant.missing_fields
+        else "Lengkap"
+    )
     return plant
 
 
@@ -99,3 +144,92 @@ class PlantCatalogView(ActiveUserRequiredMixin, ListView):
             query_string=query.urlencode(),
         )
         return context
+
+
+class PlantManageListView(AdminRequiredMixin, ListView):
+    model = Plant
+    template_name = "plants/manage_list.html"
+    context_object_name = "plants"
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = Plant.objects.all()
+        self.filters = {
+            "q": self.request.GET.get("q", "").strip(),
+            "category": self.request.GET.get("category", "").strip(),
+            "status": self.request.GET.get("status", "").strip(),
+        }
+
+        if self.filters["q"]:
+            queryset = queryset.filter(
+                Q(name__icontains=self.filters["q"])
+                | Q(scientific_name__icontains=self.filters["q"])
+            )
+
+        categories = dict(Plant.CATEGORY_CHOICES)
+        if self.filters["category"] in categories:
+            queryset = queryset.filter(category=self.filters["category"])
+        else:
+            self.filters["category"] = ""
+
+        if self.filters["status"] in {"complete", "incomplete"}:
+            matching_ids = [
+                plant.pk
+                for plant in queryset
+                if bool(get_missing_plant_fields(plant))
+                == (self.filters["status"] == "incomplete")
+            ]
+            queryset = queryset.filter(pk__in=matching_ids)
+        else:
+            self.filters["status"] = ""
+
+        return queryset.order_by("name", "pk")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for plant in context["plants"]:
+            prepare_plant_manage_display(plant)
+
+        all_plants = list(Plant.objects.all())
+        complete_count = sum(
+            not get_missing_plant_fields(plant) for plant in all_plants
+        )
+        query = self.request.GET.copy()
+        query.pop("page", None)
+        context.update(
+            filters=self.filters,
+            category_choices=Plant.CATEGORY_CHOICES,
+            total_count=len(all_plants),
+            complete_count=complete_count,
+            incomplete_count=len(all_plants) - complete_count,
+            query_string=query.urlencode(),
+        )
+        return context
+
+
+class PlantCreateView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Plant
+    form_class = PlantForm
+    template_name = "plants/plant_form.html"
+    success_url = reverse_lazy("plants:manage")
+    success_message = "Tanaman %(name)s berhasil ditambahkan."
+
+
+class PlantUpdateView(AdminRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Plant
+    form_class = PlantForm
+    template_name = "plants/plant_form.html"
+    success_url = reverse_lazy("plants:manage")
+    success_message = "Data %(name)s berhasil diperbarui."
+
+
+class PlantDeleteView(AdminRequiredMixin, DeleteView):
+    model = Plant
+    template_name = "plants/plant_confirm_delete.html"
+    success_url = reverse_lazy("plants:manage")
+
+    def form_valid(self, form):
+        plant_name = self.object.name
+        response = super().form_valid(form)
+        messages.success(self.request, f"Tanaman {plant_name} berhasil dihapus.")
+        return response

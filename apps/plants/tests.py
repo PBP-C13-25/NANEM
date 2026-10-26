@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
+from .forms import PlantForm
 from .models import Plant
 
 
@@ -75,3 +76,108 @@ class PlantCatalogViewTests(TestCase):
         url = f"{reverse('plants:index')}{self.kangkung.pk}/"
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
+
+
+class PlantAdminCrudTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        user_model = get_user_model()
+        cls.staff = user_model.objects.create_user(
+            username="plant-admin",
+            password="safe-test-password",
+            is_staff=True,
+        )
+        cls.regular_user = user_model.objects.create_user(
+            username="regular-user",
+            password="safe-test-password",
+        )
+        cls.plant = Plant.objects.create(
+            name="Kangkung",
+            scientific_name="Ipomoea aquatica",
+            category="sayur",
+            supports_soil=True,
+            supports_hydroponic=True,
+            sunlight=["full_sun"],
+            space_needed="small",
+        )
+
+    def plant_payload(self, **overrides):
+        payload = {
+            "name": "Pakcoy",
+            "scientific_name": "Brassica rapa subsp. chinensis",
+            "description": "Sayuran daun.",
+            "image_url": "https://example.com/pakcoy.jpg",
+            "category": "sayur",
+            "supports_soil": "on",
+            "supports_hydroponic": "on",
+            "sunlight": ["full_sun", "partial_shade"],
+            "watering": "Average",
+            "care_level": "Low",
+            "drought_tolerant": "false",
+            "indoor": "true",
+            "space_needed": "small",
+            "temp_min": "18",
+            "temp_max": "30",
+            "humidity_min": "50",
+            "humidity_max": "80",
+            "rainfall_min": "2",
+            "rainfall_max": "4",
+        }
+        payload.update(overrides)
+        return payload
+
+    def test_manage_routes_reject_regular_users(self):
+        self.client.force_login(self.regular_user)
+        urls = [
+            reverse("plants:manage"),
+            reverse("plants:create"),
+            reverse("plants:update", args=[self.plant.pk]),
+            reverse("plants:delete", args=[self.plant.pk]),
+        ]
+        for url in urls:
+            with self.subTest(url=url):
+                self.assertEqual(self.client.get(url).status_code, 403)
+
+    def test_staff_can_create_plant(self):
+        self.client.force_login(self.staff)
+        response = self.client.post(
+            reverse("plants:create"), self.plant_payload()
+        )
+        self.assertRedirects(response, reverse("plants:manage"), fetch_redirect_response=False)
+        plant = Plant.objects.get(name="Pakcoy")
+        self.assertEqual(plant.sunlight, ["full_sun", "partial_shade"])
+        self.assertIs(plant.indoor, True)
+        self.assertIs(plant.drought_tolerant, False)
+
+    def test_staff_can_update_plant(self):
+        self.client.force_login(self.staff)
+        response = self.client.post(
+            reverse("plants:update", args=[self.plant.pk]),
+            self.plant_payload(name="Kangkung Air"),
+        )
+        self.assertRedirects(response, reverse("plants:manage"), fetch_redirect_response=False)
+        self.plant.refresh_from_db()
+        self.assertEqual(self.plant.name, "Kangkung Air")
+
+    def test_staff_can_delete_plant(self):
+        self.client.force_login(self.staff)
+        response = self.client.post(
+            reverse("plants:delete", args=[self.plant.pk])
+        )
+        self.assertRedirects(response, reverse("plants:manage"), fetch_redirect_response=False)
+        self.assertFalse(Plant.objects.filter(pk=self.plant.pk).exists())
+
+    def test_form_rejects_reversed_range(self):
+        form = PlantForm(data=self.plant_payload(temp_min="30", temp_max="20"))
+        self.assertFalse(form.is_valid())
+        self.assertIn("temp_max", form.errors)
+
+    def test_form_requires_at_least_one_growing_medium(self):
+        form = PlantForm(
+            data=self.plant_payload(
+                supports_soil="",
+                supports_hydroponic="",
+            )
+        )
+        self.assertFalse(form.is_valid())
+        self.assertIn("Pilih minimal satu media tanam", form.non_field_errors()[0])
