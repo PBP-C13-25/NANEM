@@ -83,9 +83,15 @@
 
 .catalog-categories__options {
   display: flex;
+  width: 100%;
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.catalog-chip {
+  display: inline-flex;
+  flex: 0 0 auto;
 }
 
 .catalog-chip input {
