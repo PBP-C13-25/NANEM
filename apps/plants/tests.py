@@ -215,6 +215,29 @@ class PlantAdminCrudTests(TestCase):
         self.assertEqual(delete_response.status_code, 200)
         self.assertContains(delete_response, "Yakin ingin menghapus")
 
+    def test_form_and_delete_pages_render_final_ui_content(self):
+        self.client.force_login(self.staff)
+        form_response = self.client.get(
+            reverse("plants:update", args=[self.plant.pk])
+        )
+        for heading in (
+            "Identitas tanaman",
+            "Media dan lokasi",
+            "Perawatan",
+            "Kondisi lingkungan",
+            "Deskripsi dan gambar",
+        ):
+            self.assertContains(form_response, heading)
+        self.assertContains(form_response, "plant_manage.css")
+        self.assertNotContains(form_response, 'href="#"')
+
+        delete_response = self.client.get(
+            reverse("plants:delete", args=[self.plant.pk])
+        )
+        self.assertContains(delete_response, "hilang dari katalog")
+        self.assertContains(delete_response, "hasil rekomendasi")
+        self.assertNotContains(delete_response, 'href="#"')
+
     def test_manage_list_can_filter_by_search_category_and_status(self):
         self.client.force_login(self.staff)
         response = self.client.get(
