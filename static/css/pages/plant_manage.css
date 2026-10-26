@@ -60,6 +60,16 @@
   background: #fff;
 }
 
+.plant-admin__filters select,
+.plant-admin-form .form-group select {
+  appearance: none;
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23566246' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-position: right 14px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
 .plant-admin__filter-actions {
   display: flex;
   grid-column: 1 / -1;
@@ -151,32 +161,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.plant-admin__badge,
-.plant-admin__status {
-  display: inline-flex;
-  align-items: center;
-  padding: 5px 9px;
-  border-radius: 999px;
-  font-size: 0.76rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.plant-admin__badge {
-  background: var(--plant-admin-soft);
-  color: var(--color-primary);
-}
-
-.plant-admin__status--complete {
-  background: #e4f2e1;
-  color: #315c2c;
-}
-
-.plant-admin__status--incomplete {
-  background: #fff2d9;
-  color: #785919;
 }
 
 .plant-admin__actions {
@@ -339,7 +323,7 @@
 .plant-admin-form .form-group textarea {
   border: 1px solid var(--plant-admin-border);
   border-radius: 8px;
-  background: #fafbf9;
+  background-color: #fafbf9;
 }
 
 .plant-admin-form .form-group input[type="checkbox"] {

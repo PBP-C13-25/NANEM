@@ -29,16 +29,18 @@
 
         <fieldset class="catalog-categories">
             <legend>Kategori</legend>
-            <label class="catalog-chip">
-                <input type="radio" name="category" value="" {% if not filters.category %}checked{% endif %}>
-                <span>Semua</span>
-            </label>
-            {% for value, label in category_choices %}
-            <label class="catalog-chip">
-                <input type="radio" name="category" value="{{ value }}" {% if filters.category == value %}checked{% endif %}>
-                <span>{{ label }}</span>
-            </label>
-            {% endfor %}
+            <div class="catalog-categories__options">
+                <label class="catalog-chip">
+                    <input type="radio" name="category" value="" {% if not filters.category %}checked{% endif %}>
+                    <span>Semua</span>
+                </label>
+                {% for value, label in category_choices %}
+                <label class="catalog-chip">
+                    <input type="radio" name="category" value="{{ value }}" {% if filters.category == value %}checked{% endif %}>
+                    <span>{{ label }}</span>
+                </label>
+                {% endfor %}
+            </div>
         </fieldset>
 
         <div class="catalog-selects">

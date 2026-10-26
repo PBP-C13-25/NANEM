@@ -112,14 +112,14 @@
                                 </div>
                             </div>
                         </td>
-                        <td><span class="plant-admin__badge">{{ plant.get_category_display }}</span></td>
+                        <td>{{ plant.get_category_display }}</td>
                         <td>
                             <strong>{{ plant.media_label }}</strong>
                             <small>{{ plant.sunlight_label }}</small>
                         </td>
                         <td>{{ plant.care_level|default:"Belum ditentukan" }}</td>
                         <td>
-                            <span class="plant-admin__status plant-admin__status--{{ plant.data_status }}" title="{% if plant.missing_fields %}Belum ada: {{ plant.missing_fields|join:', ' }}{% endif %}">
+                            <span title="{% if plant.missing_fields %}Belum ada: {{ plant.missing_fields|join:', ' }}{% endif %}">
                                 {{ plant.data_status_label }}
                             </span>
                         </td>

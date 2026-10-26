@@ -272,6 +272,8 @@ class PlantAdminCrudTests(TestCase):
         self.assertContains(response, reverse("plants:create"))
         self.assertContains(response, reverse("plants:update", args=[self.plant.pk]))
         self.assertContains(response, reverse("plants:delete", args=[self.plant.pk]))
+        self.assertNotContains(response, "plant-admin__badge")
+        self.assertNotContains(response, "plant-admin__status--")
         self.assertNotContains(response, 'href="#"')
 
     def test_manage_list_renders_empty_state(self):
