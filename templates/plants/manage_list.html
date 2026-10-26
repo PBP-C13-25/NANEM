@@ -35,11 +35,30 @@
         </div>
 
         <div class="form-group">
+            <label for="manage-medium">Media tanam</label>
+            <select id="manage-medium" name="medium">
+                <option value="">Semua media</option>
+                <option value="soil"{% if filters.medium == 'soil' %} selected{% endif %}>Tanah</option>
+                <option value="hydroponic"{% if filters.medium == 'hydroponic' %} selected{% endif %}>Hidroponik</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label for="manage-status">Kelengkapan data</label>
             <select id="manage-status" name="status">
                 <option value="">Semua status</option>
                 <option value="complete"{% if filters.status == 'complete' %} selected{% endif %}>Lengkap</option>
                 <option value="incomplete"{% if filters.status == 'incomplete' %} selected{% endif %}>Belum lengkap</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="manage-sort">Urutkan</label>
+            <select id="manage-sort" name="sort">
+                <option value="name"{% if filters.sort == 'name' %} selected{% endif %}>Nama A–Z</option>
+                <option value="name_desc"{% if filters.sort == 'name_desc' %} selected{% endif %}>Nama Z–A</option>
+                <option value="category"{% if filters.sort == 'category' %} selected{% endif %}>Kategori</option>
+                <option value="updated"{% if filters.sort == 'updated' %} selected{% endif %}>Terakhir diperbarui</option>
             </select>
         </div>
 

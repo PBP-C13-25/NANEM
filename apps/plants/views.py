@@ -157,7 +157,9 @@ class PlantManageListView(AdminRequiredMixin, ListView):
         self.filters = {
             "q": self.request.GET.get("q", "").strip(),
             "category": self.request.GET.get("category", "").strip(),
+            "medium": self.request.GET.get("medium", "").strip(),
             "status": self.request.GET.get("status", "").strip(),
+            "sort": self.request.GET.get("sort", "name").strip(),
         }
 
         if self.filters["q"]:
@@ -172,6 +174,13 @@ class PlantManageListView(AdminRequiredMixin, ListView):
         else:
             self.filters["category"] = ""
 
+        if self.filters["medium"] == "soil":
+            queryset = queryset.filter(supports_soil=True)
+        elif self.filters["medium"] == "hydroponic":
+            queryset = queryset.filter(supports_hydroponic=True)
+        else:
+            self.filters["medium"] = ""
+
         if self.filters["status"] in {"complete", "incomplete"}:
             matching_ids = [
                 plant.pk
@@ -183,7 +192,15 @@ class PlantManageListView(AdminRequiredMixin, ListView):
         else:
             self.filters["status"] = ""
 
-        return queryset.order_by("name", "pk")
+        sort_fields = {
+            "name": ("name", "pk"),
+            "name_desc": ("-name", "pk"),
+            "category": ("category", "name", "pk"),
+            "updated": ("-updated_at", "name", "pk"),
+        }
+        if self.filters["sort"] not in sort_fields:
+            self.filters["sort"] = "name"
+        return queryset.order_by(*sort_fields[self.filters["sort"]])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

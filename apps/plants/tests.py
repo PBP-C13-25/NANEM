@@ -224,6 +224,85 @@ class PlantAdminCrudTests(TestCase):
         self.assertContains(response, "Kangkung")
         self.assertContains(response, "Kurang")
 
+    def test_manage_list_can_filter_by_growing_medium(self):
+        Plant.objects.create(
+            name="Mangga",
+            category="buah",
+            supports_soil=True,
+            supports_hydroponic=False,
+            space_needed="large",
+        )
+        self.client.force_login(self.staff)
+        response = self.client.get(
+            reverse("plants:manage"), {"medium": "hydroponic"}
+        )
+        self.assertContains(response, "Kangkung")
+        self.assertNotContains(response, "Mangga")
+
+    def test_manage_list_sorting_is_stable(self):
+        Plant.objects.create(
+            name="Bayam",
+            category="sayur",
+            supports_soil=True,
+            space_needed="small",
+        )
+        Plant.objects.create(
+            name="Tomat",
+            category="sayur",
+            supports_soil=True,
+            space_needed="small",
+        )
+        self.client.force_login(self.staff)
+        response = self.client.get(
+            reverse("plants:manage"), {"sort": "name_desc"}
+        )
+        names = [plant.name for plant in response.context["plants"]]
+        self.assertEqual(names, ["Tomat", "Kangkung", "Bayam"])
+
+    def test_invalid_management_filters_fall_back_to_defaults(self):
+        self.client.force_login(self.staff)
+        response = self.client.get(
+            reverse("plants:manage"),
+            {
+                "category": "invalid",
+                "medium": "invalid",
+                "status": "invalid",
+                "sort": "invalid",
+            },
+        )
+        self.assertEqual(response.context["filters"]["category"], "")
+        self.assertEqual(response.context["filters"]["medium"], "")
+        self.assertEqual(response.context["filters"]["status"], "")
+        self.assertEqual(response.context["filters"]["sort"], "name")
+
+    def test_pagination_preserves_management_query(self):
+        for index in range(11):
+            Plant.objects.create(
+                name=f"Plant {index:02d}",
+                category="sayur",
+                supports_soil=True,
+                space_needed="small",
+            )
+        self.client.force_login(self.staff)
+        response = self.client.get(
+            reverse("plants:manage"),
+            {
+                "q": "Plant",
+                "category": "sayur",
+                "medium": "soil",
+                "status": "incomplete",
+                "sort": "name_desc",
+            },
+        )
+        self.assertTrue(response.context["is_paginated"])
+        content = response.content.decode()
+        self.assertIn("q=Plant", content)
+        self.assertIn("category=sayur", content)
+        self.assertIn("medium=soil", content)
+        self.assertIn("status=incomplete", content)
+        self.assertIn("sort=name_desc", content)
+        self.assertIn("page=2", content)
+
     def test_manage_link_only_appears_for_staff(self):
         self.client.force_login(self.staff)
         staff_response = self.client.get(reverse("plants:index"))
