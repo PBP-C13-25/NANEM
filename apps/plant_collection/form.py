@@ -1,19 +1,11 @@
 from django import forms
-from .models import PlantCollection, Comment
+from .models import PlantCollection
 
-
-class PlantCollectionCreateForm(forms.ModelForm):
+class PlantCollectionForm(forms.ModelForm):
     class Meta:
         model = PlantCollection
-        fields = ['title', 'description', 'photo']
-
-class PlantCollectionUpdateForm(forms.ModelForm):
-    class Meta:
-        model = PlantCollection
-        fields = ['title', 'description'] 
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ['text']
-        widgets = {'text': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Tulis komentar...'})}
+        fields = ['title', 'photo', 'description']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Judul Tanaman'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Ceritakan tentang tanaman ini...'}),
+        }

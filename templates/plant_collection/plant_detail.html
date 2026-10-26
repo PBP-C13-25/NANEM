@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/collection.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="collection-detail">
+    <a href="{% url 'collection:index' %}" style="color: var(--color-muted); text-decoration: none;">&larr; Kembali ke Feed</a>
+    
+    <div class="card" style="margin-top: 20px;">
+        <div class="card-header">
+            <strong>@{{ post.author.username }}</strong>
+            {% if request.user == post.author %}
+                <div>
+                    <a href="{% url 'collection:edit' post.pk %}" class="btn btn-outline">Edit</a>
+                    <!-- Tombol Pemicu Modal Hapus -->
+                    <button data-modal-open="modal-delete" class="btn btn-danger">Hapus</button>
+                </div>
+            {% endif %}
+        </div>
+        
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img" style="height: 500px;">
+        
+        <div class="card-body">
+            <div style="margin-bottom: 16px;">
+                {% csrf_token %} <!-- Digunakan oleh JS untuk fetch -->
+                <button class="btn-like" data-id="{{ post.pk }}" id="like-btn">
+                    <span id="like-icon">{% if request.user in post.likes.all %}❤️{% else %}🤍{% endif %}</span> 
+                    <span id="like-count">{{ post.total_likes }}</span> Likes
+                </button>
+            </div>
+            <h1 class="card-title" style="color: var(--color-primary);">{{ post.title }}</h1>
+            <p class="card-desc">{{ post.description|linebreaksbr }}</p>
+        </div>
+    </div>
+</div>
+
+{% if request.user == post.author %}
+<!-- Modal Dialog untuk Hapus (Terkait dengan modal.js) -->
+<dialog class="modal" id="modal-delete" style="border: none; border-radius: var(--radius-md); padding: 24px; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <h3 style="margin-top: 0; color: var(--color-danger);">Hapus Postingan</h3>
+    <p>Apakah Anda yakin ingin menghapus <strong>{{ post.title }}</strong>? Tindakan ini tidak dapat dibatalkan.</p>
+    
+    <form method="POST" action="{% url 'collection:delete' post.pk %}" style="display: flex; gap: 12px; margin-top: 24px; justify-content: flex-end;">
+        {% csrf_token %}
+        <button type="button" class="btn btn-outline" data-modal-close>Batal</button>
+        <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+    </form>
+</dialog>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/pages/collection.js' %}"></script>
+{% endblock %}

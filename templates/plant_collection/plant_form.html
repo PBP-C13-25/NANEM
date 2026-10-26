@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% if object %}Edit{% else %}Buat{% endif %} Postingan - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/collection.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{% if object %}Edit Postingan{% else %}Buat Postingan Baru{% endif %}</h2>
+    <form method="POST" enctype="multipart/form-data" class="collection-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a href="{% url 'collection:index' %}" class="btn-cancel">Batal</a>
+    </form>
+</div>
+{% endblock %}

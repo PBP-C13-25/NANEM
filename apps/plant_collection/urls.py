@@ -6,11 +6,11 @@ from . import views
 app_name = "collection"
 
 urlpatterns = [
-    path("", views.collection_page, name="index"),
-    path("create/", views.plant_create, name="plant_create"),
-    path("plants/<int:pk>/", views.plant_detail, name="plant_detail"),
-    path("plants/<int:pk>/update/", views.plant_update, name="plant_update"),
-    path("plants/<int:pk>/delete/", views.plant_delete, name="plant_delete"),
-    path("plants/<int:pk>/comment/", views.add_comment, name="add_comment"),
+    path('', views.CollectionListView.as_view(), name='index'),
+    path('create/', views.CollectionCreateView.as_view(), name='create'),
+    path('<int:pk>/', views.CollectionDetailView.as_view(), name='detail'),
+    path('<int:pk>/edit/', views.CollectionUpdateView.as_view(), name='edit'),
+    path('<int:pk>/delete/', views.CollectionDeleteView.as_view(), name='delete'),
+    path('<int:pk>/like/', views.ToggleLikeView.as_view(), name='like'),
 ]
 

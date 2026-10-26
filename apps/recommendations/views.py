@@ -4,8 +4,9 @@ from django.urls import reverse, reverse_lazy
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
 from django.views.generic import DeleteView, DetailView, FormView, ListView, TemplateView, UpdateView
-
+from django.http import JsonResponse
 from apps.core.mixins import OwnedQuerysetMixin, RegularUserRequiredMixin
+from datetime import timedelta
 
 from .konstan import MEDIUM_CHOICES, summarize_environment
 from .forms import HistoryLandNameForm, RecommendationForm
@@ -23,6 +24,10 @@ def _can_save(user):
     
     return user.is_authenticated and user.is_active and not user.is_staff
 
+def _is_ajax(request):
+    return request.headers.get("x-requested-with") == "XMLHttpRequest"
+
+
 #* INPUT REKOMENDASI
 class RecommendationFormView(FormView):
     """
@@ -32,6 +37,15 @@ class RecommendationFormView(FormView):
     form_class = RecommendationForm
     success_url = reverse_lazy("recommendations:result")
 
+    def get_initial(self):
+        # dari tombol "Ubah data lahan" (?ubah=1): isi form dengan data terakhir
+        initial = super().get_initial()
+        result = self.request.session.get(SESSION_KEY)
+        if self.request.GET.get("ubah") and result:
+            for field in ("land_name", "latitude", "longitude", "land_area", "planting_medium"):
+                initial[field] = result.get(field)
+        return initial
+    
     def form_valid(self, form):
         data = form.cleaned_data
         latitude, longitude = data["latitude"], data["longitude"]
@@ -117,13 +131,39 @@ class HistoryListView(RegularUserRequiredMixin, OwnedQuerysetMixin, ListView):
     model = RecommendationHistory
     template_name = "recommendations/history_list.html"
     context_object_name = "histories"
-    paginate_by = 10
+ 
+    def get_search_query(self):
+        return self.request.GET.get("q", "").strip()
+ 
+    def get_queryset(self):
+        # super() sudah memfilter riwayat milik user yang login (OwnedQuerysetMixin)
+        queryset = super().get_queryset().order_by("-created_at")
+        q = self.get_search_query()
+        if q:
+            queryset = queryset.filter(land_name__icontains=q)
+        return queryset
+ 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["q"] = self.get_search_query()
+        return context
 
 
 class HistoryDetailView(RegularUserRequiredMixin, OwnedQuerysetMixin, DetailView):
     model = RecommendationHistory
     template_name = "recommendations/history_detail.html"
     context_object_name = "history"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        snapshot = self.object.environment_snapshot or {}
+        raw = snapshot.get("raw", {})
+        summary = snapshot.get("summary", {})
+        
+        days = raw.get("period_days") or summary.get("period_days") or 90
+        context["period_days"] = round(days)
+        context["period_start"] = self.object.created_at - timedelta(days=round(days))
+        return context
 
 
 #* UNTUK UPDATE HISTORY
@@ -143,19 +183,35 @@ class HistoryUpdateView(RegularUserRequiredMixin, OwnedQuerysetMixin, UpdateView
         ):
             return next_url
         return reverse("recommendations:history_detail", kwargs={"pk": self.object.pk})
-
+    
     def form_valid(self, form):
+        self.object = form.save()
+        if _is_ajax(self.request):
+            return JsonResponse({
+                "ok": True,
+                "land_name": self.object.land_name,
+                "message": "Nama lahan diperbarui.",
+            })
         messages.success(self.request, "Nama lahan diperbarui.")
-        return super().form_valid(form)
+        return redirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        if _is_ajax(self.request):
+            first_error = next(iter(form.errors.values()))[0]
+            return JsonResponse({"ok": False, "message": first_error}, status=400)
+        return super().form_invalid(form)
 
 
 #* DELETE HISTORY
 class HistoryDeleteView(RegularUserRequiredMixin, OwnedQuerysetMixin, DeleteView):
     model = RecommendationHistory
-    template_name = "recommendations/history_confirm_delete.html"
+    template_name = "recommendations/history_confirm_modal.html"
     context_object_name = "history"
     success_url = reverse_lazy("recommendations:history_list")
 
     def form_valid(self, form):
+        if _is_ajax(self.request):
+            self.object.delete()
+            return JsonResponse({"ok": True, "message": "Riwayat dihapus."})
         messages.success(self.request, "Riwayat dihapus.")
         return super().form_valid(form)

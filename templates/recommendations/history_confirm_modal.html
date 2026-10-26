@@ -1,15 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Hapus Riwayat - Tanem{% endblock %}
+{% block title %}Hapus Riwayat - Nanem{% endblock %}
 
 {% block content %}
-<section class="auth-card">
-    <h1>Hapus riwayat?</h1>
-    <p>Riwayat <strong>{{ history.land_name }}</strong> akan dihapus permanen.</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn--primary">Ya, hapus</button>
-    </form>
-    <p class="auth-card__switch"><a href="{% url 'recommendations:history_detail' history.pk %}">Batal</a></p>
+{# Halaman cadangan: biasanya dibuka lewat modal dari daftar riwayat. Tampilannya sengaja sama dengan modal. #}
+<section class="card card--narrow dialog">
+    <div class="dialog__icon dialog__icon--danger" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6M14 11v6"/></svg>
+    </div>
+
+    <h1 class="dialog__title">Hapus riwayat?</h1>
+    <p class="dialog__text">Riwayat <strong>{{ history.land_name }}</strong> akan dihapus permanen.</p>
+
+    <div class="dialog__actions">
+        <a href="{% url 'recommendations:history_detail' history.pk %}" class="btn btn--outline">Batal</a>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn--danger">Ya, hapus</button>
+        </form>
+    </div>
 </section>
 {% endblock %}
