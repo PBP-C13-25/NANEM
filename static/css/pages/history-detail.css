@@ -431,6 +431,13 @@
   margin-top: 3px;
   color: var(--plant-color);
 }
+/* reason yg tidak sesuai */
+.plant__reason--no {
+  color: var(--color-muted);
+}
+.plant__reason--no .icon {
+  color: var(--color-danger);
+}
 
 /* empty state di dalam kartu: tanpa margin besar */
 .detail__card .empty-state {
@@ -450,6 +457,39 @@
   font-size: 0.7rem;
   font-weight: 700;
   color: #fff;
+}
+
+/* ---------- Badge kriteria ---------- */
+.plant__criteria {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #f3f5ee;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+.plant__criteria--all {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+/* ---------- Tombol "Lihat lainnya" ---------- */
+.plants__more {
+  margin-top: 12px;
+}
+.plants__more .icon {
+  transition: transform 0.2s;
+}
+.plants__more.is-expanded .icon {
+  transform: rotate(180deg);
+}
+.plants__more[hidden],
+.plant[hidden] {
+  display: none;
 }
 
 /* RESPONSIVE */

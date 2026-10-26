@@ -54,6 +54,11 @@
     </div>
 </section>
 
+{# ================= JavaScript ================= #}
+{% block extra_js %}
+<script src="{% static 'js/pages/plants-rec-card.js' %}" defer></script>
+{% endblock %}
+
 {# ================= Modal ================= #}
 {% url 'recommendations:history_update' history.pk as rename_url %}
 {% url 'recommendations:history_delete' history.pk as delete_url %}
