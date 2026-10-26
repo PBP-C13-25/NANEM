@@ -123,6 +123,14 @@ class PlantForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
 
+        for field_name in ("humidity_min", "humidity_max"):
+            value = cleaned_data.get(field_name)
+            if value is not None and not 0 <= value <= 100:
+                self.add_error(
+                    field_name,
+                    "Kelembapan harus berada dalam rentang 0 sampai 100 persen.",
+                )
+
         for minimum, maximum, label in (
             ("temp_min", "temp_max", "Suhu"),
             ("humidity_min", "humidity_max", "Kelembapan"),

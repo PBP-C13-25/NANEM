@@ -138,6 +138,37 @@ class PlantAdminCrudTests(TestCase):
             with self.subTest(url=url):
                 self.assertEqual(self.client.get(url).status_code, 403)
 
+    def test_manage_routes_redirect_guests_to_login(self):
+        urls = [
+            reverse("plants:manage"),
+            reverse("plants:create"),
+            reverse("plants:update", args=[self.plant.pk]),
+            reverse("plants:delete", args=[self.plant.pk]),
+        ]
+        for url in urls:
+            with self.subTest(url=url):
+                response = self.client.get(url)
+                self.assertEqual(response.status_code, 302)
+                self.assertIn(reverse("accounts:login"), response.url)
+
+    def test_regular_user_cannot_post_crud_operations(self):
+        self.client.force_login(self.regular_user)
+        requests = [
+            (reverse("plants:create"), self.plant_payload()),
+            (
+                reverse("plants:update", args=[self.plant.pk]),
+                self.plant_payload(name="Perubahan tidak sah"),
+            ),
+            (reverse("plants:delete", args=[self.plant.pk]), {}),
+        ]
+        for url, payload in requests:
+            with self.subTest(url=url):
+                self.assertEqual(self.client.post(url, payload).status_code, 403)
+
+        self.plant.refresh_from_db()
+        self.assertEqual(self.plant.name, "Kangkung")
+        self.assertTrue(Plant.objects.filter(pk=self.plant.pk).exists())
+
     def test_staff_can_create_plant(self):
         self.client.force_login(self.staff)
         response = self.client.post(
@@ -148,6 +179,17 @@ class PlantAdminCrudTests(TestCase):
         self.assertEqual(plant.sunlight, ["full_sun", "partial_shade"])
         self.assertIs(plant.indoor, True)
         self.assertIs(plant.drought_tolerant, False)
+
+    def test_invalid_create_does_not_change_database(self):
+        self.client.force_login(self.staff)
+        initial_count = Plant.objects.count()
+        response = self.client.post(
+            reverse("plants:create"),
+            self.plant_payload(temp_min="35", temp_max="20"),
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Plant.objects.count(), initial_count)
+        self.assertContains(response, "maksimum tidak boleh lebih kecil")
 
     def test_staff_can_render_manage_list_and_forms(self):
         self.client.force_login(self.staff)
@@ -209,10 +251,53 @@ class PlantAdminCrudTests(TestCase):
         self.assertRedirects(response, reverse("plants:manage"), fetch_redirect_response=False)
         self.assertFalse(Plant.objects.filter(pk=self.plant.pk).exists())
 
+    def test_delete_confirmation_does_not_delete_plant(self):
+        self.client.force_login(self.staff)
+        response = self.client.get(reverse("plants:delete", args=[self.plant.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(Plant.objects.filter(pk=self.plant.pk).exists())
+
+    def test_missing_plant_returns_404_for_staff(self):
+        self.client.force_login(self.staff)
+        missing_pk = self.plant.pk + 999
+        for route_name in ("update", "delete"):
+            with self.subTest(route_name=route_name):
+                response = self.client.get(
+                    reverse(f"plants:{route_name}", args=[missing_pk])
+                )
+                self.assertEqual(response.status_code, 404)
+
+    def test_crud_success_messages_are_rendered(self):
+        self.client.force_login(self.staff)
+        create_response = self.client.post(
+            reverse("plants:create"), self.plant_payload(), follow=True
+        )
+        self.assertContains(create_response, "Pakcoy berhasil ditambahkan")
+        pakcoy = Plant.objects.get(name="Pakcoy")
+
+        update_response = self.client.post(
+            reverse("plants:update", args=[pakcoy.pk]),
+            self.plant_payload(name="Pakcoy Hijau"),
+            follow=True,
+        )
+        self.assertContains(update_response, "Pakcoy Hijau berhasil diperbarui")
+
+        delete_response = self.client.post(
+            reverse("plants:delete", args=[pakcoy.pk]), follow=True
+        )
+        self.assertContains(delete_response, "Pakcoy Hijau berhasil dihapus")
+
     def test_form_rejects_reversed_range(self):
         form = PlantForm(data=self.plant_payload(temp_min="30", temp_max="20"))
         self.assertFalse(form.is_valid())
         self.assertIn("temp_max", form.errors)
+
+    def test_form_rejects_humidity_outside_percentage_range(self):
+        for field_name, value in (("humidity_min", "-1"), ("humidity_max", "101")):
+            with self.subTest(field_name=field_name, value=value):
+                form = PlantForm(data=self.plant_payload(**{field_name: value}))
+                self.assertFalse(form.is_valid())
+                self.assertIn(field_name, form.errors)
 
     def test_form_requires_at_least_one_growing_medium(self):
         form = PlantForm(
