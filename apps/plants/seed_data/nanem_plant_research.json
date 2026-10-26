@@ -643,8 +643,8 @@
     "scientific_name": "Brassica oleracea var. alboglabra",
     "temp_min": 15,
     "temp_max": 22,
-    "humidity_min": null,
-    "humidity_max": null,
+    "humidity_min": 40,
+    "humidity_max": 80,
     "supports_soil": true,
     "supports_hydroponic": true,
     "sunlight": [
@@ -710,9 +710,20 @@
           "supports_hydroponic"
         ],
         "notes": "Halaman menyatakan tanaman famili Brassica, termasuk kale, tumbuh baik secara hidroponik sepanjang tahun. Sumber ini hanya dipakai untuk supports_hydroponic, bukan rentang iklim khusus varietas atau klasifikasi ruang/perawatan."
+      },
+      {
+        "url": "https://www.slideshare.net/slideshow/djaenudin-et-al-2011/80437932",
+        "title": "Petunjuk Teknis Evaluasi Lahan untuk Komoditas Pertanian (Edisi Kedua 2011) — Djaenudin et al.",
+        "publisher": "BBSDLP, Badan Litbang Pertanian, Kementerian Pertanian (salinan di SlideShare)",
+        "accessed_at": "2026-10-26",
+        "supports_fields": [
+          "humidity_min",
+          "humidity_max"
+        ],
+        "notes": "Lampiran 2, tabel Kailan halaman 76: kelas S1 mencantumkan kelembaban 40–80%. Ini kriteria kesesuaian lahan berdasarkan kelembaban udara rerata tahunan, bukan setpoint greenhouse. Tabel hanya menyebut nama komoditas Kailan tanpa nama ilmiah; kecocokan dengan Brassica oleracea var. alboglabra pada dataset belum dipastikan."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–22 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 450–1000 mm/tahun. EcoCrop id 3867 memakai pengelompokan Brassica oleracea var. acephala dan mencantumkan Chinese kale/kailan; rentang iklim tersebut merupakan proksi kelompok kale, bukan hasil pengukuran khusus var. alboglabra. Hidroponik didukung riset yang secara eksplisit memakai varietas alboglabra. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 15–22 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 450–1000 mm/tahun. EcoCrop id 3867 memakai pengelompokan Brassica oleracea var. acephala dan mencantumkan Chinese kale/kailan; rentang iklim tersebut merupakan proksi kelompok kale, bukan hasil pengukuran khusus var. alboglabra. Hidroponik didukung riset yang secara eksplisit memakai varietas alboglabra. RH 40–80% berasal dari kelas S1 evaluasi kesesuaian lahan dan merepresentasikan kelembaban udara rerata tahunan; tabel sumber hanya menyebut Kailan tanpa nama ilmiah, sehingga kecocokan taksonomi dengan var. alboglabra belum pasti. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Gambar dan atribusi diverifikasi melalui halaman file Wikimedia Commons. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
@@ -724,7 +735,7 @@
     "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
     "rainfall_annual_min_mm": 450,
     "rainfall_annual_max_mm": 1000,
-    "humidity_basis": null
+    "humidity_basis": "land_suitability_s1"
   },
   {
     "name": "Daun bawang",
@@ -1570,8 +1581,8 @@
     "scientific_name": "Sechium edule",
     "temp_min": 19,
     "temp_max": 30,
-    "humidity_min": null,
-    "humidity_max": null,
+    "humidity_min": 80,
+    "humidity_max": 85,
     "supports_soil": true,
     "supports_hydroponic": null,
     "sunlight": [
@@ -1617,9 +1628,20 @@
           "image_attribution"
         ],
         "notes": "Identitas gambar, fotografer Filo gèn' dan lisensi CC BY-SA 4.0 diverifikasi di halaman berkas Commons. URL gambar menggunakan pengalihan resmi Special:FilePath yang stabil."
+      },
+      {
+        "url": "https://ask.ifas.ufl.edu/publication/HS1454",
+        "title": "Chayote—A Potential Vegetable Crop for Florida (HS1454)",
+        "publisher": "University of Florida IFAS Extension — Yuheng Qiu dan Guodong Liu",
+        "accessed_at": "2026-10-26",
+        "supports_fields": [
+          "humidity_min",
+          "humidity_max"
+        ],
+        "notes": "Bagian Growing Conditions menyatakan chayote growth requires RH 80–85%, dengan sitasi ke Rojas-Sandoval (2020), CABI Compendium. Angka RH 80–90% pada bagian Harvest and Storage tidak dipakai. Halaman membahas kondisi tumbuh tropis/subtropis, tetapi tidak secara eksplisit menetapkan sistem lahan terbuka; basis open_field pada record adalah klasifikasi konteks yang perlu dipahami sebagai inferensi."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 19–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 800–2000 mm/tahun. Sulur labu siam dewasa dapat menjalar sangat luas sehingga dikelompokkan large. Bukti budidaya hidroponik praktis sampai hasil panen belum dapat diverifikasi; nilai false tidak berarti mustahil secara biologis. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 19–30 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 800–2000 mm/tahun. Sulur labu siam dewasa dapat menjalar sangat luas sehingga dikelompokkan large. Bukti budidaya hidroponik praktis sampai hasil panen belum dapat diverifikasi; nilai false tidak berarti mustahil secara biologis. UF/IFAS melaporkan RH 80–85% untuk pertumbuhan, merujuk Rojas-Sandoval (2020); konteks halaman adalah kondisi tumbuh tropis/subtropis dan tidak secara eksplisit menyatakan sistem lahan terbuka, sehingga humidity_basis open_field merupakan inferensi klasifikasi. Angka RH penyimpanan tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman. supports_hydroponic=null karena belum ditemukan bukti tepercaya yang cukup untuk menyimpulkan cocok maupun tidak cocok; ketiadaan bukti hidroponik bukan bukti ketidaksesuaian.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
@@ -1632,7 +1654,7 @@
     "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
     "rainfall_annual_min_mm": 800,
     "rainfall_annual_max_mm": 2000,
-    "humidity_basis": null
+    "humidity_basis": "open_field"
   },
   {
     "name": "Buncis",
@@ -1730,8 +1752,8 @@
     "scientific_name": "Vigna unguiculata subsp. sesquipedalis",
     "temp_min": 20,
     "temp_max": 35,
-    "humidity_min": null,
-    "humidity_max": null,
+    "humidity_min": 42,
+    "humidity_max": 75,
     "supports_soil": true,
     "supports_hydroponic": true,
     "sunlight": [
@@ -1787,9 +1809,31 @@
           "image_url"
         ],
         "notes": "Foto polong kacang panjang menggantung tampak jelas setelah crop katalog dan URL gambar aktif. Artikel asal tidak mencantumkan fotografer maupun izin penggunaan ulang; status penggunaan sementara untuk proyek kampus dan harus ditinjau sebelum publikasi umum."
+      },
+      {
+        "url": "https://www.slideshare.net/slideshow/djaenudin-et-al-2011/80437932",
+        "title": "Petunjuk Teknis Evaluasi Lahan untuk Komoditas Pertanian (Edisi Kedua 2011) — Djaenudin et al.",
+        "publisher": "BBSDLP, Badan Litbang Pertanian, Kementerian Pertanian (salinan di SlideShare)",
+        "accessed_at": "2026-10-26",
+        "supports_fields": [
+          "humidity_min",
+          "humidity_max"
+        ],
+        "notes": "Lampiran 2, tabel Kacang panjang halaman 63: kelas S1 mencantumkan kelembaban 42–75%. Tabel memakai nama Vigna sinensis ENDL; sumber resmi versi revisi 2011 juga mencantumkan kelas S1 42–75% untuk Kacang panjang di bawah nama tersebut. Kriteria ini berbasis kelembaban udara rerata tahunan, bukan setpoint greenhouse."
+      },
+      {
+        "url": "https://repository.pertanian.go.id/bitstreams/2f795bd4-1a6c-448c-bf94-083e6706408e/download",
+        "title": "Petunjuk Teknis Evaluasi Lahan untuk Komoditas Pertanian (Edisi Revisi 2011)",
+        "publisher": "Balai Besar Penelitian dan Pengembangan Sumberdaya Lahan Pertanian, Kementerian Pertanian — Sofyan Ritung, Kusumo Nugroho, Anny Mulyani, dan Erna Suryani",
+        "accessed_at": "2026-10-26",
+        "supports_fields": [
+          "humidity_min",
+          "humidity_max"
+        ],
+        "notes": "Tabel Kacang panjang (Vigna sinensis ENDL) mencantumkan kelembaban kelas S1 42–75%; ini merupakan kriteria evaluasi kesesuaian lahan dan kelembaban udara rerata tahunan, bukan RH optimum greenhouse."
       }
     ],
-    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1500–2000 mm/tahun. FAO menulis subspesies sebagai ssp. sesquipedalis; nama ilmiah user dipertahankan subsp. Penelitian hidroponik 2025 mendukung produksi polong matang. Tanaman memerlukan ruang vertikal/rambatan; medium adalah kelas praktis, bukan kebutuhan 5–20 m² per tanaman. Kelembapan relatif udara ideal tidak ditemukan dari sumber pertumbuhan yang cukup spesifik, maka humidity_min/max = null; kelembapan penyimpanan produk tidak digunakan. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Foto katalog sementara dari Gapoktan Sekarsari; fotografer dan izin penggunaan ulang belum terverifikasi. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop menyatakan suhu OPTIMAL 20–35 °C (bukan batas hidup) dan curah hujan OPTIMAL TAHUNAN 1500–2000 mm/tahun. FAO menulis subspesies sebagai ssp. sesquipedalis; nama ilmiah user dipertahankan subsp. Penelitian hidroponik 2025 mendukung produksi polong matang. Tanaman memerlukan ruang vertikal/rambatan; medium adalah kelas praktis, bukan kebutuhan 5–20 m² per tanaman. RH 42–75% diisi dari kriteria kelas S1 evaluasi kesesuaian lahan yang mengacu pada kelembaban udara rerata tahunan, bukan setpoint greenhouse atau rentang fisiologis presisi. Bukti toleransi kekeringan bermakna setelah tumbuh belum cukup untuk memutuskan true/false, sehingga drought_tolerant = null. Foto katalog sementara dari Gapoktan Sekarsari; fotografer dan izin penggunaan ulang belum terverifikasi. Watering, care_level, dan space_needed adalah kategorisasi praktis katalog, bukan angka presisi atau resep budidaya. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
@@ -1802,7 +1846,7 @@
     "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
     "rainfall_annual_min_mm": 1500,
     "rainfall_annual_max_mm": 2000,
-    "humidity_basis": null
+    "humidity_basis": "land_suitability_s1"
   },
   {
     "name": "Oyong",
@@ -1971,8 +2015,8 @@
     "scientific_name": "Raphanus sativus",
     "temp_min": 12,
     "temp_max": 26,
-    "humidity_min": null,
-    "humidity_max": null,
+    "humidity_min": 40,
+    "humidity_max": 80,
     "supports_soil": true,
     "supports_hydroponic": true,
     "sunlight": [
@@ -2028,9 +2072,20 @@
           "supports_hydroponic"
         ],
         "notes": "Studi membandingkan budidaya Raphanus sativus dengan tanah dan NFT/DWC/wick hingga akar lobak yang dapat dipanen, bukan hanya semai."
+      },
+      {
+        "url": "https://www.slideshare.net/slideshow/djaenudin-et-al-2011/80437932",
+        "title": "Petunjuk Teknis Evaluasi Lahan untuk Komoditas Pertanian (Edisi Kedua 2011) — Djaenudin et al.",
+        "publisher": "BBSDLP, Badan Litbang Pertanian, Kementerian Pertanian (salinan di SlideShare)",
+        "accessed_at": "2026-10-26",
+        "supports_fields": [
+          "humidity_min",
+          "humidity_max"
+        ],
+        "notes": "Lampiran 2, tabel Lobak (Raphanus sativus LINN) halaman 71: kelas S1 mencantumkan kelembaban 40–80%. Nilai ini berasal dari edisi kedua 2011 dan merupakan kriteria kesesuaian lahan berbasis kelembaban udara rerata tahunan, bukan setpoint greenhouse. Edisi revisi resmi 2011 yang berbeda tidak mencantumkan parameter kelembaban pada tabel Lobak; nilai ini dipertahankan sebagai kriteria edisi kedua, bukan konsensus lintas edisi."
       }
     ],
-    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 12–26 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1000–1500 mm/tahun. Tidak ada referensi memadai untuk RH udara ideal saat pertumbuhan, maka humidity_min dan humidity_max null; data RH penyimpanan pascapanen tidak digunakan. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Praktik hidroponik yang menghasilkan akar panen sudah diuji dalam penelitian; tidak otomatis berarti lazim untuk semua sistem hidroponik. Toleransi kekeringan tanaman dewasa tidak dapat dipastikan dari sumber pertumbuhan, sehingga null. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
+    "notes": "EcoCrop memberi rentang OPTIMAL pertumbuhan 12–26 °C, bukan batas suhu bertahan hidup. Curah hujan asli OPTIMAL TAHUNAN 1000–1500 mm/tahun. RH 40–80% berasal dari kelas S1 pada kriteria kesesuaian lahan edisi kedua Djaenudin 2011 dan merepresentasikan kelembaban udara rerata tahunan, bukan setpoint greenhouse atau rentang fisiologis presisi. Edisi revisi resmi 2011 tidak mencantumkan parameter kelembaban pada tabel Lobak; angka ini dipertahankan dengan batasan sumber tersebut. Kategori watering, care_level, dan space_needed ialah filter kasar untuk katalog, bukan resep budidaya. Praktik hidroponik yang menghasilkan akar panen sudah diuji dalam penelitian; tidak otomatis berarti lazim untuk semua sistem hidroponik. Toleransi kekeringan tanaman dewasa tidak dapat dipastikan dari sumber pertumbuhan, sehingga null. Field rainfall_annual_min_mm dan rainfall_annual_max_mm menyimpan curah hujan optimal tahunan asli FAO EcoCrop dalam mm/tahun; nilai tersebut bukan kebutuhan hujan harian, irigasi, atau penyiraman.",
     "taxon_scope": "specific_taxon",
     "derived_fields": [
       "watering",
@@ -2043,7 +2098,7 @@
     "rainfall_basis": "annual_optimal_fao_ecocrop_divided_by_365",
     "rainfall_annual_min_mm": 1000,
     "rainfall_annual_max_mm": 1500,
-    "humidity_basis": null
+    "humidity_basis": "land_suitability_s1"
   },
   {
     "name": "Singkong",
