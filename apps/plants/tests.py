@@ -149,6 +149,48 @@ class PlantAdminCrudTests(TestCase):
         self.assertIs(plant.indoor, True)
         self.assertIs(plant.drought_tolerant, False)
 
+    def test_staff_can_render_manage_list_and_forms(self):
+        self.client.force_login(self.staff)
+
+        manage_response = self.client.get(reverse("plants:manage"))
+        self.assertEqual(manage_response.status_code, 200)
+        self.assertContains(manage_response, "Kelola Tanaman")
+        self.assertContains(manage_response, "Kangkung")
+
+        create_response = self.client.get(reverse("plants:create"))
+        self.assertEqual(create_response.status_code, 200)
+        self.assertContains(create_response, "Tambah Tanaman")
+
+        update_response = self.client.get(
+            reverse("plants:update", args=[self.plant.pk])
+        )
+        self.assertEqual(update_response.status_code, 200)
+        self.assertContains(update_response, "Edit Kangkung")
+
+        delete_response = self.client.get(
+            reverse("plants:delete", args=[self.plant.pk])
+        )
+        self.assertEqual(delete_response.status_code, 200)
+        self.assertContains(delete_response, "Yakin ingin menghapus")
+
+    def test_manage_list_can_filter_by_search_category_and_status(self):
+        self.client.force_login(self.staff)
+        response = self.client.get(
+            reverse("plants:manage"),
+            {"q": "kangkung", "category": "sayur", "status": "incomplete"},
+        )
+        self.assertContains(response, "Kangkung")
+        self.assertContains(response, "Kurang")
+
+    def test_manage_link_only_appears_for_staff(self):
+        self.client.force_login(self.staff)
+        staff_response = self.client.get(reverse("plants:index"))
+        self.assertContains(staff_response, reverse("plants:manage"))
+
+        self.client.force_login(self.regular_user)
+        regular_response = self.client.get(reverse("plants:index"))
+        self.assertNotContains(regular_response, reverse("plants:manage"))
+
     def test_staff_can_update_plant(self):
         self.client.force_login(self.staff)
         response = self.client.post(

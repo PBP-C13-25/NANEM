@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Edit {{ object.name }}{% else %}Tambah Tanaman{% endif %} - NANEM{% endblock %}
+
+{% block content %}
+<section class="plant-admin-form" aria-labelledby="plant-form-title">
+    <header>
+        <p><a href="{% url 'plants:manage' %}">← Kembali ke Kelola Tanaman</a></p>
+        <h1 id="plant-form-title">
+            {% if object %}Edit {{ object.name }}{% else %}Tambah Tanaman{% endif %}
+        </h1>
+        <p>Field yang belum memiliki data tepercaya boleh dibiarkan kosong.</p>
+    </header>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-errors">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <fieldset>
+            <legend>Identitas tanaman</legend>
+            {% include "plants/_form_field.html" with field=form.name %}
+            {% include "plants/_form_field.html" with field=form.scientific_name %}
+            {% include "plants/_form_field.html" with field=form.category %}
+            {% include "plants/_form_field.html" with field=form.description %}
+            {% include "plants/_form_field.html" with field=form.image_url %}
+        </fieldset>
+
+        <fieldset>
+            <legend>Kebutuhan budidaya</legend>
+            {% include "plants/_form_field.html" with field=form.supports_soil %}
+            {% include "plants/_form_field.html" with field=form.supports_hydroponic %}
+            {% include "plants/_form_field.html" with field=form.sunlight %}
+            {% include "plants/_form_field.html" with field=form.watering %}
+            {% include "plants/_form_field.html" with field=form.care_level %}
+            {% include "plants/_form_field.html" with field=form.drought_tolerant %}
+            {% include "plants/_form_field.html" with field=form.indoor %}
+            {% include "plants/_form_field.html" with field=form.space_needed %}
+        </fieldset>
+
+        <fieldset>
+            <legend>Kondisi lingkungan</legend>
+            {% include "plants/_form_field.html" with field=form.temp_min %}
+            {% include "plants/_form_field.html" with field=form.temp_max %}
+            {% include "plants/_form_field.html" with field=form.humidity_min %}
+            {% include "plants/_form_field.html" with field=form.humidity_max %}
+            {% include "plants/_form_field.html" with field=form.rainfall_min %}
+            {% include "plants/_form_field.html" with field=form.rainfall_max %}
+        </fieldset>
+
+        <div class="plant-admin-form__actions">
+            <a class="btn btn--outline" href="{% url 'plants:manage' %}">Batal</a>
+            <button class="btn btn--primary" type="submit">
+                {% if object %}Simpan Perubahan{% else %}Tambah Tanaman{% endif %}
+            </button>
+        </div>
+    </form>
+</section>
+{% endblock %}

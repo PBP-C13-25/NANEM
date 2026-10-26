@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Hapus {{ object.name }} - NANEM{% endblock %}
+
+{% block content %}
+<section class="plant-admin-delete" aria-labelledby="plant-delete-title">
+    <h1 id="plant-delete-title">Hapus tanaman</h1>
+    <p>
+        Yakin ingin menghapus <strong>{{ object.name }}</strong> dari katalog?
+        Tindakan ini tidak dapat dibatalkan.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <a class="btn btn--outline" href="{% url 'plants:manage' %}">Batal</a>
+        <button class="btn btn--danger" type="submit">Ya, Hapus</button>
+    </form>
+</section>
+{% endblock %}
