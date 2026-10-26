@@ -25,6 +25,13 @@
 }
 
 /* pencarian */
+/* Hapus tombol x bawaan broweser */
+.history-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
 .history-search {
   position: relative;
   display: flex;
@@ -60,9 +67,26 @@
 
 .history-search__clear {
   position: absolute;
-  right: 14px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  top: 50%;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-muted);
+  text-decoration: none;
+  transform: translateY(-50%);
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+.history-search__clear:hover {
+  background: var(--nav-hover);
+  color: var(--color-text);
+}
+.history-search__clear[hidden] {
+  display: none;
 }
 
 /* 1 row periwayat */

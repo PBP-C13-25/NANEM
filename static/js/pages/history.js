@@ -28,7 +28,11 @@ document.addEventListener("submit", async (e) => {
     } else if (form.dataset.ajax === "delete") {
       row.remove();
       // kalau semua riwayat sudah dihapus, muat ulang biar empty state tampil
-      if (!document.querySelector(".history-row")) location.reload();
+      if (!document.querySelector(".history-row")) {
+        location.reload();
+        return;
+      }
+      updateCount();
     }
 
     window.showToast("success", data.message);
@@ -38,6 +42,17 @@ document.addEventListener("submit", async (e) => {
     button.disabled = false;
   }
 });
+
+// Perbarui jumlah teks klo ada riwayat yg dihapus
+function updateCount() {
+  const count = document.getElementById("history-count");
+  if (!count) return;
+  const total = document.querySelectorAll(".history-row").length;
+  const q = new URL(window.location.href).searchParams.get("q");
+  count.textContent = q
+    ? `${total} lahan cocok dengan "${q}"`
+    : `${total} lahan tersimpan`;
+}
 
 // ===== Pencarian dengan debounce =====
 const searchInput = document.querySelector('.history-search input[name="q"]');
@@ -58,11 +73,15 @@ if (searchInput) {
     try {
       const response = await fetch(url, { signal: controller.signal });
       const html = await response.text();
-      const fresh = new DOMParser()
-        .parseFromString(html, "text/html")
-        .getElementById("history-results");
+      const doc = new DOMParser().parseFromString(html, "text/html");
 
-      if (fresh) document.getElementById("history-results").replaceWith(fresh);
+      // ganti daftar hasil + teks jumlah
+      ["history-results", "history-count"].forEach((id) => {
+        const current = document.getElementById(id);
+        const fresh = doc.getElementById(id);
+        if (current && fresh) current.replaceWith(fresh);
+      });
+
       history.replaceState(null, "", url); // URL ikut berubah, bisa di-refresh/dibagikan
     } catch (err) {
       if (err.name !== "AbortError") {
@@ -71,9 +90,26 @@ if (searchInput) {
     }
   };
 
+  // tombol X buat hapus pencarian
+  const clearBtn = searchInput.form.querySelector("[data-search-clear]");
+  const toggleClear = () => {
+    if (clearBtn) clearBtn.hidden = !searchInput.value;
+  };
+
   searchInput.addEventListener("input", () => {
+    toggleClear();
     clearTimeout(timer);
     timer = setTimeout(runSearch, 300); // tunggu 300 ms setelah ketikan terakhir
+  });
+
+  // klik X for kosongin kolom & tampilkan semua riwayat (tanpa reload)
+  clearBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    searchInput.value = "";
+    toggleClear();
+    clearTimeout(timer);
+    runSearch();
+    searchInput.focus();
   });
 
   // tekan Enter -> langsung cari, tanpa reload halaman
