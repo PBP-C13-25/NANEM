@@ -1,9 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django.urls import reverse
+from django.urls import resolve, reverse
 
 from .forms import PlantForm
 from .models import Plant
+from .views import PlantManageListView
 
 
 class PlantCatalogViewTests(TestCase):
@@ -351,6 +352,18 @@ class PlantAdminCrudTests(TestCase):
         self.client.force_login(self.regular_user)
         regular_response = self.client.get(reverse("plants:index"))
         self.assertNotContains(regular_response, reverse("plants:manage"))
+
+    def test_manage_route_and_navigation_active_state(self):
+        match = resolve(reverse("plants:manage"))
+        self.assertIs(match.func.view_class, PlantManageListView)
+
+        self.client.force_login(self.staff)
+        response = self.client.get(reverse("plants:manage"))
+        self.assertContains(
+            response,
+            f'href="{reverse("plants:manage")}" '
+            'class="dropdown__item dropdown__item--sub is-active"',
+        )
 
     def test_staff_can_update_plant(self):
         self.client.force_login(self.staff)
