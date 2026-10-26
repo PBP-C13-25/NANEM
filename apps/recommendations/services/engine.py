@@ -100,6 +100,24 @@ def score_plant(plant, environment: dict):
         "reasons": reasons,
     }
 
+CARE_LEVEL_LABELS = {
+    "low": "Mudah",
+    "medium": "Sedang",
+    "moderate": "Sedang",
+    "high": "Sulit",
+}
+
+
+def _care_level_label(plant):
+    """Label care_level untuk badge. Nilai di luar daftar: pakai label choices / nilai aslinya."""
+    raw = (plant.care_level or "").strip()
+    if not raw:
+        return ""
+    if raw.lower() in CARE_LEVEL_LABELS:
+        return CARE_LEVEL_LABELS[raw.lower()]
+    display = getattr(plant, "get_care_level_display", None)
+    return display() if callable(display) else raw
+
 
 def recommend(environment: dict, medium: str, land_area: float) -> list:
     """
@@ -128,6 +146,10 @@ def recommend(environment: dict, medium: str, land_area: float) -> list:
                 "matched_count": scored["matched_count"],
                 "total_criteria": len(CLIMATE_CRITERIA),
                 "reasons": scored["reasons"],
+                # info tambahan untuk badge (tidak memengaruhi skor)
+                "care_level": plant.care_level or "",
+                "care_level_label": _care_level_label(plant),
+                "indoor": plant.indoor,
             }
         )
 

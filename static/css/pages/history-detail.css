@@ -460,21 +460,54 @@
 }
 
 /* ---------- Badge kriteria ---------- */
-.plant__criteria {
+.plant__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.plant__tags:empty {
+  display: none;
+}
+
+.plant__tag {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  margin: 10px 0 0;
   padding: 3px 10px;
   border-radius: 999px;
   background: #f3f5ee;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 600;
+  line-height: 1.4;
   color: var(--color-muted);
 }
-.plant__criteria--all {
+
+/* badge x/y kriteria: warna tetap */
+.plant__tag--criteria {
   background: var(--color-primary-soft);
   color: var(--color-primary);
+}
+
+/* care level */
+.plant__tag--care-low {
+  background: #e3f1df;
+  color: #2f7a35;
+}
+.plant__tag--care-medium,
+.plant__tag--care-moderate {
+  background: #fbf0d9;
+  color: #8a5d0a;
+}
+.plant__tag--care-high {
+  background: #fde8e5;
+  color: #b0392b;
+}
+
+/* indoor */
+.plant__tag--indoor {
+  background: #ebf3fb;
+  color: #2b6cb0;
 }
 
 /* ---------- Tombol "Lihat lainnya" ---------- */

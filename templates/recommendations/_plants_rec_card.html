@@ -3,7 +3,8 @@
 
   Parameter:
     plants : list tanaman (plant_name, scientific_name, match_percentage, reasons,
-             plant_id, criteria_count, matched_count)
+             plant_id, criteria_count, matched_count,
+             care_level, care_level_label, indoor)
 
   5 tanaman pertama tampil langsung; sisanya disembunyikan lewat JS dan
   dimunculkan dengan tombol "Lihat lainnya" (lihat js/pages/plants-card.js).
@@ -40,13 +41,34 @@
                         <span style="width: {{ plant.match_percentage|floatformat:0 }}%"></span>
                     </div>
 
-                    {# Badge kriteria: riwayat lama (sebelum engine baru) tidak punya data ini, jadi dicek dulu #}
-                    {% if plant.criteria_count %}
-                        <p class="plant__criteria {% if plant.matched_count == plant.criteria_count %}plant__criteria--all{% endif %}">
-                            {% include "components/icon.html" with name="check" size=13 %}
-                            {{ plant.matched_count|default:0 }}/{{ plant.criteria_count }} kriteria sesuai
-                        </p>
-                    {% endif %}
+                    {# Badge kriteria, perawatan, indoor. Riwayat lama tidak punya datanya, jadi tiap badge dicek dulu. #}
+                    <div class="plant__tags">
+                        {% if plant.criteria_count %}
+                            <span class="plant__tag plant__tag--criteria">
+                                {% include "components/icon.html" with name="check" size=13 %}
+                                {{ plant.matched_count|default:0 }}/{{ plant.criteria_count }} kriteria sesuai
+                            </span>
+                        {% endif %}
+
+                        {% if plant.care_level_label %}
+                            <span class="plant__tag plant__tag--care-{{ plant.care_level|slugify }}" title="Tingkat perawatan">
+                                {% include "components/icon.html" with name="leaf" size=13 %}
+                                Perawatan {{ plant.care_level_label|lower }}
+                            </span>
+                        {% endif %}
+
+                        {% if plant.indoor is True %}
+                            <span class="plant__tag plant__tag--indoor">
+                                {% include "components/icon.html" with name="home" size=13 %}
+                                Bisa di dalam ruangan
+                            </span>
+                        {% elif plant.indoor is False %}
+                            <span class="plant__tag">
+                                {% include "components/icon.html" with name="sun" size=13 %}
+                                Luar ruangan
+                            </span>
+                        {% endif %}
+                    </div>
 
                     {% if plant.reasons %}
                         <ul class="plant__reasons">
