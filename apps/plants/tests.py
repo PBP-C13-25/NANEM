@@ -239,6 +239,23 @@ class PlantAdminCrudTests(TestCase):
         self.assertContains(response, "Kangkung")
         self.assertNotContains(response, "Mangga")
 
+    def test_manage_list_renders_final_table_elements(self):
+        self.client.force_login(self.staff)
+        response = self.client.get(reverse("plants:manage"))
+        self.assertContains(response, "plant-admin__thumbnail")
+        self.assertContains(response, "Media &amp; cahaya")
+        self.assertContains(response, "Perawatan")
+        self.assertContains(response, reverse("plants:create"))
+        self.assertContains(response, reverse("plants:update", args=[self.plant.pk]))
+        self.assertContains(response, reverse("plants:delete", args=[self.plant.pk]))
+        self.assertNotContains(response, 'href="#"')
+
+    def test_manage_list_renders_empty_state(self):
+        self.client.force_login(self.staff)
+        response = self.client.get(reverse("plants:manage"), {"q": "tidak-ada"})
+        self.assertContains(response, "Tanaman tidak ditemukan")
+        self.assertContains(response, "Reset filter")
+
     def test_manage_list_sorting_is_stable(self):
         Plant.objects.create(
             name="Bayam",

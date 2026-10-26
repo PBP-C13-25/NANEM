@@ -1,6 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Kelola Tanaman - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/plant_manage.css' %}">
+{% endblock %}
 
 {% block content %}
 <section class="plant-admin" aria-labelledby="plant-admin-title">
@@ -68,10 +73,12 @@
         </div>
     </form>
 
-    <p class="plant-admin__summary">
-        {{ total_count }} tanaman · {{ complete_count }} lengkap ·
-        {{ incomplete_count }} perlu dilengkapi
-    </p>
+    <div class="plant-admin__results-bar">
+        <p>
+            <strong>{{ page_obj.paginator.count }}</strong> hasil dari {{ total_count }} tanaman
+        </p>
+        <p>{{ complete_count }} lengkap · {{ incomplete_count }} perlu dilengkapi</p>
+    </div>
 
     <div class="plant-admin__table-wrapper">
         <table class="plant-admin__table">
@@ -79,7 +86,8 @@
                 <tr>
                     <th scope="col">Tanaman</th>
                     <th scope="col">Kategori</th>
-                    <th scope="col">Media</th>
+                    <th scope="col">Media &amp; cahaya</th>
+                    <th scope="col">Perawatan</th>
                     <th scope="col">Kelengkapan</th>
                     <th scope="col">Diperbarui</th>
                     <th scope="col">Aksi</th>
@@ -89,27 +97,44 @@
                 {% for plant in plants %}
                     <tr>
                         <td>
-                            <strong>{{ plant.name }}</strong>
-                            {% if plant.scientific_name %}
-                                <br><small>{{ plant.scientific_name }}</small>
-                            {% endif %}
+                            <div class="plant-admin__identity">
+                                <div class="plant-admin__thumbnail">
+                                    <span>{% include "components/icon.html" with name="sprout" size=22 %}</span>
+                                    {% if plant.image_url %}
+                                        <img src="{{ plant.image_url }}" alt="" loading="lazy" onerror="this.hidden=true">
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <strong>{{ plant.name }}</strong>
+                                    <small>
+                                        {% if plant.scientific_name %}<i>{{ plant.scientific_name }}</i>{% else %}Nama ilmiah belum tersedia{% endif %}
+                                    </small>
+                                </div>
+                            </div>
                         </td>
-                        <td>{{ plant.get_category_display }}</td>
-                        <td>{{ plant.media_label }}</td>
+                        <td><span class="plant-admin__badge">{{ plant.get_category_display }}</span></td>
                         <td>
-                            <span title="{% if plant.missing_fields %}Belum ada: {{ plant.missing_fields|join:', ' }}{% endif %}">
+                            <strong>{{ plant.media_label }}</strong>
+                            <small>{{ plant.sunlight_label }}</small>
+                        </td>
+                        <td>{{ plant.care_level|default:"Belum ditentukan" }}</td>
+                        <td>
+                            <span class="plant-admin__status plant-admin__status--{{ plant.data_status }}" title="{% if plant.missing_fields %}Belum ada: {{ plant.missing_fields|join:', ' }}{% endif %}">
                                 {{ plant.data_status_label }}
                             </span>
                         </td>
                         <td>{{ plant.updated_at|date:"d M Y" }}</td>
-                        <td>
-                            <a href="{% url 'plants:update' plant.pk %}">Edit</a>
-                            <a href="{% url 'plants:delete' plant.pk %}">Hapus</a>
+                        <td class="plant-admin__actions">
+                            <a class="plant-admin__action" href="{% url 'plants:update' plant.pk %}">{% include "components/icon.html" with name="pencil" size=16 %}<span>Edit</span></a>
+                            <a class="plant-admin__action plant-admin__action--danger" href="{% url 'plants:delete' plant.pk %}">{% include "components/icon.html" with name="trash" size=16 %}<span>Hapus</span></a>
                         </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="6">Tidak ada tanaman yang sesuai dengan filter.</td>
+                        <td colspan="7" class="plant-admin__empty-cell">
+                            {% url 'plants:manage' as manage_url %}
+                            {% include "components/empty_state.html" with icon="search" title="Tanaman tidak ditemukan" text="Coba ubah kata kunci atau kurangi filter yang digunakan." action_url=manage_url action_label="Reset filter" %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
