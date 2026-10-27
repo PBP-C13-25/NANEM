@@ -62,3 +62,8 @@
 {% include "components/confirm_modal.html" with id="hapus-detail" title="Hapus riwayat?" message="Riwayat ini akan dihapus permanen:" item=history.land_name action=delete_url confirm_label="Ya, hapus" danger=True %}
 {% endwith %}
 {% endblock %}
+
+{# ================= JavaScript ================= #}
+{% block extra_js %}
+<script src="{% static 'js/pages/plants-rec-card.js' %}" defer></script>
+{% endblock %}

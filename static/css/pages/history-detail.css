@@ -431,6 +431,13 @@
   margin-top: 3px;
   color: var(--plant-color);
 }
+/* reason yg tidak sesuai */
+.plant__reason--no {
+  color: var(--color-muted);
+}
+.plant__reason--no .icon {
+  color: var(--color-danger);
+}
 
 /* empty state di dalam kartu: tanpa margin besar */
 .detail__card .empty-state {
@@ -450,6 +457,76 @@
   font-size: 0.7rem;
   font-weight: 700;
   color: #fff;
+}
+
+/* ---------- Badge kriteria ---------- */
+.plant__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.plant__tags:empty {
+  display: none;
+}
+
+.plant__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #f3f5ee;
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-muted);
+}
+/* badge kriteria: abu-abu kalau belum semua sesuai */
+.plant__tag--criteria {
+  background: #eceef1;
+  color: #6b6c72;
+}
+/* semua kriteria sesuai (3/3): hijau lainnya abu2*/
+.plant__tag--all {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+/* care level */
+.plant__tag--care-low {
+  background: #e3f1df;
+  color: #2f7a35;
+}
+.plant__tag--care-medium,
+.plant__tag--care-moderate {
+  background: #fbf0d9;
+  color: #8a5d0a;
+}
+.plant__tag--care-high {
+  background: #fde8e5;
+  color: #b0392b;
+}
+
+/* indoor */
+.plant__tag--indoor {
+  background: #ebf3fb;
+  color: #2b6cb0;
+}
+
+/* ---------- Tombol "Lihat lainnya" ---------- */
+.plants__more {
+  margin-top: 12px;
+}
+.plants__more .icon {
+  transition: transform 0.2s;
+}
+.plants__more.is-expanded .icon {
+  transform: rotate(180deg);
+}
+.plants__more[hidden],
+.plant[hidden] {
+  display: none;
 }
 
 /* RESPONSIVE */
