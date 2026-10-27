@@ -54,11 +54,6 @@
     </div>
 </section>
 
-{# ================= JavaScript ================= #}
-{% block extra_js %}
-<script src="{% static 'js/pages/plants-rec-card.js' %}" defer></script>
-{% endblock %}
-
 {# ================= Modal ================= #}
 {% url 'recommendations:history_update' history.pk as rename_url %}
 {% url 'recommendations:history_delete' history.pk as delete_url %}
@@ -66,4 +61,9 @@
 {% include "components/rename_modal.html" with id="ubah-detail" action=rename_url value=history.land_name next=detail_page %}
 {% include "components/confirm_modal.html" with id="hapus-detail" title="Hapus riwayat?" message="Riwayat ini akan dihapus permanen:" item=history.land_name action=delete_url confirm_label="Ya, hapus" danger=True %}
 {% endwith %}
+{% endblock %}
+
+{# ================= JavaScript ================= #}
+{% block extra_js %}
+<script src="{% static 'js/pages/plants-rec-card.js' %}" defer></script>
 {% endblock %}

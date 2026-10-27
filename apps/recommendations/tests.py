@@ -107,7 +107,7 @@ class ScoringTests(SimpleTestCase):
         result = score_plant(self.full(rainfall_min=8, rainfall_max=10), ENV)
         self.assertEqual(result["criteria_count"], 3)
         self.assertEqual(result["matched_count"], 2)
-        
+
     def test_matched_count_only_counts_criteria_with_data(self):
         result = score_plant(fake_plant(temp_min=20, temp_max=32), ENV)
         self.assertEqual(result["criteria_count"], 1)
@@ -415,7 +415,6 @@ class HistoryAuthorizationTests(ViewBase):
         self.client.force_login(self.admin)
         for url in self.urls_for(self.mine.pk):
             r = self.client.get(url)
-            print("\nDEBUG", url, r.status_code, r.get("Location"))
             self.assertEqual(r.status_code, 404, url)
 
     def test_others_history_is_404(self):

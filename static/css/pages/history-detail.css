@@ -482,9 +482,13 @@
   line-height: 1.4;
   color: var(--color-muted);
 }
-
-/* badge x/y kriteria: warna tetap */
+/* badge kriteria: abu-abu kalau belum semua sesuai */
 .plant__tag--criteria {
+  background: #eceef1;
+  color: #6b6c72;
+}
+/* semua kriteria sesuai (3/3): hijau lainnya abu2*/
+.plant__tag--all {
   background: var(--color-primary-soft);
   color: var(--color-primary);
 }

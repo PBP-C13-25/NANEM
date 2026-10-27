@@ -44,8 +44,8 @@
                     {# Badge kriteria, perawatan, indoor. Riwayat lama tidak punya datanya, jadi tiap badge dicek dulu. #}
                     <div class="plant__tags">
                         {% if plant.criteria_count %}
-                            <span class="plant__tag plant__tag--criteria">
-                                {% include "components/icon.html" with name="check" size=13 %}
+                            <span class="plant__tag plant__tag--criteria{% if plant.matched_count == plant.criteria_count %} plant__tag--all{% endif %}">
+                                {% if plant.matched_count == plant.criteria_count %}{% include "components/icon.html" with name="check" size=13 %}{% endif %}
                                 {{ plant.matched_count|default:0 }}/{{ plant.criteria_count }} kriteria sesuai
                             </span>
                         {% endif %}

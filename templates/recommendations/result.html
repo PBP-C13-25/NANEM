@@ -74,11 +74,10 @@
         {% include "recommendations/_plants_rec_card.html" with plants=plants %}
     </div>
 </section>
+{% endwith %}
+{% endblock %}
 
 {# ================= JavaScript ================= #}
 {% block extra_js %}
 <script src="{% static 'js/pages/plants-rec-card.js' %}" defer></script>
-{% endblock %}
-
-{% endwith %}
 {% endblock %}
