@@ -561,6 +561,10 @@
   color: #fff;
 }
 
+.plants-filter[hidden] {
+  display: none;
+}
+
 /* RESPONSIVE */
 @media (max-width: 860px) {
   .detail__grid {

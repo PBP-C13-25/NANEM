@@ -1,6 +1,6 @@
 // Kartu "Rekomendasi tanaman": tampilkan 5 dulu, sisanya lewat tombol "Lihat lainnya".
 // Dipakai di halaman hasil & detail riwayat.
-// plus filter kategori (chip) kalau hasilnya punya lebih dari 1
+// Plus filter kategori (chip), muncul kalau hasilnya punya lebih dari 1 kategori.
 // Tanpa JS semua tanaman tetap tampil (tidak ada yang hilang).
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-plants]").forEach((list) => {
@@ -12,21 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let activeCategory = "all";
     let expanded = false;
 
-    const matchingItems = () =>
-      items.filter(
-        (item) =>
-          activeCategory === "all" || item.dataset.category === activeCategory,
-      );
+    const inActiveCategory = (item) =>
+      activeCategory === "all" || item.dataset.category === activeCategory;
+
+    const matchingItems = () => items.filter(inActiveCategory);
 
     const render = () => {
       const matching = matchingItems();
       const extra = matching.slice(visible);
 
       items.forEach((item) => {
-        const inCategory =
-          activeCategory === "all" || item.dataset.category === activeCategory;
         const position = matching.indexOf(item);
-        item.hidden = !inCategory || (position >= visible && !expanded);
+        item.hidden =
+          !inActiveCategory(item) || (position >= visible && !expanded);
       });
 
       if (!button) return;
@@ -49,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ...new Set(items.map((item) => item.dataset.category).filter(Boolean)),
       ];
 
-      if (categories.length > 0) {
+      if (categories.length > 1) {
         filterBox.hidden = false;
 
         const makeChip = (value, text) => {
@@ -75,7 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         filterBox.appendChild(makeChip("all", "Semua"));
         categories.forEach((category) => {
-          const label = category.charAt(0).toUpperCase() + category.slice(1);
+          // pakai label Indonesia dari template (data-category-label)
+          const sample = items.find(
+            (item) => item.dataset.category === category,
+          );
+          const label = sample?.dataset.categoryLabel || category;
           filterBox.appendChild(makeChip(category, label));
         });
       }

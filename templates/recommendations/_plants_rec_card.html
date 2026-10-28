@@ -21,7 +21,7 @@
 
     {% if plants %}
         {# Diisi JS kalau kategori tanamannya lebih dari 1 macam; tetap hidden kalau nggak #}
-        <div class="plants-filter" data-plants-filter hidden></div>
+        <div class="plants-filter" data-plants-filter role="group" aria-label="Filter kategori" hidden></div>
 
         <ol class="plants" data-plants data-visible="5">
         {% for plant in plants %}
