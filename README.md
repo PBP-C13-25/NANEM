@@ -9,7 +9,7 @@
 ![Open-Meteo](https://img.shields.io/badge/Open--Meteo-API-2E86C1?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-In%20Development-F39C12?style=for-the-badge)
 
-🌐 [**Live Demo (PWS)**](https://jihan-nabiilah-nanem.pws.cs.ui.ac.id/) &nbsp;|&nbsp; 🎨 [**Desain Figma (Low-Fi)**](https://www.figma.com/design/AwgBPy0JQrH6tXT4aN79Io/Main-Figma?node-id=0-1&p=f&t=HVUroBjAaXXzQvnn-0)
+🌐 [**Live Demo (PWS)**](https://jihan-nabiilah-nanem.pws.cs.ui.ac.id/) &nbsp;|&nbsp; 🎨 [**Desain Figma (Low-Fi)**](https://www.figma.com/design/cHfPMtY5z1b3hZdhOH6qLj/Untitled?t=8elytltRLo4KhqEf-1)
 
 </div>
 
@@ -24,6 +24,8 @@
 - [🗄️ Daftar Model & PIC](#️-daftar-model--pic)
 - [🔌 Eksternal API](#-eksternal-api)
 - [🔐 User Role](#-user-role)
+- [📸 Penjelasan Fitur](#-penjelasan-fitur)
+- [⚙️ Instalasi & Menjalankan Secara Lokal](#️-instalasi--menjalankan-secara-lokal)
 - [🔗 Tautan Penting](#-tautan-penting)
 
 ---
@@ -254,9 +256,114 @@ Informasi praktis cara membudidayakan tanaman: cara menanam, media tanam, kebutu
 
 ---
 
+## 📸 Penjelasan Fitur
+
+> 🚧 Bagian ini masih dalam proses pengisian — akan dilengkapi tangkapan layar dan penjelasan tiap fitur.
+
+### 🔍 Rekomendasi & Riwayat
+
+_(Tangkap layar & penjelasan menyusul)_
+
+### 👤 Profil Pengguna & Autentikasi
+
+_(Tangkap layar & penjelasan menyusul)_
+
+### 📔 Koleksi Tanaman
+
+_(Tangkap layar & penjelasan menyusul)_
+
+### 📚 Katalog Tanaman
+
+_(Tangkap layar & penjelasan menyusul)_
+
+### 🧑‍🌾 Panduan Budidaya
+
+_(Tangkap layar & penjelasan menyusul)_
+
+---
+
+## ⚙️ Instalasi & Menjalankan Secara Lokal
+
+Ikuti langkah berikut untuk menjalankan NANEM di komputer kamu:
+
+### 1. Clone repository
+
+```bash
+git clone https://github.com/<username-atau-org>/<nama-repo>.git
+cd <nama-repo>
+```
+
+### 2. Buat & aktifkan virtual environment
+
+```bash
+python -m venv env
+
+# Windows
+env\Scripts\activate
+
+# macOS/Linux
+source env/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Siapkan environment variables
+
+Buat file `.env` di root project (lihat `.env.example` kalau ada), minimal berisi:
+
+```env
+SECRET_KEY=ganti-dengan-secret-key-kamu
+DEBUG=True
+```
+
+### 5. Jalankan migration
+
+```bash
+python manage.py migrate
+```
+
+### 6. (Opsional) Buat akun admin
+
+```bash
+python manage.py createsuperuser
+```
+
+### 7. (Opsional) Isi data awal tanaman
+
+```bash
+python manage.py seed_plants
+```
+
+### 8. Jalankan server
+
+```bash
+python manage.py runserver
+```
+
+Buka [http://127.0.0.1:8000](http://127.0.0.1:8000) di browser.
+
+### 9. Menjalankan test
+
+```bash
+python manage.py test
+```
+
+Atau dengan laporan coverage:
+
+```bash
+coverage run manage.py test
+coverage report -m
+```
+
+---
+
 ## 🔗 Tautan Penting
 
 |                       | Tautan                                                                                                            |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | 🚀 **Deployment PWS** | https://jihan-nabiilah-nanem.pws.cs.ui.ac.id/                                                                     |
-| 🎨 **Figma (Low-Fi)** | [Buka Figma](https://www.figma.com/design/AwgBPy0JQrH6tXT4aN79Io/Main-Figma?node-id=0-1&p=f&t=HVUroBjAaXXzQvnn-0) |
+| 🎨 **Figma (Low-Fi)** | [Buka Figma](https://www.figma.com/design/cHfPMtY5z1b3hZdhOH6qLj/Untitled?t=8elytltRLo4KhqEf-1) |
