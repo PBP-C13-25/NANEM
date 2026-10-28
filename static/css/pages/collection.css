@@ -1,4 +1,4 @@
-
+/* FEED SECTION */
 .collection-feed, .collection-detail, .form-container {
     max-width: 800px;
     margin: 0 auto;
@@ -80,22 +80,242 @@
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
 }
+.btn-outline-detail{
+    margin-left: auto !important;
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
 
 .btn-danger {
     background-color: var(--color-danger);
     color: white;
 }
 
-/* Like Section */
+/* TOMBOL LIKE SECTION */
+/* Variabel  Tombol Like (Sesuaikan dengan warna tema Nanem) */
+:root {
+  --like-theme-color: #2d5a27; /* Warna hijau tema (atau ganti ke #e63946 jika mau merah) */
+}
+
+/* 1. Tombol Like Dasar */
 .btn-like {
-    background: var(--color-primary-soft);
-    color: var(--color-text);
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 6px 12px;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 999px;
+  background: var(--color-surface, #ffffff);
+  color: var(--color-muted, #6b7280);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+/* Hover State: Mengikuti warna tema */
+.btn-like:hover {
+  border-color: var(--like-theme-color);
+  color: var(--like-theme-color);
+}
+
+/* 2. UNLIKED STATE (Default): Hanya Outline */
+.icon-like-wrapper svg {
+  width: 20px;
+  height: 20px;
+  fill: none !important; /* Dalamnya transparan/kosong */
+  stroke: currentColor !important; /* Garis tepi mengikuti warna teks */
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+/* 3. LIKED STATE: Full Love Terisi Warna Tema */
+.btn-like.is-liked {
+  border-color: var(--like-theme-color);
+  background: rgba(45, 90, 39, 0.05); /* Latar belakang lembut sesuai tema */
+  color: var(--like-theme-color); /* Ubah warna teks & ikon sekaligus */
+}
+
+.icon-like-wrapper.is-active svg,
+.btn-like.is-liked .icon-like-wrapper svg {
+  fill: currentColor !important; /* Terisi penuh dengan warna yang sama */
+  stroke: currentColor !important;
+}
+
+
+/*  TAB KOLEKSI  SECTION */
+div.collection-feed div.tab-container {
+  width: 100% !important;
+  margin-bottom: 28px !important;
+}
+
+div.collection-feed div.tab-navigation {
+  display: flex !important;
+  flex-direction: row !important; 
+  align-items: stretch !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  border-bottom: 1px solid var(--nav-border, #e5e7eb) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* Memaksa setiap tombol tab mengambil 50% lebar area penuh */
+div.collection-feed .tab-btn {
+  position: relative !important;
+  flex: 1 1 50% !important;
+  width: 50% !important;
+  max-width: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  height: 48px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  background: none !important;
+  font: inherit !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  color: var(--nav-muted, #6b7280) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  transition: color 0.15s ease !important;
+}
+
+/* Garis bawah animasi (Style Navbar Nanem) */
+div.collection-feed .tab-btn::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: -1px !important;
+  height: 3px !important;
+  border-radius: 3px 3px 0 0 !important;
+  background: var(--nav-accent, #2d5a27) !important;
+  opacity: 0 !important;
+  transform: scaleX(0.4) !important;
+  transition: opacity 0.2s ease, transform 0.25s ease !important;
+}
+
+/* Hover: Garis samar & teks hijau (seperti Panduan) */
+div.collection-feed .tab-btn:hover {
+  color: var(--nav-accent, #2d5a27) !important;
+}
+
+div.collection-feed .tab-btn:hover::after {
+  opacity: 0.4 !important;
+  transform: scaleX(1) !important;
+}
+
+/* Aktif: Garis solid & teks hijau tebal (seperti Koleksi Saya) */
+div.collection-feed .tab-btn.active {
+  color: var(--nav-accent, #2d5a27) !important;
+  font-weight: 600 !important;
+}
+
+div.collection-feed .tab-btn.active::after {
+  opacity: 1 !important;
+  transform: scaleX(1) !important;
+}
+
+/* Konten Tab */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* FORM SECTION */
+/* Zona Upload */
+.upload-zone {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+  border: 2px dashed var(--color-border, #cbd5e1);
+  border-radius: var(--radius-lg, 12px);
+  background: #f8faf6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+/* Input file tersembunyi namun berada di lapisan paling atas */
+.upload-zone__input {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  z-index: 10 !important; /* Memastikan input bisa menerima klik */
+}
+
+/* Area Teks & IkonPlaceholder */
+.upload-zone__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  pointer-events: none; /* Cegah teks menghalangi klik ke input */
+  z-index: 1;
+}
+
+/* Layer Preview Foto */
+.upload-zone__preview {
+  position: absolute;
+  inset: 0;
+  z-index: 15; /* Berada di atas input ketika foto sudah terpilih */
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+.upload-zone__remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20; /* Tombol X tetap bisa diklik */
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+/* Sembunyikan elemen preview saat belum ada foto */
+.upload-zone__preview.is-hidden,
+.upload-zone__placeholder.is-hidden,
+.is-hidden {
+  display: none !important;
+}
+
+/* Pastikan area preview pas di dalam kotak */
+.upload-zone__preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  background: #ffffff;
+}
+
+.upload-zone__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

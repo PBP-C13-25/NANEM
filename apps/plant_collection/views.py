@@ -11,6 +11,11 @@ class CollectionListView(RegularUserRequiredMixin, ListView):
     model = PlantCollection
     template_name = "plant_collection/index.html"
     context_object_name = "posts"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Mengambil postingan khusus user yang sedang login
+        context['my_posts'] = PlantCollection.objects.filter(owner=self.request.user)
+        return context
 
 class CollectionDetailView(RegularUserRequiredMixin, DetailView):
     model = PlantCollection
@@ -26,6 +31,10 @@ class CollectionCreateView(RegularUserRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_edit'] = False
+        return context
 
 class CollectionUpdateView(RegularUserRequiredMixin, OwnedQuerysetMixin, UpdateView):
     model = PlantCollection
@@ -35,6 +44,10 @@ class CollectionUpdateView(RegularUserRequiredMixin, OwnedQuerysetMixin, UpdateV
     
     def get_success_url(self):
         return reverse_lazy('collection:detail', kwargs={'pk': self.object.pk})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_edit'] = True
+        return context
     
 class CollectionDeleteView(RegularUserRequiredMixin, OwnedQuerysetMixin, DeleteView):
     model = PlantCollection
@@ -51,4 +64,4 @@ class ToggleLikeView(RegularUserRequiredMixin, View):
         else:
             post.likes.add(request.user)
             liked = True
-        return JsonResponse({'liked': liked, 'total_likes': post.total_likes})
+        return JsonResponse({'liked': liked, 'total_likes': post.likes.count()})

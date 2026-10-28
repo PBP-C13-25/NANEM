@@ -6,30 +6,78 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/pages/collection.css' %}">
 {% endblock %}
-
+{% csrf_token %}
 {% block content %}
 <div class="collection-feed">
     <div class="feed-header">
-        <h1>Koleksi Pengguna</h1>
-        <a href="{% url 'collection:create' %}" class="btn btn-primary">Buat Postingan</a>
+        <h1>Koleksi Tanaman</h1>
+        <a href="{% url 'collection:create' %}" class="btn btn-primary"> Buat Postingan </a>
     </div>
 
-    <div class="feed-grid">
-        {% for post in posts %}
-        <div class="feed-card">
-            <div class="card-header">
-                <strong>@{{ post.author.username }}</strong>
-            </div>
-            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="feed-img">
-            <div class="card-body">
-                <h3 class="feed-title">{{ post.title }}</h3>
-                <p class="feed-desc">{{ post.description|truncatewords:15 }}</p>
-                <a href="{% url 'collection:detail' post.pk %}" class="btn-detail">Lihat Detail</a>
-            </div>
+    <!-- Navigasi Tab -->
+     <div class="tab-container">
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="all">
+                <span>Semua Koleksi</span>
+            </button>
+            <button class="tab-btn" data-tab="my">
+                <span>Koleksi Saya ({{ my_posts.count }})</span>
+            </button>
         </div>
-        {% empty %}
-        <p>Belum ada koleksi tanaman.</p>
-        {% endfor %}
+    </div>
+    
+    <!-- TAB 1: Semua Koleksi -->
+    <div id="tab-all" class="tab-content active">
+        <div class="feed-grid">
+            {% for post in posts %}
+            <div class="card">
+                {% if post.photo %}
+                    <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 250px;">
+                {% else %}
+                    <div class="card-img" style="background: #eee; display: flex; align-items: center; justify-content: center;">Gambar tidak tersedia</div>
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title" style="margin-top: 0;">{{ post.title }}</h2>
+                    <p class="card-desc">{{ post.description|truncatewords:10 }}</p>
+                    <strong>{{ post.owner.first_name|default:post.owner.username}}</strong> 
+                </div>
+                <a href="{% url 'collection:detail' post.pk %}" class="btn btn-outline-detail" style="font-size: 0.9rem;">Lihat Detail</a>
+            </div>
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; color: var(--color-muted); padding: 40px;">
+                <p>Belum ada postingan koleksi. Jadilah yang pertama!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- TAB 2: Koleksi Saya -->
+    <div id="tab-my" class="tab-content">
+        <div class="feed-grid">
+            {% for post in my_posts %}
+            <div class="card">
+                {% if post.photo %}
+                    <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 250px;">
+                {% else %}
+                    <div class="card-img" style="background: #eee; display: flex; align-items: center; justify-content: center;">Gambar tidak tersedia</div>
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title" style="margin-top: 0;">{{ post.title }}</h2>
+                    <p class="card-desc">{{ post.description|truncatewords:10 }}</p>
+                    <strong>{{ post.owner.first_name|default:post.owner.username}}</strong> 
+                </div>
+                <a href="{% url 'collection:detail' post.pk %}" class="btn btn-outline" style="font-size: 0.9rem;">Lihat Detail</a>
+            </div>   
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; color: var(--color-muted); padding: 40px;">
+                <p>Yahh, masih kosong nih. Ayo posting koleksi tanamanmu dan share ke semua orang!</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/pages/collection.js' %}"></script>
 {% endblock %}
