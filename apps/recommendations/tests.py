@@ -478,3 +478,9 @@ class HistoryCrudTests(ViewBase):
         history = self.make_history(self.budi, "Snapshot")
         page = self.client.get(reverse("recommendations:history_detail", args=[history.pk]))
         self.assertContains(page, "Bayam")  # nama tersimpan di snapshot, bukan live query
+        
+    def test_land_name_is_escaped(self):
+        history = self.make_history(self.budi, "<script>alert(1)</script>")
+        page = self.client.get(reverse("recommendations:history_detail", args=[history.pk]))
+        self.assertNotContains(page, "<script>alert(1)</script>")
+        self.assertContains(page, "&lt;script&gt;alert(1)&lt;/script&gt;")
