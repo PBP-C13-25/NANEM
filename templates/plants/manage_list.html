@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Kelola Tanaman - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/plant_manage.css' %}?v=20261027-2">
+{% endblock %}
+
+{% block content %}
+<section class="plant-admin" aria-labelledby="plant-admin-title">
+    <header class="plant-admin__header">
+        <div>
+            <h1 id="plant-admin-title">Kelola Tanaman</h1>
+            <p>Tambah, perbarui, dan hapus data tanaman pada katalog NANEM.</p>
+        </div>
+        <a class="btn btn--primary" href="{% url 'plants:create' %}">+ Tambah Tanaman</a>
+    </header>
+
+    <form class="plant-admin__filters" method="get">
+        <div class="form-group">
+            <label for="manage-query">Cari tanaman</label>
+            <input
+                id="manage-query"
+                type="search"
+                name="q"
+                value="{{ filters.q }}"
+                placeholder="Cari nama atau nama ilmiah"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="manage-category">Kategori</label>
+            <select id="manage-category" name="category">
+                <option value="">Semua kategori</option>
+                {% for value, label in category_choices %}
+                    <option value="{{ value }}"{% if filters.category == value %} selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="manage-medium">Media tanam</label>
+            <select id="manage-medium" name="medium">
+                <option value="">Semua media</option>
+                <option value="soil"{% if filters.medium == 'soil' %} selected{% endif %}>Tanah</option>
+                <option value="hydroponic"{% if filters.medium == 'hydroponic' %} selected{% endif %}>Hidroponik</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="manage-status">Kelengkapan data</label>
+            <select id="manage-status" name="status">
+                <option value="">Semua status</option>
+                <option value="complete"{% if filters.status == 'complete' %} selected{% endif %}>Lengkap</option>
+                <option value="incomplete"{% if filters.status == 'incomplete' %} selected{% endif %}>Belum lengkap</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="manage-sort">Urutkan</label>
+            <select id="manage-sort" name="sort">
+                <option value="name"{% if filters.sort == 'name' %} selected{% endif %}>Nama A–Z</option>
+                <option value="name_desc"{% if filters.sort == 'name_desc' %} selected{% endif %}>Nama Z–A</option>
+                <option value="category"{% if filters.sort == 'category' %} selected{% endif %}>Kategori</option>
+                <option value="updated"{% if filters.sort == 'updated' %} selected{% endif %}>Terakhir diperbarui</option>
+            </select>
+        </div>
+
+        <div class="plant-admin__filter-actions">
+            <button class="btn btn--primary" type="submit">Terapkan</button>
+            <a class="btn btn--ghost" href="{% url 'plants:manage' %}">Reset</a>
+        </div>
+    </form>
+
+    <div class="plant-admin__results-bar">
+        <p>
+            <strong>{{ page_obj.paginator.count }}</strong> hasil dari {{ total_count }} tanaman
+        </p>
+        <p>{{ complete_count }} lengkap · {{ incomplete_count }} perlu dilengkapi</p>
+    </div>
+
+    <div class="plant-admin__table-wrapper">
+        <table class="plant-admin__table">
+            <thead>
+                <tr>
+                    <th scope="col">Tanaman</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Media &amp; cahaya</th>
+                    <th scope="col">Perawatan</th>
+                    <th scope="col">Kelengkapan</th>
+                    <th scope="col">Diperbarui</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plant in plants %}
+                    <tr>
+                        <td>
+                            <div class="plant-admin__identity">
+                                <div class="plant-admin__thumbnail">
+                                    <span>{% include "components/icon.html" with name="sprout" size=22 %}</span>
+                                    {% if plant.image_url %}
+                                        <img src="{{ plant.image_url }}" alt="" loading="lazy" onerror="this.hidden=true">
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <strong>{{ plant.name }}</strong>
+                                    <small>
+                                        {% if plant.scientific_name %}<i>{{ plant.scientific_name }}</i>{% else %}Nama ilmiah belum tersedia{% endif %}
+                                    </small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ plant.get_category_display }}</td>
+                        <td>
+                            <strong>{{ plant.media_label }}</strong>
+                            <small>{{ plant.sunlight_label }}</small>
+                        </td>
+                        <td>{{ plant.care_level|default:"Belum ditentukan" }}</td>
+                        <td>
+                            <span title="{% if plant.missing_fields %}Belum ada: {{ plant.missing_fields|join:', ' }}{% endif %}">
+                                {{ plant.data_status_label }}
+                            </span>
+                        </td>
+                        <td>{{ plant.updated_at|date:"d M Y" }}</td>
+                        <td class="plant-admin__actions">
+                            <a class="plant-admin__action" href="{% url 'plants:update' plant.pk %}">{% include "components/icon.html" with name="pencil" size=16 %}<span>Edit</span></a>
+                            <a class="plant-admin__action plant-admin__action--danger" href="{% url 'plants:delete' plant.pk %}">{% include "components/icon.html" with name="trash" size=16 %}<span>Hapus</span></a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7" class="plant-admin__empty-cell">
+                            {% url 'plants:manage' as manage_url %}
+                            {% include "components/empty_state.html" with icon="search" title="Tanaman tidak ditemukan" text="Coba ubah kata kunci atau kurangi filter yang digunakan." action_url=manage_url action_label="Reset filter" %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if is_paginated %}
+        <nav class="plant-admin__pagination" aria-label="Pagination kelola tanaman">
+            {% if page_obj.has_previous %}
+                <a class="btn btn--outline" href="?{% if query_string %}{{ query_string }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">Sebelumnya</a>
+            {% endif %}
+
+            <span>Halaman {{ page_obj.number }} dari {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a class="btn btn--outline" href="?{% if query_string %}{{ query_string }}&amp;{% endif %}page={{ page_obj.next_page_number }}">Berikutnya</a>
+            {% endif %}
+        </nav>
+    {% endif %}
+</section>
+{% endblock %}
