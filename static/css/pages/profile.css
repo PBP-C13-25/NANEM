@@ -1,70 +1,150 @@
-/* styling utama halaman profil & edit */
+/* card profil & edit profil agar seragam dengan halaman login */
 .card-profile {
-    background: #ffffff !important;
-    border-radius: 16px !important;
-    border: 1px solid rgba(130, 149, 123, 0.15) !important;
-    box-shadow: 0 10px 30px rgba(44, 62, 45, 0.08) !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 700px !important; /* Dikecilkan agar tidak terlalu lebar */
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 15px 35px rgba(44, 62, 45, 0.08) !important;
+    background-color: #ffffff !important;
+}
+
+/* judul yang seragam dengan form login */
+.auth-title {
+    color: #4a6147 !important;
+    font-weight: 700 !important;
+    font-size: 2rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* subtitle yang seragam dengan halaman register */
+.auth-subtitle {
+    color: #6c757d !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.form-label {
+    display: block !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #212529 !important;
+    margin-bottom: 0.6rem !important;
+}
+
+/* base input: background abu-abu tanpa border */
+form input[type="text"],
+form input[type="file"],
+form select,
+form textarea {
+    display: block !important;
     width: 100% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-.card-profile:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(44, 62, 45, 0.12) !important;
-}
-
-/* tombol sage (primary) */
-.btn-sage {
-    background-color: #5c7255 !important;
-    border-color: #5c7255 !important;
-    color: #ffffff !important;
-    border-radius: 10px !important;
-    font-weight: 500;
-    padding: 10px 20px;
-    transition: all 0.25s ease-in-out;
-    box-shadow: 0 4px 10px rgba(92, 114, 85, 0.25);
-}
-
-.btn-sage:hover {
-    background-color: #4a5d44 !important;
-    border-color: #4a5d44 !important;
-    color: #ffffff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(92, 114, 85, 0.35);
-}
-
-/* tombol brown (secondary) */
-.btn-brown {
-    background-color: #9c7b4a !important;
-    border-color: #9c7b4a !important;
-    color: #ffffff !important;
-    border-radius: 10px !important;
-    font-weight: 500;
-    padding: 10px 20px;
-    transition: all 0.25s ease-in-out;
-    box-shadow: 0 4px 10px rgba(156, 123, 74, 0.25);
-}
-
-.btn-brown:hover {
-    background-color: #84673d !important;
-    border-color: #84673d !important;
-    color: #ffffff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(156, 123, 74, 0.35);
-}
-
-/* Custom Form Control agar tidak flat */
-.form-control {
-    border-radius: 10px !important;
-    border: 1.5px solid #d3d0c5 !important;
-    padding: 12px 15px !important;
+    padding: 0.9rem 1.1rem !important;
+    font-size: 0.95rem !important;
+    color: #212529 !important;
+    background-color: #f1f3ed !important;
+    border: 1px solid transparent !important;
+    border-radius: 12px !important;
     transition: all 0.2s ease-in-out;
 }
 
-.form-control:focus {
+form input[type="text"]:focus,
+form select:focus,
+form textarea:focus {
+    background-color: #ffffff !important;
     border-color: #5c7255 !important;
-    box-shadow: 0 0 0 4px rgba(92, 114, 85, 0.15) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* spacing antar field form */
+.form-group-custom {
+    margin-bottom: 1.5rem !important;
+}
+
+/* container aksi & tombol utama */
+.action-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* tombol utama simpan perubahan */
+.btn-login-style {
+    background-color: #52674e !important;
+    border-color: #52674e !important;
+    color: #ffffff !important;
+    border-radius: 50rem !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 2.25rem !important;
+    min-width: 200px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    box-shadow: 0 4px 12px rgba(82, 103, 78, 0.2) !important;
+    border: none !important;
+    cursor: pointer;
+}
+
+.btn-login-style:hover {
+    background-color: #445640 !important;
+    border-color: #445640 !important;
+    color: #ffffff !important;
+    transform: none !important;
+}
+
+/* tombol batal sebagai teks link di bawah tombol utama */
+.btn-cancel-link {
+    display: block;
+    text-align: center;
+    color: #6c757d !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    text-decoration: none !important;
+    margin-top: 1rem !important;
+    transition: color 0.2s;
+}
+
+.btn-cancel-link:hover {
+    color: #212529 !important;
+    text-decoration: underline !important;
+}
+
+/* tombol di profil (edit & ganti password) ditaro di tengah */
+.profile-actions {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    margin-top: 1.5rem !important;
+    width: 100% !important;
+}
+
+.btn-profile-action {
+    background-color: #f1f3ed !important;
+    border: 1px solid #dcdfd8 !important;
+    color: #4a6147 !important;
+    border-radius: 50rem !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    padding: 0.6rem 1.5rem !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease-in-out;
+    display: inline-block !important;
+    text-align: center !important;
+}
+
+.btn-profile-action:hover {
+    background-color: #52674e !important;
+    border-color: #52674e !important;
+    color: #ffffff !important;
+}
+
+.profile-box-custom {
+    max-width: 450px !important;
+    width: 100% !important;
 }
