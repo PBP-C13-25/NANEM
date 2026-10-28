@@ -68,11 +68,13 @@ class PlantCatalogViewTests(TestCase):
         response = self.client.get(reverse("plants:index"), {"q": "tidak-ada"})
         self.assertContains(response, "Tanaman tidak ditemukan")
 
-    def test_catalog_marks_guides_unavailable_until_cultivation_route_exists(self):
+    def test_catalog_links_each_plant_to_its_cultivation_guide(self):
         response = self.client.get(reverse("plants:index"))
-        self.assertContains(response, "Panduan belum tersedia", count=2)
+        self.assertContains(response, "Lihat panduan", count=2)
+        self.assertContains(response, reverse("cultivation:detail", args=[self.kangkung.pk]))
+        self.assertContains(response, reverse("cultivation:detail", args=[self.monstera.pk]))
         self.assertNotContains(response, "Lihat detail")
-
+        
     def test_standalone_plant_detail_route_does_not_exist(self):
         url = f"{reverse('plants:index')}{self.kangkung.pk}/"
         response = self.client.get(url)

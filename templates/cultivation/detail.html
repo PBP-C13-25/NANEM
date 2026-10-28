@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Panduan {{ plant.name }} - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/cultivation.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="cg-page" aria-labelledby="cg-title">
+    <a href="{% url 'plants:index' %}" class="cg-back">&larr; Kembali ke katalog</a>
+
+    <header class="cg-plant">
+        <div class="cg-plant__image">
+            {% if plant.image_url %}
+            <img src="{{ plant.image_url }}" alt="{{ plant.name }}">
+            {% else %}
+            <span>Gambar belum tersedia</span>
+            {% endif %}
+        </div>
+
+        <div class="cg-plant__info">
+            <span class="cg-plant__category">{{ plant.get_category_display }}</span>
+            <h1 id="cg-title">Panduan Budidaya {{ plant.name }}</h1>
+            <p class="cg-plant__scientific">
+                {% if plant.scientific_name %}<i>{{ plant.scientific_name }}</i>{% else %}Kelompok tanaman{% endif %}
+            </p>
+
+            <dl class="cg-plant__facts">
+                <div><dt>Media</dt><dd>{{ plant.media_label }}</dd></div>
+                <div><dt>Cahaya</dt><dd>{{ plant.sunlight_label }}</dd></div>
+                <div><dt>Ruang</dt><dd>{{ plant.get_space_needed_display }}</dd></div>
+            </dl>
+
+            {% if user.is_staff and guide %}
+            <div class="cg-admin-actions">
+                <a href="{% url 'cultivation:update' plant.pk %}" class="btn btn--outline">Edit panduan</a>
+                <a href="{% url 'cultivation:detail' plant.pk %}" class="btn btn--danger" data-modal-open="hapus-panduan">Hapus panduan</a>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    {% if guide %}
+    <section class="cg-steps" aria-labelledby="cg-steps-title">
+        <h2 id="cg-steps-title">Cara Menanam</h2>
+        <ol>
+            {% for step in guide.step_list %}
+            <li>{{ step }}</li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <div class="cg-grid">
+        <article class="cg-card">
+            <h3>Media Tanam</h3>
+            <p>{{ guide.planting_medium|linebreaksbr }}</p>
+        </article>
+        <article class="cg-card">
+            <h3>Kebutuhan Air</h3>
+            <p>{{ guide.water_needs|linebreaksbr }}</p>
+        </article>
+        <article class="cg-card">
+            <h3>Kebutuhan Cahaya</h3>
+            <p>{{ guide.light_needs|linebreaksbr }}</p>
+        </article>
+        <article class="cg-card">
+            <h3>Pemupukan</h3>
+            <p>{{ guide.fertilizing|linebreaksbr }}</p>
+        </article>
+        <article class="cg-card">
+            <h3>Waktu Panen</h3>
+            <p>{{ guide.harvest_time|linebreaksbr }}</p>
+        </article>
+    </div>
+
+    {% if user.is_staff %}
+    {% url 'cultivation:delete' plant.pk as delete_url %}
+    {% include "components/confirm_modal.html" with id="hapus-panduan" title="Hapus panduan?" message="Panduan budidaya ini akan dihapus permanen:" item=plant.name action=delete_url confirm_label="Ya, hapus" danger=True %}
+    {% endif %}
+
+    {% else %}
+        {% if user.is_staff %}
+        {% url 'cultivation:create' plant.pk as create_url %}
+        {% include "components/empty_state.html" with icon="plant" title="Panduan belum tersedia" text="Tanaman ini belum punya panduan budidaya. Tambahkan panduan pertamanya." action_url=create_url action_label="Tambah Panduan" %}
+        {% else %}
+        {% include "components/empty_state.html" with icon="plant" title="Panduan belum tersedia" text="Panduan budidaya untuk tanaman ini sedang disiapkan." %}
+        {% endif %}
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{% if is_edit %}Edit{% else %}Tambah{% endif %} Panduan {{ plant.name }} - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/cultivation.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="card cg-form-card">
+    <h1 class="card__title">{% if is_edit %}Edit{% else %}Tambah{% endif %} Panduan {{ plant.name }}</h1>
+    <p class="card__text">Isi panduan budidaya yang akan tampil di halaman detail tanaman ini.</p>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <ul class="form-errors">
+            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<p class="field-hint">{{ field.help_text }}</p>{% endif %}
+            {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+        {% endfor %}
+
+        <div class="card__actions">
+            <a href="{% url 'cultivation:detail' plant.pk %}" class="btn btn--outline">Batal</a>
+            <button type="submit" class="btn btn--primary">Simpan</button>
+        </div>
+    </form>
+</section>
+{% endblock %}
