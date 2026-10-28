@@ -150,6 +150,8 @@ def recommend(environment: dict, medium: str, land_area: float) -> list:
                 "care_level": plant.care_level or "",
                 "care_level_label": _care_level_label(plant),
                 "indoor": plant.indoor,
+                # Untuk filter
+                "category": plant.category or "",
             }
         )
 

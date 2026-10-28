@@ -13,6 +13,7 @@ from .forms import HistoryLandNameForm, RecommendationForm
 from .models import RecommendationHistory
 from .services.engine import recommend
 from .services.open_meteo import OpenMeteoError, fetch_environment
+from apps.core import ratelimit
 
 # Create your views here.
 SESSION_KEY = "recommendation_result"
@@ -47,6 +48,11 @@ class RecommendationFormView(FormView):
         return initial
     
     def form_valid(self, form):
+        if ratelimit.is_rate_limited(self.request, "recommend_submit", 10):
+            form.add_error(None, "Terlalu banyak percobaan, coba lagi sebentar lagi.")
+            return self.form_invalid(form)
+        ratelimit.hit(self.request, "recommend_submit", 60)
+
         data = form.cleaned_data
         latitude, longitude = data["latitude"], data["longitude"]
 
