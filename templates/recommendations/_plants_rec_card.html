@@ -4,11 +4,12 @@
   Parameter:
     plants : list tanaman (plant_name, scientific_name, match_percentage, reasons,
              plant_id, criteria_count, matched_count,
-             care_level, care_level_label, indoor)
+             care_level, care_level_label, indoor, category)
 
   5 tanaman pertama tampil langsung; sisanya disembunyikan lewat JS dan
-  dimunculkan dengan tombol "Lihat lainnya" (lihat js/pages/plants-card.js).
-  Tanpa JS, semua tanaman tetap tampil.
+  dimunculkan dengan tombol "Lihat lainnya". Kalau tanaman punya lebih dari
+  1 kategori beda, muncul juga chip filter kategori. Semua ini murni JS
+  (lihat js/pages/plants-rec-card.js) -- tanpa JS, semua tanaman tetap tampil.
 {% endcomment %}
 
 <article class="card detail__card">
@@ -19,9 +20,13 @@
     <p class="detail__card-sub">Diurutkan dari yang paling cocok.</p>
 
     {% if plants %}
+        {# Diisi JS kalau kategori tanamannya lebih dari 1 macam; tetap hidden kalau nggak #}
+        <div class="plants-filter" data-plants-filter hidden></div>
+
         <ol class="plants" data-plants data-visible="5">
         {% for plant in plants %}
-            <li class="plant {% if forloop.first %}plant--top {% endif %}{% if plant.match_percentage >= 75 %}plant--high{% elif plant.match_percentage >= 50 %}plant--mid{% else %}plant--low{% endif %}">
+            <li class="plant {% if forloop.first %}plant--top {% endif %}{% if plant.match_percentage >= 75 %}plant--high{% elif plant.match_percentage >= 50 %}plant--mid{% else %}plant--low{% endif %}"
+                data-category="{{ plant.category }}">
                 {# TODO: ganti "#" jadi URL detail/panduan tanaman kalau sudah dipastikan #}
                 <a href="#" class="plant__link" aria-label="Lihat detail {{ plant.plant_name }}">
                     <div class="plant__head">

@@ -529,6 +529,38 @@
   display: none;
 }
 
+/* ---------- Filter berdasarkan kategori ---------- */
+.plants-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.plants-filter__chip {
+  padding: 6px 14px;
+  border: 1px solid #d8ddd0;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.plants-filter__chip:hover {
+  background: #f3f5ee;
+}
+
+.plants-filter__chip.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
 /* RESPONSIVE */
 @media (max-width: 860px) {
   .detail__grid {
