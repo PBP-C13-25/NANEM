@@ -1,4 +1,7 @@
 // AJAX untuk modal ubah nama & hapus di halaman Riwayat
+// Optimistic UI: DOM diubah LANGSUNG begitu user submit, request jalan di
+// background. Kalau server balikin gagal/error, baru di-rollback ke keadaan
+// semula + toast error. Ini bikin UI kerasa instan.
 document.addEventListener("submit", async (e) => {
   const form = e.target.closest("form[data-ajax]");
   if (!form) return; // form biasa -> biarkan jalan normal
@@ -6,6 +9,29 @@ document.addEventListener("submit", async (e) => {
   e.preventDefault();
   const button = form.querySelector('[type="submit"]');
   button.disabled = true;
+
+  const row = document.getElementById(form.dataset.target);
+  const dialog = form.closest("dialog");
+  let rollback = () => {};
+
+  if (form.dataset.ajax === "rename") {
+    const nameEl = row.querySelector("[data-name]");
+    const oldName = nameEl.textContent;
+    const newName = new FormData(form).get("land_name");
+    nameEl.textContent = newName;
+    rollback = () => {
+      nameEl.textContent = oldName;
+    };
+  } else if (form.dataset.ajax === "delete") {
+    const nextSibling = row.nextSibling;
+    const parent = row.parentElement;
+    row.remove();
+    rollback = () => {
+      parent.insertBefore(row, nextSibling);
+    };
+  }
+
+  dialog?.close();
 
   try {
     const response = await fetch(form.action, {
@@ -16,17 +42,12 @@ document.addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (!response.ok || !data.ok) {
+      rollback();
       window.showToast("error", data.message || "Gagal menyimpan.");
       return;
     }
 
-    form.closest("dialog")?.close();
-    const row = document.getElementById(form.dataset.target);
-
-    if (form.dataset.ajax === "rename") {
-      row.querySelector("[data-name]").textContent = data.land_name;
-    } else if (form.dataset.ajax === "delete") {
-      row.remove();
+    if (form.dataset.ajax === "delete") {
       // kalau semua riwayat sudah dihapus, muat ulang biar empty state tampil
       if (!document.querySelector(".history-row")) {
         location.reload();
@@ -37,6 +58,7 @@ document.addEventListener("submit", async (e) => {
 
     window.showToast("success", data.message);
   } catch (err) {
+    rollback();
     window.showToast("error", "Tidak bisa terhubung ke server. Coba lagi.");
   } finally {
     button.disabled = false;

@@ -349,6 +349,25 @@ class RecommendationFlowTests(ViewBase):
         self.assertNotContains(page, 'value="Kebun Prefill"')
 
 
+class RateLimitTests(ViewBase):
+    def test_11th_submission_within_window_is_blocked(self):
+        make_plant("Bayam")
+        for _ in range(10):
+            r = self.submit()
+            self.assertRedirects(r, self.result)
+
+        r = self.submit()
+        self.assertContains(r, "Terlalu banyak percobaan")
+        self.assertEqual(r.status_code, 200) 
+
+    def test_limit_resets_after_cache_cleared(self):
+        make_plant("Bayam")
+        for _ in range(10):
+            self.submit()
+        cache.clear() 
+        r = self.submit()
+        self.assertRedirects(r, self.result)
+
 class SaveHistoryTests(ViewBase):
     def test_guest_save_redirects_to_login(self):
         r = self.client.post(self.save_url)
