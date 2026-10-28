@@ -36,7 +36,7 @@
 
                 {% if user.is_authenticated %}
                     <a href="{% url 'plants:index' %}"
-                       class="nav-link {% if ns == 'plants' and url_name == 'index' %}is-active{% endif %}">
+                       class="nav-link {% if ns == 'plants' %}is-active{% endif %}">
                         {% include "components/icon.html" with name="book-open" %}<span>Katalog</span>
                     </a>
 
@@ -57,12 +57,12 @@
 
                     {% if user.is_staff %}
                         <details class="dropdown dropdown--nav">
-                            <summary class="nav-link {% if ns == 'plants' and url_name != 'index' or url_name == 'kelola_panduan' %}is-active{% endif %}">
+                            <summary class="nav-link {% if url_name == 'kelola_panduan' %}is-active{% endif %}">
                                 {% include "components/icon.html" with name="sliders" %}<span>Kelola</span>
                                 <span class="dropdown__caret">{% include "components/icon.html" with name="chevron-down" size=16 %}</span>
                             </summary>
                             <div class="dropdown__panel">
-                                <a href="{% url 'plants:manage' %}" class="dropdown__item dropdown__item--sub{% if ns == 'plants' and url_name != 'index' %} is-active{% endif %}">Kelola Tanaman</a>
+                                <a href="#" class="dropdown__item dropdown__item--sub">Kelola Tanaman</a>
                                 <a href="{% url 'cultivation:kelola_panduan' %}" class="dropdown__item dropdown__item--sub">Kelola Panduan</a>
                             </div>
                         </details>
