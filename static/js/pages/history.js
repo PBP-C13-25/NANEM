@@ -43,7 +43,7 @@ document.addEventListener("submit", async (e) => {
   }
 });
 
-// Perbarui jumlah teks klo ada riwayat yg dihapus
+// Perbarui teks jumlah setelah ada riwayat yang dihapus
 function updateCount() {
   const count = document.getElementById("history-count");
   if (!count) return;
@@ -55,7 +55,9 @@ function updateCount() {
 }
 
 // ===== Pencarian dengan debounce =====
-const searchInput = document.querySelector('.history-search input[name="q"]');
+const searchInput = document.querySelector(
+  ".history-search .search-field__input",
+);
 
 if (searchInput) {
   let timer;
@@ -75,7 +77,7 @@ if (searchInput) {
       const html = await response.text();
       const doc = new DOMParser().parseFromString(html, "text/html");
 
-      // ganti daftar hasil + teks jumlah
+      // ganti daftar hasil + teks jumlah dengan versi terbaru
       ["history-results", "history-count"].forEach((id) => {
         const current = document.getElementById(id);
         const fresh = doc.getElementById(id);
@@ -90,26 +92,10 @@ if (searchInput) {
     }
   };
 
-  // tombol X buat hapus pencarian
-  const clearBtn = searchInput.form.querySelector("[data-search-clear]");
-  const toggleClear = () => {
-    if (clearBtn) clearBtn.hidden = !searchInput.value;
-  };
-
+  // ketik (atau klik X di komponen search-field) -> cari setelah 300 ms
   searchInput.addEventListener("input", () => {
-    toggleClear();
     clearTimeout(timer);
     timer = setTimeout(runSearch, 300); // tunggu 300 ms setelah ketikan terakhir
-  });
-
-  // klik X for kosongin kolom & tampilkan semua riwayat (tanpa reload)
-  clearBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    searchInput.value = "";
-    toggleClear();
-    clearTimeout(timer);
-    runSearch();
-    searchInput.focus();
   });
 
   // tekan Enter -> langsung cari, tanpa reload halaman
