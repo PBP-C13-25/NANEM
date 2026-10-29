@@ -9,24 +9,16 @@
 {% csrf_token %}
 {% block content %}
 <div class="collection-detail">
-    <a href="{% url 'collection:index' %}" style="color: var(--color-muted); text-decoration: none;">&larr; Kembali ke Koleksi</a>
-    
-    <div class="card" style="margin-top: 20px;">
-        <div class="card-header">
-            {% if request.user == post.owner %}
-                <div>
-                    <a href="{% url 'collection:edit' post.pk %}" class="btn btn-outline">Edit</a>
-                    <!-- Tombol Pemicu Modal Hapus -->
-                    <button data-modal-open="modal-delete" class="btn btn-danger">Hapus</button>
-                </div>
-            {% endif %}
-        </div>
-        
-        <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 500px;">
+
+    <a href="{% url 'collection:index' %}" class="btn-back" style="display: inline-block; margin-bottom: 20px; text-decoration: none;">
+    ← Kembali ke Koleksi
+    </a>
+    <div class="card"> 
+        <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 380px;">
         
         <div class="card-body">
-            <div style="margin-bottom: 16px;">
-                {% csrf_token %} <!-- Digunakan oleh JS untuk fetch -->
+            <div style="margin-bottom: 12px;">
+                {% csrf_token %}
                 <button type="button" class="btn-like {% if user in post.likes.all %}is-liked{% endif %}" id="like-btn" data-id="{{ post.pk }}">
                     <span id="like-icon" class="icon-like-wrapper {% if user in post.likes.all %}is-active{% endif %}">
                         {% include "components/icon.html" with name="heart" size=20 %}
@@ -34,9 +26,18 @@
                     <span id="like-count">{{ post.likes.count }}</span>
                 </button>
             </div>
-            <h1 class="card-title" style="color: var(--color-primary);">{{ post.title }}</h1>
+            <h1 class="card-title" style="color: var(--color-primary); margin-top: 0;">{{ post.title }}</h1>
+            <div class="card-author">
+                <strong>{{ post.owner.first_name|default:post.owner.username }}</strong>
+            </div>
             <p class="card-desc">{{ post.description|linebreaksbr }}</p>
-            <strong>{{ post.owner.first_name|default:user.username}}</strong>
+            <span class="card-time" style="font-size: 0.75rem; color: var(--color-muted); font-weight: 500; opacity: 0.85; letter-spacing: 0.02em;">
+                {{ post.created_at|timesince|truncatewords:2|cut:","|cut:"…"}} yang lalu
+            </span>    
+        </div>
+        <div class="card__actions" style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; width: 100%;">
+            <a href="{% url 'collection:edit' post.pk %}" class="btn btn--outline">Edit</a>
+            <button type="button" class="btn btn--danger" data-modal-target="#modal-delete">Hapus</button>
         </div>
     </div>
 </div>

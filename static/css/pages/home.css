@@ -1,0 +1,167 @@
+/* NANEM - HOME PAGE */
+
+.home-container {
+  max-width: 800px;
+  margin: 48px auto;
+  padding: 0 20px;
+}
+
+/* TAMPILAN GUEST (BELUM LOGIN) */
+.home-guest {
+  display: flex;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.guest-hero__tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #f0f4ed;
+  color: var(--color-primary, #2d5a27);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.guest-hero__title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-text, #111827);
+  line-height: 1.25;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.guest-hero__sub {
+  font-size: 1.05rem;
+  color: var(--color-muted, #6b7280);
+  max-width: 580px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+.guest-hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 64px;
+}
+
+.guest-hero__actions .btn {
+  height: 46px;
+  padding: 0 24px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.guest-hero__actions .btn--primary {
+  background: var(--color-primary, #2d5a27);
+  color: #ffffff;
+}
+
+.guest-hero__actions .btn--primary:hover {
+  background: #23471e;
+}
+
+.guest-hero__actions .btn--outline {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+
+.guest-hero__actions .btn--outline:hover {
+  background: #f8faf6;
+}
+
+/* TAMPILAN USER (SUDAH LOGIN) */
+.home-user {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.user-greeting {
+  background: #f8faf6;
+  border: 1px solid #e4ebd9;
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.user-greeting__badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary, #2d5a27);
+}
+
+.user-greeting__title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-text, #111827);
+  margin: 8px 0 6px;
+}
+
+.user-greeting__sub {
+  font-size: 0.95rem;
+  color: var(--color-muted, #6b7280);
+  margin: 0;
+}
+
+/* Quick nav untuk yang sudah login */
+.quick-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.quick-nav__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.quick-nav__item:hover {
+  border-color: #c3d9bc;
+  box-shadow: 0 4px 12px rgba(45, 90, 39, 0.06);
+  transform: translateY(-2px);
+}
+
+.quick-nav__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #e4ebd9;
+  color: var(--color-primary, #2d5a27);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.quick-nav__text h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text, #111827);
+  margin: 0 0 4px;
+}
+
+.quick-nav__text p {
+  font-size: 0.85rem;
+  color: var(--color-muted, #6b7280);
+  margin: 0;
+  line-height: 1.4;
+}

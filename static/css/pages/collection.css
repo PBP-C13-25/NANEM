@@ -1,46 +1,67 @@
 /* FEED SECTION */
 .collection-feed, .collection-detail, .form-container {
-    max-width: 800px;
-    margin: 0 auto;
+  max-width: 800px;
+  margin: 0 auto;
+}
+/* Memaksa area grid feed menjadi 1 kolom saja */
+.feed-grid,
+div.feed-grid,
+.tab-content .feed-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 680px !important; /* Lebar kartu ideal agar tidak terlalu melar */
+  margin: 0 auto !important;
+  gap: 24px !important;
 }
 
+/* Memaksa setiap kartu mengambil lebar 100% dari container */
+.feed-grid .card {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
 .feed-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .feed-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 24px !important;
+  width: 100% !important;
 }
 
 .card {
-    background: var(--color-surface); 
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+  background: var(--color-surface); 
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  width: 100% !important;
+  box-sizing: border-box;
 }
 
 .card-header {
-    padding: 16px;
-    border-bottom: 1px solid var(--color-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
 }
 
 .card-img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
+  width: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
 .card-body {
-    padding: 16px;
+  padding: 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .card-title {
@@ -53,6 +74,19 @@
     color: var(--color-muted);
     font-size: 0.95rem;
     margin-bottom: 16px;
+}
+.card-time {
+    color: var(--color-muted);
+    font-size: 0.02rem;
+    margin-bottom: 1px;
+}
+
+.card__actions {
+  display: flex !important;
+  justify-content: flex-end !important; 
+  align-items: center !important;
+  gap: 10px !important;                
+  width: 100% !important;
 }
 
 /* Tombol */

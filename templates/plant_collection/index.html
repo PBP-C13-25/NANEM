@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/pages/collection.css' %}">
 {% endblock %}
 {% csrf_token %}
+
 {% block content %}
 <div class="collection-feed">
     <div class="feed-header">
@@ -28,21 +29,51 @@
     
     <!-- TAB 1: Semua Koleksi -->
     <div id="tab-all" class="tab-content active">
-        <div class="feed-grid">
+        <div class="feed-grid" style="display: flex; flex-direction: column; width: 100%; max-width: 640px; margin: 0 auto; gap: 24px;">
             {% for post in posts %}
-            <div class="card">
-                {% if post.photo %}
-                    <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 250px;">
-                {% else %}
-                    <div class="card-img" style="background: #eee; display: flex; align-items: center; justify-content: center;">Gambar tidak tersedia</div>
-                {% endif %}
+            <div class="card">    
+                <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 380px;">
+                
                 <div class="card-body">
-                    <h2 class="card-title" style="margin-top: 0;">{{ post.title }}</h2>
-                    <p class="card-desc">{{ post.description|truncatewords:10 }}</p>
-                    <strong>{{ post.owner.first_name|default:post.owner.username}}</strong> 
+                    <div style="margin-bottom: 12px;">
+                        {% csrf_token %}
+                        <button type="button" class="btn-like {% if user in post.likes.all %}is-liked{% endif %}" id="like-btn" data-id="{{ post.pk }}">
+                            <span id="like-icon" class="icon-like-wrapper {% if user in post.likes.all %}is-active{% endif %}">
+                                {% include "components/icon.html" with name="heart" size=20 %}
+                            </span>
+                            <span id="like-count">{{ post.likes.count }}</span>
+                        </button>
+                    </div>
+                    <h1 class="card-title" style="color: var(--color-primary); margin-top: 0;">{{ post.title }}</h1>
+                    <div class="card-author">
+                        <strong>{{ post.owner.first_name|default:post.owner.username }}</strong>
+                    </div>
+                    <p class="card-desc">{{ post.description|linebreaksbr }}</p>
+                    <span class="card-time" style="font-size: 0.75rem; color: var(--color-muted); font-weight: 500; opacity: 0.85; letter-spacing: 0.02em;">
+                        {{ post.created_at|timesince|truncatewords:2|cut:","|cut:"…"}} yang lalu
+                    </span>
                 </div>
-                <a href="{% url 'collection:detail' post.pk %}" class="btn btn-outline-detail" style="font-size: 0.9rem;">Lihat Detail</a>
+                {% if request.user == post.owner %}
+                    <div class="card__actions" style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; width: 100%;">
+                        <a href="{% url 'collection:edit' post.pk %}" class="btn btn--outline">Edit</a>
+                        <button type="button" class="btn btn--danger" data-modal-target="#modal-delete">Hapus</button>
+                    </div>
+                {% endif %}
             </div>
+
+            {% if request.user == post.owner %}
+                <!-- Modal Dialog untuk Hapus -->
+                <dialog class="modal" id="modal-delete" style="border: none; border-radius: var(--radius-md); padding: 24px; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                    <h3 style="margin-top: 0; color: var(--color-danger);">Hapus Postingan</h3>
+                    <p>Apakah Anda yakin ingin menghapus <strong>{{ post.title }}</strong>? Tindakan ini tidak dapat dibatalkan.</p>
+                    
+                    <form method="POST" action="{% url 'collection:delete' post.pk %}" style="display: flex; gap: 12px; margin-top: 24px; justify-content: flex-end;">
+                        {% csrf_token %}
+                        <button type="button" class="btn btn-outline" data-modal-close>Batal</button>
+                        <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                    </form>
+                </dialog>
+            {% endif %}
             {% empty %}
             <div style="grid-column: 1 / -1; text-align: center; color: var(--color-muted); padding: 40px;">
                 <p>Belum ada postingan koleksi. Jadilah yang pertama!</p>
@@ -53,24 +84,52 @@
 
     <!-- TAB 2: Koleksi Saya -->
     <div id="tab-my" class="tab-content">
-        <div class="feed-grid">
+        <div class="feed-grid" style="display: flex; flex-direction: column; width: 100%; max-width: 640px; margin: 0 auto; gap: 24px;">
             {% for post in my_posts %}
-            <div class="card">
-                {% if post.photo %}
-                    <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 250px;">
-                {% else %}
-                    <div class="card-img" style="background: #eee; display: flex; align-items: center; justify-content: center;">Gambar tidak tersedia</div>
-                {% endif %}
+            <div class="card"> 
+                <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 380px;">
+                
                 <div class="card-body">
-                    <h2 class="card-title" style="margin-top: 0;">{{ post.title }}</h2>
-                    <p class="card-desc">{{ post.description|truncatewords:10 }}</p>
-                    <strong>{{ post.owner.first_name|default:post.owner.username}}</strong> 
+                    <div style="margin-bottom: 12px;">
+                        {% csrf_token %}
+                        <button type="button" class="btn-like {% if user in post.likes.all %}is-liked{% endif %}" id="like-btn" data-id="{{ post.pk }}">
+                            <span id="like-icon" class="icon-like-wrapper {% if user in post.likes.all %}is-active{% endif %}">
+                                {% include "components/icon.html" with name="heart" size=20 %}
+                            </span>
+                            <span id="like-count">{{ post.likes.count }}</span>
+                        </button>
+                    </div>
+                    <h1 class="card-title" style="color: var(--color-primary); margin-top: 0;">{{ post.title }}</h1>
+                    <div class="card-author">
+                        <strong>{{ post.owner.first_name|default:post.owner.username }}</strong>
+                    </div>
+                    <p class="card-desc">{{ post.description|linebreaksbr }}</p>
+                    <span class="card-time" style="font-size: 0.75rem; color: var(--color-muted); font-weight: 500; opacity: 0.85; letter-spacing: 0.02em;">
+                        {{ post.created_at|timesince|truncatewords:2|cut:","|cut:"…"}} yang lalu
+                    </span>
                 </div>
-                <a href="{% url 'collection:detail' post.pk %}" class="btn btn-outline" style="font-size: 0.9rem;">Lihat Detail</a>
-            </div>   
+                <div class="card__actions" style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; width: 100%;">
+                    <a href="{% url 'collection:edit' post.pk %}" class="btn btn--outline">Edit</a>
+                    <button type="button" class="btn btn--danger" data-modal-target="#modal-delete">Hapus</button>
+                </div>
+            </div>
+
+            {% if request.user == post.owner %}
+                <!-- Modal Dialog untuk Hapus -->
+                <dialog class="modal" id="modal-delete" style="border: none; border-radius: var(--radius-md); padding: 24px; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                    <h3 style="margin-top: 0; color: var(--color-danger);">Hapus Postingan</h3>
+                    <p>Apakah Anda yakin ingin menghapus <strong>{{ post.title }}</strong>? Tindakan ini tidak dapat dibatalkan.</p>
+                    
+                    <form method="POST" action="{% url 'collection:delete' post.pk %}" style="display: flex; gap: 12px; margin-top: 24px; justify-content: flex-end;">
+                        {% csrf_token %}
+                        <button type="button" class="btn btn-outline" data-modal-close>Batal</button>
+                        <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                    </form>
+                </dialog>
+            {% endif %}
             {% empty %}
             <div style="grid-column: 1 / -1; text-align: center; color: var(--color-muted); padding: 40px;">
-                <p>Yahh, masih kosong nih. Ayo posting koleksi tanamanmu dan share ke semua orang!</p>
+                <p>Yahhh, kamu belum posting apapun nih. Ayo posting tanamanmu lalu share ke semua orang!</p>
             </div>
             {% endfor %}
         </div>
