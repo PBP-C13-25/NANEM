@@ -4,9 +4,15 @@
   padding: 24px 0 48px;
 }
 
+.cg-back-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 18px;
+}
+
 .cg-back {
   display: inline-block;
-  margin-bottom: 18px;
   color: var(--color-primary);
   font-weight: 600;
   text-decoration: none;

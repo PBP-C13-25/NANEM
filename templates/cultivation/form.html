@@ -12,6 +12,11 @@
     <h1 class="card__title">{% if is_edit %}Edit{% else %}Tambah{% endif %} Panduan {{ plant.name }}</h1>
     <p class="card__text">Isi panduan budidaya yang akan tampil di halaman detail tanaman ini.</p>
 
+    <p class="field-hint">
+        Media tanam, kebutuhan air, dan kebutuhan cahaya diambil dari data katalog tanaman, jadi tidak diisi di sini.
+        Ubah lewat <a href="{% url 'plants:update' plant.pk %}">Kelola Tanaman</a>.
+    </p>
+    
     <form method="post" novalidate>
         {% csrf_token %}
 

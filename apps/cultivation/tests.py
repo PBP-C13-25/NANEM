@@ -9,9 +9,7 @@ from .models import CultivationGuide
 
 GUIDE_DATA = {
     "planting_steps": "Rendam benih\n\nTebar benih\nSiram setiap pagi",
-    "planting_medium": "Tanah gembur",
-    "water_needs": "Siram sekali sehari",
-    "light_needs": "Matahari penuh",
+    "watering_frequency": "Setiap pagi",
     "fertilizing": "Pupuk kompos setiap 2 minggu",
     "harvest_time": "30 hari setelah tanam",
 }
@@ -51,14 +49,35 @@ class CultivationGuideTests(TestCase):
     def test_detail_shows_guide_of_that_plant_only(self):
         self.create_guide(self.kangkung)
         CultivationGuide.objects.create(
-            plant=self.bayam, **{**GUIDE_DATA, "planting_medium": "Rockwool khusus bayam"}
+            plant=self.bayam, **{**GUIDE_DATA, "fertilizing": "Pupuk khusus bayam"}
         )
         self.client.force_login(self.user)
         response = self.client.get(self.detail_url(self.kangkung))
         self.assertContains(response, "Panduan Budidaya Kangkung")
-        self.assertContains(response, "Tanah gembur")
-        self.assertNotContains(response, "Rockwool khusus bayam")
+        self.assertContains(response, "Pupuk kompos setiap 2 minggu")
+        self.assertNotContains(response, "Pupuk khusus bayam")
 
+    def test_detail_takes_medium_water_and_light_from_catalog(self):
+        self.kangkung.supports_soil = True
+        self.kangkung.supports_hydroponic = True
+        self.kangkung.watering = "Frequent"
+        self.kangkung.save()
+        self.create_guide(self.kangkung)
+        self.client.force_login(self.user)
+        response = self.client.get(self.detail_url(self.kangkung))
+        self.assertContains(response, "Tanah, Hidroponik")
+        self.assertContains(response, "Sering")
+        self.assertContains(response, "Matahari penuh")
+
+    def test_form_has_no_fields_duplicated_from_catalog(self):
+        self.client.force_login(self.admin)
+        response = self.client.get(reverse("cultivation:create", args=[self.kangkung.pk]))
+        form = response.context["form"]
+        self.assertEqual(
+            list(form.fields),
+            ["planting_steps", "watering_frequency", "fertilizing", "harvest_time"],
+        )
+        
     def test_detail_without_guide_shows_empty_state_without_admin_buttons(self):
         self.client.force_login(self.user)
         response = self.client.get(self.detail_url(self.kangkung))
@@ -155,10 +174,88 @@ class CultivationGuideTests(TestCase):
         self.kangkung.delete()
         self.assertFalse(CultivationGuide.objects.exists())
 
-    def test_cultivation_root_redirects_to_catalog(self):
+    def test_detail_shows_watering_frequency(self):
+        self.create_guide(self.kangkung)
+        self.client.force_login(self.user)
+        response = self.client.get(self.detail_url(self.kangkung))
+        self.assertContains(response, "Frekuensi Penyiraman")
+        self.assertContains(response, "Setiap pagi")
+
+    def test_list_requires_login(self):
+        response = self.client.get(reverse("cultivation:index"))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/accounts/login/", response.url)
+
+    def test_list_shows_only_plants_with_guides(self):
+        self.create_guide(self.kangkung)
         self.client.force_login(self.user)
         response = self.client.get(reverse("cultivation:index"))
-        self.assertRedirects(response, reverse("plants:index"))
+        self.assertContains(response, "Kangkung")
+        self.assertNotContains(response, "Bayam")
+        self.assertContains(response, self.detail_url(self.kangkung))
+
+    def test_list_empty_state(self):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse("cultivation:index"))
+        self.assertContains(response, "Panduan tidak ditemukan")
+
+    def test_list_filters_by_search_category_and_medium(self):
+        self.create_guide(self.kangkung)
+        monstera = Plant.objects.create(
+            name="Monstera", category="hias", supports_soil=True,
+            supports_hydroponic=False, space_needed="medium",
+        )
+        self.create_guide(monstera)
+        self.kangkung.supports_hydroponic = True
+        self.kangkung.save()
+        self.client.force_login(self.user)
+        url = reverse("cultivation:index")
+
+        response = self.client.get(url, {"q": "monst"})
+        self.assertContains(response, "Monstera")
+        self.assertNotContains(response, "Kangkung")
+
+        response = self.client.get(url, {"category": "sayur"})
+        self.assertContains(response, "Kangkung")
+        self.assertNotContains(response, "Monstera")
+
+        response = self.client.get(url, {"medium": "hydroponic"})
+        self.assertContains(response, "Kangkung")
+        self.assertNotContains(response, "Monstera")
+
+    def test_list_invalid_filters_fall_back_to_defaults(self):
+        self.client.force_login(self.user)
+        response = self.client.get(
+            reverse("cultivation:index"),
+            {"category": "xxx", "medium": "xxx", "sort": "xxx"},
+        )
+        self.assertEqual(response.context["filters"]["category"], "")
+        self.assertEqual(response.context["filters"]["medium"], "")
+        self.assertEqual(response.context["filters"]["sort"], "name")
+
+    def test_list_sort_name_desc(self):
+        self.create_guide(self.kangkung)
+        self.create_guide(self.bayam)
+        self.client.force_login(self.user)
+        response = self.client.get(reverse("cultivation:index"), {"sort": "name_desc"})
+        names = [guide.plant.name for guide in response.context["guides"]]
+        self.assertEqual(names, ["Kangkung", "Bayam"])
+
+    def test_list_pagination_keeps_filters(self):
+        for index in range(7):
+            plant = Plant.objects.create(
+                name=f"Sayur {index}", category="sayur", space_needed="small"
+            )
+            self.create_guide(plant)
+        self.client.force_login(self.user)
+        response = self.client.get(reverse("cultivation:index"), {"category": "sayur"})
+        self.assertTrue(response.context["is_paginated"])
+        self.assertContains(response, "category=sayur&amp;page=2")
+
+    def test_catalog_links_to_guide_list(self):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse("plants:index"))
+        self.assertContains(response, reverse("cultivation:index"))
 
     def test_navbar_has_no_cultivation_links(self):
         self.create_guide(self.kangkung)

@@ -1,10 +1,12 @@
 from django.contrib import messages
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
-from django.views.generic import CreateView, TemplateView, UpdateView
+from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 
 from apps.core.mixins import ActiveUserRequiredMixin, AdminRequiredMixin
+from apps.plants.forms import WATERING_CHOICES
 from apps.plants.models import Plant
 from apps.plants.views import prepare_plant_display
 
@@ -23,7 +25,61 @@ class PlantMixin:
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["plant"] = prepare_plant_display(self.get_plant())
+        plant = prepare_plant_display(self.get_plant())
+        plant.water_label = dict(WATERING_CHOICES).get(plant.watering) or "Belum ditentukan"
+        context["plant"] = plant
+        return context
+
+class GuideListView(ActiveUserRequiredMixin, ListView):
+    model = CultivationGuide
+    template_name = "cultivation/list.html"
+    context_object_name = "guides"
+    paginate_by = 6
+
+    def get_queryset(self):
+        queryset = CultivationGuide.objects.select_related("plant")
+        self.filters = {
+            "q": self.request.GET.get("q", "").strip(),
+            "category": self.request.GET.get("category", "").strip(),
+            "medium": self.request.GET.get("medium", "").strip(),
+            "sort": self.request.GET.get("sort", "name").strip(),
+        }
+
+        if self.filters["q"]:
+            queryset = queryset.filter(
+                Q(plant__name__icontains=self.filters["q"])
+                | Q(plant__scientific_name__icontains=self.filters["q"])
+            )
+
+        if self.filters["category"] in dict(Plant.CATEGORY_CHOICES):
+            queryset = queryset.filter(plant__category=self.filters["category"])
+        else:
+            self.filters["category"] = ""
+
+        if self.filters["medium"] == "soil":
+            queryset = queryset.filter(plant__supports_soil=True)
+        elif self.filters["medium"] == "hydroponic":
+            queryset = queryset.filter(plant__supports_hydroponic=True)
+        else:
+            self.filters["medium"] = ""
+
+        sort_fields = {"name": "plant__name", "name_desc": "-plant__name", "newest": "-updated_at"}
+        if self.filters["sort"] not in sort_fields:
+            self.filters["sort"] = "name"
+        return queryset.order_by(sort_fields[self.filters["sort"]], "plant__name")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for guide in context["guides"]:
+            prepare_plant_display(guide.plant)
+
+        query = self.request.GET.copy()
+        query.pop("page", None)
+        context.update(
+            filters=self.filters,
+            category_choices=Plant.CATEGORY_CHOICES,
+            query_string=query.urlencode(),
+        )
         return context
 
 

@@ -10,9 +10,7 @@ class CultivationGuide(models.Model):
         related_name="cultivation_guide",
     )
     planting_steps = models.TextField()
-    planting_medium = models.TextField()
-    water_needs = models.TextField()
-    light_needs = models.TextField()
+    watering_frequency = models.TextField()
     fertilizing = models.TextField()
     harvest_time = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

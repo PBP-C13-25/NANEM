@@ -9,7 +9,10 @@
 
 {% block content %}
 <section class="cg-page" aria-labelledby="cg-title">
-    <a href="{% url 'plants:index' %}" class="cg-back">&larr; Kembali ke katalog</a>
+    <div class="cg-back-links">
+        <a href="{% url 'plants:index' %}" class="cg-back">&larr; Kembali ke katalog</a>
+        <a href="{% url 'cultivation:index' %}" class="cg-back">Semua panduan</a>
+    </div>
 
     <header class="cg-plant">
         <div class="cg-plant__image">
@@ -55,15 +58,19 @@
     <div class="cg-grid">
         <article class="cg-card">
             <h3>Media Tanam</h3>
-            <p>{{ guide.planting_medium|linebreaksbr }}</p>
+            <p>{{ plant.media_label }}</p>
         </article>
         <article class="cg-card">
             <h3>Kebutuhan Air</h3>
-            <p>{{ guide.water_needs|linebreaksbr }}</p>
+            <p>{{ plant.water_label }}</p>
+        </article>
+        <article class="cg-card">
+            <h3>Frekuensi Penyiraman</h3>
+            <p>{{ guide.watering_frequency|linebreaksbr }}</p>
         </article>
         <article class="cg-card">
             <h3>Kebutuhan Cahaya</h3>
-            <p>{{ guide.light_needs|linebreaksbr }}</p>
+            <p>{{ plant.sunlight_label }}</p>
         </article>
         <article class="cg-card">
             <h3>Pemupukan</h3>

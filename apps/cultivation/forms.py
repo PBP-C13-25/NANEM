@@ -8,17 +8,13 @@ class CultivationGuideForm(forms.ModelForm):
         model = CultivationGuide
         fields = (
             "planting_steps",
-            "planting_medium",
-            "water_needs",
-            "light_needs",
+            "watering_frequency",
             "fertilizing",
             "harvest_time",
         )
         labels = {
             "planting_steps": "Cara menanam",
-            "planting_medium": "Media tanam",
-            "water_needs": "Kebutuhan air",
-            "light_needs": "Kebutuhan cahaya",
+            "watering_frequency": "Frekuensi penyiraman",
             "fertilizing": "Pemupukan",
             "harvest_time": "Waktu panen",
         }
@@ -30,9 +26,7 @@ class CultivationGuideForm(forms.ModelForm):
                 "rows": 6,
                 "placeholder": "Contoh:\nRendam benih selama 6 jam\nTebar benih di media tanam\nSiram secukupnya setiap pagi",
             }),
-            "planting_medium": forms.Textarea(attrs={"rows": 3}),
-            "water_needs": forms.Textarea(attrs={"rows": 3}),
-            "light_needs": forms.Textarea(attrs={"rows": 3}),
+            "watering_frequency": forms.Textarea(attrs={"rows": 3}),
             "fertilizing": forms.Textarea(attrs={"rows": 3}),
             "harvest_time": forms.Textarea(attrs={"rows": 3}),
         }
