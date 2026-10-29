@@ -15,7 +15,7 @@ from .konstan import MEDIUM_HYDROPONIC, MEDIUM_SOIL, land_area_to_capacity, summ
 from .forms import RecommendationForm
 from .models import RecommendationHistory
 from .services import open_meteo
-from .services.engine import fits_land_area, recommend, score_plant
+from .services.engine import _care_level_label, fits_land_area, recommend, score_plant, supports_medium
 from .services.open_meteo import OpenMeteoError, fetch_environment
 
 User = get_user_model()
@@ -59,6 +59,10 @@ class ConstantsTests(SimpleTestCase):
         self.assertEqual(summary["temperature_label"], "Panas")
         self.assertEqual(summary["humidity_label"], "Kering")
         self.assertEqual(summary["rainfall_label"], "Tinggi")
+        
+    def test_band_label_falls_back_to_last_label_for_nan(self):
+        result = konstan._band_label(float("nan"), konstan.TEMPERATURE_BANDS)
+        self.assertEqual(result, "Panas")
 
 
 #* TEST ENGINE
@@ -72,7 +76,32 @@ class LandAreaGateTests(SimpleTestCase):
         for need in ("small", "medium", "large"):
             self.assertTrue(fits_land_area(fake_plant(need), 100))
 
+class SupportsMediumTests(SimpleTestCase):
+    def test_hydroponic_medium(self):
+        self.assertTrue(supports_medium(fake_plant(supports_hydroponic=True), MEDIUM_HYDROPONIC))
+        self.assertFalse(supports_medium(fake_plant(supports_hydroponic=False), MEDIUM_HYDROPONIC))
 
+    def test_unknown_medium_returns_false(self):
+        self.assertFalse(supports_medium(fake_plant(), "aeroponic"))
+
+
+class LandAreaGateInvalidSpaceTests(SimpleTestCase):
+    def test_empty_space_needed_is_excluded(self):
+        self.assertFalse(fits_land_area(fake_plant(space_needed=""), 10))
+
+
+class CareLevelLabelTests(SimpleTestCase):
+    def test_known_care_level_mapped(self):
+        self.assertEqual(_care_level_label(fake_plant(care_level="low")), "Mudah")
+
+    def test_unknown_care_level_uses_display_method(self):
+        plant = fake_plant(care_level="extreme")
+        plant.get_care_level_display = lambda: "Ekstrem"
+        self.assertEqual(_care_level_label(plant), "Ekstrem")
+
+    def test_unknown_care_level_without_display_uses_raw(self):
+        self.assertEqual(_care_level_label(fake_plant(care_level="extreme")), "extreme")
+        
 class ScoringTests(SimpleTestCase):
     def full(self, **kw):
         d = dict(temp_min=20, temp_max=32, humidity_min=60, humidity_max=90,
@@ -246,6 +275,28 @@ class OpenMeteoTests(SimpleTestCase):
         fetch_environment(-6.2002, 106.8002)
         self.assertEqual(get.call_count, 1)
 
+    @mock.patch.object(open_meteo.requests, "get")
+    def test_payload_not_dict_raises_error(self, get):
+        get.return_value = fake_response(["not", "a", "dict"])
+        with self.assertRaises(OpenMeteoError):
+            fetch_environment(2, 2)
+
+    @mock.patch.object(open_meteo.requests, "get")
+    def test_payload_with_error_key_raises_error(self, get):
+        get.return_value = fake_response({"error": True})
+        with self.assertRaises(OpenMeteoError):
+            fetch_environment(3, 3)
+
+    @mock.patch.object(open_meteo.requests, "get")
+    def test_missing_expected_key_raises_error(self, get):
+        get.return_value = fake_response({"hourly": {"temperature_2m": [1, 2]}})
+        with self.assertRaises(OpenMeteoError):
+            fetch_environment(4, 4)
+
+    def test_mean_of_all_none_raises_error(self):
+        from apps.recommendations.services.open_meteo import _mean
+        with self.assertRaises(OpenMeteoError):
+            _mean([None, None])
 
 #* TEST INPUT FORM REKOMENDASI
 class RecommendationFormTests(SimpleTestCase):
@@ -368,6 +419,73 @@ class RateLimitTests(ViewBase):
         r = self.submit()
         self.assertRedirects(r, self.result)
 
+class RecommendationResultDirectAccessTests(ViewBase):
+    def test_result_without_session_redirects_to_index(self):
+        r = self.client.get(self.result)
+        self.assertRedirects(r, self.index)
+
+
+class SaveHistoryWithoutSessionTests(ViewBase):
+    def test_save_without_prior_submission_redirects_with_error(self):
+        self.client.force_login(self.budi)
+        r = self.client.post(self.save_url)
+        self.assertRedirects(r, self.index)
+        self.assertEqual(RecommendationHistory.objects.count(), 0)
+
+
+class HistorySearchTests(ViewBase):
+    def setUp(self):
+        super().setUp()
+        self.client.force_login(self.budi)
+        self.make_history(self.budi, "Kebun Depan")
+        self.make_history(self.budi, "Taman Belakang")
+
+    def test_search_filters_by_land_name(self):
+        page = self.client.get(self.list_url, {"q": "Depan"})
+        self.assertContains(page, "Kebun Depan")
+        self.assertNotContains(page, "Taman Belakang")
+
+
+class HistoryUpdateExtraTests(ViewBase):
+    def setUp(self):
+        super().setUp()
+        self.client.force_login(self.budi)
+        self.history = self.make_history(self.budi, "Lama")
+
+    def test_success_url_honors_safe_next_param(self):
+        r = self.client.post(
+            reverse("recommendations:history_update", args=[self.history.pk]),
+            {"land_name": "Baru", "latitude": "1", "land_area": "999", "next": self.list_url},
+        )
+        self.assertRedirects(r, self.list_url)
+
+    def test_ajax_update_returns_json(self):
+        r = self.client.post(
+            reverse("recommendations:history_update", args=[self.history.pk]),
+            {"land_name": "Baru AJAX", "latitude": "1", "land_area": "999"},
+            HTTP_X_REQUESTED_WITH="XMLHttpRequest",
+        )
+        data = r.json()
+        self.assertTrue(data["ok"])
+        self.assertEqual(data["land_name"], "Baru AJAX")
+
+    def test_ajax_update_invalid_returns_json_error(self):
+        r = self.client.post(
+            reverse("recommendations:history_update", args=[self.history.pk]),
+            {"land_name": "", "latitude": "1", "land_area": "999"},
+            HTTP_X_REQUESTED_WITH="XMLHttpRequest",
+        )
+        self.assertEqual(r.status_code, 400)
+        self.assertFalse(r.json()["ok"])
+
+    def test_ajax_delete_returns_json(self):
+        r = self.client.post(
+            reverse("recommendations:history_delete", args=[self.history.pk]),
+            HTTP_X_REQUESTED_WITH="XMLHttpRequest",
+        )
+        self.assertTrue(r.json()["ok"])
+        self.assertFalse(RecommendationHistory.objects.filter(pk=self.history.pk).exists())
+        
 class SaveHistoryTests(ViewBase):
     def test_guest_save_redirects_to_login(self):
         r = self.client.post(self.save_url)
@@ -478,3 +596,9 @@ class HistoryCrudTests(ViewBase):
         history = self.make_history(self.budi, "Snapshot")
         page = self.client.get(reverse("recommendations:history_detail", args=[history.pk]))
         self.assertContains(page, "Bayam")  # nama tersimpan di snapshot, bukan live query
+        
+    def test_land_name_is_escaped(self):
+        history = self.make_history(self.budi, "<script>alert(1)</script>")
+        page = self.client.get(reverse("recommendations:history_detail", args=[history.pk]))
+        self.assertNotContains(page, "<script>alert(1)</script>")
+        self.assertContains(page, "&lt;script&gt;alert(1)&lt;/script&gt;")
