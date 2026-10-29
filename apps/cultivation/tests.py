@@ -77,7 +77,7 @@ class CultivationGuideTests(TestCase):
             list(form.fields),
             ["planting_steps", "watering_frequency", "fertilizing", "harvest_time"],
         )
-        
+
     def test_detail_without_guide_shows_empty_state_without_admin_buttons(self):
         self.client.force_login(self.user)
         response = self.client.get(self.detail_url(self.kangkung))
@@ -257,9 +257,48 @@ class CultivationGuideTests(TestCase):
         response = self.client.get(reverse("plants:index"))
         self.assertContains(response, reverse("cultivation:index"))
 
-    def test_navbar_has_no_cultivation_links(self):
-        self.create_guide(self.kangkung)
+    def test_navbar_shows_kelola_panduan_only_for_admin(self):
         self.client.force_login(self.admin)
         response = self.client.get(reverse("plants:index"))
-        self.assertNotContains(response, "Kelola Panduan")
+        self.assertContains(response, reverse("cultivation:kelola_panduan"))
         self.assertNotContains(response, ">Panduan<")
+        self.client.force_login(self.user)
+        response = self.client.get(reverse("plants:index"))
+        self.assertNotContains(response, reverse("cultivation:kelola_panduan"))
+
+    def test_kelola_requires_admin(self):
+        url = reverse("cultivation:kelola_panduan")
+        self.assertEqual(self.client.get(url).status_code, 302)
+        self.client.force_login(self.user)
+        self.assertEqual(self.client.get(url).status_code, 403)
+
+    def test_kelola_lists_all_plants_with_status_and_actions(self):
+        self.create_guide(self.kangkung)
+        self.client.force_login(self.admin)
+        response = self.client.get(reverse("cultivation:kelola_panduan"))
+        self.assertContains(response, "Kangkung")
+        self.assertContains(response, "Bayam")
+        self.assertContains(response, reverse("cultivation:update", args=[self.kangkung.pk]))
+        self.assertContains(response, reverse("cultivation:create", args=[self.bayam.pk]))
+        self.assertEqual(response.context["with_guide_count"], 1)
+        self.assertEqual(response.context["without_guide_count"], 1)
+
+    def test_kelola_filters_by_status_search_and_category(self):
+        self.create_guide(self.kangkung)
+        self.client.force_login(self.admin)
+        url = reverse("cultivation:kelola_panduan")
+
+        response = self.client.get(url, {"status": "ada"})
+        self.assertContains(response, "Kangkung")
+        self.assertNotContains(response, "Bayam")
+
+        response = self.client.get(url, {"status": "belum"})
+        self.assertContains(response, "Bayam")
+        self.assertNotContains(response, "Kangkung")
+
+        response = self.client.get(url, {"q": "baya"})
+        self.assertNotContains(response, "Kangkung")
+
+        response = self.client.get(url, {"category": "xxx", "status": "xxx"})
+        self.assertEqual(response.context["filters"]["category"], "")
+        self.assertEqual(response.context["filters"]["status"], "")

@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Kelola Panduan - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/plant_manage.css' %}?v=20261027-2">
+{% endblock %}
+
+{% block content %}
+<section class="plant-admin" aria-labelledby="guide-admin-title">
+    <header class="plant-admin__header">
+        <div>
+            <h1 id="guide-admin-title">Kelola Panduan</h1>
+            <p>Tambah, perbarui, dan hapus panduan budidaya untuk setiap tanaman di katalog.</p>
+        </div>
+    </header>
+
+    <form class="plant-admin__filters" method="get">
+        <div class="form-group">
+            <label for="kelola-query">Cari tanaman</label>
+            <input id="kelola-query" type="search" name="q" value="{{ filters.q }}" placeholder="Cari nama atau nama ilmiah">
+        </div>
+
+        <div class="form-group">
+            <label for="kelola-category">Kategori</label>
+            <select id="kelola-category" name="category">
+                <option value="">Semua kategori</option>
+                {% for value, label in category_choices %}
+                    <option value="{{ value }}"{% if filters.category == value %} selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="kelola-status">Status panduan</label>
+            <select id="kelola-status" name="status">
+                <option value="">Semua status</option>
+                <option value="ada"{% if filters.status == 'ada' %} selected{% endif %}>Sudah ada</option>
+                <option value="belum"{% if filters.status == 'belum' %} selected{% endif %}>Belum ada</option>
+            </select>
+        </div>
+
+        <div class="plant-admin__filter-actions">
+            <button class="btn btn--primary" type="submit">Terapkan</button>
+            <a class="btn btn--ghost" href="{% url 'cultivation:kelola_panduan' %}">Reset</a>
+        </div>
+    </form>
+
+    <div class="plant-admin__results-bar">
+        <p><strong>{{ page_obj.paginator.count }}</strong> hasil dari {{ total_count }} tanaman</p>
+        <p>{{ with_guide_count }} sudah ada panduan · {{ without_guide_count }} belum ada</p>
+    </div>
+
+    <div class="plant-admin__table-wrapper">
+        <table class="plant-admin__table">
+            <thead>
+                <tr>
+                    <th scope="col">Tanaman</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Status panduan</th>
+                    <th scope="col">Diperbarui</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plant in plants %}
+                    <tr>
+                        <td>
+                            <div class="plant-admin__identity">
+                                <div class="plant-admin__thumbnail">
+                                    <span>{% include "components/icon.html" with name="sprout" size=22 %}</span>
+                                    {% if plant.image_url %}
+                                        <img src="{{ plant.image_url }}" alt="" loading="lazy" onerror="this.hidden=true">
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <strong>{{ plant.name }}</strong>
+                                    <small>
+                                        {% if plant.scientific_name %}<i>{{ plant.scientific_name }}</i>{% else %}Nama ilmiah belum tersedia{% endif %}
+                                    </small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ plant.get_category_display }}</td>
+                        <td>{% if plant.cultivation_guide %}Sudah ada{% else %}Belum ada{% endif %}</td>
+                        <td>{% if plant.cultivation_guide %}{{ plant.cultivation_guide.updated_at|date:"d M Y" }}{% else %}-{% endif %}</td>
+                        <td class="plant-admin__actions">
+                            <a class="plant-admin__action" href="{% url 'cultivation:detail' plant.pk %}">{% include "components/icon.html" with name="search" size=16 %}<span>Lihat</span></a>
+                            {% if plant.cultivation_guide %}
+                                <a class="plant-admin__action" href="{% url 'cultivation:update' plant.pk %}">{% include "components/icon.html" with name="pencil" size=16 %}<span>Edit</span></a>
+                                <a class="plant-admin__action plant-admin__action--danger" href="{% url 'cultivation:kelola_panduan' %}" data-modal-open="hapus-{{ plant.pk }}">{% include "components/icon.html" with name="trash" size=16 %}<span>Hapus</span></a>
+                            {% else %}
+                                <a class="plant-admin__action" href="{% url 'cultivation:create' plant.pk %}">{% include "components/icon.html" with name="pencil" size=16 %}<span>Tambah</span></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="plant-admin__empty-cell">
+                            {% url 'cultivation:kelola_panduan' as kelola_url %}
+                            {% include "components/empty_state.html" with icon="search" title="Tanaman tidak ditemukan" text="Coba ubah kata kunci atau kurangi filter yang digunakan." action_url=kelola_url action_label="Reset filter" %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% for plant in plants %}
+        {% if plant.cultivation_guide %}
+            {% url 'cultivation:delete' plant.pk as delete_url %}
+            {% with pk=plant.pk|stringformat:"s" %}
+            {% include "components/confirm_modal.html" with id="hapus-"|add:pk title="Hapus panduan?" message="Panduan budidaya ini akan dihapus permanen:" item=plant.name action=delete_url confirm_label="Ya, hapus" danger=True %}
+            {% endwith %}
+        {% endif %}
+    {% endfor %}
+
+    {% if is_paginated %}
+        <nav class="plant-admin__pagination" aria-label="Pagination kelola panduan">
+            {% if page_obj.has_previous %}
+                <a class="btn btn--outline" href="?{% if query_string %}{{ query_string }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">Sebelumnya</a>
+            {% endif %}
+
+            <span>Halaman {{ page_obj.number }} dari {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a class="btn btn--outline" href="?{% if query_string %}{{ query_string }}&amp;{% endif %}page={{ page_obj.next_page_number }}">Berikutnya</a>
+            {% endif %}
+        </nav>
+    {% endif %}
+</section>
+{% endblock %}

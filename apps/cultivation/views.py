@@ -82,7 +82,56 @@ class GuideListView(ActiveUserRequiredMixin, ListView):
         )
         return context
 
+class GuideManageView(AdminRequiredMixin, ListView):
+    model = Plant
+    template_name = "cultivation/kelola.html"
+    context_object_name = "plants"
+    paginate_by = 10
 
+    def get_queryset(self):
+        queryset = Plant.objects.select_related("cultivation_guide")
+        self.filters = {
+            "q": self.request.GET.get("q", "").strip(),
+            "category": self.request.GET.get("category", "").strip(),
+            "status": self.request.GET.get("status", "").strip(),
+        }
+
+        if self.filters["q"]:
+            queryset = queryset.filter(
+                Q(name__icontains=self.filters["q"])
+                | Q(scientific_name__icontains=self.filters["q"])
+            )
+
+        if self.filters["category"] in dict(Plant.CATEGORY_CHOICES):
+            queryset = queryset.filter(category=self.filters["category"])
+        else:
+            self.filters["category"] = ""
+
+        if self.filters["status"] == "ada":
+            queryset = queryset.filter(cultivation_guide__isnull=False)
+        elif self.filters["status"] == "belum":
+            queryset = queryset.filter(cultivation_guide__isnull=True)
+        else:
+            self.filters["status"] = ""
+
+        return queryset.order_by("name", "pk")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.copy()
+        query.pop("page", None)
+        total = Plant.objects.count()
+        with_guide = CultivationGuide.objects.count()
+        context.update(
+            filters=self.filters,
+            category_choices=Plant.CATEGORY_CHOICES,
+            query_string=query.urlencode(),
+            total_count=total,
+            with_guide_count=with_guide,
+            without_guide_count=total - with_guide,
+        )
+        return context
+    
 class GuideDetailView(ActiveUserRequiredMixin, PlantMixin, TemplateView):
     template_name = "cultivation/detail.html"
 
