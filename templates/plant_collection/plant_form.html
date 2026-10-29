@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Buat Postingan Baru - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/collection.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 640px; margin: 40px auto; padding: 0 16px;">
+    <section class="card card--form">
+        <!-- Judul Dinamis -->
+        <h1 class="card__title" style="font-size: 1.6rem; font-weight: 800; margin-bottom: 6px;">
+            {% if is_edit %}Edit Postingan Tanaman{% else %}Buat Postingan Baru{% endif %}
+        </h1>
+        <p class="card__text" style="margin-bottom: 24px;">
+            {% if is_edit %} Perbarui informasi koleksi tanamanmu. {% else %} Bagikan koleksi atau cerita tanaman hias favoritmu ke komunitas. {% endif %}
+        </p>
+
+        <form method="post" action="" enctype="multipart/form-data" id="plant-form">
+            {% csrf_token %}
+
+            <!-- Input Judul -->
+            <div class="form-group">
+                <label for="id_title">Judul Tanaman</label>
+                <input type="text" name="title" id="id_title" value="{{ form.title.value|default:'' }}" placeholder="Contoh: Monstera Deliciosa Kesayangan" required>
+            </div>
+
+            <!-- Upload Area Interaktif (Drag & Drop + Preview) -->
+            <div class="form-group">
+                <label>Foto Tanaman</label>
+                <div class="upload-zone" id="upload-zone">
+                    <input type="file" name="photo" id="id_photo" accept="image/*" class="upload-zone__input">
+                    
+                    <!-- Placeholder (Sembunyi jika sedang Edit dan sudah ada foto) -->
+                    <div class="upload-zone__placeholder {% if form.instance.photo %}is-hidden{% endif %}" id="upload-placeholder">
+                        <div class="upload-zone__icon">
+                            {% include "components/icon.html" with name="sprout" size=28 %}
+                        </div>
+                        <p class="upload-zone__text"><strong>Klik untuk pilih foto</strong> atau tarik & lepas di sini</p>
+                        <span class="upload-zone__hint">Format JPG, PNG, atau WEBP (Maks. 5MB)</span>
+                    </div>
+
+                    <!-- Live Image Preview -->
+                    <div class="upload-zone__preview {% if not form.instance.photo %}is-hidden{% endif %}" id="upload-preview">
+                        <img id="preview-img" src="{% if form.instance.photo %}{{ form.instance.photo.url }}{% endif %}" alt="Preview Foto">
+                        <button type="button" class="upload-zone__remove" id="remove-img-btn" title="Hapus Gambar">
+                            {% include "components/icon.html" with name="x" size=16 %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Deskripsi -->
+            <div class="form-group">
+                <label for="id_description">Deskripsi</label>
+                <textarea name="description" id="id_description" rows="4" placeholder="Ceritakan tentang tanaman ini..." required>{{ form.description.value|default:'' }}</textarea>
+            </div>
+
+            <!-- Tombol Aksi (Telah diperbarui dari card__actions ke form-actions) -->
+            <div class="form-actions">
+                <a href="{% url 'collection:index' %}" class="btn btn--outline">Batal</a>
+                <button type="submit" class="btn btn--primary">
+                    {% if is_edit %}
+                        <span>Simpan Perubahan</span>
+                    {% else %}
+                        <span>Simpan Postingan</span>
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/pages/collection.js' %}"></script>
+{% endblock %}

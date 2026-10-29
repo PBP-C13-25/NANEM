@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Hapus Postingan - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/collection.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="card" style="padding: 24px;">
+        <h2 style="color: var(--color-danger); margin-top: 0;">Konfirmasi Hapus</h2>
+        <p>Apakah Anda yakin ingin menghapus koleksi tanaman <strong>"{{ object.title }}"</strong>?</p>
+        <p style="color: var(--color-muted); font-size: 0.9rem;">Tindakan ini permanen dan tidak dapat dibatalkan.</p>
+        
+        <form method="POST" style="display: flex; gap: 12px; margin-top: 24px;">
+            {% csrf_token %}
+            <a href="{% url 'collection:detail' object.pk %}" class="btn btn-outline" style="text-decoration: none;">Batal</a>
+            <button type="submit" class="btn btn-danger">Ya, Hapus Postingan</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
