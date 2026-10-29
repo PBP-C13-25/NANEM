@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.http import JsonResponse
@@ -30,7 +31,13 @@ class CollectionCreateView(RegularUserRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
+        messages.success(self.request, "Postingan berhasil dibuat!")
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.warning(self.request, "Gagal menyimpan! Harap lengkapi field yang masih kosong dan lampirkan foto.")
+        return super().form_invalid(form)
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['is_edit'] = False

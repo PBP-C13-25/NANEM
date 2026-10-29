@@ -9,3 +9,15 @@ class PlantCollectionForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Judul Tanaman'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Ceritakan tentang tanaman ini...'}),
         }
+        error_messages = {
+            'title': {
+                'required': 'Judul tanaman wajib diisi!',
+            },
+            'photo': {
+                'required': 'Wajib melampirkan foto tanaman!',
+                'invalid': 'File yang dilampirkan harus berupa gambar.',
+            },
+            'description': {
+                'required': 'Deskripsi tanaman wajib diisi!',
+            },
+        }
