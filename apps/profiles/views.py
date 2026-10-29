@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -98,6 +99,7 @@ class DeleteAccountView(RegularUserRequiredMixin, View):
         return redirect('/')  # redirect ke halaman utama
 
 
+@user_passes_test(lambda u: u.is_authenticated and u.is_active and not u.is_staff)
 def search_users(request):
     """Mengembalikan hasil pencarian user dalam format JSON (dipakai live search di halaman koleksi)."""
     query = request.GET.get('q', '').strip()
