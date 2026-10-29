@@ -5,7 +5,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
 from django.views.generic import DeleteView, DetailView, FormView, ListView, TemplateView, UpdateView
 from django.http import JsonResponse
-from apps.core.mixins import OwnedQuerysetMixin, RegularUserRequiredMixin
+from apps.core.mixins import OwnedQuerysetMixin, RegularUserRequiredMixin, LoginRequiredMixin
 from datetime import timedelta
 
 from .konstan import MEDIUM_CHOICES, summarize_environment
@@ -13,6 +13,7 @@ from .forms import HistoryLandNameForm, RecommendationForm
 from .models import RecommendationHistory
 from .services.engine import recommend
 from .services.open_meteo import OpenMeteoError, fetch_environment
+from apps.core import ratelimit
 
 # Create your views here.
 SESSION_KEY = "recommendation_result"
@@ -22,7 +23,7 @@ def _can_save(user):
     simpan history cuma bisa unutk user yg ter autentikasih
     """
     
-    return user.is_authenticated and user.is_active and not user.is_staff
+    return user.is_authenticated and user.is_active
 
 def _is_ajax(request):
     return request.headers.get("x-requested-with") == "XMLHttpRequest"
@@ -47,6 +48,11 @@ class RecommendationFormView(FormView):
         return initial
     
     def form_valid(self, form):
+        if ratelimit.is_rate_limited(self.request, "recommend_submit", 10):
+            form.add_error(None, "Terlalu banyak percobaan, coba lagi sebentar lagi.")
+            return self.form_invalid(form)
+        ratelimit.hit(self.request, "recommend_submit", 60)
+
         data = form.cleaned_data
         latitude, longitude = data["latitude"], data["longitude"]
 
@@ -96,7 +102,7 @@ class RecommendationResultView(TemplateView):
 
 
 #* SAVE HASIL REKOMENDASI
-class SaveHistoryView(RegularUserRequiredMixin, View):
+class SaveHistoryView(LoginRequiredMixin, View):
     http_method_names = ["post"]
 
     def post(self, request):
@@ -127,7 +133,7 @@ class SaveHistoryView(RegularUserRequiredMixin, View):
         return redirect("recommendations:history_detail", pk=history.pk)
 
 #* ALL HISTORY DATA
-class HistoryListView(RegularUserRequiredMixin, OwnedQuerysetMixin, ListView):
+class HistoryListView(LoginRequiredMixin, OwnedQuerysetMixin, ListView):
     model = RecommendationHistory
     template_name = "recommendations/history_list.html"
     context_object_name = "histories"
@@ -149,7 +155,7 @@ class HistoryListView(RegularUserRequiredMixin, OwnedQuerysetMixin, ListView):
         return context
 
 
-class HistoryDetailView(RegularUserRequiredMixin, OwnedQuerysetMixin, DetailView):
+class HistoryDetailView(LoginRequiredMixin, OwnedQuerysetMixin, DetailView):
     model = RecommendationHistory
     template_name = "recommendations/history_detail.html"
     context_object_name = "history"
@@ -168,7 +174,7 @@ class HistoryDetailView(RegularUserRequiredMixin, OwnedQuerysetMixin, DetailView
 
 #* UNTUK UPDATE HISTORY
 # (land name only)
-class HistoryUpdateView(RegularUserRequiredMixin, OwnedQuerysetMixin, UpdateView):
+class HistoryUpdateView(LoginRequiredMixin, OwnedQuerysetMixin, UpdateView):
     model = RecommendationHistory
     form_class = HistoryLandNameForm
     template_name = "recommendations/history_update.html"
@@ -203,7 +209,7 @@ class HistoryUpdateView(RegularUserRequiredMixin, OwnedQuerysetMixin, UpdateView
 
 
 #* DELETE HISTORY
-class HistoryDeleteView(RegularUserRequiredMixin, OwnedQuerysetMixin, DeleteView):
+class HistoryDeleteView(LoginRequiredMixin, OwnedQuerysetMixin, DeleteView):
     model = RecommendationHistory
     template_name = "recommendations/history_confirm_modal.html"
     context_object_name = "history"

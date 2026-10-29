@@ -179,6 +179,13 @@ Master data tanaman yang dipakai bersama oleh modul Rekomendasi, Koleksi Tanaman
 | ✏️ Update | Admin memperbarui data tanaman                                                                                       |
 | 🗑️ Delete | Admin menghapus tanaman dari katalog                                                                                 |
 
+**Alur data CRUD katalog:** akun dengan `is_staff=True` mengelola tanaman melalui
+`/catalog/manage/`. Operasi tambah, edit, dan hapus langsung mengubah tabel `Plant`
+pada database environment yang sedang digunakan. Operasi tersebut tidak menulis ulang
+file JSON riset atau seed; file seed tetap berfungsi sebagai sumber data awal yang dapat
+diimpor secara terpisah. Karena CRUD memakai field model yang sudah tersedia, fitur ini
+tidak memerlukan migration baru.
+
 ### 5️⃣ Panduan Budidaya — _Nicholas_
 
 Informasi praktis cara membudidayakan tanaman: cara menanam, media tanam, kebutuhan air, frekuensi penyiraman, kebutuhan cahaya, pemupukan, dan waktu panen.

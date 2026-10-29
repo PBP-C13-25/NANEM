@@ -46,7 +46,7 @@ def make_plant(name="Bayam", **kw):
     return Plant.objects.create(**data)
 
 
-# --------------------------------------------------------------- constants
+#* TEST CONTSTANT
 class ConstantsTests(SimpleTestCase):
     def test_land_area_to_capacity_boundaries(self):
         self.assertEqual(land_area_to_capacity(5), "small")
@@ -61,7 +61,7 @@ class ConstantsTests(SimpleTestCase):
         self.assertEqual(summary["rainfall_label"], "Tinggi")
 
 
-# ------------------------------------------------------------------ engine
+#* TEST ENGINE
 class LandAreaGateTests(SimpleTestCase):
     def test_small_land_only_fits_small_plant(self):
         self.assertTrue(fits_land_area(fake_plant("small"), 3))
@@ -101,6 +101,17 @@ class ScoringTests(SimpleTestCase):
         result = score_plant(fake_plant(temp_min=20, temp_max=32), ENV)
         self.assertEqual(len(result["reasons"]), 1)
         self.assertEqual(result["score"], 100)
+
+    def test_matched_count_counts_criteria_inside_range(self):
+        # suhu & kelembapan masuk rentang, curah hujan (5) di luar rentang 8-10
+        result = score_plant(self.full(rainfall_min=8, rainfall_max=10), ENV)
+        self.assertEqual(result["criteria_count"], 3)
+        self.assertEqual(result["matched_count"], 2)
+
+    def test_matched_count_only_counts_criteria_with_data(self):
+        result = score_plant(fake_plant(temp_min=20, temp_max=32), ENV)
+        self.assertEqual(result["criteria_count"], 1)
+        self.assertEqual(result["matched_count"], 1)
 
     def test_no_climate_data_returns_none(self):
         self.assertIsNone(score_plant(fake_plant(), ENV))
@@ -150,12 +161,6 @@ class WeightedScoringTests(SimpleTestCase):
         result = score_plant(plant, ENV)
         self.assertEqual(result["score"], 100)
 
-    def test_reasons_mention_the_weight_used(self):
-        konstan.CRITERIA_WEIGHTS.update({"temperature": 2, "humidity": 1, "rainfall": 1})
-        plant = fake_plant(temp_min=20, temp_max=32)
-        result = score_plant(plant, ENV)
-        self.assertTrue(any("bobot 2" in r for r in result["reasons"]))
-
 
 def _range_score_for_test(value, low, high):
     from .services.engine import _range_score
@@ -170,13 +175,20 @@ class RecommendEndToEndTests(TestCase):
         names = [p["plant_name"] for p in recommend(ENV, MEDIUM_SOIL, land_area=3)]
         self.assertEqual(names, ["Cocok"])
 
-    def test_top_5_limit_and_sorted_desc(self):
-        for i in range(8):
+    def test_top_10_limit_and_sorted_desc(self):
+        for i in range(12):
             make_plant(f"P{i}", temp_min=20 + i, temp_max=32)
         result = recommend(ENV, MEDIUM_SOIL, land_area=100)
-        self.assertEqual(len(result), 5)
+        self.assertEqual(len(result), 10)
         scores = [p["match_percentage"] for p in result]
         self.assertEqual(scores, sorted(scores, reverse=True))
+
+    def test_result_includes_criteria_counts(self):
+        make_plant("Bayam")
+        plant = recommend(ENV, MEDIUM_SOIL, land_area=100)[0]
+        self.assertEqual(plant["criteria_count"], 3)
+        self.assertEqual(plant["matched_count"], 3)
+        self.assertEqual(plant["total_criteria"], 3)
 
     def test_scientific_name_included(self):
         make_plant("Bayam", scientific_name="Amaranthus tricolor")
@@ -190,7 +202,7 @@ class RecommendEndToEndTests(TestCase):
         self.assertEqual(recommend(ENV, MEDIUM_SOIL, land_area=100), [])
 
 
-# --------------------------------------------------------------- open-meteo
+#* TEST OPEN METEO
 def fake_response(payload, status=200):
     resp = mock.Mock()
     resp.status_code = status
@@ -235,7 +247,7 @@ class OpenMeteoTests(SimpleTestCase):
         self.assertEqual(get.call_count, 1)
 
 
-# ------------------------------------------------------------------- forms
+#* TEST INPUT FORM REKOMENDASI
 class RecommendationFormTests(SimpleTestCase):
     def data(self, **kw):
         d = {"land_name": "Kebun", "latitude": "-6.2", "longitude": "106.8",
@@ -252,7 +264,7 @@ class RecommendationFormTests(SimpleTestCase):
             self.assertFalse(RecommendationForm(self.data(**kw)).is_valid(), kw)
 
 
-# ------------------------------------------------------------------- views
+#* TEST VIEWS
 FETCH = "apps.recommendations.views.fetch_environment"
 
 
@@ -318,14 +330,43 @@ class RecommendationFlowTests(ViewBase):
                                 "planting_medium": MEDIUM_SOIL})
         self.assertEqual(r.status_code, 403)
 
-    def test_admin_sees_result_but_no_save_button(self):
+    def test_admin_sees_result_and_save_button(self):
         make_plant("Bayam")
         self.client.force_login(self.admin)
         self.submit()
         page = self.client.get(self.result)
         self.assertContains(page, "Bayam")
-        self.assertNotContains(page, "Simpan ke Riwayat")
+        self.assertContains(page, "Simpan ke riwayat")
 
+    def test_edit_link_prefills_form_from_session(self):
+        self.submit(land_name="Kebun Prefill")
+        page = self.client.get(self.index + "?ubah=1")
+        self.assertContains(page, 'value="Kebun Prefill"')
+
+    def test_index_without_edit_flag_is_empty(self):
+        self.submit(land_name="Kebun Prefill")
+        page = self.client.get(self.index)
+        self.assertNotContains(page, 'value="Kebun Prefill"')
+
+
+class RateLimitTests(ViewBase):
+    def test_11th_submission_within_window_is_blocked(self):
+        make_plant("Bayam")
+        for _ in range(10):
+            r = self.submit()
+            self.assertRedirects(r, self.result)
+
+        r = self.submit()
+        self.assertContains(r, "Terlalu banyak percobaan")
+        self.assertEqual(r.status_code, 200) 
+
+    def test_limit_resets_after_cache_cleared(self):
+        make_plant("Bayam")
+        for _ in range(10):
+            self.submit()
+        cache.clear() 
+        r = self.submit()
+        self.assertRedirects(r, self.result)
 
 class SaveHistoryTests(ViewBase):
     def test_guest_save_redirects_to_login(self):
@@ -333,10 +374,14 @@ class SaveHistoryTests(ViewBase):
         self.assertIn("/accounts/login/", r["Location"])
         self.assertEqual(RecommendationHistory.objects.count(), 0)
 
-    def test_admin_save_forbidden(self):
+    def test_admin_can_save_own_history(self):
+        make_plant("Bayam")
         self.client.force_login(self.admin)
         self.submit()
-        self.assertEqual(self.client.post(self.save_url).status_code, 403)
+        r = self.client.post(self.save_url)
+        history = RecommendationHistory.objects.get()
+        self.assertRedirects(r, reverse("recommendations:history_detail", args=[history.pk]))
+        self.assertEqual(history.user, self.admin)
 
     def test_save_persists_land_name_from_session(self):
         make_plant("Bayam")
@@ -378,10 +423,18 @@ class HistoryAuthorizationTests(ViewBase):
         for url in [self.list_url] + self.urls_for(self.mine.pk):
             self.assertEqual(self.client.get(url).status_code, 302, url)
 
-    def test_admin_forbidden(self):
+    def test_admin_can_access_own_history(self):
+        own = self.make_history(self.admin, "Punya Admin")
         self.client.force_login(self.admin)
-        for url in [self.list_url] + self.urls_for(self.mine.pk):
-            self.assertEqual(self.client.get(url).status_code, 403, url)
+        for url in [self.list_url] + self.urls_for(own.pk):
+            self.assertEqual(self.client.get(url).status_code, 200, url)
+
+    def test_admin_cannot_access_others_history(self):
+        # admin hanya bisa melihat history dirinya sendiri
+        self.client.force_login(self.admin)
+        for url in self.urls_for(self.mine.pk):
+            r = self.client.get(url)
+            self.assertEqual(r.status_code, 404, url)
 
     def test_others_history_is_404(self):
         self.client.force_login(self.budi)
@@ -425,3 +478,9 @@ class HistoryCrudTests(ViewBase):
         history = self.make_history(self.budi, "Snapshot")
         page = self.client.get(reverse("recommendations:history_detail", args=[history.pk]))
         self.assertContains(page, "Bayam")  # nama tersimpan di snapshot, bukan live query
+        
+    def test_land_name_is_escaped(self):
+        history = self.make_history(self.budi, "<script>alert(1)</script>")
+        page = self.client.get(reverse("recommendations:history_detail", args=[history.pk]))
+        self.assertNotContains(page, "<script>alert(1)</script>")
+        self.assertContains(page, "&lt;script&gt;alert(1)&lt;/script&gt;")

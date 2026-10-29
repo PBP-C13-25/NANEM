@@ -66,8 +66,6 @@
         <p class="result__note">
             Belum punya akun? <a href="{% url 'accounts:register' %}">Daftar gratis</a> supaya hasil ini bisa disimpan ke riwayat.
         </p>
-    {% elif not can_save %}
-        <p class="result__note">Akun admin tidak memiliki riwayat rekomendasi.</p>
     {% endif %}
 
     {# ================= Isi: analisis | rekomendasi ================= #}
@@ -77,4 +75,9 @@
     </div>
 </section>
 {% endwith %}
+{% endblock %}
+
+{# ================= JavaScript ================= #}
+{% block extra_js %}
+<script src="{% static 'js/pages/plants-rec-card.js' %}" defer></script>
 {% endblock %}

@@ -82,6 +82,9 @@ placeholder bila `image_url` kosong.
 
 Mapping khusus data riset:
 
+- Nilai `null` pada field nullable berarti riset belum memberi bukti baru.
+  Importer tidak memakai `null` tersebut untuk menghapus nilai Perenual atau
+  nilai database yang sudah ada. Record baru tetap memakai default model.
 - `supports_hydroponic: null` berarti bukti belum cukup, bukan terbukti tidak
   cocok. Karena field model saat ini tidak nullable, importer menyimpannya
   sebagai fallback `False`.

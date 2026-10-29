@@ -43,6 +43,12 @@ RESEARCH_METADATA_FIELDS = {
     "rainfall_basis", "rainfall_annual_min_mm", "rainfall_annual_max_mm",
     "humidity_basis",
 }
+RESEARCH_NULL_FALLBACKS = {
+    "scientific_name": "",
+    "description": "",
+    "image_url": "",
+    "supports_hydroponic": False,
+}
 
 
 def write_atomic(path, text):
@@ -265,12 +271,12 @@ def map_match(entry, selection, detail=None, research=None):
             if name not in research:
                 continue
             value = research[name]
-            if name in ("scientific_name", "description", "image_url") and value is None:
-                value = ""
-            elif name == "supports_hydroponic" and value is None:
-                # Plant is non-nullable. Research null means evidence is insufficient,
-                # so the current model stores its conservative False fallback.
-                value = False
+            if value is None:
+                if name not in RESEARCH_NULL_FALLBACKS:
+                    # Unknown research data must not erase an existing API or
+                    # database value. New records retain the model default.
+                    continue
+                value = RESEARCH_NULL_FALLBACKS[name]
             fields[name] = value
     for name, value in fields.items():
         try:

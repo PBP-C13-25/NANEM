@@ -73,3 +73,38 @@ a {
   white-space: nowrap;
   border: 0;
 }
+
+/* ================= Aksesibilitas ================= */
+
+/* 1. Fokus keyboard: garis jelas saat navigasi pakai tab, tidak muncul sat di klik mpuse */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* di latar gelap/berwarna (toast, tombol primary) garisnya putih biar kelihatan */
+.toast :focus-visible {
+  outline-color: #fff;
+}
+
+/* 2. Kurangi animasi kalau user mengaktifkan "Reduce motion" di OS-nya */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* pengecualian: spinner loading tetap berputar pelan,
+     supaya user tetap tahu prosesnya masih jalan */
+  .spinner {
+    animation-duration: 2s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
