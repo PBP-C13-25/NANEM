@@ -30,6 +30,11 @@ class PlantCollectionTests(TestCase):
             email='other@example.com', 
             password='password123'
         )
+        self.admin_user = User.objects.create_superuser(
+            username='adminuser',
+            email='admin@example.com',
+            password='password123'
+        )
 
         # Helper untuk membuat gambar tiruan (dummy image)
         self.dummy_image = self._generate_dummy_image()
@@ -50,9 +55,7 @@ class PlantCollectionTests(TestCase):
         file.seek(0)
         return SimpleUploadedFile('test_photo.jpg', file.read(), content_type='image/jpeg')
 
-    # ==========================================
     # 1. MODEL TESTS
-    # ==========================================
     def test_plant_collection_model(self):
         """Menguji metode __str__ dan total_likes pada Model PlantCollection."""
         self.assertEqual(str(self.collection), 'Monstera Deliciosa')
@@ -62,9 +65,7 @@ class PlantCollectionTests(TestCase):
         self.collection.likes.add(self.user)
         self.assertEqual(self.collection.total_likes(), 1)
 
-    # ==========================================
     # 2. FORM TESTS
-    # ==========================================
     def test_plant_collection_form_valid(self):
         """Menguji bahwa form valid ketika diberikan input yang benar."""
         photo = self._generate_dummy_image()
@@ -85,9 +86,7 @@ class PlantCollectionTests(TestCase):
         self.assertIn('title', form.errors)
         self.assertIn('photo', form.errors)
 
-    # ==========================================
     # 3. URL TESTS
-    # ==========================================
     def test_urls_resolving(self):
         """Menguji resolusi URL ke View yang sesuai."""
         self.assertEqual(resolve(reverse('collection:index')).func.view_class, views.CollectionListView)
@@ -97,9 +96,7 @@ class PlantCollectionTests(TestCase):
         self.assertEqual(resolve(reverse('collection:delete', kwargs={'pk': self.collection.pk})).func.view_class, views.CollectionDeleteView)
         self.assertEqual(resolve(reverse('collection:like', kwargs={'pk': self.collection.pk})).func.view_class, views.ToggleLikeView)
 
-    # ==========================================
     # 4. VIEW TESTS
-    # ==========================================
     def test_collection_list_view(self):
         """Menguji tampilan daftar koleksi tanaman."""
         self.client.login(username='testuser', password='password123')
@@ -190,3 +187,38 @@ class PlantCollectionTests(TestCase):
         self.assertEqual(response2.status_code, 200)
         self.assertJSONEqual(response2.content, {'is_liked': False, 'like_count': 0})
         self.assertNotIn(self.user, self.collection.likes.all()) 
+
+    # 5. AUTHORIZATION & PERMISSION TESTS
+    def test_authorization_guest_redirects_to_login(self):
+        """Tamu (belum login) di-redirect ke halaman login saat mencoba edit/hapus."""
+
+        edit_url = reverse('collection:edit', kwargs={'pk': self.collection.pk})
+        delete_url = reverse('collection:delete', kwargs={'pk': self.collection.pk})
+        login_url = reverse('accounts:login')  # Atau '/accounts/login/' sesuai rute login proyek kamu
+
+        # Coba akses Edit tanpa login
+        edit_response = self.client.get(edit_url)
+        self.assertRedirects(edit_response, f"{login_url}?next={edit_url}")
+
+        # Coba akses Hapus tanpa login
+        delete_response = self.client.post(delete_url)
+        self.assertRedirects(delete_response, f"{login_url}?next={delete_url}")
+
+    def test_authorization_other_user_returns_404(self):
+        """User lain (bukan owner & bukan admin) mendapat status 404 saat mencoba edit/hapus."""
+        self.client.login(username='otheruser', password='password123')
+        
+        edit_url = reverse('collection:edit', kwargs={'pk': self.collection.pk})
+        delete_url = reverse('collection:delete', kwargs={'pk': self.collection.pk})
+
+        # Coba akses Edit sebagai user lain -> Expect 404
+        edit_response = self.client.get(edit_url)
+        self.assertEqual(edit_response.status_code, 404)
+
+        # Coba POST ke Edit sebagai user lain -> Expect 404
+        edit_post_response = self.client.post(edit_url, data={'title': 'Hack'})
+        self.assertEqual(edit_post_response.status_code, 404)
+
+        # Coba POST Hapus sebagai user lain -> Expect 404
+        delete_response = self.client.post(delete_url)
+        self.assertEqual(delete_response.status_code, 404)

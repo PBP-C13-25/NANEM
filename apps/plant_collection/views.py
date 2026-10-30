@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.views.generic import DeleteView, ListView, DetailView, CreateView, UpdateView, View
 from apps.core.mixins import LoginRequiredMixin, OwnedQuerysetMixin 
-
 from .models import PlantCollection
 from .forms import PlantCollectionForm
 
@@ -15,10 +14,10 @@ class CollectionListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Mengambil postingan khusus user yang sedang login
-        context['my_posts'] = PlantCollection.objects.filter(owner=self.request.user)
+        context['my_posts'] = PlantCollection.objects.select_related("owner").prefetch_related("likes").all().order_by('-created_at')
         return context
 
-class CollectionDetailView(LoginRequiredMixin, DetailView):
+class CollectionDetailView(LoginRequiredMixin,  DetailView):
     model = PlantCollection
     template_name = "plant_collection/plant_detail.html"
     context_object_name = "post"

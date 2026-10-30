@@ -84,7 +84,7 @@
             <!-- Input Deskripsi -->
             <div class="form-group">
                 <label for="id_description">Deskripsi</label>
-                <textarea name="description" id="id_description" rows="4" placeholder="Ceritakan tentang tanaman ini..." required>{{ form.description.value|default:'' }}</textarea>
+                <textarea name="description" id="id_description" rows="4" placeholder="Ceritakan tentang tanaman ini... (maksimal 10 kata)" required>{{ form.description.value|default:'' }}</textarea>
                 {% if form.description.errors %}
                     <div class="form-error" style="color: #e3342f; font-size: 0.875rem; margin-top: 6px;">
                         {% for error in form.description.errors %}
