@@ -1,9 +1,25 @@
-
-
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Nanem{% endblock %}
- 
+{% block title %}Koleksi Tanaman - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/collection.css' %}">
+{% endblock %}
+{% csrf_token %}
+
 {% block content %}
-<h1>INI MODUL KOLEKSI TANAMAN</h1>
+<div class="collection-feed">
+    <div class="feed-header">
+        <h1>Koleksi Tanaman</h1>
+        <a href="{% url 'collection:create' %}" class="btn btn--primary"> Buat Postingan </a>
+    </div>
+    <!-- TODO : SEARCH BAR USER -->
+     
+    {% include "plant_collection/_grid.html" with collections=posts %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/pages/collection.js' %}"></script>
 {% endblock %}
