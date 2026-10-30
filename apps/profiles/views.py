@@ -1,11 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.views import View
 from django.views.generic import DetailView
 
@@ -99,29 +97,28 @@ class DeleteAccountView(RegularUserRequiredMixin, View):
         return redirect('/')  # redirect ke halaman utama
 
 
-@user_passes_test(lambda u: u.is_authenticated and u.is_active and not u.is_staff)
-def search_users(request):
-    """Mengembalikan hasil pencarian user dalam format JSON (dipakai live search di halaman koleksi)."""
-    query = request.GET.get('q', '').strip()
-    users = []
-    if query:
-        # cari user berdasarkan username yang mengandung kata kunci (case insensitive)
-        users = (
-            User.objects
-            .filter(username__icontains=query)
-            .select_related('profile')
-            .order_by('username')[:20]
-        )
+class SearchUsersView(RegularUserRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q', '').strip()
+        users = []
+        if query:
+            # cari user berdasarkan username yang mengandung kata kunci (case insensitive)
+            users = (
+                User.objects
+                .filter(username__icontains=query)
+                .select_related('profile')
+                .order_by('username')[:20]
+            )
 
-    data = []
-    for u in users:
-        profile = getattr(u, 'profile', None)
-        photo = getattr(profile, 'photo', None)
-        data.append({
-            'username': u.username,
-            'initial': (u.first_name or u.username)[:1].upper(),
-            'photo': photo.url if photo else '',
-            'url': reverse('profiles:public_profile', args=[u.username]),
-        })
+        data = []
+        for u in users:
+            profile = getattr(u, 'profile', None)
+            photo = getattr(profile, 'photo', None)
+            data.append({
+                'username': u.username,
+                'initial': (u.first_name or u.username)[:1].upper(),
+                'photo': photo.url if photo else '',
+                'url': reverse('profiles:public_profile', args=[u.username]),
+            })
 
-    return JsonResponse({'query': query, 'users': data})
+        return JsonResponse({'query': query, 'users': data})
