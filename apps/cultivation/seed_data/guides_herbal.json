@@ -1,0 +1,239 @@
+[
+  {
+    "plant": "Kemangi",
+    "planting_steps": [
+      "Tanam di tempat yang terkena sinar matahari penuh; sinar matahari sekitar enam jam sehari masih cukup baik. Sinar penuh menghasilkan minyak atsiri dan rasa yang lebih kuat.",
+      "Taburkan benih sedalam sekitar 0,3-0,6 cm dan tutup tipis. Benih berkecambah dalam 5-14 hari pada suhu sekitar 21-29 C.",
+      "Jarangkan bibit hingga berjarak 7,5-10 cm, lalu hingga jarak akhir sekitar 30 cm. Sumber lain menyarankan jarak sampai 60 cm.",
+      "Pindahkan bibit saat suhu stabil hangat. Bibit siap pindah setelah 4-6 minggu.",
+      "Beri mulsa dan siram di pangkal tanaman agar daun tetap kering."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Sekitar 4 cm air per minggu, tergantung jenis tanah dan suhu. Jaga kelembapan media relatif konstan. Tanaman di pot butuh disiram dan dipupuk teratur. Panas dan kekurangan air memicu berbunga, rasa menyimpang, dan daun berkurang.",
+    "fertilizing_frequency": "biweekly",
+    "fertilizing_note": "Tentukan kebutuhan pupuk dengan uji tanah sebelum tanam. Setelah tanaman bisa dipanen, beri pupuk nitrogen cair sekitar 1-2 sendok makan per 3 m baris setiap 2-3 minggu. Untuk tanaman di pot, beri pupuk cair serbaguna secara teratur. Hindari pemupukan berlebihan karena menurunkan rasa.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut jumlah hari dari benih sampai panen. Mulai panen saat tanaman memiliki 6-8 daun, potong dengan menyisakan 2-4 daun, dan panen bergantian antar tanaman agar pasokan terus ada. Petik atau pinch kuncup bunga begitu muncul supaya daun tetap beraroma.",
+    "sources": [
+      {
+        "title": "Utah State University Extension - Basil in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/basil-in-the-garden.php"
+      },
+      {
+        "title": "Clemson Cooperative Extension HGIC - Basil",
+        "url": "https://hgic.clemson.edu/factsheet/basil/"
+      }
+    ]
+  },
+  {
+    "plant": "Jahe",
+    "planting_steps": [
+      "Pilih rimpang yang keras dan segar. Potong menjadi bagian 2,5-4 cm, masing-masing minimal dengan satu mata tunas yang menonjol. Keringkan potongan beberapa hari supaya tidak busuk.",
+      "Rimpang dari toko sebaiknya direndam semalam karena dapat diberi zat penghambat tumbuh.",
+      "Siapkan media atau tanah yang gembur, kaya bahan organik, dan drainasenya baik. Pada tanah berbatu, gunakan bedengan tinggi minimal 20 cm.",
+      "Tanam potongan dengan mata tunas menghadap atas, sedalam 2,5-10 cm (sumber berbeda menyebut sekitar 2,5 cm hingga 5-10 cm). Beri jarak 15-38 cm antar potongan.",
+      "Tempatkan di tempat teduh sebagian dengan sinar matahari langsung sekitar 2-5 jam per hari dan terlindung dari angin kencang.",
+      "Jaga tanah lembap selama beberapa minggu sampai tunas muncul."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Jangan biarkan tanah mengering saat pertumbuhan aktif, tetapi hindari penyiraman berlebihan. Kurangi penyiraman saat cuaca mulai mendingin untuk mendorong pembentukan rimpang.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Bila tanah kurang subur, beri pupuk organik lepas lambat saat tanam, lalu pupuk cair setiap beberapa minggu. Jahe terbantu pupuk berfosfor tinggi; lakukan uji tanah lebih dulu.",
+    "is_harvestable": true,
+    "harvest_days_min": 240,
+    "harvest_days_max": 300,
+    "harvest_note": "Rimpang matang penuh setelah sekitar 8-10 bulan. Panen dengan menggali seluruh tanaman saat bagian atas mulai mati. Panen lebih awal dimungkinkan sesaat sebelum tangkai bunga muncul.",
+    "sources": [
+      {
+        "title": "UF/IFAS Gardening Solutions - Edible Ginger",
+        "url": "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/vegetables/ginger/"
+      },
+      {
+        "title": "Texas A&M AgriLife Extension - Ginger",
+        "url": "https://agrilifeextension.tamu.edu/library/gardening/ginger/"
+      }
+    ]
+  },
+  {
+    "plant": "Serai",
+    "planting_steps": [
+      "Perbanyak dengan pembagian rumpun: pisahkan satu atau lebih anakan beserta bagian rimpang dari rumpun induk.",
+      "Pangkas daun anakan sampai sekitar 25 cm dari akar dan pangkas akar menjadi rimpang pendek.",
+      "Tanam anakan sedalam 10-15 cm dengan jarak sekitar 30 cm, atau lebih lebar hingga 90 cm untuk rumpun dewasa. Anakan juga bisa ditanam di pot berisi kompos atau tanah pot.",
+      "Gunakan tanah dengan drainase baik, subur, dan kaya bahan organik. pH yang disarankan sekitar 5,0-5,8.",
+      "Tempatkan di sinar matahari penuh; masih toleran naungan ringan. Tanaman menyukai iklim hangat dan lembap."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Kebutuhan air sedang di tanah, tetapi tanaman perlu kelembapan teratur. Jaga tanah tetap lembap beberapa minggu setelah tanam. Tanaman di pot lebih sering disiram. Hindari sprinkler.",
+    "fertilizing_frequency": "monthly",
+    "fertilizing_note": "Butuh banyak nitrogen di musim panas. Beri pupuk seimbang larut air setengah dosis sebulan sekali untuk tanaman di tanah, atau seminggu sekali untuk tanaman di pot luar ruangan pada musim tumbuh. Tanaman di pot dalam ruangan dipupuk sebulan sekali.",
+    "is_harvestable": true,
+    "harvest_days_min": 180,
+    "harvest_days_max": 270,
+    "harvest_note": "Panen pertama sekitar 6-9 bulan setelah tanam, ketika rumpun sudah banyak batang. Batang siap panen bila tinggi minimal 30 cm dengan diameter sekitar 1,3 cm. Tarik batang kuat-kuat dekat pangkal lalu potong, atau potong di permukaan tanah. Panen batang yang lebih tua dahulu untuk mendorong anakan baru.",
+    "sources": [
+      {
+        "title": "University of Guam Extension - Lemongrass",
+        "url": "https://uog.edu/_resources/files/extension/Lemongrass.pdf"
+      },
+      {
+        "title": "Utah State University Extension - Lemongrass in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/lemongrass-in-the-garden.php"
+      }
+    ]
+  },
+  {
+    "plant": "Kunyit",
+    "planting_steps": [
+      "Pilih rimpang yang keras dan segar. Potong menjadi bagian 2,5-4 cm, masing-masing minimal dengan satu mata tunas bila memungkinkan.",
+      "Keringkan potongan rimpang beberapa hari sebelum tanam untuk mengurangi risiko busuk.",
+      "Siapkan tanah yang diperkaya bahan organik. Tanam di tempat dengan naungan sebagian hingga penuh.",
+      "Tanam tiap potongan dan tutup dengan tanah sekitar 2,5 cm. Beri jarak sekitar 38 cm antar potongan dan antar baris.",
+      "Waktu tanam terbaik adalah awal musim tanam yang hangat."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Sumber tidak menyebut kebutuhan atau jadwal penyiraman. Jaga media lembap dengan drainase baik.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Sumber tidak menyebut pemupukan, hanya menyarankan tanah yang diperkaya bahan organik.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut jumlah hari panen. Panen umumnya dilakukan pada akhir musim gugur atau awal musim dingin, yaitu saat tanaman mulai dorman. Panduan ini ringkas; tambahkan detail lain lewat Edit Panduan bila ada sumber tepercaya.",
+    "sources": [
+      {
+        "title": "UF/IFAS Gardening Solutions - Turmeric",
+        "url": "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/vegetables/turmeric/"
+      }
+    ]
+  },
+  {
+    "plant": "Daun mint",
+    "planting_steps": [
+      "Siapkan tanah yang kaya, lembap, drainasenya baik, dan sedikit asam. Campur kompos bila perlu dan sebarkan pupuk di 15 cm bagian atas tanah.",
+      "Tanam mint di pot atau batasi akarnya karena mudah menyebar. Pot berdiameter 30-40 cm cocok, atau benamkan wadah sedalam 25-40 cm dengan tepi 7-10 cm di atas permukaan tanah.",
+      "Perbanyak dengan stek atau pembagian rumpun. Bagi rumpun dewasa pada awal musim semi atau awal musim gugur.",
+      "Bila dari benih, tabur sedalam sekitar 0,6 cm lalu jarangkan setelah tumbuh. Bibit pindahan ditanam dengan akar tepat di bawah permukaan tanah.",
+      "Beri jarak sekitar 45 cm antar tanaman dan minimal 60 cm antar baris.",
+      "Tanaman tumbuh di sinar matahari penuh maupun teduh sebagian. Jenis berdaun belang dapat gosong bila terkena sinar penuh."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Siram teratur selama musim tumbuh, sekitar 2,5-5 cm per minggu, disesuaikan dengan suhu dan paparan matahari. Hindari penyiraman berlebihan. Irigasi tetes disarankan. Jangan biarkan pot mengering.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri satu kali pupuk lengkap lepas lambat di awal musim semi, sekitar 1 sendok teh pupuk 16-16-16 per tanaman saat pertumbuhan dimulai lagi.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut jumlah hari panen. Mulai panen saat tanaman setinggi 7,5-10 cm. Potong batang hingga sekitar 2,5 cm dari tanah pada pagi menjelang siang di hari cerah dan kering. Pemotongan dilakukan 2-3 kali per musim sebelum berbunga. Daun segar boleh dipetik kapan saja; pemotongan yang sering mendorong pertumbuhan.",
+    "sources": [
+      {
+        "title": "Utah State University Extension - Mint in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/mint-in-the-garden.php"
+      },
+      {
+        "title": "University of Maryland Extension - Mint",
+        "url": "https://extension.umd.edu/resource/mint"
+      }
+    ]
+  },
+  {
+    "plant": "Rosemary",
+    "planting_steps": [
+      "Lebih andal ditanam dari stek atau bibit pindahan daripada benih, karena perkecambahan benih hanya sekitar 15%.",
+      "Untuk stek, potong cabang sepanjang sekitar 7,5 cm, buang daun bagian bawah sampai tersisa sekitar 4 cm, lalu tanam satu atau dua stek dalam pot 7,5 cm.",
+      "Letakkan stek di cahaya tidak langsung pada suhu 16-21 C. Stek berakar dalam sekitar 8 minggu, lalu siap dipindahkan.",
+      "Siapkan tanah lempung dengan drainase baik dan sedikit asam, pH 6,0-7,0. Singkirkan batu, gulma, dan sisa akar, lalu campur kompos setebal sekitar 10 cm ke kedalaman 15-20 cm. Bedengan agak ditinggikan paling baik untuk drainase.",
+      "Tempatkan di sinar matahari penuh, minimal 6 jam per hari."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Siram sekitar tiap 1-2 minggu tergantung ukuran tanaman dan iklim. Biarkan tanah mengering benar di antara penyiraman karena air berlebih menyebabkan busuk akar. Tanaman tahan kekeringan.",
+    "fertilizing_frequency": "none",
+    "fertilizing_note": "Jarang diperlukan. Bila pertumbuhan lambat atau daun menguning pucat, beri satu kali pupuk serbaguna sebelum pertumbuhan baru di awal musim semi. Jangan taburkan langsung pada tanaman agar daun tidak terbakar.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Panen pertama sekitar 3 bulan untuk bibit dari pembibitan, sekitar 1 tahun untuk stek, dan sekitar 15 bulan untuk benih. Petik beberapa cabang kecil sekaligus setelah tanaman cukup besar. Panen beberapa kali per musim dan beri waktu tumbuh kembali. Daun segar tahan 2-7 hari di kulkas; untuk penyimpanan lama, gantung dalam ikatan hingga kering.",
+    "sources": [
+      {
+        "title": "Texas A&M AgriLife Extension - Easy Gardening: Rosemary",
+        "url": "https://aggie-horticulture.tamu.edu/vegetable/files/2010/10/E-623-Easty-Gardening-Rosemary.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Daun salam",
+    "planting_steps": [
+      "Perbanyak dengan stek, cangkok, atau biji. Biji cepat kehilangan daya tumbuh dalam 4-6 minggu.",
+      "Bila dari biji, letakkan buah segar di permukaan tanah di tempat teduh. Perkecambahan terjadi 1-12 minggu kemudian.",
+      "Beri jarak tanam 2-3 m.",
+      "Tanam di tanah yang subur, lempung, berdrainase baik atau lembap.",
+      "Tempatkan di tempat teduh sebagian atau sinar matahari penuh."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Kebutuhan air sedang. Sumber tidak menyebut jadwal yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Sumber tidak menyebut pemupukan. Perawatannya digolongkan rendah dan pohon mudah tumbuh.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut waktu panen. Daun mudanya dipakai sebagai bumbu masakan Asia Tenggara, terutama di Indonesia, dengan rasa agak asam. Pertumbuhan tergolong cepat sampai sedang. Panduan ini ringkas; tambahkan detail lain lewat Edit Panduan bila ada sumber tepercaya.",
+    "sources": [
+      {
+        "title": "National Parks Board Singapore (Flora & Fauna Web) - Syzygium polyanthum",
+        "url": "https://www.nparks.gov.sg/florafaunaweb/flora/3/1/3164"
+      }
+    ]
+  },
+  {
+    "plant": "Oregano",
+    "planting_steps": [
+      "Perbanyak dari stek yang diambil dari tanaman beraroma kuat. Tanaman dari biji sering tidak menurunkan rasa induknya.",
+      "Bila dari biji, letakkan benih di permukaan media dan tekan ringan tanpa menutupnya karena benih butuh cahaya untuk berkecambah. Jaga media lembap.",
+      "Tanam di tempat bersinar matahari penuh dengan tanah yang ringan, cukup subur, dan drainasenya baik.",
+      "Tanaman mampu tumbuh di kondisi yang sulit asalkan drainasenya baik."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Jaga media lembap saat benih berkecambah. Setelah itu kebutuhan air tergolong rata-rata. Sumber tidak menyebut jadwal yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Sumber tidak menyebut pemupukan. Tanah ringan yang cukup subur sudah memadai.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut jumlah hari panen. Mulai panen sesaat sebelum tanaman berbunga karena pembungaan mengurangi pertumbuhan dan rasa daun. Potong ujung batang dan sisakan 4-6 pasang daun supaya tumbuh tunas samping dan tanaman lebih rimbun. Untuk dikeringkan, gantung batang di tempat sejuk, kering, gelap, dan berventilasi baik, lalu lepas daunnya dan simpan dalam wadah tertutup.",
+    "sources": [
+      {
+        "title": "University of Illinois Extension - Oregano",
+        "url": "https://extension.illinois.edu/herbs/oregano"
+      },
+      {
+        "title": "University of Delaware Cooperative Extension - Oregano",
+        "url": "https://www.udel.edu/content/dam/udelImages/canr/pdfs/extension/factsheets/Oregano.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Lengkuas",
+    "planting_steps": [
+      "Gunakan rimpang utuh karena lebih disarankan daripada potongan. Rimpang boleh disimpan di kulkas satu sampai dua minggu sebelum ditanam.",
+      "Siapkan bedengan tinggi dengan tanah lempung berpasir yang diperkaya. Tanah yang lebih berat tetap bisa dipakai, tetapi pemanenan menjadi lebih lama dan kotor.",
+      "Letakkan segenggam kecil pupuk organik di lubang tanam.",
+      "Tanaman dapat tumbuh di tempat teduh, tetapi hasil rimpang bisa lebih sedikit.",
+      "Setelah tanam, cukup beri mulsa. Tambahkan sedikit kompos bila tanaman tampak kerdil."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Sumber tidak menyebut kebutuhan atau jadwal penyiraman.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Cukup segenggam kecil pupuk organik di lubang tanam. Setelah itu hanya mulsa, ditambah sedikit kompos bila tanaman tampak kerdil.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Lengkuas yang ditanam di musim semi baru siap panen pada musim dingin berikutnya, atau sekitar setahun (di lokasi sumber). Panen butuh sekop dan kadang gergaji, dan lebih melelahkan dibanding jahe. Sebagian rimpang bisa ditinggal di tanah sebagai tanaman tahunan. Sumber ini ringkas dan tidak berasal dari lembaga penyuluhan yang jelas; periksa kembali sebelum dijadikan acuan.",
+    "sources": [
+      {
+        "title": "Growing Ginger, Galangal and Turmeric (PDF, University of Diyala e-library)",
+        "url": "https://uodiyala.edu.iq/uploads/PDF%20ELIBRARY%20UODIYALA/EL50/Growing%20Ginger,%20Galangal%20and%20Turmeric.pdf"
+      }
+    ]
+  }
+]
