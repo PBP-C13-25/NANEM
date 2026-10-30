@@ -94,7 +94,8 @@ Mapping khusus data riset:
   ekuivalen rata-rata dari curah hujan optimal tahunan FAO EcoCrop, bukan
   kebutuhan hujan, irigasi, atau penyiraman harian. Nilai tahunan asli ada di
   metadata `rainfall_annual_min_mm/max` dan asal konversinya ada di
-  `rainfall_basis`.
+  `rainfall_basis`. Nama field model dipertahankan untuk kompatibilitas schema;
+  label dan bantuan pada form admin menjelaskan basis ekuivalen tersebut.
 - `humidity_basis: controlled_environment` menandai rentang RH yang berasal
   dari greenhouse/protected cropping.
 - `humidity_basis: open_field` menandai rentang RH yang berasal dari syarat

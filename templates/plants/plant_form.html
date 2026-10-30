@@ -60,7 +60,11 @@
 
         <fieldset class="plant-admin-form__section">
             <legend>Kondisi lingkungan</legend>
-            <p>Rentang numerik yang digunakan sebagai data pendukung rekomendasi.</p>
+            <p>
+                Rentang numerik yang digunakan sebagai data pendukung rekomendasi.
+                Curah hujan merupakan ekuivalen harian dari rentang optimal tahunan,
+                bukan kebutuhan penyiraman harian.
+            </p>
             <div class="plant-admin-form__grid plant-admin-form__grid--two">
                 {% include "plants/_form_field.html" with field=form.temp_min %}
                 {% include "plants/_form_field.html" with field=form.temp_max %}

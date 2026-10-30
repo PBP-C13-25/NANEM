@@ -235,6 +235,8 @@ class PlantAdminCrudTests(TestCase):
         ):
             self.assertContains(form_response, heading)
         self.assertContains(form_response, "plant_manage.css")
+        self.assertContains(form_response, "Curah hujan minimum ekuivalen")
+        self.assertContains(form_response, "bukan kebutuhan penyiraman harian")
         self.assertNotContains(form_response, 'href="#"')
 
         delete_response = self.client.get(

@@ -100,8 +100,18 @@ class PlantForm(forms.ModelForm):
             "temp_max": "Suhu maksimum (°C)",
             "humidity_min": "Kelembapan minimum (%)",
             "humidity_max": "Kelembapan maksimum (%)",
-            "rainfall_min": "Curah hujan minimum (mm/hari)",
-            "rainfall_max": "Curah hujan maksimum (mm/hari)",
+            "rainfall_min": "Curah hujan minimum ekuivalen (mm/hari)",
+            "rainfall_max": "Curah hujan maksimum ekuivalen (mm/hari)",
+        }
+        help_texts = {
+            "rainfall_min": (
+                "Rata-rata harian ekuivalen dari curah hujan optimal tahunan; "
+                "bukan kebutuhan penyiraman harian."
+            ),
+            "rainfall_max": (
+                "Rata-rata harian ekuivalen dari curah hujan optimal tahunan; "
+                "bukan kebutuhan penyiraman harian."
+            ),
         }
         widgets = {
             "description": forms.Textarea(attrs={"rows": 5}),

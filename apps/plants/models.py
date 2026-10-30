@@ -35,7 +35,8 @@ class Plant(models.Model):
     image_url = models.URLField(max_length=2048, blank=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
 
-    # Temperature in Celsius, humidity in percent, rainfall in mm/day.
+    # Temperature is Celsius and humidity is percent. Rainfall stores the
+    # daily equivalent of an optimal annual range, not a watering schedule.
     temp_min = models.FloatField(null=True, blank=True)
     temp_max = models.FloatField(null=True, blank=True)
     humidity_min = models.FloatField(null=True, blank=True)
