@@ -104,8 +104,8 @@ class PlantCollectionTests(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "plant_collection/index.html")
-        self.assertIn('my_posts', response.context)
-        self.assertEqual(len(response.context['my_posts']), 1)
+        self.assertIn('posts', response.context)
+        self.assertEqual(len(response.context['posts']), 1)
 
     def test_collection_detail_view(self):
         """Menguji tampilan detail koleksi."""
