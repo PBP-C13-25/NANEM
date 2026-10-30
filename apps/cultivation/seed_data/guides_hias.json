@@ -1,0 +1,214 @@
+[
+  {
+    "plant": "Aglaonema",
+    "planting_steps": [
+      "Siapkan pot yang punya lubang drainase di dasarnya.",
+      "Isi pot dengan media tanam siap pakai tanpa tanah (soilless mix) yang diberi tambahan humus.",
+      "Untuk bibit baru, ambil stek batang atau pucuk yang memiliki 4 sampai 5 daun, atau pisahkan anakan (tunas) di pangkal rumpun.",
+      "Jika daun bawah tanaman induk sudah rontok dan batang bawah gundul, potong bagian pucuknya lalu akarkan sebagai tanaman baru.",
+      "Letakkan di tempat teduh dengan cahaya tidak langsung. Hindari sinar matahari langsung pada daun.",
+      "Siram sampai media lembap tetapi tidak becek."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Tidak ada jadwal hari yang pasti. Siram ketika media lapisan atas sedalam 1 sampai 2 inci (sekitar 2,5 sampai 5 cm) sudah kering. Cek dengan menekan dua jari ke media. Jika media masih lembap atau udara dingin, tunda penyiraman. Gunakan air bersuhu ruang.",
+    "fertilizing_frequency": "monthly",
+    "fertilizing_note": "Untuk tanaman di dalam ruangan, gunakan pupuk larut air 20-20-20 dengan dosis 50 ppm nitrogen. Jangan berlebihan karena pupuk berlebih membuat tepi daun terbakar.",
+    "is_harvestable": false,
+    "harvest_note": "Aglaonema tanaman hias dan tidak dipanen. Jika muncul bunga (tongkol di tengah rumpun daun), sebaiknya dibuang agar tanaman tetap rimbun dan awet.",
+    "sources": [
+      {
+        "title": "Chinese Evergreen (Aglaonema) Care, Cultivation & Growing Guide, Clemson HGIC",
+        "url": "https://hgic.clemson.edu/factsheet/chinese-evergreen-aglaonema-care-cultivation-growing-guide/"
+      },
+      {
+        "title": "Aglaonema Production Guide, UF/IFAS EDIS EP160",
+        "url": "https://edis.ifas.ufl.edu/publication/EP160"
+      }
+    ]
+  },
+  {
+    "plant": "Lidah mertua",
+    "planting_steps": [
+      "Gunakan media tanam pot berbasis tanah (soil-based potting mix).",
+      "Pilih pot tanah liat yang lebih lebar dari biasanya supaya tanaman yang tinggi dan ramping tetap tegak.",
+      "Letakkan di tempat hangat dan terang, di bawah sinar matahari atau naungan sebagian. Lindungi dari terik matahari siang yang panas.",
+      "Tanaman dalam ruangan boleh dipindahkan ke tempat teduh di luar ruangan saat musim panas."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Siram teratur selama musim tumbuh dan kurangi banyak dari musim gugur hingga akhir musim dingin. Jangan menuang air ke tengah rosette daun.",
+    "fertilizing_frequency": "none",
+    "fertilizing_note": "Sumber tidak menyebut pemupukan.",
+    "is_harvestable": false,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Tanaman hias, tidak dipanen. Tanaman ini beracun bagi anjing dan kucing dan berisiko menyebar liar bila ditanam di luar, jadi pelihara di dalam pot. Sumber menyebut tidak ada masalah serius hama atau penyakit.",
+    "sources": [
+      {
+        "title": "UF/IFAS Extension Santa Rosa County - Snake Plant (Dracaena trifasciata)",
+        "url": "https://sfyl.ifas.ufl.edu/media/sfylifasufledu/santa-rosa/docs/pdfs/demo-garden-5/Snake-Plant-revised.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Sirih gading",
+    "planting_steps": [
+      "Perbanyak dengan stek batang. Ambil stek sepanjang 2,5-4 cm yang memiliki satu ruas dan satu daun.",
+      "Letakkan stek di air sampai berakar, lalu pindahkan ke tanah pot. Akar terbentuk dalam sekitar 3-4 minggu dan tunas muncul dalam 2-3 minggu.",
+      "Gunakan tanah pot yang drainasenya baik, misalnya campuran gambut, kulit pinus, vermikulit, atau perlit, dengan pH 6,5-7,0.",
+      "Letakkan di tempat dengan cahaya terang tidak langsung. Tanaman juga masih tumbuh di ruangan kurang terang, tetapi corak daun dapat memudar.",
+      "Beri tiang atau penyangga bila ingin merambat."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Siram sampai basah merata, lalu biarkan tanah mengering sebelum menyiram lagi. Tanah yang terus lembap menyebabkan akar busuk dan bintik hitam di daun. Daun layu menandakan tanaman butuh air; tepi daun cokelat kering menandakan terlalu lama kekurangan air.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri pupuk seimbang sekitar tiap dua bulan karena tanah pot miskin hara. Hentikan pemupukan saat musim dingin saat tanaman dorman. Jangan memupuk tanaman dalam ruangan sekitar empat minggu setelah dipindahkan.",
+    "is_harvestable": false,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Tanaman hias, tidak dipanen. Tanaman ini beracun bagi manusia dan hewan peliharaan bila dikunyah atau tertelan. Suhu dalam ruangan 21-27 C cocok, dan kelembapan tinggi disukai. Kutu putih kadang muncul dan dapat ditangani dengan sabun insektisida sesuai label.",
+    "sources": [
+      {
+        "title": "South Dakota State University Extension - Pothos / Devil's Ivy / Golden Pothos",
+        "url": "https://extension.sdstate.edu/pothos-devils-ivy-golden-pothos-house-plant-how"
+      },
+      {
+        "title": "UF/IFAS Extension - Epipremnum aureum (Pothos)",
+        "url": "https://ask.ifas.ufl.edu/publication/EP151/pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Monstera",
+    "planting_steps": [
+      "Gunakan media subur yang drainasenya baik, misalnya campuran tanpa tanah atau tanah pot berbahan organik tinggi, dengan ruang akar yang cukup.",
+      "Perbanyak dengan stek batang dari tanaman dewasa. Potong tepat di bawah akar udara atau ruas, lalu tanam. Stek dapat dibuat kapan saja sepanjang tahun.",
+      "Pasang tiang berlumut atau penyangga kulit kayu yang ditancapkan di pot agar akar udara dapat menempel. Penyangga mencegah batang patah dan daun biasanya membesar setelah menempel.",
+      "Letakkan di tempat dengan cahaya terang. Tanpa cahaya cukup, daun tidak akan berlubang. Tanaman yang dipindah ke luar ruangan perlu pengenalan cahaya kuat secara bertahap agar tidak terbakar.",
+      "Pindahkan ke pot lebih besar secara bertahap hanya bila akar sudah mencapai dasar dan sisi pot."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Siram sampai basah merata lalu biarkan media mengering sedikit sebelum menyiram lagi (sekitar 5-7 cm bagian atas). Siram juga tiang berlumut agar akar udara dapat menyerap air. Kurangi penyiraman saat musim dingin. Daun yang berkeringat menandakan penyiraman perlu dikurangi.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Pupuk secara teratur dari musim semi hingga musim gugur. Garam tanah yang tinggi mudah membakar tanaman. Sumber tidak menyebut dosis.",
+    "is_harvestable": false,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Tanaman hias, tidak dipanen. Tanaman menyukai suhu hangat dan kelembapan sedang hingga tinggi. Tidak tumbuh di bawah sekitar 10 C dan mati terkena embun beku; tepi daun cokelat menandakan udara terlalu kering.",
+    "sources": [
+      {
+        "title": "UConn Home & Garden Education Center - Monstera deliciosa",
+        "url": "https://homegarden.cahnr.uconn.edu/factsheets/monstera-deliciosa"
+      },
+      {
+        "title": "UW-Madison Division of Extension Horticulture - Monstera deliciosa",
+        "url": "https://hort.extension.wisc.edu/articles/monstera-deliciosa/"
+      }
+    ]
+  },
+  {
+    "plant": "Kaktus",
+    "planting_steps": [
+      "Gunakan campuran tanam yang sangat porous: sekitar sepertiga bahan organik dan dua pertiga bahan mineral seperti perlit, pasir kasar, atau batu apung. Campuran siap pakai untuk kaktus dan sukulen juga cocok. Alternatif: satu bagian tanah pot dan satu bagian pasir kasar.",
+      "Pakai pot dengan lubang drainase. Lapisan kerikil tidak menggantikan lubang. Pot tanah liat atau terakota paling baik karena cepat kering.",
+      "Letakkan di jendela yang terang dan cerah. Sebagian besar membutuhkan minimal 6-8 jam cahaya terang per hari, atau gunakan lampu tambahan.",
+      "Pindahkan ke luar ruangan secara bertahap, hindari sinar matahari siang yang terik.",
+      "Perbanyak dengan anakan atau stek. Biarkan stek mengering di udara dulu lalu tanam di pasir sedikit lembap."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Siram sampai air keluar dari lubang drainase lalu buang kelebihan air. Biarkan media kering benar sebelum menyiram lagi, biasanya sekitar 2-3 minggu. Jangan biarkan pot tergenang di alasnya. Saat musim kurang cahaya, siram sekadar agar tidak keriput. Siraman sedikit-sedikit yang sering membuat pertumbuhan tidak normal.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri pupuk kaktus sekali atau dua kali setahun, pada akhir musim semi atau musim panas, dengan pupuk tanaman hias berfosfor lebih tinggi dari nitrogen dan setengah dosis. Jangan memupuk saat musim dingin.",
+    "is_harvestable": false,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Tanaman hias, tidak dipanen. Suhu ideal 13-24 C dengan malam yang lebih sejuk. Kaktus toleran terhadap kelembapan udara rendah. Sumber menyatakan semua kaktus adalah sukulen dan tidak memberi panduan terpisah khusus kaktus.",
+    "sources": [
+      {
+        "title": "University of Minnesota Extension - Cacti and Succulents",
+        "url": "https://extension.umn.edu/house-plants/cacti-and-succulents"
+      },
+      {
+        "title": "Iowa State University Extension - Growing Succulents Indoors",
+        "url": "https://yardandgarden.extension.iastate.edu/how-to/growing-succulents-indoors"
+      }
+    ]
+  },
+  {
+    "plant": "Sukulen",
+    "planting_steps": [
+      "Gunakan campuran tanam yang sangat porous: sekitar sepertiga bahan organik dan dua pertiga bahan mineral seperti perlit, pasir kasar, atau batu apung. Alternatif: satu bagian tanah pot dan satu bagian pasir kasar.",
+      "Pakai pot dengan lubang drainase. Pot tanah liat atau terakota paling baik. Pada taman mini dangkal, tambahkan pecahan tanah liat atau kerikil kasar untuk drainase.",
+      "Letakkan di jendela yang terang. Bila memakai lampu tambahan, letakkan 15-30 cm di atas tanaman selama 14-16 jam per hari.",
+      "Perbanyak dengan anakan, stek batang, atau stek daun. Biarkan stek mengering di udara dulu lalu letakkan di pasir steril yang sedikit lembap.",
+      "Memindahkan ke pot baru adalah saat yang baik untuk memperbanyak, memangkas batang yang memanjang, dan memisahkan anakan yang berdesakan."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Siram sampai air keluar dari lubang drainase lalu buang kelebihan air. Biarkan media kering benar sebelum menyiram lagi, biasanya sekitar 2-3 minggu. Saat cahaya musim dingin rendah, siram sekadar agar tidak keriput, lalu tambah lagi saat cahaya musim semi meningkat.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri pupuk tiga atau empat kali pada musim yang terang, dengan pupuk serbaguna atau pupuk kaktus pada setengah hingga seperempat dosis label. Jangan memupuk saat musim dingin.",
+    "is_harvestable": false,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Tanaman hias, tidak dipanen. Suhu ideal 13-24 C dengan malam yang lebih sejuk; sebagian toleran 7-29 C. Tanaman tahan kelembapan udara rendah.",
+    "sources": [
+      {
+        "title": "University of Minnesota Extension - Cacti and Succulents",
+        "url": "https://extension.umn.edu/house-plants/cacti-and-succulents"
+      },
+      {
+        "title": "Iowa State University Extension - Growing Succulents Indoors",
+        "url": "https://yardandgarden.extension.iastate.edu/how-to/growing-succulents-indoors"
+      }
+    ]
+  },
+  {
+    "plant": "Peace lily",
+    "planting_steps": [
+      "Gunakan tanah pot yang drainasenya baik dan kaya organik, misalnya berbahan gambut atau kulit kayu.",
+      "Letakkan di tempat dengan cahaya terang tidak langsung. Tanaman masih tahan cahaya rendah, tetapi sinar matahari langsung dapat membakar daun.",
+      "Pindahkan ke pot lebih besar bila akar keluar dari lubang drainase atau melingkar di permukaan. Pilih pot yang hanya 2,5-5 cm lebih besar karena pot terlalu besar membuat media terlalu basah.",
+      "Jauhkan dari lubang AC atau pemanas serta angin yang bertiup."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Jaga media lembap tetapi tidak becek, dan biarkan sedikit mengering di antara penyiraman. Pakai air bersuhu ruang dan jangan biarkan tanaman terendam air. Tanaman agak tahan kekeringan; kekeringan berlebih menyebabkan layu dan daun menguning.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Kebutuhan pupuk sangat sedikit. Pakai pupuk cair seimbang (misalnya 20-20-20) pada seperempat dosis setiap 6-8 minggu di musim semi dan panas. Sumber lain menyarankan dosis rendah sekitar tiga kali setahun. Pupuk berlebih membuat ujung daun cokelat.",
+    "is_harvestable": false,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Tanaman hias, tidak dipanen. Suhu yang disukai 20-29 C pada siang hari dengan malam sekitar 5 C lebih sejuk. Hindari suhu di bawah 16 C. Penyakit akar dan batang biasanya terkait penyiraman berlebih.",
+    "sources": [
+      {
+        "title": "Clemson Cooperative Extension HGIC - Peace Lily",
+        "url": "https://hgic.clemson.edu/factsheet/peace-lily/"
+      },
+      {
+        "title": "UF/IFAS Extension - Peace Lily (Spathiphyllum)",
+        "url": "https://ask.ifas.ufl.edu/publication/EP477"
+      }
+    ]
+  },
+  {
+    "plant": "Calathea",
+    "planting_steps": [
+      "Gunakan media pot yang lembap, drainasenya baik, dan sedikit asam.",
+      "Letakkan di tempat dengan cahaya terang tidak langsung atau naungan sebagian. Sinar matahari langsung dapat membakar daun.",
+      "Jaga kelembapan udara minimal 60 persen, misalnya dengan pelembap udara atau meletakkan pot di atas nampan berkerikil basah.",
+      "Jaga suhu stabil sekitar 18-24 C dan hindari angin dingin serta perubahan suhu mendadak."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Jaga tanah lembap secara konsisten tetapi tidak basah atau becek. Sumber menyarankan air suling atau air hujan karena fluorida dalam air keran dapat mencokelatkan ujung daun. Air berlebih menyebabkan busuk akar.",
+    "fertilizing_frequency": "monthly",
+    "fertilizing_note": "Beri pupuk sebulan sekali selama musim tumbuh. Dosis tidak disebut sumber.",
+    "is_harvestable": false,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Tanaman hias, tidak dipanen. Kelembapan rendah menyebabkan tepi daun cokelat dan daun menggulung. Panduan ini berasal dari satu halaman spesies (Goeppertia orbifolia); jenis calathea lain bisa berbeda.",
+    "sources": [
+      {
+        "title": "NC State Extension Plant Toolbox - Goeppertia orbifolia",
+        "url": "https://plants.ces.ncsu.edu/plants/goeppertia-orbifolia"
+      }
+    ]
+  }
+]

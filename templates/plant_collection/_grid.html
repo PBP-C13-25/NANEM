@@ -1,0 +1,49 @@
+
+<div class="feed-grid" style="grid-template-columns: repeat(2, 1fr)">
+    {% for post in collections %}
+        <div class="card"> 
+            <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 250px;">
+            
+            <div class="card-body">
+                <div style="margin-bottom: 12px; margin-top: 12px;">
+                    {% csrf_token %}
+                    <button type="button" class="btn-like {% if user in post.likes.all %}is-liked{% endif %}"  data-id="{{ post.pk }}">
+                        <span  class="icon-like-wrapper {% if user in post.likes.all %}is-active{% endif %}">
+                            {% include "components/icon.html" with name="heart" size=20 %}
+                        </span>
+                        <span class="like-count">{{ post.likes.count }}</span>
+                    </button>
+                </div>
+                <h1 class="card-title"><a href="{% url 'collection:detail' post.pk %}" class="card-link">{{ post.title }}</a></h1>
+                <p class="card-desc">{{ post.description }}</p>
+                <div class="author-name">
+                    <strong>{{ post.owner.first_name|default:post.owner.username }}</strong>
+                </div>
+                <span class="card-time">
+                    {{ post.created_at|timesince|truncatewords:2|cut:","|cut:"…"}} yang lalu
+                </span>
+            </div>
+                        {% if request.user == post.owner %}
+            <div class="owner-actions">
+                <a href="{% url 'collection:edit' post.pk %}" class="btn btn--outline">Edit</a>
+                <button type="button" class="btn btn--danger" data-modal-open="delete-post-{{ post.pk }}">Hapus</button>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if request.user == post.owner %}
+            {% url 'collection:delete' post.pk as delete_url %}
+            {% with pk_str=post.pk|stringformat:"s" %}
+                {% include "components/confirm_modal.html" with id="delete-post-"|add:pk_str title="Hapus postingan?" message="Postingan ini akan dihapus permanen dan tidak bisa dikembalikan." action=delete_url confirm_label="Ya, Hapus" danger=True %}
+            {% endwith %}
+        {% endif %}
+
+        {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; color: var(--color-muted); padding: 40px;">
+            <p>Yahhh, masih belum ada postingan apapun nih.</p>
+        </div>
+    {% endfor %}
+</div>
+
+
+

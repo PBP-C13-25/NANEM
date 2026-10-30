@@ -1,0 +1,247 @@
+.cg-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.cg-back-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 18px;
+}
+
+.cg-back {
+  display: inline-block;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cg-back:hover {
+  color: var(--color-primary-hover);
+}
+
+.cg-plant {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cg-plant__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: #f3f5ee;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.cg-plant__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cg-plant__category {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-hover);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cg-plant__info h1 {
+  margin: 0 0 6px;
+  font-size: 1.8rem;
+  line-height: 1.25;
+}
+
+.cg-plant__scientific {
+  margin: 0 0 12px;
+  color: var(--color-muted);
+}
+
+.cg-plant__description {
+  margin: 0 0 18px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.cg-plant__facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+.cg-plant__facts div {
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+}
+
+.cg-plant__facts dt {
+  margin-bottom: 2px;
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cg-plant__facts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.cg-admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.cg-admin-actions .btn {
+  width: auto;
+  text-decoration: none;
+}
+
+.cg-steps {
+  margin-bottom: 28px;
+  padding: 24px 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: 0 10px 30px rgba(30, 40, 20, 0.06);
+}
+
+.cg-steps h2 {
+  margin: 0 0 14px;
+  font-size: 1.2rem;
+}
+
+.cg-steps ol {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 22px;
+}
+
+.cg-steps li::marker {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.cg-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.cg-card {
+  padding: 20px 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+}
+
+.cg-card h3 {
+  margin: 0 0 8px;
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.cg-card p + p {
+  margin-top: 8px;
+}
+
+.cg-card p {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.cg-form-section {
+  margin: 24px 0 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+  font-size: 1.05rem;
+}
+
+.cg-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cg-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cg-check input {
+  width: auto;
+}
+
+.cg-form-plant {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cg-form-plant__image {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cg-form-plant__name {
+  display: block;
+}
+
+.cg-form-plant__scientific {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.cg-form-card textarea,
+.cg-form-card select,
+.cg-form-card input[type="number"] {
+  width: 100%;
+  resize: vertical;
+}
+
+@media (max-width: 640px) {
+  .cg-plant__facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .cg-plant {
+    grid-template-columns: 1fr;
+  }
+
+  .cg-plant__image {
+    aspect-ratio: 16 / 10;
+  }
+
+  .cg-form-row {
+    grid-template-columns: 1fr;
+  }
+}

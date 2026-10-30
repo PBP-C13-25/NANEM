@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Hasil Rekomendasi - Nanem{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/history-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+{% with env=result.environment plants=result.plants %}
+<section class="detail result">
+
+    {# ================= Header ================= #}
+    <a href="{% url 'recommendations:index' %}?ubah=1" class="detail__back">
+        {% include "components/icon.html" with name="arrow-left" size=16 %}Ubah data lahan
+    </a>
+
+    <header class="detail__header">
+        <div class="detail__heading">
+            <h1 class="detail__title">Hasil untuk "{{ result.land_name }}"</h1>
+
+            {% if plants %}
+                {% with top=plants|first %}
+                <p class="detail__highlight">
+                    {% include "components/icon.html" with name="sprout" size=18 %}
+                    Paling cocok: <strong>{{ top.plant_name }}</strong>
+                    <span class="detail__highlight-pct">{{ top.match_percentage|floatformat:0 }}%</span>
+                </p>
+                {% endwith %}
+            {% endif %}
+        </div>
+
+        {# ---- Aksi: simpan / sudah disimpan / ajak login ---- #}
+        <div class="detail__actions">
+            {% if can_save %}
+                {% if saved_history_id %}
+                    <span class="result__saved">
+                        {% include "components/icon.html" with name="check" size=16 %}Tersimpan
+                    </span>
+                    <a href="{% url 'recommendations:history_detail' saved_history_id %}" class="btn btn--outline detail__btn">
+                        Lihat di riwayat
+                    </a>
+                {% else %}
+                    <form method="post" action="{% url 'recommendations:save' %}" class="result__save-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn--primary detail__btn">
+                            {% include "components/icon.html" with name="bookmark" size=16 %}Simpan ke riwayat
+                        </button>
+                    </form>
+                {% endif %}
+            {% elif not user.is_authenticated %}
+                <a href="{% url 'accounts:login' %}?next={% url 'recommendations:result' %}" class="btn btn--primary detail__btn">
+                    {% include "components/icon.html" with name="bookmark" size=16 %}Masuk untuk menyimpan
+                </a>
+            {% endif %}
+
+            <a href="{% url 'recommendations:index' %}" class="btn btn--outline detail__btn">
+                {% include "components/icon.html" with name="search" size=16 %}Cari lagi
+            </a>
+        </div>
+    </header>
+
+    {# catatan kecil untuk tamu / admin #}
+    {% if not user.is_authenticated %}
+        <p class="result__note">
+            Belum punya akun? <a href="{% url 'accounts:register' %}">Daftar gratis</a> supaya hasil ini bisa disimpan ke riwayat.
+        </p>
+    {% endif %}
+
+    {# ================= Isi: analisis | rekomendasi ================= #}
+    <div class="detail__grid">
+        {% include "recommendations/_analysis_card.html" with env=env latitude=result.latitude longitude=result.longitude land_area=result.land_area medium_label=medium_label %}
+        {% include "recommendations/_plants_rec_card.html" with plants=plants %}
+    </div>
+</section>
+{% endwith %}
+{% endblock %}
+
+{# ================= JavaScript ================= #}
+{% block extra_js %}
+<script src="{% static 'js/pages/plants-rec-card.js' %}" defer></script>
+{% endblock %}

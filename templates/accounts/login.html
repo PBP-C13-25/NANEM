@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Masuk - Nanem{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="auth">
+
+    {# ===== Panel kiri ===== #}
+    <div class="auth__panel">
+        <h2 class="auth__panel-title">Selamat Datang Kembali!</h2>
+        <p class="auth__panel-text">Belum punya akun? Daftar dulu, gratis kok.</p>
+        <a href="{% url 'accounts:register' %}" class="btn btn--outline-light">Daftar</a>
+    </div>
+
+    {# ===== Panel kanan: form ===== #}
+    <div class="auth__form">
+        <h1 class="auth__title">Masuk</h1>
+        <p class="auth__subtitle">Masuk pakai username dan password kamu.</p>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+
+            {% if form.non_field_errors %}
+                <ul class="form-errors">
+                    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+                </ul>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn--primary auth__submit">Masuk</button>
+        </form>
+
+        <p class="auth__switch-mobile">
+            Belum punya akun? <a href="{% url 'accounts:register' %}">Daftar</a>
+        </p>
+    </div>
+
+</section>
+{% endblock %}

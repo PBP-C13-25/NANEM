@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ history.land_name }} - Riwayat - Nanem{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/history-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+{% with env=history.environment_snapshot plants=history.recommended_plants %}
+<section class="detail">
+
+    {# ================= Header ================= #}
+    <a href="{% url 'recommendations:history_list' %}" class="detail__back">
+        {% include "components/icon.html" with name="arrow-left" size=16 %}Semua riwayat
+    </a>
+
+    <header class="detail__header">
+        <div class="detail__heading">
+            <h1 class="detail__title">{{ history.land_name }}</h1>
+            <p class="detail__meta">
+                <span>{% include "components/icon.html" with name="calendar" size=15 %}Disimpan {{ history.created_at|date:"d M Y · H:i" }}</span>
+            </p>
+
+            {% if plants %}
+                {% with top=plants|first %}
+                <p class="detail__highlight">
+                    {% include "components/icon.html" with name="sprout" size=18 %}
+                    Paling cocok: <strong>{{ top.plant_name }}</strong>
+                    <span class="detail__highlight-pct">{{ top.match_percentage|floatformat:0 }}%</span>
+                </p>
+                {% endwith %}
+            {% endif %}
+        </div>
+
+        <div class="detail__actions">
+            <a href="{% url 'recommendations:history_update' history.pk %}" data-modal-open="ubah-detail"
+               class="btn btn--outline detail__btn">
+                {% include "components/icon.html" with name="pencil" size=16 %}Ubah nama
+            </a>
+            <a href="{% url 'recommendations:history_delete' history.pk %}" data-modal-open="hapus-detail"
+               class="btn btn--outline detail__btn detail__btn--danger" aria-label="Hapus riwayat">
+                {% include "components/icon.html" with name="trash" size=16 %}<span class="detail__btn-label">Hapus</span>
+            </a>
+        </div>
+    </header>
+
+    {# ================= Isi: analisis | rekomendasi ================= #}
+    <div class="detail__grid">
+
+        {% include "recommendations/_analysis_card.html" with env=env latitude=history.latitude longitude=history.longitude land_area=history.land_area medium_label=history.get_planting_medium_display period_start=period_start period_end=history.created_at %}
+        {% include "recommendations/_plants_rec_card.html" with plants=plants %}
+    </div>
+</section>
+
+{# ================= Modal ================= #}
+{% url 'recommendations:history_update' history.pk as rename_url %}
+{% url 'recommendations:history_delete' history.pk as delete_url %}
+{% url 'recommendations:history_detail' history.pk as detail_page %}
+{% include "components/rename_modal.html" with id="ubah-detail" action=rename_url value=history.land_name next=detail_page %}
+{% include "components/confirm_modal.html" with id="hapus-detail" title="Hapus riwayat?" message="Riwayat ini akan dihapus permanen:" item=history.land_name action=delete_url confirm_label="Ya, hapus" danger=True %}
+{% endwith %}
+{% endblock %}
+
+{# ================= JavaScript ================= #}
+{% block extra_js %}
+<script src="{% static 'js/pages/plants-rec-card.js' %}" defer></script>
+{% endblock %}

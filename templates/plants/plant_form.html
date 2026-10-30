@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{% if object %}Edit {{ object.name }}{% else %}Tambah Tanaman{% endif %} - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/plant_manage.css' %}?v=20261030-1">
+{% endblock %}
+
+{% block content %}
+<section class="plant-admin-form" aria-labelledby="plant-form-title">
+    <header>
+        <a class="plant-admin-form__back" href="{% url 'plants:manage' %}">{% include "components/icon.html" with name="arrow-left" size=16 %}Kembali ke Kelola Tanaman</a>
+        <h1 id="plant-form-title">
+            {% if object %}Edit {{ object.name }}{% else %}Tambah Tanaman{% endif %}
+        </h1>
+        <p>Field yang belum memiliki data tepercaya boleh dibiarkan kosong.</p>
+    </header>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-errors">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <fieldset class="plant-admin-form__section">
+            <legend>Identitas tanaman</legend>
+            <p>Informasi utama yang ditampilkan pada katalog dan hasil rekomendasi.</p>
+            <div class="plant-admin-form__grid plant-admin-form__grid--two">
+                {% include "plants/_form_field.html" with field=form.name %}
+                {% include "plants/_form_field.html" with field=form.scientific_name %}
+                {% include "plants/_form_field.html" with field=form.category %}
+            </div>
+        </fieldset>
+
+        <fieldset class="plant-admin-form__section">
+            <legend>Media dan lokasi</legend>
+            <p>Tempat dan kondisi dasar yang didukung oleh tanaman.</p>
+            <div class="plant-admin-form__grid plant-admin-form__grid--two">
+                {% include "plants/_form_field.html" with field=form.supports_soil %}
+                {% include "plants/_form_field.html" with field=form.supports_hydroponic %}
+                {% include "plants/_form_field.html" with field=form.indoor %}
+                {% include "plants/_form_field.html" with field=form.space_needed %}
+                <div class="plant-admin-form__wide">
+                    {% include "plants/_form_field.html" with field=form.sunlight %}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="plant-admin-form__section">
+            <legend>Perawatan</legend>
+            <p>Ringkasan kebutuhan perawatan untuk katalog.</p>
+            <div class="plant-admin-form__grid plant-admin-form__grid--three">
+                {% include "plants/_form_field.html" with field=form.watering %}
+                {% include "plants/_form_field.html" with field=form.care_level %}
+                {% include "plants/_form_field.html" with field=form.drought_tolerant %}
+            </div>
+        </fieldset>
+
+        <fieldset class="plant-admin-form__section">
+            <legend>Kondisi lingkungan</legend>
+            <p>
+                Rentang numerik yang digunakan sebagai data pendukung rekomendasi.
+                Curah hujan merupakan ekuivalen harian dari rentang optimal tahunan,
+                bukan kebutuhan penyiraman harian.
+            </p>
+            <div class="plant-admin-form__grid plant-admin-form__grid--two">
+                {% include "plants/_form_field.html" with field=form.temp_min %}
+                {% include "plants/_form_field.html" with field=form.temp_max %}
+                {% include "plants/_form_field.html" with field=form.humidity_min %}
+                {% include "plants/_form_field.html" with field=form.humidity_max %}
+                {% include "plants/_form_field.html" with field=form.rainfall_min %}
+                {% include "plants/_form_field.html" with field=form.rainfall_max %}
+            </div>
+        </fieldset>
+
+        <fieldset class="plant-admin-form__section">
+            <legend>Deskripsi dan gambar</legend>
+            <p>Konten yang membantu pengguna mengenali tanaman pada katalog.</p>
+            {% include "plants/_form_field.html" with field=form.description %}
+            {% include "plants/_form_field.html" with field=form.image_url %}
+        </fieldset>
+
+        <div class="plant-admin-form__actions">
+            <a class="btn btn--outline" href="{% url 'plants:manage' %}">Batal</a>
+            <button class="btn btn--primary" type="submit">
+                {% if object %}Simpan Perubahan{% else %}Tambah Tanaman{% endif %}
+            </button>
+        </div>
+    </form>
+</section>
+{% endblock %}

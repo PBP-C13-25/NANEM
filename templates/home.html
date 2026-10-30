@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nanem{% endblock %}
+ 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="home-container">
+
+    {% if user.is_authenticated %}
+    <!--  TAMPILAN USER (UDAH LOGIN) -->
+    <section class="home-user">
+        <header class="user-greeting">
+            <span class="user-greeting__badge">Selamat Datang Kembali</span>
+            <h1 class="user-greeting__title">Halo, {{ user.first_name|default:user.username }} </h1>
+            <p class="user-greeting__sub"> Ayo mulai berbenah tanaman di halamanmu!</p>
+        </header>
+
+        <!-- Akses Cepat Fitur Utama -->
+        <div class="quick-nav">
+            <a href="{% url 'recommendations:index' %}" class="quick-nav__item">
+                <div class="quick-nav__icon">
+                    {% include "components/icon.html" with name="sprout" size=20 %}
+                </div>
+                <div class="quick-nav__text">
+                    <h3>Cari Rekomendasi</h3>
+                    <p>Temukan tanaman yang cocok untuk rumahmu</p>
+                </div>
+            </a>
+
+            <a href="{% url 'collection:index' %}" class="quick-nav__item">
+                <div class="quick-nav__icon">
+                    {% include "components/icon.html" with name="layout-grid" size=20 %}
+                </div>
+                <div class="quick-nav__text">
+                    <h3>Koleksi Saya</h3>
+                    <p>Kelola dan bagikan cerita tentang tanamanmu</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    {% else %}
+
+    <!--  TAMPILAN GUEST (BELUM LOGIN) -->
+
+    <section class="home-guest">
+        <div class="guest-hero">
+            <span class="guest-hero__tag">
+                {% include "components/icon.html" with name="sprout" size=48 %}
+            </span>
+            <h1 class="guest-hero__title">Temukan Tanaman yang Cocok dengan Kondisi Tempat Tinggalmu</h1>
+            <p class="guest-hero__sub">
+                Nanem membantu memilih tanaman berdasarkan pencahayaan, kelembapan, dan gaya hidupmu dengan mudah.
+            </p>
+            
+            <div class="guest-hero__actions">
+                <a href="{% url 'accounts:register' %}" class="btn btn--primary"> Daftar </a>
+                <a href="{% url 'accounts:login' %}" class="btn btn--outline"> Masuk </a>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+</div>
+{% endblock %}

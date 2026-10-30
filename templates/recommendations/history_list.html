@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Riwayat Rekomendasi - Nanem{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/history.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="history">
+
+    {# ===== Header ===== #}
+    <header class="history__header">
+        <div>
+            <h1 class="history__title">Riwayat Rekomendasi</h1>
+            {# selalu ada (boleh kosong) supaya bisa diperbarui JS pencarian #}
+            <p class="history__subtitle" id="history-count">{% if q %}{{ histories|length }} lahan cocok dengan "{{ q }}"{% elif histories %}{{ histories|length }} lahan tersimpan{% endif %}</p>
+        </div>
+        {% if histories or q %}
+            <a href="{% url 'recommendations:index' %}" class="btn btn--primary">+ Rekomendasi Baru</a>
+        {% endif %}
+    </header>
+
+    {# ===== Pencarian (disembunyikan kalau user memang belum punya riwayat) ===== #}
+    {% if histories or q %}
+    <form method="get" class="history-search" role="search">
+        {% url 'recommendations:history_list' as clear_url %}
+        {% include "components/search_field.html" with value=q placeholder="Cari nama lahan..." clear_url=clear_url live=True %}
+    </form>
+    {% endif %}
+
+    {# ===== Daftar: 1 baris per riwayat ===== #}
+    <div id="history-results">
+        {% if histories %}
+            <ul class="history-list">
+            {% for history in histories %}
+                {% with top=history.recommended_plants|first %}
+                <li class="history-row" id="riwayat-{{ history.pk }}">
+                    <div class="history-row__main">
+                        <p class="history-row__date">{{ history.created_at|date:"d M Y · H:i" }}</p>
+
+                        <div class="history-row__name">
+                            <a href="{% url 'recommendations:history_detail' history.pk %}" data-name>{{ history.land_name }}</a>
+                            <a href="{% url 'recommendations:history_update' history.pk %}"
+                            data-modal-open="ubah-{{ history.pk }}"
+                            class="history-row__icon-btn" title="Ubah nama" aria-label="Ubah nama {{ history.land_name }}">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                            </a>
+                        </div>
+
+                        {% if top %}
+                            <p class="history-row__top">
+                                Paling cocok: <strong>{{ top.plant_name }}</strong>
+                                <span class="history-row__match">{{ top.match_percentage }}%</span>
+                            </p>
+                        {% else %}
+                            <p class="history-row__top history-row__top--none">Belum ada tanaman yang cocok saat itu.</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="history-row__side">
+                        <a href="{% url 'recommendations:history_detail' history.pk %}" class="btn btn--outline history-row__detail">Lihat detail</a>
+                        <a href="{% url 'recommendations:history_delete' history.pk %}"
+                        data-modal-open="hapus-{{ history.pk }}"
+                        class="history-row__icon-btn history-row__icon-btn--danger" title="Hapus" aria-label="Hapus {{ history.land_name }}">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6M14 11v6"/></svg>
+                        </a>
+                    </div>
+                </li>
+                {% endwith %}
+
+                {# ---- Modal per item ---- #}
+                {% url 'recommendations:history_update' history.pk as rename_url %}
+                {% url 'recommendations:history_delete' history.pk as delete_url %}
+                {% with pk=history.pk|stringformat:"s" %}
+                    {% include "components/rename_modal.html" with id="ubah-"|add:pk action=rename_url value=history.land_name next=request.get_full_path ajax=True target="riwayat-"|add:pk %}
+                    {% include "components/confirm_modal.html" with id="hapus-"|add:pk title="Hapus riwayat?" message="Riwayat ini akan dihapus permanen:" item=history.land_name action=delete_url confirm_label="Ya, hapus" danger=True ajax=True target="riwayat-"|add:pk %}
+                {% endwith %}
+            {% endfor %}
+            </ul>
+
+
+        {# ===== Pencarian tidak ketemu ===== #}
+        {% elif q %}
+            {% url 'recommendations:history_list' as reset_url %}
+            {% include "components/empty_state.html" with icon="search" title="Lahan tidak ditemukan" text="Coba kata kunci lain, atau tampilkan semua riwayat." action_url=reset_url action_label="Tampilkan semua" %}
+
+        {# ===== Belum punya riwayat sama sekali ===== #}
+        {% else %}
+            {% url 'recommendations:index' as cta_url %}
+            {% include "components/empty_state.html" with icon="history" title="Belum ada riwayat" text="Hasil rekomendasi yang kamu simpan bakal muncul di sini." action_url=cta_url action_label="Cari Rekomendasi" %}
+        {% endif %}
+    </div>
+    
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/pages/history.js' %}" defer></script>
+{% endblock %}

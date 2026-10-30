@@ -1,0 +1,106 @@
+{% comment %}
+  Kartu "Rekomendasi tanaman" — dipakai di halaman hasil & detail riwayat.
+
+  Parameter:
+    plants : list tanaman (plant_name, scientific_name, match_percentage, reasons,
+             plant_id, criteria_count, matched_count,
+             care_level, care_level_label, indoor, category)
+
+  5 tanaman pertama tampil langsung; sisanya disembunyikan lewat JS dan
+  dimunculkan dengan tombol "Lihat lainnya". Kalau tanaman punya lebih dari
+  1 kategori beda, muncul juga chip filter kategori. Semua ini murni JS
+  (lihat js/pages/plants-rec-card.js) -- tanpa JS, semua tanaman tetap tampil.
+{% endcomment %}
+
+<article class="card detail__card">
+    <div class="detail__card-head">
+        <h2 class="detail__card-title">Rekomendasi tanaman</h2>
+        {% if plants %}<span class="detail__count">{{ plants|length }} tanaman</span>{% endif %}
+    </div>
+    <p class="detail__card-sub">Diurutkan dari yang paling cocok.</p>
+
+    {% if plants %}
+        {# Diisi JS kalau kategori tanamannya lebih dari 1 macam; tetap hidden kalau nggak #}
+        <div class="plants-filter" data-plants-filter role="group" aria-label="Filter kategori" hidden></div>
+
+        <ol class="plants" data-plants data-visible="5">
+        {% for plant in plants %}
+            <li class="plant {% if forloop.first %}plant--top {% endif %}{% if plant.match_percentage >= 75 %}plant--high{% elif plant.match_percentage >= 50 %}plant--mid{% else %}plant--low{% endif %}"
+                data-category="{{ plant.category }}">
+                {% url 'cultivation:detail' plant.plant_id as guide_url %}
+                <a {% if guide_url %}href="{{ guide_url }}"{% endif %} class="plant__link" aria-label="Lihat panduan budidaya {{ plant.plant_name }}">
+                    <div class="plant__head">
+                        <span class="plant__rank">{{ forloop.counter }}</span>
+                        <div class="plant__names">
+                            <h3 class="plant__name">{{ plant.plant_name }}</h3>
+                            {% if plant.scientific_name %}<p class="plant__latin">{{ plant.scientific_name }}</p>{% endif %}
+                        </div>
+                        {% if forloop.first %}<span class="plant__badge">Pilihan teratas</span>{% endif %}
+                        <span class="plant__percent">{{ plant.match_percentage|floatformat:0 }}%</span>
+                        <span class="plant__chevron" aria-hidden="true">{% include "components/icon.html" with name="chevron-right" size=18 %}</span>
+                    </div>
+
+                    <div class="plant__bar" role="meter" aria-valuemin="0" aria-valuemax="100"
+                         aria-valuenow="{{ plant.match_percentage|floatformat:0 }}"
+                         aria-label="Kecocokan {{ plant.plant_name }}">
+                        <span style="width: {{ plant.match_percentage|floatformat:0 }}%"></span>
+                    </div>
+
+                    {# Badge kriteria, perawatan, indoor. Riwayat lama tidak punya datanya, jadi tiap badge dicek dulu. #}
+                    <div class="plant__tags">
+                        {% if plant.criteria_count %}
+                            <span class="plant__tag plant__tag--criteria{% if plant.matched_count == plant.criteria_count %} plant__tag--all{% endif %}">
+                                {% if plant.matched_count == plant.criteria_count %}{% include "components/icon.html" with name="check" size=13 %}{% endif %}
+                                {{ plant.matched_count|default:0 }}/{{ plant.criteria_count }} kriteria sesuai
+                            </span>
+                        {% endif %}
+
+                        {% if plant.care_level_label %}
+                            <span class="plant__tag plant__tag--care-{{ plant.care_level|slugify }}" title="Tingkat perawatan">
+                                {% include "components/icon.html" with name="leaf" size=13 %}
+                                Perawatan {{ plant.care_level_label|lower }}
+                            </span>
+                        {% endif %}
+
+                        {% if plant.indoor is True %}
+                            <span class="plant__tag plant__tag--indoor">
+                                {% include "components/icon.html" with name="home" size=13 %}
+                                Bisa di dalam ruangan
+                            </span>
+                        {% elif plant.indoor is False %}
+                            <span class="plant__tag">
+                                {% include "components/icon.html" with name="sun" size=13 %}
+                                Luar ruangan
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    {% if plant.reasons %}
+                        <ul class="plant__reasons">
+                            {% for reason in plant.reasons %}
+                                <li class="{% if reason.matched == False %}plant__reason--no{% endif %}">
+                                    {% if reason.matched == False %}
+                                        {% include "components/icon.html" with name="x" size=14 %}
+                                    {% else %}
+                                        {% include "components/icon.html" with name="check" size=14 %}
+                                    {% endif %}
+                                    {{ reason.text|default:reason }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+        </ol>
+
+        {# Tombol muat lainnya (dimunculkan JS kalau tanaman lebih dari 5) #}
+        <button type="button" class="btn btn--outline btn--block plants__more" data-plants-more hidden>
+            <span data-plants-more-label>Lihat lainnya</span>
+            {% include "components/icon.html" with name="chevron-down" size=16 %}
+        </button>
+    {% else %}
+        {% url 'recommendations:index' as cta_url %}
+        {% include "components/empty_state.html" with icon="plant" title="Belum ada yang cocok" text="Tidak ada tanaman yang cocok dengan lahan dan media tanam ini." action_url=cta_url action_label="Coba data lain" %}
+    {% endif %}
+</article>

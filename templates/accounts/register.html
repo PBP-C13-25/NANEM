@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Daftar - Nanem{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="auth">
+
+    {# ===== Panel kiri ===== #}
+    <div class="auth__panel">
+        <h2 class="auth__panel-title">Sudah punya akun?</h2>
+        <p class="auth__panel-text">Masuk lagi buat lihat riwayat dan koleksi tanamanmu.</p>
+        <a href="{% url 'accounts:login' %}" class="btn btn--outline-light">Masuk</a>
+    </div>
+
+    {# ===== Panel kanan: form ===== #}
+    <div class="auth__form">
+        <h1 class="auth__title">Buat Akun</h1>
+        <p class="auth__subtitle">Daftar gratis untuk mulai dapat rekomendasi tanaman.</p>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <ul class="form-errors">
+                    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+                </ul>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn--primary auth__submit">Daftar</button>
+        </form>
+
+        <p class="auth__switch-mobile">
+            Sudah punya akun? <a href="{% url 'accounts:login' %}">Masuk</a>
+        </p>
+    </div>
+
+</section>
+{% endblock %}
