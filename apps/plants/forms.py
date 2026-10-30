@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Plant
+from .utils import CARE_LEVEL_CHOICES, WATERING_CHOICES
 
 
 SUNLIGHT_CHOICES = [
@@ -9,20 +10,6 @@ SUNLIGHT_CHOICES = [
     ("shade", "Teduh"),
 ]
 
-
-WATERING_CHOICES = [
-    ("", "Belum ditentukan"),
-    ("Minimum", "Jarang"),
-    ("Average", "Sedang"),
-    ("Frequent", "Sering"),
-]
-
-CARE_LEVEL_CHOICES = [
-    ("", "Belum ditentukan"),
-    ("Low", "Mudah"),
-    ("Medium", "Sedang"),
-    ("High", "Sulit"),
-]
 
 NULLABLE_BOOLEAN_CHOICES = [
     ("", "Belum diketahui"),

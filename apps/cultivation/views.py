@@ -6,9 +6,8 @@ from django.views import View
 from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 
 from apps.core.mixins import ActiveUserRequiredMixin, AdminRequiredMixin
-from apps.plants.forms import CARE_LEVEL_CHOICES, WATERING_CHOICES
+from apps.plants.utils import CARE_LEVEL_CHOICES, WATERING_CHOICES, prepare_plant_display
 from apps.plants.models import Plant
-from apps.plants.views import prepare_plant_display
 
 from .forms import CultivationGuideForm
 from .models import CultivationGuide
@@ -40,7 +39,7 @@ def build_plant_facts(plant):
     return [
         ("Media", plant.media_label),
         ("Cahaya", plant.sunlight_label),
-        ("Ruang", plant.get_space_needed_display()),
+        ("Ruang", plant.space_label),
         ("Kebutuhan air", dict(WATERING_CHOICES).get(plant.watering) or NOT_SET),
         ("Tingkat perawatan", dict(CARE_LEVEL_CHOICES).get(plant.care_level) or NOT_SET),
         ("Tahan kekeringan", format_yes_no(plant.drought_tolerant)),

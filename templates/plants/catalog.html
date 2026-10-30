@@ -125,7 +125,7 @@
                 <dl class="plant-card__facts">
                     <div><dt>Media</dt><dd>{{ plant.media_label }}</dd></div>
                     <div><dt>Cahaya</dt><dd>{{ plant.sunlight_label }}</dd></div>
-                    <div><dt>Ruang</dt><dd>{{ plant.get_space_needed_display }}</dd></div>
+                    <div><dt>Ruang</dt><dd>{{ plant.space_label }}</dd></div>
                 </dl>
 
                 <a href="{% url 'cultivation:detail' plant.pk %}" class="catalog-button catalog-button--card">Lihat panduan</a>

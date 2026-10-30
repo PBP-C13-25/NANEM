@@ -272,7 +272,7 @@ class CultivationGuideTests(TestCase):
         response = self.client.get(self.detail_url(plant))
         for text in (
             "Tanaman hias berdaun lebar.", "Aglaonema spp.", "Tanah", "Teduh sebagian, Teduh",
-            "Small", "Sedang", "Mudah", "Tidak", "18-30,5 °C", "50-80 %", "2-5 mm/hari",
+            "Kecil", "Sedang", "Mudah", "Tidak", "18-30,5 °C", "50-80 %", "2-5 mm/hari",
         ):
             self.assertContains(response, text)
         for label in (
@@ -350,6 +350,29 @@ class CultivationGuideTests(TestCase):
         self.assertEqual(response.context["with_guide_count"], 1)
         self.assertEqual(response.context["without_guide_count"], 1)
 
+    def test_kelola_wraps_results_for_live_search(self):
+        self.client.force_login(self.admin)
+        response = self.client.get(reverse("cultivation:kelola_panduan"))
+        self.assertContains(response, 'id="kelola-results"')
+        self.assertContains(response, 'id="kelola-filters"')
+        self.assertContains(response, "data-search-live")
+        self.assertContains(response, "js/pages/kelola.js")
+
+    def test_space_label_is_indonesian_in_catalog_and_detail(self):
+        self.client.force_login(self.user)
+        catalog = self.client.get(reverse("plants:index"))
+        self.assertContains(catalog, "<dd>Kecil</dd>")
+        self.assertNotContains(catalog, "<dd>Small</dd>")
+        detail = self.client.get(self.detail_url(self.kangkung))
+        self.assertContains(detail, "<dd>Kecil</dd>")
+        self.assertNotContains(detail, "<dd>Small</dd>")
+
+    def test_guide_form_shows_plant_header(self):
+        self.client.force_login(self.admin)
+        response = self.client.get(reverse("cultivation:create", args=[self.kangkung.pk]))
+        self.assertContains(response, "cg-form-plant")
+        self.assertContains(response, "card--form")
+        
     def test_kelola_filters_by_status_search_and_category(self):
         self.create_guide(self.kangkung)
         self.client.force_login(self.admin)

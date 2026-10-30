@@ -196,9 +196,27 @@
   width: auto;
 }
 
-.cg-form-card {
-  max-width: 720px;
-  margin: 24px auto;
+.cg-form-plant {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cg-form-plant__image {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cg-form-plant__name {
+  display: block;
+}
+
+.cg-form-plant__scientific {
+  color: var(--color-muted);
+  font-size: 0.9rem;
 }
 
 .cg-form-card textarea,

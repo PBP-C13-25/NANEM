@@ -8,13 +8,8 @@ from apps.core.mixins import ActiveUserRequiredMixin, AdminRequiredMixin
 
 from .forms import PlantForm
 from .models import Plant
+from .utils import SUNLIGHT_LABELS, prepare_plant_display
 
-
-SUNLIGHT_LABELS = {
-    "full_sun": "Matahari penuh",
-    "partial_shade": "Teduh sebagian",
-    "shade": "Teduh",
-}
 
 PLANT_COMPLETENESS_FIELDS = {
     "scientific_name": "nama ilmiah",
@@ -35,18 +30,6 @@ PLANT_COMPLETENESS_FIELDS = {
 }
 
 
-def prepare_plant_display(plant):
-    media = []
-    if plant.supports_soil:
-        media.append("Tanah")
-    if plant.supports_hydroponic:
-        media.append("Hidroponik")
-    plant.media_label = ", ".join(media) or "Belum ditentukan"
-    plant.sunlight_label = ", ".join(
-        SUNLIGHT_LABELS.get(value, value.replace("_", " ").title())
-        for value in (plant.sunlight or [])
-    ) or "Belum ditentukan"
-    return plant
 
 
 def get_missing_plant_fields(plant):

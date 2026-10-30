@@ -8,7 +8,16 @@
 {% endblock %}
 
 {% block content %}
-<section class="card cg-form-card">
+<section class="card card--form cg-form-card">
+    <div class="cg-form-plant">
+        {% if plant.image_url %}
+        <img src="{{ plant.image_url }}" alt="{{ plant.name }}" class="cg-form-plant__image">
+        {% endif %}
+        <div>
+            <strong class="cg-form-plant__name">{{ plant.name }}</strong>
+            {% if plant.scientific_name %}<i class="cg-form-plant__scientific">{{ plant.scientific_name }}</i>{% endif %}
+        </div>
+    </div>
     <h1 class="card__title">{% if is_edit %}Edit{% else %}Tambah{% endif %} Panduan {{ plant.name }}</h1>
     <p class="card__text">Isi panduan budidaya yang akan tampil di halaman detail tanaman ini.</p>
     <p class="field-hint">
