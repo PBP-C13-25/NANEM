@@ -8,7 +8,7 @@ from django.urls import reverse, resolve
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from .models import PlantCollection
-from .form import PlantCollectionForm
+from .forms import PlantCollectionForm
 from . import views
 
 # Menggunakan folder sementara untuk penyimpanan file media saat pengujian
@@ -182,11 +182,11 @@ class PlantCollectionTests(TestCase):
         # 1. Menambahkan Like (First POST)
         response1 = self.client.post(url)
         self.assertEqual(response1.status_code, 200)
-        self.assertJSONEqual(response1.content, {'liked': True, 'total_likes': 1})
+        self.assertJSONEqual(response1.content, {'is_liked': True, 'like_count': 1})
         self.assertIn(self.user, self.collection.likes.all()) 
 
         # 2. Menghapus Like (Second POST)
         response2 = self.client.post(url)
         self.assertEqual(response2.status_code, 200)
-        self.assertJSONEqual(response2.content, {'liked': False, 'total_likes': 0})
+        self.assertJSONEqual(response2.content, {'is_liked': False, 'like_count': 0})
         self.assertNotIn(self.user, self.collection.likes.all()) 
