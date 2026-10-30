@@ -16,6 +16,12 @@ SUNLIGHT_LABELS = {
     "shade": "Teduh",
 }
 
+CARE_LEVEL_LABELS = {
+    "Low": "Mudah",
+    "Medium": "Sedang",
+    "High": "Sulit",
+}
+
 PLANT_COMPLETENESS_FIELDS = {
     "scientific_name": "nama ilmiah",
     "description": "deskripsi",
@@ -62,10 +68,14 @@ def get_missing_plant_fields(plant):
 
 def prepare_plant_manage_display(plant):
     prepare_plant_display(plant)
+    plant.care_level_label = CARE_LEVEL_LABELS.get(
+        plant.care_level,
+        plant.care_level or "Belum ditentukan",
+    )
     plant.missing_fields = get_missing_plant_fields(plant)
     plant.data_status = "incomplete" if plant.missing_fields else "complete"
     plant.data_status_label = (
-        f"Kurang {len(plant.missing_fields)} field"
+        f"Kurang {len(plant.missing_fields)} data"
         if plant.missing_fields
         else "Lengkap"
     )

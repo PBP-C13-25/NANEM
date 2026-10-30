@@ -264,6 +264,10 @@
   color: var(--catalog-sage);
 }
 
+.plant-card__placeholder[hidden] {
+  display: none;
+}
+
 .plant-card__placeholder small {
   color: var(--catalog-muted);
 }
