@@ -65,7 +65,7 @@ class PlantMixin:
 
 class GuideManageView(AdminRequiredMixin, ListView):
     model = Plant
-    template_name = "cultivation/kelola.html"
+    template_name = "cultivation/manage.html"
     context_object_name = "plants"
     paginate_by = 10
 

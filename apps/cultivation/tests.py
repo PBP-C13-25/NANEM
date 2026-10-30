@@ -356,7 +356,7 @@ class CultivationGuideTests(TestCase):
         self.assertContains(response, 'id="kelola-results"')
         self.assertContains(response, 'id="kelola-filters"')
         self.assertContains(response, "data-search-live")
-        self.assertContains(response, "js/pages/kelola.js")
+        self.assertContains(response, "js/pages/cultivation_manage.js")
 
     def test_space_label_is_indonesian_in_catalog_and_detail(self):
         self.client.force_login(self.user)
@@ -372,7 +372,7 @@ class CultivationGuideTests(TestCase):
         response = self.client.get(reverse("cultivation:create", args=[self.kangkung.pk]))
         self.assertContains(response, "cg-form-plant")
         self.assertContains(response, "card--form")
-        
+
     def test_kelola_filters_by_status_search_and_category(self):
         self.create_guide(self.kangkung)
         self.client.force_login(self.admin)
