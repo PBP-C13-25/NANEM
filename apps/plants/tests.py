@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.db import IntegrityError, transaction
 from django.test import TestCase
 from django.urls import resolve, reverse
 
@@ -47,6 +48,9 @@ class PlantCatalogViewTests(TestCase):
         self.assertContains(response, "Monstera")
         self.assertContains(response, "Tanah, Hidroponik")
         self.assertContains(response, "Matahari penuh, Teduh sebagian")
+        self.assertContains(response, "Kecil")
+        self.assertContains(response, "Sedang")
+        self.assertContains(response, "Atur ulang")
 
     def test_search_and_filters_can_be_combined(self):
         response = self.client.get(reverse("plants:index"), {
@@ -67,6 +71,19 @@ class PlantCatalogViewTests(TestCase):
     def test_empty_result_has_a_clear_state(self):
         response = self.client.get(reverse("plants:index"), {"q": "tidak-ada"})
         self.assertContains(response, "Tanaman tidak ditemukan")
+
+    def test_catalog_provides_fallback_for_empty_and_broken_images(self):
+        self.kangkung.image_url = "https://example.com/kangkung.jpg"
+        self.kangkung.save(update_fields=["image_url"])
+
+        response = self.client.get(reverse("plants:index"))
+
+        self.assertContains(
+            response,
+            'onerror="this.hidden=true;this.nextElementSibling.hidden=false"',
+        )
+        self.assertContains(response, "Gambar belum tersedia")
+        self.assertContains(response, "plant-card__placeholder", count=2)
 
     def test_catalog_marks_guides_unavailable_until_cultivation_route_exists(self):
         response = self.client.get(reverse("plants:index"))
@@ -99,6 +116,7 @@ class PlantAdminCrudTests(TestCase):
             supports_soil=True,
             supports_hydroponic=True,
             sunlight=["full_sun"],
+            care_level="Low",
             space_needed="small",
         )
 
@@ -230,6 +248,8 @@ class PlantAdminCrudTests(TestCase):
         ):
             self.assertContains(form_response, heading)
         self.assertContains(form_response, "plant_manage.css")
+        self.assertContains(form_response, "Curah hujan minimum ekuivalen")
+        self.assertContains(form_response, "bukan kebutuhan penyiraman harian")
         self.assertNotContains(form_response, 'href="#"')
 
         delete_response = self.client.get(
@@ -264,11 +284,19 @@ class PlantAdminCrudTests(TestCase):
         self.assertNotContains(response, "Mangga")
 
     def test_manage_list_renders_final_table_elements(self):
+        self.plant.image_url = "https://example.com/kangkung.jpg"
+        self.plant.save(update_fields=["image_url"])
         self.client.force_login(self.staff)
         response = self.client.get(reverse("plants:manage"))
         self.assertContains(response, "plant-admin__thumbnail")
+        self.assertContains(response, "plant-admin__thumbnail-image")
+        self.assertContains(response, 'onerror="this.hidden=true"')
         self.assertContains(response, "Media &amp; cahaya")
         self.assertContains(response, "Perawatan")
+        self.assertContains(response, "Mudah")
+        self.assertContains(response, "data")
+        self.assertContains(response, "<details")
+        self.assertContains(response, "Belum ada:")
         self.assertContains(response, reverse("plants:create"))
         self.assertContains(response, reverse("plants:update", args=[self.plant.pk]))
         self.assertContains(response, reverse("plants:delete", args=[self.plant.pk]))
@@ -280,7 +308,7 @@ class PlantAdminCrudTests(TestCase):
         self.client.force_login(self.staff)
         response = self.client.get(reverse("plants:manage"), {"q": "tidak-ada"})
         self.assertContains(response, "Tanaman tidak ditemukan")
-        self.assertContains(response, "Reset filter")
+        self.assertContains(response, "Atur ulang filter")
 
     def test_manage_list_sorting_is_stable(self):
         Plant.objects.create(
@@ -377,6 +405,31 @@ class PlantAdminCrudTests(TestCase):
         self.plant.refresh_from_db()
         self.assertEqual(self.plant.name, "Kangkung Air")
 
+    def test_form_rejects_duplicate_name_ignoring_case(self):
+        form = PlantForm(data=self.plant_payload(name="  KANGKUNG  "))
+
+        self.assertFalse(form.is_valid())
+        self.assertIn("name", form.errors)
+        self.assertIn("sudah digunakan", form.errors["name"][0])
+
+    def test_update_can_keep_its_existing_name(self):
+        form = PlantForm(
+            data=self.plant_payload(name="  Kangkung  "),
+            instance=self.plant,
+        )
+
+        self.assertTrue(form.is_valid(), form.errors)
+        self.assertEqual(form.cleaned_data["name"], "Kangkung")
+
+    def test_database_rejects_duplicate_name_ignoring_case(self):
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            Plant.objects.create(
+                name="KANGKUNG",
+                category="sayur",
+                supports_soil=True,
+                space_needed="small",
+            )
+
     def test_staff_can_delete_plant(self):
         self.client.force_login(self.staff)
         response = self.client.post(
@@ -432,6 +485,13 @@ class PlantAdminCrudTests(TestCase):
                 form = PlantForm(data=self.plant_payload(**{field_name: value}))
                 self.assertFalse(form.is_valid())
                 self.assertIn(field_name, form.errors)
+
+    def test_form_rejects_negative_rainfall(self):
+        form = PlantForm(data=self.plant_payload(rainfall_min="-0.1"))
+
+        self.assertFalse(form.is_valid())
+        self.assertIn("rainfall_min", form.errors)
+        self.assertIn("tidak boleh bernilai negatif", form.errors["rainfall_min"][0])
 
     def test_form_requires_at_least_one_growing_medium(self):
         form = PlantForm(

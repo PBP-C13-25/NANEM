@@ -185,8 +185,15 @@ Master data tanaman yang dipakai bersama oleh modul Rekomendasi, Koleksi Tanaman
 `/catalog/manage/`. Operasi tambah, edit, dan hapus langsung mengubah tabel `Plant`
 pada database environment yang sedang digunakan. Operasi tersebut tidak menulis ulang
 file JSON riset atau seed; file seed tetap berfungsi sebagai sumber data awal yang dapat
-diimpor secara terpisah. Karena CRUD memakai field model yang sudah tersedia, fitur ini
-tidak memerlukan migration baru.
+diimpor secara terpisah. Database SQLite lokal di-ignore Git dan tidak ikut saat branch
+di-push; deployment memakai database environment production sendiri.
+
+Import ulang mencocokkan tanaman berdasarkan nama NANEM (tanpa membedakan kapitalisasi)
+atau ID Perenual. Karena itu data seed yang diedit atau dihapus lewat CRUD dapat
+diperbarui atau dibuat kembali saat import dijalankan. Perubahan permanen pada baseline
+harus dilakukan melalui review file riset/seed, kemudian diimport kembali. Jalankan
+`python manage.py migrate` setelah menarik perubahan schema sebelum memakai CRUD atau
+importer.
 
 ### 5️⃣ Panduan Budidaya — _Nicholas_
 

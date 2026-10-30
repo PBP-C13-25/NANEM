@@ -55,6 +55,7 @@ class SeedWorkflowTests(TestCase):
                 "name": entry["nama_id"],
                 "category": entry["category"],
                 "scientific_name": entry["scientific_name"],
+                "space_needed": "small",
             }
             for entry in self.entries
         ]), encoding="utf-8")
@@ -177,6 +178,32 @@ class SeedWorkflowTests(TestCase):
         seed.RESEARCH_PATH.write_text(json.dumps(research), encoding="utf-8")
         with self.assertRaisesMessage(CommandError, "unknown research fields"):
             self.run_mode(import_selected=True)
+
+    def test_import_rejects_invalid_cross_field_data_and_rolls_back_batch(self):
+        research = json.loads(seed.RESEARCH_PATH.read_text(encoding="utf-8"))
+        research[1].update({"temp_min": 35, "temp_max": 20})
+        seed.RESEARCH_PATH.write_text(json.dumps(research), encoding="utf-8")
+
+        with self.assertRaisesMessage(CommandError, "invalid plant data"):
+            self.run_mode(import_selected=True)
+
+        self.assertEqual(Plant.objects.count(), 0)
+
+    def test_import_rejects_invalid_sunlight_and_growing_medium(self):
+        for overrides in (
+            {"sunlight": ["direct_sun"]},
+            {"supports_soil": False, "supports_hydroponic": False},
+        ):
+            with self.subTest(overrides=overrides):
+                research = json.loads(seed.RESEARCH_PATH.read_text(encoding="utf-8"))
+                research[0].update(overrides)
+                seed.RESEARCH_PATH.write_text(json.dumps(research), encoding="utf-8")
+
+                with self.assertRaisesMessage(CommandError, "invalid plant data"):
+                    self.run_mode(import_selected=True)
+
+                self.assertEqual(Plant.objects.count(), 0)
+                self.save_inputs()
 
     def test_dry_run_rolls_back_every_database_write(self):
         self.run_mode(import_selected=True, dry_run=True)
