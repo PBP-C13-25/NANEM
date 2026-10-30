@@ -368,6 +368,13 @@ coverage report -m
 ```
 
 ---
+ 
+## ⚠️ Keterbatasan yang Diketahui
+ 
+- *Foto yang di-upload berpotensi hilang setelah redeploy.* Foto koleksi dan foto profil disimpan di folder media/ di dalam container aplikasi, sehingga dapat hilang jika container dibuat ulang saat deploy. Data lain di database tetap aman. Solusi ke depannya adalah memindahkan penyimpanan media ke layanan eksternal seperti Cloudinary.
+---
+
+---
 
 ## 🤖 Penggunaan AI
 
