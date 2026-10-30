@@ -62,7 +62,7 @@
 <div class="collection-feed">
     <div class="feed-header">
         <h1>Koleksi Tanaman</h1>
-        <a href="{% url 'collection:create' %}" class="btn btn-primary">Buat Postingan</a>
+        <a href="{% url 'collection:create' %}" class="btn btn--primary">Buat Postingan</a>
     </div>
 
     <!-- SEARCH BAR USER -->
@@ -119,7 +119,7 @@
                             });
                         } else {
                             resultsContainer.style.display = 'block';
-                            resultsContainer.innerHTML = `<div style="padding: 0.75rem 1rem; color: #6b7280; text-align: center;">Tidak ada pengguna ditemukan. Coba lagi sebentar lagi.</div>`;
+                            resultsContainer.innerHTML = `<div style="padding: 0.75rem 1rem; color: #6b7280; text-align: center;">Tidak ada pengguna ditemukan.</div>`;
                         }
                     })
                     .catch(error => {
