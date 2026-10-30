@@ -12,11 +12,14 @@ class CollectionListView(LoginRequiredMixin, ListView):
     model = PlantCollection
     template_name = "plant_collection/index.html"
     context_object_name = "posts"
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Mengambil postingan khusus user yang sedang login
-        context['my_posts'] = PlantCollection.objects.select_related("owner").prefetch_related("likes").all().order_by('-created_at')
-        return context
+    def get_queryset(self):
+        # Langsung gabungkan query optimasi
+        return (
+            PlantCollection.objects
+            .select_related("owner")
+            .prefetch_related("likes")
+            .order_by("-created_at")
+        )
 
 class CollectionDetailView(LoginRequiredMixin,  DetailView):
     model = PlantCollection
