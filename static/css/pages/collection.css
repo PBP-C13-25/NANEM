@@ -1,0 +1,281 @@
+/* FEED SECTION */
+.collection-feed, .collection-detail, .form-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.feed-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important; 
+  gap: 24px;
+  width: 100%;
+  max-width: 1000px; 
+  margin: 0 auto;
+  padding: 20px 0;
+  align-items: stretch;
+}
+
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-primary);
+  margin-bottom: 12px 16px;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 24px;
+}
+
+.card-header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
+}
+.card-img {
+  width: 100%;
+  height: 25%;
+  object-fit: cover;
+  display: flex;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px; 
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 4px 16px 16px 16px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-title {
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 700;
+  margin: 4px 0 6px 0;
+  margin-top: 20px;
+  color: var(--color-primary);
+}
+
+.card-desc {
+  color: var(--color-muted);
+  font-size: 0,75rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.author-name {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+.card-time {
+  font-size: 0.75rem; 
+  color: var(--color-muted); 
+  font-weight: 500; 
+  opacity: 0.85; 
+  letter-spacing: 0.02em;
+}
+
+.owner-actions {
+  margin-top: auto !important ;      
+  padding-top: 16px;       
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 8px;
+  
+}
+
+.btn--sm {
+  padding: 6px 12px !important;
+  font-size: 0.8rem !important;
+  border-radius: 8px !important;
+}
+
+/* Tombol */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+}
+
+.btn--primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn--primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.btn--outline {
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+}
+.btn--outline-detail{
+    margin-left: auto !important;
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn--danger {
+    background-color: var(--color-danger);
+    color: white;
+}
+
+/* TOMBOL LIKE SECTION */
+/* Variabel  Tombol Like (Sesuaikan dengan warna tema Nanem) */
+:root {
+  --like-theme-color: #2d5a27; /* Warna hijau tema (atau ganti ke #e63946 jika mau merah) */
+}
+
+/* 1. Tombol Like Dasar */
+.btn-like {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 999px;
+  background: var(--color-surface, #ffffff);
+  color: var(--color-muted, #6b7280);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+/* Hover State: Mengikuti warna tema */
+.btn-like:hover {
+  border-color: var(--like-theme-color);
+  color: var(--like-theme-color);
+}
+
+/* 2. UNLIKED STATE (Default): Hanya Outline */
+.icon-like-wrapper svg {
+  width: 20px;
+  height: 20px;
+  fill: none !important; /* Dalamnya transparan/kosong */
+  stroke: currentColor !important; /* Garis tepi mengikuti warna teks */
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+/* 3. LIKED STATE: Full Love Terisi Warna Tema */
+.btn-like.is-liked {
+  border-color: var(--like-theme-color);
+  background: rgba(45, 90, 39, 0.05); /* Latar belakang lembut sesuai tema */
+  color: var(--like-theme-color); /* Ubah warna teks & ikon sekaligus */
+}
+
+.icon-like-wrapper.is-active svg,
+.btn-like.is-liked .icon-like-wrapper svg {
+  fill: currentColor !important; /* Terisi penuh dengan warna yang sama */
+  stroke: currentColor !important;
+}
+
+/* FORM SECTION */
+/* Zona Upload */
+.upload-zone {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+  border: 2px dashed var(--color-border, #cbd5e1);
+  border-radius: var(--radius-lg, 12px);
+  background: #f8faf6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+/* Input file tersembunyi namun berada di lapisan paling atas */
+.upload-zone__input {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  z-index: 10 !important; 
+}
+
+/* Area Teks & IkonPlaceholder */
+.upload-zone__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  pointer-events: none; 
+  z-index: 1;
+}
+
+/* Layer Preview Foto */
+.upload-zone__preview {
+  position: absolute;
+  inset: 0;
+  z-index: 15; 
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+.upload-zone__remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+/* Sembunyikan elemen preview saat belum ada foto */
+.upload-zone__preview.is-hidden,
+.upload-zone__placeholder.is-hidden,
+.is-hidden {
+  display: none !important;
+}
+
+/* Pastikan area preview pas di dalam kotak */
+.upload-zone__preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  background: #ffffff;
+}
+
+.upload-zone__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
