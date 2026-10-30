@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -7,13 +8,12 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import DetailView
 
-from apps.core.mixins import RegularUserRequiredMixin
 from apps.plant_collection.models import PlantCollection
 from .forms import ProfileEditForm, UserEditForm
 from .models import UserProfile
 
 
-class ProfileDetailView(RegularUserRequiredMixin, DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = UserProfile
     template_name = "profiles/profile.html"
     context_object_name = 'userprofile'
@@ -29,7 +29,7 @@ class ProfileDetailView(RegularUserRequiredMixin, DetailView):
         return context
 
 
-class PublicProfileView(RegularUserRequiredMixin, DetailView):
+class PublicProfileView(LoginRequiredMixin, DetailView):
     model = UserProfile
     template_name = "profiles/profile.html"
     context_object_name = 'userprofile'
@@ -48,7 +48,7 @@ class PublicProfileView(RegularUserRequiredMixin, DetailView):
         return context
 
 
-class ProfileEditView(RegularUserRequiredMixin, View):
+class ProfileEditView(LoginRequiredMixin, View):
     template_name = "profiles/profile_edit.html"
 
     def get(self, request):
@@ -88,7 +88,7 @@ class ProfileEditView(RegularUserRequiredMixin, View):
         return render(request, self.template_name, context)
 
 
-class DeleteAccountView(RegularUserRequiredMixin, View):
+class DeleteAccountView(LoginRequiredMixin, View):
     def post(self, request):
         user = request.user
         logout(request)  # logout sesi user terlebih dahulu
@@ -97,7 +97,7 @@ class DeleteAccountView(RegularUserRequiredMixin, View):
         return redirect('/')  # redirect ke halaman utama
 
 
-class SearchUsersView(RegularUserRequiredMixin, View):
+class SearchUsersView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('q', '').strip()
         users = []

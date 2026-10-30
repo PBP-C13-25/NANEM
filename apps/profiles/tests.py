@@ -37,6 +37,12 @@ class ProfileTestCases(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'profiles/profile.html')
 
+    def test_admin_profile_detail_access(self):
+        # tambahan: memastikan akun admin dapat membuka halaman profil dengan status 200
+        self.client.login(username='adminuser', password='testpassword123')
+        response = self.client.get(reverse('profiles:profile'))
+        self.assertEqual(response.status_code, 200)
+
     def test_user_search_view(self):
         self.client.login(username='testuser', password='testpassword123')
         response = self.client.get(reverse('profiles:search'), {'q': 'other'})
