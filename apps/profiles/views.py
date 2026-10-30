@@ -25,7 +25,7 @@ class ProfileDetailView(RegularUserRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # ambil koleksi tanaman milik user yang sedang login
-        context['user_collections'] = PlantCollection.objects.filter(owner=self.request.user).order_by('-created_at' if hasattr(PlantCollection, 'created_at') else '-pk')
+        context['user_collections'] = PlantCollection.objects.filter(owner=self.request.user).order_by('-created_at')
         return context
 
 
@@ -42,9 +42,9 @@ class PublicProfileView(RegularUserRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        profile = self.get_object()
+        profile = self.object
         # ambil koleksi tanaman milik user target dari public profile
-        context['user_collections'] = PlantCollection.objects.filter(owner=profile.user).order_by('-created_at' if hasattr(PlantCollection, 'created_at') else '-pk')
+        context['user_collections'] = PlantCollection.objects.filter(owner=profile.user).order_by('-created_at')
         return context
 
 
@@ -103,9 +103,10 @@ class SearchUsersView(RegularUserRequiredMixin, View):
         users = []
         if query:
             # cari user berdasarkan username yang mengandung kata kunci (case insensitive)
+            # menambahkan filter is_active=True dan is_staff=False sesuai saran review
             users = (
                 User.objects
-                .filter(username__icontains=query)
+                .filter(username__icontains=query, is_active=True, is_staff=False)
                 .select_related('profile')
                 .order_by('username')[:20]
             )
