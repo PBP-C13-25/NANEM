@@ -167,6 +167,27 @@
   white-space: nowrap;
 }
 
+.plant-admin__completeness summary {
+  width: max-content;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.plant-admin__completeness summary:focus-visible {
+  border-radius: 3px;
+  outline: 3px solid rgba(92, 114, 85, 0.22);
+  outline-offset: 2px;
+}
+
+.plant-admin__completeness p {
+  max-width: 240px;
+  margin: 7px 0 0;
+  color: var(--plant-admin-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
 .plant-admin__action {
   display: inline-flex;
   align-items: center;

@@ -4,13 +4,6 @@ from .models import Plant
 from .utils import CARE_LEVEL_CHOICES, WATERING_CHOICES
 
 
-SUNLIGHT_CHOICES = [
-    ("full_sun", "Matahari penuh"),
-    ("partial_shade", "Teduh sebagian"),
-    ("shade", "Teduh"),
-]
-
-
 NULLABLE_BOOLEAN_CHOICES = [
     ("", "Belum diketahui"),
     ("true", "Ya"),
@@ -29,7 +22,7 @@ def coerce_nullable_boolean(value):
 class PlantForm(forms.ModelForm):
     sunlight = forms.MultipleChoiceField(
         label="Kebutuhan cahaya",
-        choices=SUNLIGHT_CHOICES,
+        choices=Plant.SUNLIGHT_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple,
     )
@@ -94,8 +87,18 @@ class PlantForm(forms.ModelForm):
             "temp_max": "Suhu maksimum (°C)",
             "humidity_min": "Kelembapan minimum (%)",
             "humidity_max": "Kelembapan maksimum (%)",
-            "rainfall_min": "Curah hujan minimum (mm/hari)",
-            "rainfall_max": "Curah hujan maksimum (mm/hari)",
+            "rainfall_min": "Curah hujan minimum ekuivalen (mm/hari)",
+            "rainfall_max": "Curah hujan maksimum ekuivalen (mm/hari)",
+        }
+        help_texts = {
+            "rainfall_min": (
+                "Rata-rata harian ekuivalen dari curah hujan optimal tahunan; "
+                "bukan kebutuhan penyiraman harian."
+            ),
+            "rainfall_max": (
+                "Rata-rata harian ekuivalen dari curah hujan optimal tahunan; "
+                "bukan kebutuhan penyiraman harian."
+            ),
         }
         widgets = {
             "description": forms.Textarea(attrs={"rows": 5}),
@@ -107,40 +110,14 @@ class PlantForm(forms.ModelForm):
             "rainfall_max": forms.NumberInput(attrs={"step": "any"}),
         }
 
-    def clean(self):
-        cleaned_data = super().clean()
-
-        for field_name in ("humidity_min", "humidity_max"):
-            value = cleaned_data.get(field_name)
-            if value is not None and not 0 <= value <= 100:
-                self.add_error(
-                    field_name,
-                    "Kelembapan harus berada dalam rentang 0 sampai 100 persen.",
-                )
-
-        for minimum, maximum, label in (
-            ("temp_min", "temp_max", "Suhu"),
-            ("humidity_min", "humidity_max", "Kelembapan"),
-            ("rainfall_min", "rainfall_max", "Curah hujan"),
-        ):
-            min_value = cleaned_data.get(minimum)
-            max_value = cleaned_data.get(maximum)
-            if (
-                min_value is not None
-                and max_value is not None
-                and min_value > max_value
-            ):
-                self.add_error(
-                    maximum,
-                    f"{label} maksimum tidak boleh lebih kecil dari nilai minimum.",
-                )
-
-        if not (
-            cleaned_data.get("supports_soil")
-            or cleaned_data.get("supports_hydroponic")
-        ):
+    def clean_name(self):
+        name = self.cleaned_data["name"].strip()
+        duplicate = Plant.objects.filter(name__iexact=name).exclude(
+            pk=self.instance.pk
+        )
+        if duplicate.exists():
             raise forms.ValidationError(
-                "Pilih minimal satu media tanam: tanah atau hidroponik."
+                "Nama tanaman sudah digunakan. Gunakan nama yang berbeda."
             )
+        return name
 
-        return cleaned_data

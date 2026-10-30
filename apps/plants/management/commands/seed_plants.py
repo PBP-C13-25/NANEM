@@ -373,7 +373,7 @@ class Command(BaseCommand):
 
     def save_match(self, fields):
         with transaction.atomic():
-            lookup = Q(name=fields["name"])
+            lookup = Q(name__iexact=fields["name"])
             if fields["perenual_id"] is not None:
                 lookup |= Q(perenual_id=fields["perenual_id"])
             candidates = list(Plant.objects.select_for_update().filter(lookup)[:2])
@@ -387,11 +387,24 @@ class Command(BaseCommand):
                             and value in ("", None, [])):
                         continue
                     setattr(plant, name, value)
+                try:
+                    plant.full_clean()
+                except ValidationError as exc:
+                    raise CommandError(
+                        f"{fields['name']}: invalid plant data: {exc}."
+                    ) from None
                 plant.save(update_fields=[*fields, "updated_at"])
             else:
                 # Climate, space and medium support are not inferred from names.
                 # Unmapped fields retain the model's existing defaults.
-                Plant.objects.create(**fields)
+                plant = Plant(**fields)
+                try:
+                    plant.full_clean()
+                except ValidationError as exc:
+                    raise CommandError(
+                        f"{fields['name']}: invalid plant data: {exc}."
+                    ) from None
+                plant.save()
 
     def handle(self, *args, **options):
         fetch = bool(options.get("fetch"))
