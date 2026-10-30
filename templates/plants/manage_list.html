@@ -4,7 +4,7 @@
 {% block title %}Kelola Tanaman - NANEM{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/pages/plant_manage.css' %}?v=20261027-2">
+<link rel="stylesheet" href="{% static 'css/pages/plant_manage.css' %}?v=20261030-1">
 {% endblock %}
 
 {% block content %}
@@ -69,7 +69,7 @@
 
         <div class="plant-admin__filter-actions">
             <button class="btn btn--primary" type="submit">Terapkan</button>
-            <a class="btn btn--ghost" href="{% url 'plants:manage' %}">Reset</a>
+            <a class="btn btn--ghost" href="{% url 'plants:manage' %}">Atur ulang</a>
         </div>
     </form>
 
@@ -101,7 +101,13 @@
                                 <div class="plant-admin__thumbnail">
                                     <span>{% include "components/icon.html" with name="sprout" size=22 %}</span>
                                     {% if plant.image_url %}
-                                        <img src="{{ plant.image_url }}" alt="" loading="lazy" onerror="this.hidden=true">
+                                        <img
+                                            class="plant-admin__thumbnail-image"
+                                            src="{{ plant.image_url }}"
+                                            alt=""
+                                            loading="lazy"
+                                            onerror="this.hidden=true"
+                                        >
                                     {% endif %}
                                 </div>
                                 <div>
@@ -117,11 +123,16 @@
                             <strong>{{ plant.media_label }}</strong>
                             <small>{{ plant.sunlight_label }}</small>
                         </td>
-                        <td>{{ plant.care_level|default:"Belum ditentukan" }}</td>
+                        <td>{{ plant.care_level_label }}</td>
                         <td>
-                            <span title="{% if plant.missing_fields %}Belum ada: {{ plant.missing_fields|join:', ' }}{% endif %}">
-                                {{ plant.data_status_label }}
-                            </span>
+                            {% if plant.missing_fields %}
+                                <details class="plant-admin__completeness">
+                                    <summary>{{ plant.data_status_label }}</summary>
+                                    <p><strong>Belum ada:</strong> {{ plant.missing_fields|join:", " }}</p>
+                                </details>
+                            {% else %}
+                                <span>Lengkap</span>
+                            {% endif %}
                         </td>
                         <td>{{ plant.updated_at|date:"d M Y" }}</td>
                         <td class="plant-admin__actions">
@@ -133,7 +144,7 @@
                     <tr>
                         <td colspan="7" class="plant-admin__empty-cell">
                             {% url 'plants:manage' as manage_url %}
-                            {% include "components/empty_state.html" with icon="search" title="Tanaman tidak ditemukan" text="Coba ubah kata kunci atau kurangi filter yang digunakan." action_url=manage_url action_label="Reset filter" %}
+                            {% include "components/empty_state.html" with icon="search" title="Tanaman tidak ditemukan" text="Coba ubah kata kunci atau kurangi filter yang digunakan." action_url=manage_url action_label="Atur ulang filter" %}
                         </td>
                     </tr>
                 {% endfor %}

@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("Response dari Server:", data); // Cek data di Console Browser (F12)
 
                     // Sesuaikan key JSON (Mendukung data.is_liked atau data.liked)
                     const isLiked = data.is_liked !== undefined ? data.is_liked : data.liked;

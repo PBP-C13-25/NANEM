@@ -38,7 +38,7 @@
         {% if request.user == post.owner %}
         <div class="card__actions" style="display: flex; justify-content: flex-end; align-items: center end; gap: 10px; width: 100%; ">
             <a href="{% url 'collection:edit' post.pk %}" class="btn btn--outline">Edit</a>
-            <button type="button" class="btn btn--danger" data-modal-target="modal-delete">Hapus</button>
+            <button type="button" class="btn btn--danger" data-modal-open="modal-delete">Hapus</button>
         </div> 
         {% endif %}
     </div>

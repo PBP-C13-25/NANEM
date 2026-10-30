@@ -3,7 +3,8 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.views.generic import DeleteView, ListView, DetailView, CreateView, UpdateView, View
-from apps.core.mixins import LoginRequiredMixin, OwnedQuerysetMixin 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from apps.core.mixins import OwnedQuerysetMixin
 from .models import PlantCollection
 from .forms import PlantCollectionForm
 
