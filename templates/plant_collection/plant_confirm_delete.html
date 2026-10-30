@@ -16,8 +16,8 @@
         
         <form method="POST" style="display: flex; gap: 12px; margin-top: 24px;">
             {% csrf_token %}
-            <a href="{% url 'collection:detail' object.pk %}" class="btn btn-outline" style="text-decoration: none;">Batal</a>
-            <button type="submit" class="btn btn-danger">Ya, Hapus Postingan</button>
+            <a href="{% url 'collection:detail' object.pk %}" class="btn btn--outline" style="text-decoration: none;">Batal</a>
+            <button type="submit" class="btn btn--danger">Ya, Hapus Postingan</button>
         </form>
     </div>
 </div>

@@ -1,14 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 class PlantCollection(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='collections')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='collections')
     title = models.CharField(max_length=100)
     description = models.TextField()
     photo = models.ImageField(upload_to='plant_collections/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, related_name='liked_collections', blank=True)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_collections', blank=True)
 
     class Meta:
         ordering = ['-created_at']

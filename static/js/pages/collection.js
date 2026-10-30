@@ -19,49 +19,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const likeBtn = document.getElementById('like-btn');
-    
-    if (likeBtn) {
-        likeBtn.addEventListener('click', async () => {
-            const postId = likeBtn.dataset.id;
-            const likeCountSpan = document.getElementById('like-count');
-            const likeIcon = document.getElementById('like-icon');
-            const csrfTokenInput = document.querySelector('[name=csrfmiddlewaretoken]');
-            
-            if (!csrfTokenInput) {
-                console.error('CSRF token tidak ditemukan di halaman HTML!');
-                return;
-            }
+    const likeButtons = document.querySelectorAll(".btn-like");
+
+    likeButtons.forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+            e.preventDefault(); 
+
+            const postId = btn.dataset.id;
+
+            // Ambil token CSRF
+            const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
+            const csrfToken = csrfInput ? csrfInput.value : '';
+
+            const iconWrapper = btn.querySelector(".icon-like-wrapper");
+            const likeCountSpan = btn.querySelector(".like-count");
 
             try {
                 const response = await fetch(`/collection/${postId}/like/`, {
-                    method: 'POST',
+                    method: "POST",
                     headers: {
-                        'X-CSRFToken': csrfTokenInput.value,
-                        'Content-Type': 'application/json'
-                    }
+                        "X-CSRFToken": csrfToken,
+                        "Content-Type": "application/json",
+                        "X-Requested-With": "XMLHttpRequest"
+                    },
                 });
 
                 if (response.ok) {
                     const data = await response.json();
 
-                    likeCountSpan.textContent = data.total_likes;
+                    // Sesuaikan key JSON (Mendukung data.is_liked atau data.liked)
+                    const isLiked = data.is_liked !== undefined ? data.is_liked : data.liked;
+                    const count = data.like_count !== undefined ? data.like_count : data.count;
 
-                    if (data.liked) {
-                        likeBtn.classList.add('is-liked');
-                        if (likeIconWrapper) likeIconWrapper.classList.add('is-active');
+                    // Toggle Class untuk Warna & Ikon
+                    if (isLiked) {
+                        btn.classList.add("is-liked");
+                        if (iconWrapper) iconWrapper.classList.add("is-active");
                     } else {
-                        likeBtn.classList.remove('is-liked');
-                        if (likeIconWrapper) likeIconWrapper.classList.remove('is-active');
+                        btn.classList.remove("is-liked");
+                        if (iconWrapper) iconWrapper.classList.remove("is-active");
+                    }
+                    
+                    // Update Angka Like
+                    if (likeCountSpan && count !== undefined) {
+                        likeCountSpan.textContent = count;
                     }
                 } else {
-                    console.error('Server merespon dengan status:', response.status);
+                    console.error("Server merespon dengan status error:", response.status);
                 }
             } catch (error) {
-                console.error('Error saat melakukan request like:', error);
+                console.error("Gagal mengirim request like:", error);
             }
         });
-    }
+    });
     
     const fileInput = document.getElementById('id_photo');
     const uploadZone = document.getElementById('upload-zone');

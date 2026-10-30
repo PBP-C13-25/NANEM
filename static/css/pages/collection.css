@@ -1,58 +1,108 @@
 /* FEED SECTION */
 .collection-feed, .collection-detail, .form-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.feed-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .feed-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important; 
+  gap: 24px;
+  width: 100%;
+  max-width: 1000px; 
+  margin: 0 auto;
+  padding: 20px 0;
+  align-items: stretch;
+}
+
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-primary);
+  margin-bottom: 12px 16px;
 }
 
 .card {
-    background: var(--color-surface); 
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 24px;
 }
 
 .card-header {
-    padding: 16px;
-    border-bottom: 1px solid var(--color-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
 }
-
 .card-img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
+  width: 100%;
+  height: 25%;
+  object-fit: cover;
+  display: flex;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px; 
+  overflow: hidden;
 }
 
 .card-body {
-    padding: 16px;
+  padding: 4px 16px 16px 16px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .card-title {
-    color: var(--color-text);
-    margin: 8px 0;
-    font-size: 1.25rem;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 700;
+  margin: 4px 0 6px 0;
+  margin-top: 20px;
+  color: var(--color-primary);
 }
 
 .card-desc {
-    color: var(--color-muted);
-    font-size: 0.95rem;
-    margin-bottom: 16px;
+  color: var(--color-muted);
+  font-size: 0,75rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.author-name {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+.card-time {
+  font-size: 0.75rem; 
+  color: var(--color-muted); 
+  font-weight: 500; 
+  opacity: 0.85; 
+  letter-spacing: 0.02em;
+}
+
+.owner-actions {
+  margin-top: auto !important ;      
+  padding-top: 16px;       
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 8px;
+  
+}
+
+.btn--sm {
+  padding: 6px 12px !important;
+  font-size: 0.8rem !important;
+  border-radius: 8px !important;
 }
 
 /* Tombol */
@@ -66,29 +116,28 @@
     border: none;
 }
 
-.btn-primary {
+.btn--primary {
     background-color: var(--color-primary);
     color: white;
 }
 
-.btn-primary:hover {
+.btn--primary:hover {
     background-color: var(--color-primary-hover);
 }
 
-.btn-outline {
+.btn--outline {
     background: transparent;
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
 }
-.btn-outline-detail{
+.btn--outline-detail{
     margin-left: auto !important;
     background: transparent;
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
 }
 
-
-.btn-danger {
+.btn--danger {
     background-color: var(--color-danger);
     color: white;
 }
@@ -142,95 +191,6 @@
   stroke: currentColor !important;
 }
 
-
-/*  TAB KOLEKSI  SECTION */
-div.collection-feed div.tab-container {
-  width: 100% !important;
-  margin-bottom: 28px !important;
-}
-
-div.collection-feed div.tab-navigation {
-  display: flex !important;
-  flex-direction: row !important; 
-  align-items: stretch !important;
-  justify-content: space-between !important;
-  width: 100% !important;
-  border-bottom: 1px solid var(--nav-border, #e5e7eb) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  list-style: none !important;
-}
-
-/* Memaksa setiap tombol tab mengambil 50% lebar area penuh */
-div.collection-feed .tab-btn {
-  position: relative !important;
-  flex: 1 1 50% !important;
-  width: 50% !important;
-  max-width: 50% !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  height: 48px !important;
-  padding: 0 16px !important;
-  border: 0 !important;
-  background: none !important;
-  font: inherit !important;
-  font-size: 0.95rem !important;
-  font-weight: 500 !important;
-  color: var(--nav-muted, #6b7280) !important;
-  text-decoration: none !important;
-  cursor: pointer !important;
-  white-space: nowrap !important;
-  box-sizing: border-box !important;
-  transition: color 0.15s ease !important;
-}
-
-/* Garis bawah animasi (Style Navbar Nanem) */
-div.collection-feed .tab-btn::after {
-  content: "" !important;
-  position: absolute !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: -1px !important;
-  height: 3px !important;
-  border-radius: 3px 3px 0 0 !important;
-  background: var(--nav-accent, #2d5a27) !important;
-  opacity: 0 !important;
-  transform: scaleX(0.4) !important;
-  transition: opacity 0.2s ease, transform 0.25s ease !important;
-}
-
-/* Hover: Garis samar & teks hijau (seperti Panduan) */
-div.collection-feed .tab-btn:hover {
-  color: var(--nav-accent, #2d5a27) !important;
-}
-
-div.collection-feed .tab-btn:hover::after {
-  opacity: 0.4 !important;
-  transform: scaleX(1) !important;
-}
-
-/* Aktif: Garis solid & teks hijau tebal (seperti Koleksi Saya) */
-div.collection-feed .tab-btn.active {
-  color: var(--nav-accent, #2d5a27) !important;
-  font-weight: 600 !important;
-}
-
-div.collection-feed .tab-btn.active::after {
-  opacity: 1 !important;
-  transform: scaleX(1) !important;
-}
-
-/* Konten Tab */
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
 /* FORM SECTION */
 /* Zona Upload */
 .upload-zone {
@@ -257,7 +217,7 @@ div.collection-feed .tab-btn.active::after {
   height: 100% !important;
   opacity: 0 !important;
   cursor: pointer !important;
-  z-index: 10 !important; /* Memastikan input bisa menerima klik */
+  z-index: 10 !important; 
 }
 
 /* Area Teks & IkonPlaceholder */
@@ -267,7 +227,7 @@ div.collection-feed .tab-btn.active::after {
   align-items: center;
   text-align: center;
   padding: 24px;
-  pointer-events: none; /* Cegah teks menghalangi klik ke input */
+  pointer-events: none; 
   z-index: 1;
 }
 
@@ -275,7 +235,7 @@ div.collection-feed .tab-btn.active::after {
 .upload-zone__preview {
   position: absolute;
   inset: 0;
-  z-index: 15; /* Berada di atas input ketika foto sudah terpilih */
+  z-index: 15; 
   width: 100%;
   height: 100%;
   background: #ffffff;
@@ -285,7 +245,7 @@ div.collection-feed .tab-btn.active::after {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 20; /* Tombol X tetap bisa diklik */
+  z-index: 20;
   width: 32px;
   height: 32px;
   border: none;
