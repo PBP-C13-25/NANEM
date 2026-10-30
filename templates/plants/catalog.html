@@ -4,7 +4,7 @@
 {% block title %}Katalog Tanaman - NANEM{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/pages/catalog.css' %}?v=20261027-2">
+<link rel="stylesheet" href="{% static 'css/pages/catalog.css' %}?v=20261030-1">
 {% endblock %}
 
 {% block content %}
@@ -105,7 +105,15 @@
         <article class="plant-card">
             <div class="plant-card__image">
                 {% if plant.image_url %}
-                <img src="{{ plant.image_url }}" alt="{{ plant.name }}" loading="lazy">
+                <img
+                    src="{{ plant.image_url }}"
+                    alt="{{ plant.name }}"
+                    loading="lazy"
+                    onerror="this.hidden=true;this.nextElementSibling.hidden=false"
+                >
+                <div class="plant-card__placeholder" aria-label="Gambar belum tersedia" hidden>
+                    <small>Gambar belum tersedia</small>
+                </div>
                 {% else %}
                 <div class="plant-card__placeholder" aria-label="Gambar belum tersedia">
                     <small>Gambar belum tersedia</small>

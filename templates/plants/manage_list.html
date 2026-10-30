@@ -4,7 +4,7 @@
 {% block title %}Kelola Tanaman - NANEM{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/pages/plant_manage.css' %}?v=20261027-2">
+<link rel="stylesheet" href="{% static 'css/pages/plant_manage.css' %}?v=20261030-1">
 {% endblock %}
 
 {% block content %}
@@ -101,7 +101,13 @@
                                 <div class="plant-admin__thumbnail">
                                     <span>{% include "components/icon.html" with name="sprout" size=22 %}</span>
                                     {% if plant.image_url %}
-                                        <img src="{{ plant.image_url }}" alt="" loading="lazy" onerror="this.hidden=true">
+                                        <img
+                                            class="plant-admin__thumbnail-image"
+                                            src="{{ plant.image_url }}"
+                                            alt=""
+                                            loading="lazy"
+                                            onerror="this.hidden=true"
+                                        >
                                     {% endif %}
                                 </div>
                                 <div>

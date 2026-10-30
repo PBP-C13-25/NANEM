@@ -72,6 +72,19 @@ class PlantCatalogViewTests(TestCase):
         response = self.client.get(reverse("plants:index"), {"q": "tidak-ada"})
         self.assertContains(response, "Tanaman tidak ditemukan")
 
+    def test_catalog_provides_fallback_for_empty_and_broken_images(self):
+        self.kangkung.image_url = "https://example.com/kangkung.jpg"
+        self.kangkung.save(update_fields=["image_url"])
+
+        response = self.client.get(reverse("plants:index"))
+
+        self.assertContains(
+            response,
+            'onerror="this.hidden=true;this.nextElementSibling.hidden=false"',
+        )
+        self.assertContains(response, "Gambar belum tersedia")
+        self.assertContains(response, "plant-card__placeholder", count=2)
+
     def test_catalog_marks_guides_unavailable_until_cultivation_route_exists(self):
         response = self.client.get(reverse("plants:index"))
         self.assertContains(response, "Panduan belum tersedia", count=2)
@@ -271,9 +284,13 @@ class PlantAdminCrudTests(TestCase):
         self.assertNotContains(response, "Mangga")
 
     def test_manage_list_renders_final_table_elements(self):
+        self.plant.image_url = "https://example.com/kangkung.jpg"
+        self.plant.save(update_fields=["image_url"])
         self.client.force_login(self.staff)
         response = self.client.get(reverse("plants:manage"))
         self.assertContains(response, "plant-admin__thumbnail")
+        self.assertContains(response, "plant-admin__thumbnail-image")
+        self.assertContains(response, 'onerror="this.hidden=true"')
         self.assertContains(response, "Media &amp; cahaya")
         self.assertContains(response, "Perawatan")
         self.assertContains(response, "Mudah")
