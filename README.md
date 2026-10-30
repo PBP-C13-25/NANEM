@@ -26,6 +26,7 @@
 - [🔐 User Role](#-user-role)
 - [📸 Penjelasan Fitur](#-penjelasan-fitur)
 - [⚙️ Instalasi & Menjalankan Secara Lokal](#️-instalasi--menjalankan-secara-lokal)
+- [🤖 Penggunaan AI](#-penggunaan-ai)
 - [🔗 Tautan Penting](#-tautan-penting)
 
 ---
@@ -57,12 +58,12 @@
 
 Pengguna cukup memasukkan:
 
-| Input | Wajib? | Keterangan |
-| ----- | ------ | ---------- |
-| 📍 **Lokasi** | Ya | Latitude & longitude |
-| 🪴 **Media tanam** | Ya | Tanah atau hidroponik (media lain) |
-| 📐 **Luas lahan** | Tidak | Luas area tanam yang tersedia dalam m²; angka positif, boleh desimal |
-| ☀️ **Sunlight** | Tidak | Paparan sinar matahari pada area tanam; pilihan matahari penuh, sebagian, atau teduh |
+| Input              | Wajib? | Keterangan                                                                           |
+| ------------------ | ------ | ------------------------------------------------------------------------------------ |
+| 📍 **Lokasi**      | Ya     | Latitude & longitude                                                                 |
+| 🪴 **Media tanam** | Ya     | Tanah atau hidroponik (media lain)                                                   |
+| 📐 **Luas lahan**  | Tidak  | Luas area tanam yang tersedia dalam m²; angka positif, boleh desimal                 |
+| ☀️ **Sunlight**    | Tidak  | Paparan sinar matahari pada area tanam; pilihan matahari penuh, sebagian, atau teduh |
 
 Luas lahan dan sunlight merupakan parameter opsional untuk memperinci kecocokan rekomendasi. Pengguna tetap bisa meminta rekomendasi dengan lokasi dan media tanam saja. Sunlight diisi berdasarkan kondisi area tanam pengguna, bukan diasumsikan dari cuaca lokasi.
 
@@ -132,21 +133,21 @@ Mengelola autentikasi (register, login, logout), sistem rekomendasi tanaman berb
 
 **Alur rekomendasi**
 
-| Tahap          | Detail                                                                                                               |
-| -------------- | -------------------------------------------------------------------------------------------------------------------- |
-| 📥 **Input**   | Wajib: lokasi (latitude & longitude) dan media tanam. Opsional: luas lahan (m²) dan sunlight |
-| ⚙️ **Proses**  | Cocokkan cuaca dari Open-Meteo dan media tanam dengan `Plant`; evaluasi ruang tanam dan cahaya jika input serta data pembanding tersedia |
-| 📤 **Output**  | Daftar tanaman + skor kecocokan + alasan per faktor yang dinilai; tandai faktor yang belum dapat dinilai |
+| Tahap          | Detail                                                                                                                                        |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| 📥 **Input**   | Wajib: lokasi (latitude & longitude) dan media tanam. Opsional: luas lahan (m²) dan sunlight                                                  |
+| ⚙️ **Proses**  | Cocokkan cuaca dari Open-Meteo dan media tanam dengan `Plant`; evaluasi ruang tanam dan cahaya jika input serta data pembanding tersedia      |
+| 📤 **Output**  | Daftar tanaman + skor kecocokan + alasan per faktor yang dinilai; tandai faktor yang belum dapat dinilai                                      |
 | 💾 **Riwayat** | Khusus user login: snapshot semua input (termasuk luas lahan dan sunlight, atau null jika kosong), data cuaca, faktor yang dinilai, dan hasil |
 
 **CRUD**
 
-| Operasi   | Deskripsi                                                                                     |
-| --------- | --------------------------------------------------------------------------------------------- |
+| Operasi   | Deskripsi                                                                                                            |
+| --------- | -------------------------------------------------------------------------------------------------------------------- |
 | ➕ Create | Generate rekomendasi dari lokasi & media tanam, ditambah luas lahan dan sunlight jika diisi; simpan snapshot riwayat |
-| 👁️ Read   | Melihat daftar riwayat dan detail satu riwayat                                                |
-| ✏️ Update | Mengubah nama lahan pada riwayat (hasil rekomendasi tidak bisa diubah manual)                 |
-| 🗑️ Delete | Menghapus riwayat rekomendasi                                                                 |
+| 👁️ Read   | Melihat daftar riwayat dan detail satu riwayat                                                                       |
+| ✏️ Update | Mengubah nama lahan pada riwayat (hasil rekomendasi tidak bisa diubah manual)                                        |
+| 🗑️ Delete | Menghapus riwayat rekomendasi                                                                                        |
 
 ### 2️⃣ Profil Pengguna — _Hafidz_
 
@@ -216,14 +217,14 @@ Informasi praktis cara membudidayakan tanaman: cara menanam, media tanam, kebutu
 
 ## 🗄️ Daftar Model & PIC
 
-| Model                   | Deskripsi                                                                                                                          | PIC      |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `User`                  | Model bawaan Django untuk autentikasi (username, password)                                                                         | Jihan    |
-| `UserProfile`           | Data profil tambahan (nama, foto profil), relasi 1:1 dengan `User`                                                                 | Hafidz   |
+| Model                   | Deskripsi                                                                                                                                               | PIC      |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `User`                  | Model bawaan Django untuk autentikasi (username, password)                                                                                              | Jihan    |
+| `UserProfile`           | Data profil tambahan (nama, foto profil), relasi 1:1 dengan `User`                                                                                      | Hafidz   |
 | `Plant`                 | Data master tanaman: identitas, gambar, rentang cuaca ideal, media tanam, kebutuhan cahaya, dan kebutuhan ruang tanam sebagai pembanding input opsional | Bobby    |
-| `CultivationGuide`      | Panduan budidaya tanaman, relasi 1:1 dengan `Plant`                                                                                | Nicholas |
-| `PlantCollection`       | Koleksi tanaman pribadi pengguna (foto, judul, deskripsi)                                                                          | Zhafira  |
-| `RecommendationHistory` | Snapshot input lokasi, media, luas lahan dan sunlight (nullable), data cuaca, faktor penilaian, dan hasil rekomendasi | Jihan    |
+| `CultivationGuide`      | Panduan budidaya tanaman, relasi 1:1 dengan `Plant`                                                                                                     | Nicholas |
+| `PlantCollection`       | Koleksi tanaman pribadi pengguna (foto, judul, deskripsi)                                                                                               | Zhafira  |
+| `RecommendationHistory` | Snapshot input lokasi, media, luas lahan dan sunlight (nullable), data cuaca, faktor penilaian, dan hasil rekomendasi                                   | Jihan    |
 
 > ⚠️ Model dan PIC masih dapat disesuaikan dengan kebutuhan implementasi.
 
@@ -234,7 +235,7 @@ Informasi praktis cara membudidayakan tanaman: cara menanam, media tanam, kebutu
 | API                                                 | Fungsi                                                                                        |    API Key     |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------- | :------------: |
 | ☁️ **[Open-Meteo](https://open-meteo.com/en/docs)** | Data suhu, kelembapan, dan curah hujan berdasarkan koordinat, sebagai input rule-based engine | ❌ Tidak perlu |
-| 🌿 **[Perenual](https://perenual.com/docs/api)**    | Sumber kandidat tanaman dan sebagian detail katalog (sunlight, watering, care level, dll.)   |    ✅ Perlu    |
+| 🌿 **[Perenual](https://perenual.com/docs/api)**    | Sumber kandidat tanaman dan sebagian detail katalog (sunlight, watering, care level, dll.)    |    ✅ Perlu    |
 
 **Catatan Perenual:** API dipakai saat seeding, bukan pada setiap halaman katalog. Paket gratis membatasi detail spesies ke ID 1–3000 dan 100 request/hari. Tanaman yang tidak punya match tepercaya tetap dapat dicatat sebagai data NANEM lokal. Lihat [alur kurasi katalog](apps/plants/seed_data/README.md).
 
@@ -368,9 +369,23 @@ coverage report -m
 
 ---
 
+## 🤖 Penggunaan AI
+
+Selama pengembangan NANEM, tim menggunakan asisten AI (seperti Claude) sebagai teman diskusi dan alat bantu, antara lain untuk:
+
+- 💬 **Diskusi perancangan:** alur tiap modul, struktur data, pembagian peran user dan admin, serta integrasi antarmodul.
+- 🛠️ **Perbaikan dan revisi kode:** menyesuaikan kode berdasarkan masukan code review agar perbaikan lebih cepat dan konsisten.
+- 🔍 **Code review dan Git:** membantu menganalisis perubahan pada pull request, menyusun komentar review, serta merumuskan pesan commit.
+- 📚 **Pengumpulan data seed:** mencari sumber data tanaman dan panduan budidaya, yang kemudian di-cross-check manual sebelum dipakai.
+- 🧪 **Pengujian:** membantu menyusun unit test dan memeriksa kode untuk mencapai target coverage.
+- 🔀 **Alur kerja Git:** membantu menganalisis perubahan pada pull request saat code review, menyusun komentar review, dan menulis pesan commit.
+  Keputusan akhir mengenai alur dan fitur tetap ditentukan oleh tim. Seluruh kode yang digunakan telah dipahami, disesuaikan, dan diuji sendiri oleh PIC masing-masing modul.
+
+---
+
 ## 🔗 Tautan Penting
 
-|                       | Tautan                                                                                                            |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| 🚀 **Deployment PWS** | https://jihan-nabiilah-nanem.pws.cs.ui.ac.id/                                                                     |
+|                       | Tautan                                                                                          |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| 🚀 **Deployment PWS** | https://jihan-nabiilah-nanem.pws.cs.ui.ac.id/                                                   |
 | 🎨 **Figma (Low-Fi)** | [Buka Figma](https://www.figma.com/design/cHfPMtY5z1b3hZdhOH6qLj/Untitled?t=8elytltRLo4KhqEf-1) |
