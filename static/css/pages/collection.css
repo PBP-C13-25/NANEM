@@ -3,46 +3,32 @@
   max-width: 800px;
   margin: 0 auto;
 }
-/* Memaksa area grid feed menjadi 1 kolom saja */
-.feed-grid,
-div.feed-grid,
+
 .tab-content .feed-grid {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  width: 100% !important;
-  max-width: 680px !important; /* Lebar kartu ideal agar tidak terlalu melar */
-  margin: 0 auto !important;
-  gap: 24px !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important; 
+  gap: 24px;
+  width: 100%;
+  max-width: 1000px; 
+  margin: 0 auto;
+  padding: 20px 0;
 }
 
-/* Memaksa setiap kartu mengambil lebar 100% dari container */
-.feed-grid .card {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
 .feed-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
-}
-
-.feed-grid {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 24px !important;
-  width: 100% !important;
+  margin-bottom: 12px 16px;
 }
 
 .card {
-  background: var(--color-surface); 
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 16px;
   overflow: hidden;
-  width: 100% !important;
-  box-sizing: border-box;
+  flex-direction: column;
+  margin-bottom: 24px;
 }
 
 .card-header {
@@ -51,42 +37,69 @@ div.feed-grid,
   justify-content: space-between;
   align-items: right;
 }
-
 .card-img {
-  width: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
+  width: 100%;
+  height: 25%;
+  object-fit: cover;
+  display: flex;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px; 
+  overflow: hidden;
 }
 
 .card-body {
-  padding: 20px !important;
-  display: flex !important;
-  flex-direction: column !important;
+  padding: 4px 16px 16px 16px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .card-title {
-    color: var(--color-text);
-    margin: 8px 0;
-    font-size: 1.25rem;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 700;
+  margin: 4px 0 6px 0;
+  margin-top: 20px;
+  color: var(--color-primary);
 }
 
 .card-desc {
-    color: var(--color-muted);
-    font-size: 0.95rem;
-    margin-bottom: 16px;
-}
-.card-time {
-    color: var(--color-muted);
-    font-size: 0.02rem;
-    margin-bottom: 1px;
+  color: var(--color-muted);
+  font-size: 0,75rem;
+  margin: 0;
+  line-height: 1.4;
 }
 
-.card__actions {
-  display: flex !important;
-  justify-content: flex-end !important; 
-  align-items: center !important;
-  gap: 10px !important;                
-  width: 100% !important;
+.author-name {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+.card-time {
+  font-size: 0.75rem; 
+  color: var(--color-muted); 
+  font-weight: 500; 
+  opacity: 0.85; 
+  letter-spacing: 0.02em;
+}
+
+.owner-actions {
+  margin-top: auto;        
+  padding-top: 12px;       
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 8px;
+}
+
+.btn--sm {
+  padding: 6px 12px !important;
+  font-size: 0.8rem !important;
+  border-radius: 8px !important;
 }
 
 /* Tombol */
@@ -100,29 +113,28 @@ div.feed-grid,
     border: none;
 }
 
-.btn-primary {
+.btn--primary {
     background-color: var(--color-primary);
     color: white;
 }
 
-.btn-primary:hover {
+.btn--primary:hover {
     background-color: var(--color-primary-hover);
 }
 
-.btn-outline {
+.btn--outline {
     background: transparent;
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
 }
-.btn-outline-detail{
+.btn--outline-detail{
     margin-left: auto !important;
     background: transparent;
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
 }
 
-
-.btn-danger {
+.btn--danger {
     background-color: var(--color-danger);
     color: white;
 }
@@ -291,7 +303,7 @@ div.collection-feed .tab-btn.active::after {
   height: 100% !important;
   opacity: 0 !important;
   cursor: pointer !important;
-  z-index: 10 !important; /* Memastikan input bisa menerima klik */
+  z-index: 10 !important; 
 }
 
 /* Area Teks & IkonPlaceholder */
@@ -301,7 +313,7 @@ div.collection-feed .tab-btn.active::after {
   align-items: center;
   text-align: center;
   padding: 24px;
-  pointer-events: none; /* Cegah teks menghalangi klik ke input */
+  pointer-events: none; 
   z-index: 1;
 }
 
@@ -309,7 +321,7 @@ div.collection-feed .tab-btn.active::after {
 .upload-zone__preview {
   position: absolute;
   inset: 0;
-  z-index: 15; /* Berada di atas input ketika foto sudah terpilih */
+  z-index: 15; 
   width: 100%;
   height: 100%;
   background: #ffffff;
@@ -319,7 +331,7 @@ div.collection-feed .tab-btn.active::after {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 20; /* Tombol X tetap bisa diklik */
+  z-index: 20;
   width: 32px;
   height: 32px;
   border: none;

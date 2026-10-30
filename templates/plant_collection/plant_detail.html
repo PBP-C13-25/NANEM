@@ -14,31 +14,33 @@
     ← Kembali ke Koleksi
     </a>
     <div class="card"> 
-        <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 380px;">
+        <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="card-img" style="height: 250px;">
         
         <div class="card-body">
-            <div style="margin-bottom: 12px;">
+            <div style="margin-bottom: 12px; margin-top: 12px;">
                 {% csrf_token %}
                 <button type="button" class="btn-like {% if user in post.likes.all %}is-liked{% endif %}" id="like-btn" data-id="{{ post.pk }}">
                     <span id="like-icon" class="icon-like-wrapper {% if user in post.likes.all %}is-active{% endif %}">
                         {% include "components/icon.html" with name="heart" size=20 %}
                     </span>
-                    <span id="like-count">{{ post.likes.count }}</span>
+                    <span class="like-count">{{ post.likes.count }}</span>
                 </button>
             </div>
-            <h1 class="card-title" style="color: var(--color-primary); margin-top: 0;">{{ post.title }}</h1>
-            <div class="card-author">
+            <h1 class="card-title">{{ post.title }}</h1>
+            <p class="card-desc">{{ post.description|truncatewords:10 }}</p>
+            <div class="author-name">
                 <strong>{{ post.owner.first_name|default:post.owner.username }}</strong>
             </div>
-            <p class="card-desc">{{ post.description|linebreaksbr }}</p>
-            <span class="card-time" style="font-size: 0.75rem; color: var(--color-muted); font-weight: 500; opacity: 0.85; letter-spacing: 0.02em;">
+            <span class="card-time">
                 {{ post.created_at|timesince|truncatewords:2|cut:","|cut:"…"}} yang lalu
-            </span>    
+            </span>
         </div>
-        <div class="card__actions" style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; width: 100%;">
+        {% if request.user == post.owner %}
+        <div class="card__actions" style="display: flex; justify-content: flex-end; align-items: center end; gap: 10px; width: 100%; ">
             <a href="{% url 'collection:edit' post.pk %}" class="btn btn--outline">Edit</a>
-            <button type="button" class="btn btn--danger" data-modal-target="#modal-delete">Hapus</button>
-        </div>
+            <button type="button" class="btn btn--danger" data-modal-target="modal-delete">Hapus</button>
+        </div> 
+        {% endif %}
     </div>
 </div>
 {% if request.user == post.owner %}
@@ -49,8 +51,8 @@
         
         <form method="POST" action="{% url 'collection:delete' post.pk %}" style="display: flex; gap: 12px; margin-top: 24px; justify-content: flex-end;">
             {% csrf_token %}
-            <button type="button" class="btn btn-outline" data-modal-close>Batal</button>
-            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+            <button type="button" class="btn btn--outline" data-modal-close>Batal</button>
+            <button type="submit" class="btn btn--danger">Ya, Hapus</button>
         </form>
     </dialog>
 {% endif %}

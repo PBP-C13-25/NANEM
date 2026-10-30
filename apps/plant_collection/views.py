@@ -3,12 +3,12 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.views.generic import DeleteView, ListView, DetailView, CreateView, UpdateView, View
-from apps.core.mixins import RegularUserRequiredMixin, OwnedQuerysetMixin 
+from apps.core.mixins import LoginRequiredMixin, OwnedQuerysetMixin 
 
 from .models import PlantCollection
-from .form import PlantCollectionForm
+from .forms import PlantCollectionForm
 
-class CollectionListView(RegularUserRequiredMixin, ListView):
+class CollectionListView(LoginRequiredMixin, ListView):
     model = PlantCollection
     template_name = "plant_collection/index.html"
     context_object_name = "posts"
@@ -18,12 +18,12 @@ class CollectionListView(RegularUserRequiredMixin, ListView):
         context['my_posts'] = PlantCollection.objects.filter(owner=self.request.user)
         return context
 
-class CollectionDetailView(RegularUserRequiredMixin, DetailView):
+class CollectionDetailView(LoginRequiredMixin, DetailView):
     model = PlantCollection
     template_name = "plant_collection/plant_detail.html"
     context_object_name = "post"
 
-class CollectionCreateView(RegularUserRequiredMixin, CreateView):
+class CollectionCreateView(LoginRequiredMixin, CreateView):
     model = PlantCollection
     form_class = PlantCollectionForm
     template_name = "plant_collection/plant_form.html"
@@ -43,7 +43,7 @@ class CollectionCreateView(RegularUserRequiredMixin, CreateView):
         context['is_edit'] = False
         return context
 
-class CollectionUpdateView(RegularUserRequiredMixin, OwnedQuerysetMixin, UpdateView):
+class CollectionUpdateView(LoginRequiredMixin, OwnedQuerysetMixin, UpdateView):
     model = PlantCollection
     form_class = PlantCollectionForm
     template_name = "plant_collection/plant_form.html"
@@ -56,19 +56,19 @@ class CollectionUpdateView(RegularUserRequiredMixin, OwnedQuerysetMixin, UpdateV
         context['is_edit'] = True
         return context
     
-class CollectionDeleteView(RegularUserRequiredMixin, OwnedQuerysetMixin, DeleteView):
+class CollectionDeleteView(LoginRequiredMixin, OwnedQuerysetMixin, DeleteView):
     model = PlantCollection
     template_name = "plant_collection/plant_confirm_delete.html"
     success_url = reverse_lazy('collection:index')
     owner_field = "owner"
 
-class ToggleLikeView(RegularUserRequiredMixin, View):
+class ToggleLikeView(LoginRequiredMixin, View):
     def post(self, request, pk):
         post = get_object_or_404(PlantCollection, pk=pk)
         if request.user in post.likes.all():
             post.likes.remove(request.user)
-            liked = False
+            is_liked = False
         else:
             post.likes.add(request.user)
-            liked = True
-        return JsonResponse({'liked': liked, 'total_likes': post.likes.count()})
+            is_liked = True
+        return JsonResponse({'is_liked': is_liked, 'like_count': post.likes.count()})
