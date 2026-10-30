@@ -1,15 +1,17 @@
 /* FEED SECTION */
-.collection-feed, .collection-detail, .form-container {
+.collection-feed,
+.collection-detail,
+.form-container {
   max-width: 800px;
   margin: 0 auto;
 }
 
 .feed-grid {
   display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important; 
+  grid-template-columns: repeat(2, 1fr) !important;
   gap: 24px;
   width: 100%;
-  max-width: 1000px; 
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px 0;
   align-items: stretch;
@@ -45,7 +47,7 @@
   object-fit: cover;
   display: flex;
   aspect-ratio: 4 / 3;
-  border-radius: 12px; 
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -70,7 +72,7 @@
 
 .card-desc {
   color: var(--color-muted);
-  font-size: 0,75rem;
+  font-size: 0, 75rem;
   margin: 0;
   line-height: 1.4;
 }
@@ -82,21 +84,20 @@
   color: var(--color-primary);
 }
 .card-time {
-  font-size: 0.75rem; 
-  color: var(--color-muted); 
-  font-weight: 500; 
-  opacity: 0.85; 
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  font-weight: 500;
+  opacity: 0.85;
   letter-spacing: 0.02em;
 }
 
 .owner-actions {
-  margin-top: auto !important ;      
-  padding-top: 16px;       
+  margin-top: auto !important ;
+  padding-top: 16px;
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   align-items: center;
   gap: 8px;
-  
 }
 
 .btn--sm {
@@ -107,39 +108,39 @@
 
 /* Tombol */
 .btn {
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
 }
 
 .btn--primary {
-    background-color: var(--color-primary);
-    color: white;
+  background-color: var(--color-primary);
+  color: white;
 }
 
 .btn--primary:hover {
-    background-color: var(--color-primary-hover);
+  background-color: var(--color-primary-hover);
 }
 
 .btn--outline {
-    background: transparent;
-    border: 1px solid var(--color-primary);
-    color: var(--color-primary);
+  background: transparent;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
 }
-.btn--outline-detail{
-    margin-left: auto !important;
-    background: transparent;
-    border: 1px solid var(--color-primary);
-    color: var(--color-primary);
+.btn--outline-detail {
+  margin-left: auto !important;
+  background: transparent;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
 }
 
 .btn--danger {
-    background-color: var(--color-danger);
-    color: white;
+  background-color: var(--color-danger);
+  color: white;
 }
 
 /* TOMBOL LIKE SECTION */
@@ -175,7 +176,9 @@
   height: 20px;
   fill: none !important; /* Dalamnya transparan/kosong */
   stroke: currentColor !important; /* Garis tepi mengikuti warna teks */
-  transition: fill 0.2s ease, stroke 0.2s ease;
+  transition:
+    fill 0.2s ease,
+    stroke 0.2s ease;
 }
 
 /* 3. LIKED STATE: Full Love Terisi Warna Tema */
@@ -217,7 +220,7 @@
   height: 100% !important;
   opacity: 0 !important;
   cursor: pointer !important;
-  z-index: 10 !important; 
+  z-index: 10 !important;
 }
 
 /* Area Teks & IkonPlaceholder */
@@ -227,7 +230,7 @@
   align-items: center;
   text-align: center;
   padding: 24px;
-  pointer-events: none; 
+  pointer-events: none;
   z-index: 1;
 }
 
@@ -235,7 +238,7 @@
 .upload-zone__preview {
   position: absolute;
   inset: 0;
-  z-index: 15; 
+  z-index: 15;
   width: 100%;
   height: 100%;
   background: #ffffff;
@@ -278,4 +281,43 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Seluruh card bisa diklik ke detail (stretched link) */
+.feed-grid .card {
+  position: relative;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.feed-grid .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Tombol like & Edit/Hapus tetap bisa diklik di atas lapisan link */
+.feed-grid .btn-like,
+.feed-grid .owner-actions {
+  position: relative;
+  z-index: 2;
+}
+
+/* Penanda fokus keyboard di seluruh card */
+.feed-grid .card:has(.card-link:focus-visible) {
+  outline: 3px solid rgba(92, 114, 85, 0.35);
+  outline-offset: 2px;
 }

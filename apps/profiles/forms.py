@@ -5,23 +5,23 @@ from .models import UserProfile
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["username"]
+        fields = ["first_name", "username"]
         labels = {
+            "first_name": "Nama",
             "username": "Username",
         }
         widgets = {
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
             "username": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ["name", "photo"]
+        fields = ["photo"]
         labels = {
-            "name": "Nama Lengkap",
             "photo": "Foto Profil",
         }
         widgets = {
-            "name": forms.TextInput(attrs={"class": "form-control"}),
-            "photo": forms.ClearableFileInput(attrs={"class": "form-control"}),
+            "photo": forms.FileInput(attrs={"class": "hidden-file-input", "id": "realPhotoInput"}),
         }

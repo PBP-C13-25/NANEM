@@ -1,78 +1,398 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Edit Profil - Nanem{% endblock %}
+
 {% block extra_css %}
-<!-- CSS profil -->
 <link rel="stylesheet" href="{% static 'css/pages/profile.css' %}">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    :root {
+        --nanem-dark: #4a5548;
+        --nanem-main: #5f6f5d;
+        --nanem-soft: #f1f3f0;
+        --nanem-border: #dcdedb;
+        --nanem-white: #ffffff;
+        --nanem-muted: #8a9687;
+        --nanem-danger: #dc3545;
+    }
+
+    .ep-page {
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 32px 16px 80px;
+    }
+
+    /* ---------- Judul (di luar box) ---------- */
+    .ep-heading { text-align: center; margin-bottom: 20px; }
+    .ep-title {
+        margin: 0 0 4px;
+        color: var(--nanem-dark);
+        font-size: 1.9rem; font-weight: 800; letter-spacing: -0.03em;
+        line-height: 1.2;
+    }
+    .ep-desc { margin: 0; color: var(--nanem-main); font-size: .98rem; }
+
+    /* ---------- Kartu form ---------- */
+    .ep-card {
+        position: relative;
+        background: var(--nanem-white);
+        border: 1px solid var(--nanem-border);
+        border-radius: 1.4rem;
+        padding: 28px 24px 24px;
+        box-shadow: 0 12px 34px rgba(74, 85, 72, .10);
+    }
+    .ep-card::before {
+        content: "";
+        position: absolute; left: 50%; top: 0;
+        width: 280px; height: 150px;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse at top, rgba(95,111,93,.12), transparent 70%);
+        pointer-events: none;
+    }
+    .ep-card > * { position: relative; }
+
+    /* ---------- Field teks ---------- */
+    .ep-field { margin-bottom: 18px; }
+    .ep-label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--nanem-dark);
+        font-size: .9rem; font-weight: 700;
+    }
+    .ep-card .ep-field input[type="text"],
+    .ep-card .ep-field input[type="email"],
+    .ep-card .ep-field input:not([type]) {
+        width: 100% !important;
+        background: var(--nanem-soft) !important;
+        border: 1px solid transparent !important;
+        border-radius: 0.9rem !important;
+        padding: 12px 16px !important;
+        color: var(--nanem-dark) !important;
+        font-size: 1rem !important;
+        outline: none !important;
+        box-shadow: none !important;
+        transition: border-color .2s, background .2s, box-shadow .2s !important;
+    }
+    .ep-card .ep-field input[type="text"]:focus,
+    .ep-card .ep-field input[type="email"]:focus {
+        background: var(--nanem-white) !important;
+        border-color: var(--nanem-main) !important;
+        box-shadow: 0 0 0 4px rgba(95, 111, 93, .15) !important;
+    }
+    .ep-error { color: var(--nanem-danger); font-size: .85rem; margin-top: 6px; }
+    .ep-error ul { margin: 0; padding-left: 0; list-style: none; }
+
+    /* ---------- Foto profil ---------- */
+    .ep-photo {
+        display: flex; align-items: center; gap: 18px;
+        background: var(--nanem-soft);
+        border: 1px solid var(--nanem-border);
+        border-radius: 1.1rem;
+        padding: 16px;
+    }
+    .ep-avatar {
+        position: relative;
+        width: 88px; height: 88px; flex-shrink: 0;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+        background: linear-gradient(135deg, var(--nanem-main), var(--nanem-dark));
+        color: #fff; font-weight: 800; font-size: 2.2rem;
+        border: 4px solid var(--nanem-white);
+        box-shadow: 0 0 0 2px var(--nanem-border), 0 8px 18px rgba(74, 85, 72, .2);
+        transition: opacity .2s, filter .2s;
+    }
+    .ep-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ep-avatar.is-removing { opacity: .45; filter: grayscale(1); }
+
+    .ep-photo-info { flex: 1; min-width: 0; }
+    .ep-photo-state {
+        margin: 0 0 2px;
+        color: var(--nanem-dark);
+        font-size: .95rem; font-weight: 700;
+    }
+    .ep-photo-file {
+        margin: 0 0 12px;
+        color: var(--nanem-muted);
+        font-size: .83rem;
+        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .ep-photo-file a { color: var(--nanem-main); font-weight: 600; text-decoration: underline; }
+
+    .custom-file-btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        background: var(--nanem-white);
+        color: var(--nanem-dark);
+        border: 1px solid var(--nanem-border);
+        padding: 8px 16px;
+        border-radius: 50rem;
+        font-size: .86rem; font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background .2s, border-color .2s, transform .1s;
+    }
+    .custom-file-btn:hover {
+        background: var(--nanem-white);
+        border-color: var(--nanem-main);
+        color: var(--nanem-dark);
+    }
+    .custom-file-btn:active { transform: scale(.96); }
+
+    .ep-remove {
+        display: inline-flex; align-items: center; gap: 8px;
+        margin: 12px 0 0;
+        color: var(--nanem-danger);
+        font-size: .84rem; font-weight: 600;
+        cursor: pointer;
+    }
+    .ep-remove input { accent-color: var(--nanem-danger); width: 16px; height: 16px; cursor: pointer; }
+
+    /* ---------- Tombol ---------- */
+    .ep-actions { margin-top: 26px; }
+    .btn-simpan-full {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: linear-gradient(135deg, var(--nanem-main), var(--nanem-dark)) !important;
+        border: none !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        padding: 12px 16px !important;
+        border-radius: 50rem !important;
+        text-align: center !important;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(74, 85, 72, .28) !important;
+        transition: transform .15s, box-shadow .2s, filter .2s !important;
+    }
+    .btn-simpan-full:hover { filter: brightness(1.08); box-shadow: 0 10px 22px rgba(74, 85, 72, .35) !important; transform: translateY(-2px); }
+    .btn-simpan-full:active { transform: scale(.98); }
+
+    .ep-cancel { text-align: center; margin-top: 14px; }
+    .btn-cancel-link {
+        color: var(--nanem-muted);
+        font-size: .9rem; font-weight: 600;
+        text-decoration: underline !important;
+        transition: color .2s;
+    }
+    .btn-cancel-link:hover { color: var(--nanem-dark); }
+
+    /* ---------- Zona berbahaya ---------- */
+    .ep-danger {
+        margin-top: 20px;
+        background: #fdf3f4;
+        border: 1px solid #f3cdd1;
+        border-radius: 1.2rem;
+        padding: 18px 20px;
+        display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    }
+    .ep-danger-text strong { display: block; color: #8f2330; font-size: .95rem; }
+    .ep-danger-text span { color: #a8606a; font-size: .82rem; }
+    .btn-delete-full {
+        flex-shrink: 0;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: var(--nanem-danger) !important;
+        border: none !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: .86rem !important;
+        padding: 9px 18px !important;
+        border-radius: 50rem !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+        transition: background .2s, transform .1s !important;
+    }
+    .btn-delete-full:hover { background: #bb2d3b !important; color: #fff !important; }
+    .btn-delete-full:active { transform: scale(.96); }
+
+    @media (max-width: 480px) {
+        .ep-title { font-size: 1.6rem; }
+        .ep-card { padding: 24px 16px 22px; }
+        .ep-photo { flex-direction: column; text-align: center; }
+        .ep-photo-file { max-width: 100%; }
+        .ep-danger { flex-direction: column; align-items: stretch; text-align: center; }
+        .btn-delete-full { width: 100% !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .ep-avatar, .custom-file-btn, .btn-simpan-full, .btn-delete-full { transition: none !important; }
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <div class="card card-profile p-4 p-md-5">
-                <div class="card-body px-lg-5 py-lg-4">
-                    <h2 class="fw-bold mb-1" style="color: #2c3e2d;">Edit Profil</h2>
-                    <p class="text-muted small mb-4">Perbarui informasi akun dan data diri kamu di sini.</p>
-                    <hr class="mb-4" style="border-color: #e2dfd4; opacity: 1;">
+<div class="ep-page">
 
-                    <form method="post" enctype="multipart/form-data" class="needs-validation">
-                        {% csrf_token %}
-                        
-                        <!-- username field -->
-                        <div class="mb-3">
-                            <label for="{{ user_form.username.id_for_label }}" class="form-label fw-bold small text-uppercase" style="color: #4a5d44;">Username</label>
-                            {{ user_form.username }}
-                            {% if user_form.username.errors %}
-                                <div class="text-danger small mt-1">{{ user_form.username.errors }}</div>
-                            {% endif %}
-                        </div>
+    <!-- ===== Judul & deskripsi (di luar box) ===== -->
+    <div class="ep-heading">
+        <h2 class="ep-title">Edit Profil</h2>
+        <p class="ep-desc">Perbarui informasi akun dan data diri kamu di sini.</p>
+    </div>
 
-                        <!-- name field -->
-                        <div class="mb-3">
-                            <label for="{{ profile_form.name.id_for_label }}" class="form-label fw-bold small text-uppercase" style="color: #4a5d44;">Nama Lengkap</label>
-                            {{ profile_form.name }}
-                            {% if profile_form.name.errors %}
-                                <div class="text-danger small mt-1">{{ profile_form.name.errors }}</div>
-                            {% endif %}
-                        </div>
+    <!-- ===== Kartu form ===== -->
+    <div class="ep-card">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-                        <!-- photo field -->
-                        <div class="mb-4">
-                            <label for="{{ profile_form.photo.id_for_label }}" class="form-label fw-bold small text-uppercase" style="color: #4a5d44;">Foto Profil</label>
-                            {{ profile_form.photo }}
-                            {% if profile_form.photo.errors %}
-                                <div class="text-danger small mt-1">{{ profile_form.photo.errors }}</div>
-                            {% endif %}
-                        </div>
-                        
-                       <!-- action buttons -->
-                        <div class="d-flex align-items-center justify-content-between mt-4 pt-2">
-                            <!-- tombol simpan perubahan -->
-                            <button type="submit" class="btn btn-sage fw-semibold px-4 py-2 shadow-sm">
-                                Simpan Perubahan
-                            </button>
-                            
-                            <!-- tombol batal -->
-                            <a href="{% url 'profiles:profile' %}" class="btn btn-brown fw-semibold px-4 py-2 shadow-sm text-center">
-                                Batal
-                            </a>
-                        </div>
-                    </form>
-                    
-                    <hr class="my-4" style="border-color: #e2dfd4; opacity: 1;">
-                    <div class="text-center">
-                        <span class="text-muted small">Ingin mengganti password akun? </span>
-                        <a href="{% url 'accounts:password_change' %}" class="text-decoration-none fw-bold" style="color: #9c7b4a;">Klik di sini</a>
+            <!-- nama lengkap (menggunakan first_name dari user_form) -->
+            <div class="ep-field">
+                <label for="{{ user_form.first_name.id_for_label }}" class="ep-label">Nama Lengkap</label>
+                {{ user_form.first_name }}
+                {% if user_form.first_name.errors %}
+                    <div class="ep-error">{{ user_form.first_name.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- username -->
+            <div class="ep-field">
+                <label for="{{ user_form.username.id_for_label }}" class="ep-label">Nama Pengguna (username)</label>
+                {{ user_form.username }}
+                {% if user_form.username.errors %}
+                    <div class="ep-error">{{ user_form.username.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- foto profil -->
+            <div class="ep-field" style="margin-bottom: 0;">
+                <span class="ep-label">Foto Profil</span>
+
+                <div class="ep-photo">
+                    <!-- pratinjau avatar -->
+                    <div class="ep-avatar" id="avatarPreview">
+                        {% if profile_form.instance.photo %}
+                            <img src="{{ profile_form.instance.photo.url }}" alt="Foto profil saat ini" id="avatarImg">
+                        {% else %}
+                            <span id="avatarInitial">{{ request.user.first_name|default:request.user.username|first|upper }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="ep-photo-info">
+                        <p class="ep-photo-state" id="photoState">
+                            {% if profile_form.instance.photo %}Foto saat ini{% else %}Belum ada foto{% endif %}
+                        </p>
+
+                        <p class="ep-photo-file">
+                            <span id="fileTextDisplay">
+                                {% if profile_form.instance.photo %}
+                                    <a href="{{ profile_form.instance.photo.url }}" target="_blank">{{ profile_form.instance.photo.name|cut:"profile_pics/"|cut:"profiles/" }}</a>
+                                {% else %}
+                                    Belum ada file dipilih
+                                {% endif %}
+                            </span>
+                        </p>
+
+                        <!-- input file asli (disembunyikan) + tombol kustom -->
+                        <input type="file" name="photo" id="realPhotoInput" class="d-none" accept="image/*" style="display: none !important;">
+                        <button type="button" class="custom-file-btn" id="customUploadBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            Pilih Foto Baru
+                        </button>
+
+                        <!-- jika foto saat ini ada -->
+                        {% if profile_form.instance.photo %}
+                            <label class="ep-remove">
+                                <input type="checkbox" name="photo-clear" id="photo-clear_id"> Hapus foto saat ini
+                            </label>
+                        {% endif %}
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
 
-{% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                {% if profile_form.photo.errors %}
+                    <div class="ep-error">{{ profile_form.photo.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- tombol simpan & batal -->
+            <div class="ep-actions">
+                <button type="submit" class="btn btn-simpan-full">
+                    Simpan Perubahan
+                </button>
+
+                <div class="ep-cancel">
+                    <a href="{% url 'profiles:profile' %}" class="btn-cancel-link">Batal</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- ===== Zona berbahaya: hapus akun ===== -->
+    <div class="ep-danger">
+        <div class="ep-danger-text">
+            <strong>Hapus Akun</strong>
+            <span>Tindakan ini permanen dan tidak bisa dibatalkan.</span>
+        </div>
+        <!-- tombol pemicu modal popup hapus akun -->
+        <button type="button" class="btn btn-delete-full" data-modal-open="delete-account-modal">
+            Hapus Akun Permanen
+        </button>
+    </div>
+
+</div>
+
+<!-- manggil modal konfirmasi global -->
+{% url 'profiles:delete_account' as delete_url %}
+{% include "components/confirm_modal.html" with id="delete-account-modal" title="Hapus Akun?" message="Tindakan ini bersifat permanen. Semua data diri, preferensi, dan informasi akun kamu di Nanem akan hilang selamanya dan tidak dapat dipulihkan." action=delete_url confirm_label="Ya, Hapus" danger=True %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const realInput   = document.getElementById("realPhotoInput");
+        const customBtn   = document.getElementById("customUploadBtn");
+        const textDisplay = document.getElementById("fileTextDisplay");
+        const avatarBox   = document.getElementById("avatarPreview");
+        const photoState  = document.getElementById("photoState");
+        const clearBox    = document.getElementById("photo-clear_id");
+
+        if (!realInput || !customBtn) return;
+
+        // simpan isi awal avatar & teks supaya bisa dikembalikan
+        const originalAvatarHTML = avatarBox ? avatarBox.innerHTML : "";
+        const originalFileHTML   = textDisplay ? textDisplay.innerHTML : "";
+        const originalState      = photoState ? photoState.textContent : "";
+
+        customBtn.addEventListener("click", function() {
+            realInput.click();
+        });
+
+        realInput.addEventListener("change", function() {
+            if (realInput.files && realInput.files.length > 0) {
+                const file = realInput.files[0];
+                textDisplay.textContent = file.name;
+                if (photoState) photoState.textContent = "Foto baru dipilih";
+
+                // preview langsung di avatar
+                if (avatarBox) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        avatarBox.innerHTML = "";
+                        const img = document.createElement("img");
+                        img.src = e.target.result;
+                        img.alt = "Pratinjau foto baru";
+                        avatarBox.appendChild(img);
+                        avatarBox.classList.remove("is-removing");
+                    };
+                    reader.readAsDataURL(file);
+                }
+                if (clearBox) clearBox.checked = false;
+            } else {
+                // batal memilih file maka kembalikan tampilan awal
+                textDisplay.innerHTML = originalFileHTML;
+                if (photoState) photoState.textContent = originalState;
+                if (avatarBox) avatarBox.innerHTML = originalAvatarHTML;
+            }
+        });
+
+        // centang "Hapus foto" maka avatar diredupkan sebagai penanda
+        if (clearBox && avatarBox) {
+            clearBox.addEventListener("change", function() {
+                avatarBox.classList.toggle("is-removing", clearBox.checked);
+                if (photoState) {
+                    photoState.textContent = clearBox.checked ? "Foto akan dihapus" : originalState;
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}

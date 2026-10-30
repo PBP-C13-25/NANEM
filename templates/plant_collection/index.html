@@ -5,21 +5,136 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/pages/collection.css' %}">
+<style>
+    .user-search-container {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+    .user-search-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #d1d5db;
+        font-size: 0.95rem;
+    }
+    .user-search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        margin-top: 0.25rem;
+        max-height: 250px;
+        overflow-y: auto;
+        z-index: 50;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+    .user-search-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        color: #374151;
+        border-bottom: 1px solid #f3f4f6;
+    }
+    .user-search-item:hover {
+        background-color: #f9fafb;
+    }
+    .user-avatar-initial {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #10b981;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 0.75rem;
+    }
+</style>
 {% endblock %}
-{% csrf_token %}
 
 {% block content %}
 <div class="collection-feed">
     <div class="feed-header">
         <h1>Koleksi Tanaman</h1>
-        <a href="{% url 'collection:create' %}" class="btn btn--primary"> Buat Postingan </a>
+        <a href="{% url 'collection:create' %}" class="btn btn--primary">Buat Postingan</a>
     </div>
-    <!-- TODO : SEARCH BAR USER -->
-     
+
+    <!-- SEARCH BAR USER -->
+    <div class="user-search-container">
+        <input type="text" id="userSearchInput" class="user-search-input" placeholder="Cari pengguna lain berdasarkan username...">
+        <div id="userSearchResults" class="user-search-results"></div>
+    </div>
+
     {% include "plant_collection/_grid.html" with collections=posts %}
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script src="{% static 'js/pages/collection.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('userSearchInput');
+        const resultsContainer = document.getElementById('userSearchResults');
+
+        if (searchInput && resultsContainer) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+                if (query.length === 0) {
+                    resultsContainer.innerHTML = '';
+                    resultsContainer.style.display = 'none';
+                    return;
+                }
+
+                fetch(`{% url 'profiles:search' %}?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        resultsContainer.innerHTML = '';
+                        if (data.users && data.users.length > 0) {
+                            resultsContainer.style.display = 'block';
+                            data.users.forEach(user => {
+                                const item = document.createElement('a');
+                                item.href = user.url;
+                                item.className = 'user-search-item';
+                                
+                                let avatarHTML = '';
+                                if (user.photo) {
+                                    avatarHTML = `<img src="${user.photo}" alt="${user.username}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 0.75rem;">`;
+                                } else {
+                                    avatarHTML = `<div class="user-avatar-initial">${user.initial}</div>`;
+                                }
+
+                                item.innerHTML = `
+                                    ${avatarHTML}
+                                    <div>
+                                        <div style="font-weight: 600;">@${user.username}</div>
+                                    </div>
+                                `;
+                                resultsContainer.appendChild(item);
+                            });
+                        } else {
+                            resultsContainer.style.display = 'block';
+                            resultsContainer.innerHTML = `<div style="padding: 0.75rem 1rem; color: #6b7280; text-align: center;">Tidak ada pengguna ditemukan.</div>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error searching users:', error);
+                        resultsContainer.style.display = 'block';
+                        resultsContainer.innerHTML = `<div style="padding: 0.75rem 1rem; color: #ef4444; text-align: center;">Coba lagi sebentar lagi.</div>`;
+                    });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+                    resultsContainer.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}
