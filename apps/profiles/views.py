@@ -103,10 +103,10 @@ class SearchUsersView(LoginRequiredMixin, View):
         users = []
         if query:
             # cari user berdasarkan username yang mengandung kata kunci (case insensitive)
-            # menambahkan filter is_active=True dan is_staff=False sesuai saran review
+            # menambahkan filter is_active=True 
             users = (
                 User.objects
-                .filter(username__icontains=query, is_active=True, is_staff=False)
+                .filter(username__icontains=query, is_active=True)
                 .select_related('profile')
                 .order_by('username')[:20]
             )

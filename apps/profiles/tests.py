@@ -52,7 +52,10 @@ class ProfileTestCases(TestCase):
         usernames = [u['username'] for u in data['users']]
         self.assertIn('otheruser', usernames)
         self.assertNotIn('inactiveuser', usernames)
-        self.assertNotIn('adminuser', usernames)
+        # admin tetap bisa dicari
+        response_admin = self.client.get(reverse('profiles:search'), {'q': 'admin'})
+        admin_usernames = [u['username'] for u in response_admin.json()['users']]
+        self.assertIn('adminuser', admin_usernames)
 
     def test_profile_edit_get_and_post(self):
         self.client.login(username='testuser', password='testpassword123')
