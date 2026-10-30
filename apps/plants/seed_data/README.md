@@ -75,6 +75,45 @@ nama NANEM atau ID Perenual, lalu diperbarui agar rerun tidak menduplikasi
 data. ID utama `Plant.id` selalu milik NANEM. Satu batch dibatalkan bila
 ada konflik.
 
+## CRUD admin dan sinkronisasi seed
+
+Halaman `/catalog/manage/` dan importer menulis ke tabel `Plant`, tetapi memiliki
+peran berbeda:
+
+- CRUD admin mengubah database environment yang sedang aktif. Perubahan di localhost
+  hanya mengubah `db.sqlite3` lokal; file tersebut di-ignore Git dan tidak ikut push.
+- CRUD pada aplikasi yang sudah di-deploy mengubah database production, bukan database
+  anggota tim lain.
+- JSON riset dan seed yang dilacak Git adalah baseline data bersama. CRUD tidak
+  menulis balik perubahan database ke file-file tersebut.
+- Importer mencocokkan nama tanpa membedakan huruf besar/kecil, atau memakai
+  `perenual_id` jika tersedia. Tanaman seed yang diedit dapat ditimpa kembali;
+  tanaman seed yang dihapus dapat dibuat kembali saat import berikutnya.
+- Entri `local_only` tidak memiliki `perenual_id`. Jika namanya diganti melalui CRUD,
+  import berikutnya dapat membuat ulang entri dengan nama baseline. Tinjau perubahan
+  nama baseline di JSON agar tidak menghasilkan dua konsep tanaman berbeda.
+- Data manual yang bukan bagian seed tetap berada di database selama namanya dan ID
+  eksternalnya tidak berbenturan dengan manifest.
+
+Untuk perubahan data baseline, perbarui dan review JSON terlebih dahulu, commit file
+tersebut, lalu jalankan import pada setiap environment yang membutuhkan pembaruan.
+Jangan menganggap database lokal sebagai artefak deployment.
+
+## Prosedur import yang aman
+
+1. Pastikan migration terbaru sudah diterapkan dengan `python manage.py migrate`.
+2. Buat backup database environment yang akan diubah. Untuk SQLite lokal, salin
+   `db.sqlite3` saat aplikasi sedang berhenti; untuk production gunakan mekanisme
+   backup dari penyedia database.
+3. Jalankan `python manage.py seed_plants --import-selected --dry-run`.
+4. Pastikan jumlah entri, konflik, dan pesan validasi sesuai harapan.
+5. Jalankan `python manage.py seed_plants --import-selected`.
+6. Verifikasi jumlah tanaman serta beberapa record penting melalui katalog atau shell.
+
+Dry-run melewati validasi dan jalur tulis yang sama dengan import sebenarnya, tetapi
+seluruh transaksinya dibatalkan. Satu record invalid membatalkan seluruh batch sehingga
+tidak meninggalkan import setengah jadi.
+
 Nilai `sunlight` disimpan sebagai list. Nilai `False` yang dikirim API
 dibedakan dari `null` yang berarti tidak diketahui. URL gambar dengan
 query bertanda waktu dan gambar `upgrade_access` ditolak; UI perlu memakai
