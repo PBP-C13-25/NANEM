@@ -4,13 +4,12 @@
 {% block title %}Nanem{% endblock %}
  
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/home.css' %}?v=landing-b1">
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="home-container">
-
-    {% if user.is_authenticated %}
     <!--  TAMPILAN USER (UDAH LOGIN) -->
     <section class="home-user">
         <header class="user-greeting">
@@ -43,27 +42,125 @@
         </div>
     </section>
 
-    {% else %}
+</div>
+{% else %}
+<div class="home-landing">
+    <section class="home-hero" aria-labelledby="home-title">
+        <div class="home-wrap">
+            <div class="home-hero__copy">
+                <p class="home-eyebrow">NANEM · teman mulai menanam</p>
+                <h1 id="home-title">Bingung mau nanam apa?<br><span>Mulai dari tempatmu.</span></h1>
+                <p class="home-hero__description">Temukan rekomendasi tanaman sesuai kondisi lingkungan, pelajari perawatannya, dan simpan cerita tumbuhnya.</p>
+                <div class="home-actions">
+                    <a href="{% url 'recommendations:index' %}" class="btn btn--primary home-button">
+                        Temukan tanamanmu
+                        {% include "components/icon.html" with name="chevron-right" size=18 %}
+                    </a>
+                    <a href="#kenali-nanem" class="btn btn--outline home-button">Kenali NANEM</a>
+                </div>
+            </div>
 
-    <!--  TAMPILAN GUEST (BELUM LOGIN) -->
-
-    <section class="home-guest">
-        <div class="guest-hero">
-            <span class="guest-hero__tag">
-                {% include "components/icon.html" with name="sprout" size=48 %}
-            </span>
-            <h1 class="guest-hero__title">Temukan Tanaman yang Cocok dengan Kondisi Tempat Tinggalmu</h1>
-            <p class="guest-hero__sub">
-                Nanem membantu memilih tanaman berdasarkan pencahayaan, kelembapan, dan gaya hidupmu dengan mudah.
-            </p>
-            
-            <div class="guest-hero__actions">
-                <a href="{% url 'accounts:register' %}" class="btn btn--primary"> Daftar </a>
-                <a href="{% url 'accounts:login' %}" class="btn btn--outline"> Masuk </a>
+            <div class="home-preview" aria-label="Katalog dan panduan NANEM">
+                <div class="home-preview__bar">
+                    <span class="home-preview__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span>NANEM</span>
+                    <span class="home-preview__bar-end" aria-hidden="true"></span>
+                </div>
+                <div class="home-preview__body">
+                    <div class="home-preview__heading">
+                        <h2>Tanaman yang bisa kamu kenali</h2>
+                        <span class="home-preview__categories">Sayur · Herbal · Hias</span>
+                    </div>
+                    <div class="home-preview__grid">
+                        <a class="home-plant" href="{% url 'plants:index' %}">
+                            <div class="home-plant__photo">
+                                <img src="{% static 'images/home/tomato.jpg' %}" alt="Tomat merah tumbuh di antara dedaunan" width="1280" height="853" decoding="async" fetchpriority="high">
+                            </div>
+                            <div class="home-plant__copy">
+                                <h3>Tomat</h3>
+                                <p>Sayur · Tanah &amp; hidroponik</p>
+                            </div>
+                        </a>
+                        <a class="home-plant" href="{% url 'plants:index' %}">
+                            <div class="home-plant__photo">
+                                <img src="{% static 'images/home/succulent.jpg' %}" alt="Sukulen hijau dalam pot" width="900" height="599" decoding="async">
+                            </div>
+                            <div class="home-plant__copy">
+                                <h3>Sukulen</h3>
+                                <p>Hias · Media tanah</p>
+                            </div>
+                        </a>
+                        <a class="home-plant" href="{% url 'plants:index' %}">
+                            <div class="home-plant__photo">
+                                <img src="{% static 'images/home/garden.jpg' %}" alt="Sekop dan media tanam untuk mulai berkebun" width="1200" height="800" decoding="async">
+                            </div>
+                            <div class="home-plant__copy">
+                                <h3>Panduan budidaya</h3>
+                                <p>Langkah untuk mulai menanam</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    {% endif %}
 
+    <section id="kenali-nanem" class="home-section home-wrap" aria-labelledby="home-features-title">
+        <div class="home-section__heading">
+            <div>
+                <p class="home-eyebrow">Satu tempat, dari awal</p>
+                <h2 id="home-features-title">Kenali. Rawat. Ceritakan.</h2>
+            </div>
+            <p>Semua yang kamu butuhkan untuk mulai memahami tanamanmu.</p>
+        </div>
+        <div class="home-features">
+            <article class="home-feature">
+                <span class="home-feature__icon">{% include "components/icon.html" with name="sprout" size=22 %}</span>
+                <h3>Rekomendasi tanaman</h3>
+                <p>Gunakan kondisi lingkungan sebagai titik awal memilih tanaman yang cocok dengan tempatmu.</p>
+            </article>
+            <article class="home-feature">
+                <span class="home-feature__icon">{% include "components/icon.html" with name="book-open" size=22 %}</span>
+                <h3>Panduan budidaya</h3>
+                <p>Pelajari langkah menanam, penyiraman, pemupukan, hingga waktu panen untuk tanamanmu.</p>
+            </article>
+            <article class="home-feature">
+                <span class="home-feature__icon">{% include "components/icon.html" with name="layout-grid" size=22 %}</span>
+                <h3>Koleksi &amp; cerita</h3>
+                <p>Dokumentasikan tanamanmu dan temukan cerita menanam dari pengguna lain.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="home-story" aria-labelledby="home-story-title">
+        <div class="home-wrap home-story__layout">
+            <div class="home-story__photo">
+                <img src="{% static 'images/home/tomato.jpg' %}" alt="Buah tomat yang tumbuh di kebun" width="1280" height="853" loading="lazy" decoding="async">
+            </div>
+            <div class="home-story__copy">
+                <p class="home-eyebrow">Tidak perlu langsung ahli</p>
+                <h2 id="home-story-title">Satu tanaman dulu.<br>Lalu belajar sambil tumbuh.</h2>
+                <p>Mulai dengan lokasi dan media tanammu. NANEM membantumu mencari pilihan, lalu menyiapkan panduan untuk langkah selanjutnya.</p>
+                <a class="home-link" href="{% url 'recommendations:index' %}">
+                    Coba cari rekomendasi
+                    {% include "components/icon.html" with name="chevron-right" size=17 %}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-section home-wrap" aria-labelledby="home-cta-title">
+        <div class="home-cta">
+            <div>
+                <h2 id="home-cta-title">Siap mulai dari tanaman pertama?</h2>
+                <p>Buat akun untuk menjelajah katalog, panduan, dan koleksi.</p>
+            </div>
+            <a class="btn home-button home-button--white" href="{% url 'accounts:register' %}">
+                Daftar Gratis
+                {% include "components/icon.html" with name="chevron-right" size=18 %}
+            </a>
+        </div>
+    </section>
 </div>
+{% endif %}
 {% endblock %}
