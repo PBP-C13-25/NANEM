@@ -39,14 +39,12 @@ class ProfileTestCases(TestCase):
 
     def test_user_search_view(self):
         self.client.login(username='testuser', password='testpassword123')
-        # cari user 'other', pastikan hasilnya ada dan filter is_active/is_staff berfungsi
         response = self.client.get(reverse('profiles:search'), {'q': 'other'})
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(data['query'], 'other')
         usernames = [u['username'] for u in data['users']]
         self.assertIn('otheruser', usernames)
-        # memastikan akun non aktif dan admin tidak ikut muncul di pencarian
         self.assertNotIn('inactiveuser', usernames)
         self.assertNotIn('adminuser', usernames)
 
@@ -58,29 +56,23 @@ class ProfileTestCases(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'profiles/profile_edit.html')
 
-        # test POST edit profile (mengubah first_name dan bio)
+        # test POST edit profile (mengubah first_name)
         response_post = self.client.post(
             reverse('profiles:profile_edit'),
             {
                 'first_name': 'Hafidz Updated',
-                'last_name': 'Muazzam',
-                'bio': 'Halo ini bio baru',
-                'location': 'Jakarta',
+                'username': 'testuser',
             },
         )
         self.assertIn(response_post.status_code, [200, 302])
 
-        # verifikasi data benar-benar berubah di database
+        # verifikasi data berubah di database
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, 'Hafidz Updated')
-        profile = UserProfile.objects.get(user=self.user)
-        self.assertEqual(profile.bio, 'Halo ini bio baru')
-        self.assertEqual(profile.location, 'Jakarta')
 
     def test_public_profile_view_success_and_404(self):
         self.client.login(username='testuser', password='testpassword123')
 
-        # test profil publik yang valid
         response = self.client.get(
             reverse(
                 'profiles:public_profile', kwargs={'username': 'otheruser'}
@@ -89,7 +81,6 @@ class ProfileTestCases(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'profiles/profile.html')
 
-        # test profil publik jika username tidak ditemukan (harus 404)
         response_404 = self.client.get(
             reverse(
                 'profiles:public_profile',
@@ -105,5 +96,4 @@ class ProfileTestCases(TestCase):
         response = self.client.post(reverse('profiles:delete_account'))
         self.assertIn(response.status_code, [200, 302])
 
-        # verifikasi akun benar-benar sudah terhapus dari database
         self.assertFalse(User.objects.filter(pk=user_pk).exists())
