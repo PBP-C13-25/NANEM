@@ -11,7 +11,6 @@
 <section class="cg-page" aria-labelledby="cg-title">
     <div class="cg-back-links">
         <a href="{% url 'plants:index' %}" class="cg-back">&larr; Kembali ke katalog</a>
-        <a href="{% url 'cultivation:index' %}" class="cg-back">Semua panduan</a>
     </div>
 
     <header class="cg-plant">
@@ -29,21 +28,24 @@
             <p class="cg-plant__scientific">
                 {% if plant.scientific_name %}<i>{{ plant.scientific_name }}</i>{% else %}Kelompok tanaman{% endif %}
             </p>
-
-            <dl class="cg-plant__facts">
-                <div><dt>Media</dt><dd>{{ plant.media_label }}</dd></div>
-                <div><dt>Cahaya</dt><dd>{{ plant.sunlight_label }}</dd></div>
-                <div><dt>Ruang</dt><dd>{{ plant.get_space_needed_display }}</dd></div>
-            </dl>
-
-            {% if user.is_staff and guide %}
-            <div class="cg-admin-actions">
-                <a href="{% url 'cultivation:update' plant.pk %}" class="btn btn--outline">Edit panduan</a>
-                <a href="{% url 'cultivation:detail' plant.pk %}" class="btn btn--danger" data-modal-open="hapus-panduan">Hapus panduan</a>
-            </div>
+            {% if plant.description %}
+            <p class="cg-plant__description">{{ plant.description|linebreaksbr }}</p>
             {% endif %}
         </div>
     </header>
+
+    <dl class="cg-plant__facts">
+        {% for label, value in facts %}
+        <div><dt>{{ label }}</dt><dd>{{ value }}</dd></div>
+        {% endfor %}
+    </dl>
+
+    {% if user.is_staff and guide %}
+    <div class="cg-admin-actions">
+        <a href="{% url 'cultivation:update' plant.pk %}" class="btn btn--outline">Edit panduan</a>
+        <a href="{% url 'cultivation:detail' plant.pk %}" class="btn btn--danger" data-modal-open="hapus-panduan">Hapus panduan</a>
+    </div>
+    {% endif %}
 
     {% if guide %}
     <section class="cg-steps" aria-labelledby="cg-steps-title">
@@ -57,28 +59,19 @@
 
     <div class="cg-grid">
         <article class="cg-card">
-            <h3>Media Tanam</h3>
-            <p>{{ plant.media_label }}</p>
-        </article>
-        <article class="cg-card">
-            <h3>Kebutuhan Air</h3>
-            <p>{{ plant.water_label }}</p>
-        </article>
-        <article class="cg-card">
             <h3>Frekuensi Penyiraman</h3>
-            <p>{{ guide.watering_frequency|linebreaksbr }}</p>
-        </article>
-        <article class="cg-card">
-            <h3>Kebutuhan Cahaya</h3>
-            <p>{{ plant.sunlight_label }}</p>
+            <p><strong>{{ guide.get_watering_frequency_display }}</strong></p>
+            {% if guide.watering_note %}<p>{{ guide.watering_note|linebreaksbr }}</p>{% endif %}
         </article>
         <article class="cg-card">
             <h3>Pemupukan</h3>
-            <p>{{ guide.fertilizing|linebreaksbr }}</p>
+            <p><strong>{{ guide.get_fertilizing_frequency_display }}</strong></p>
+            {% if guide.fertilizing_note %}<p>{{ guide.fertilizing_note|linebreaksbr }}</p>{% endif %}
         </article>
         <article class="cg-card">
             <h3>Waktu Panen</h3>
-            <p>{{ guide.harvest_time|linebreaksbr }}</p>
+            <p><strong>{{ guide.harvest_label }}</strong></p>
+            {% if guide.harvest_note %}<p>{{ guide.harvest_note|linebreaksbr }}</p>{% endif %}
         </article>
     </div>
 

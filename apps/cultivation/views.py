@@ -6,13 +6,48 @@ from django.views import View
 from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 
 from apps.core.mixins import ActiveUserRequiredMixin, AdminRequiredMixin
-from apps.plants.forms import WATERING_CHOICES
+from apps.plants.forms import CARE_LEVEL_CHOICES, WATERING_CHOICES
 from apps.plants.models import Plant
 from apps.plants.views import prepare_plant_display
 
 from .forms import CultivationGuideForm
 from .models import CultivationGuide
 
+NOT_SET = "Belum ditentukan"
+
+
+def format_number(value):
+    return f"{value:g}".replace(".", ",")
+
+
+def format_range(minimum, maximum, unit):
+    if minimum is not None and maximum is not None:
+        return f"{format_number(minimum)}-{format_number(maximum)} {unit}"
+    if minimum is not None:
+        return f"Minimal {format_number(minimum)} {unit}"
+    if maximum is not None:
+        return f"Maksimal {format_number(maximum)} {unit}"
+    return NOT_SET
+
+
+def format_yes_no(value):
+    if value is None:
+        return "Belum diketahui"
+    return "Ya" if value else "Tidak"
+
+
+def build_plant_facts(plant):
+    return [
+        ("Media", plant.media_label),
+        ("Cahaya", plant.sunlight_label),
+        ("Ruang", plant.get_space_needed_display()),
+        ("Kebutuhan air", dict(WATERING_CHOICES).get(plant.watering) or NOT_SET),
+        ("Tingkat perawatan", dict(CARE_LEVEL_CHOICES).get(plant.care_level) or NOT_SET),
+        ("Tahan kekeringan", format_yes_no(plant.drought_tolerant)),
+        ("Suhu", format_range(plant.temp_min, plant.temp_max, "°C")),
+        ("Kelembapan", format_range(plant.humidity_min, plant.humidity_max, "%")),
+        ("Curah hujan", format_range(plant.rainfall_min, plant.rainfall_max, "mm/hari")),
+    ]
 
 class PlantMixin:
     def get_plant(self):
@@ -25,62 +60,9 @@ class PlantMixin:
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        plant = prepare_plant_display(self.get_plant())
-        plant.water_label = dict(WATERING_CHOICES).get(plant.watering) or "Belum ditentukan"
-        context["plant"] = plant
+        context["plant"] = prepare_plant_display(self.get_plant())
         return context
 
-class GuideListView(ActiveUserRequiredMixin, ListView):
-    model = CultivationGuide
-    template_name = "cultivation/list.html"
-    context_object_name = "guides"
-    paginate_by = 6
-
-    def get_queryset(self):
-        queryset = CultivationGuide.objects.select_related("plant")
-        self.filters = {
-            "q": self.request.GET.get("q", "").strip(),
-            "category": self.request.GET.get("category", "").strip(),
-            "medium": self.request.GET.get("medium", "").strip(),
-            "sort": self.request.GET.get("sort", "name").strip(),
-        }
-
-        if self.filters["q"]:
-            queryset = queryset.filter(
-                Q(plant__name__icontains=self.filters["q"])
-                | Q(plant__scientific_name__icontains=self.filters["q"])
-            )
-
-        if self.filters["category"] in dict(Plant.CATEGORY_CHOICES):
-            queryset = queryset.filter(plant__category=self.filters["category"])
-        else:
-            self.filters["category"] = ""
-
-        if self.filters["medium"] == "soil":
-            queryset = queryset.filter(plant__supports_soil=True)
-        elif self.filters["medium"] == "hydroponic":
-            queryset = queryset.filter(plant__supports_hydroponic=True)
-        else:
-            self.filters["medium"] = ""
-
-        sort_fields = {"name": "plant__name", "name_desc": "-plant__name", "newest": "-updated_at"}
-        if self.filters["sort"] not in sort_fields:
-            self.filters["sort"] = "name"
-        return queryset.order_by(sort_fields[self.filters["sort"]], "plant__name")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        for guide in context["guides"]:
-            prepare_plant_display(guide.plant)
-
-        query = self.request.GET.copy()
-        query.pop("page", None)
-        context.update(
-            filters=self.filters,
-            category_choices=Plant.CATEGORY_CHOICES,
-            query_string=query.urlencode(),
-        )
-        return context
 
 class GuideManageView(AdminRequiredMixin, ListView):
     model = Plant
@@ -131,13 +113,15 @@ class GuideManageView(AdminRequiredMixin, ListView):
             without_guide_count=total - with_guide,
         )
         return context
-    
+
+
 class GuideDetailView(ActiveUserRequiredMixin, PlantMixin, TemplateView):
     template_name = "cultivation/detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["guide"] = CultivationGuide.objects.filter(plant=self.get_plant()).first()
+        context["facts"] = build_plant_facts(context["plant"])
         return context
 
 
