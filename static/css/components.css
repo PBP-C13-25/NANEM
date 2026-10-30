@@ -666,6 +666,7 @@ header.navbar {
   height: auto;
   min-height: 110px;
   padding: 12px 14px;
+  resize: vertical;
 }
 .form-group input:focus,
 .form-group select:focus,
