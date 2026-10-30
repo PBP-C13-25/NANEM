@@ -3,13 +3,6 @@ from django import forms
 from .models import Plant
 
 
-SUNLIGHT_CHOICES = [
-    ("full_sun", "Matahari penuh"),
-    ("partial_shade", "Teduh sebagian"),
-    ("shade", "Teduh"),
-]
-
-
 WATERING_CHOICES = [
     ("", "Belum ditentukan"),
     ("Minimum", "Jarang"),
@@ -42,7 +35,7 @@ def coerce_nullable_boolean(value):
 class PlantForm(forms.ModelForm):
     sunlight = forms.MultipleChoiceField(
         label="Kebutuhan cahaya",
-        choices=SUNLIGHT_CHOICES,
+        choices=Plant.SUNLIGHT_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple,
     )
@@ -131,40 +124,3 @@ class PlantForm(forms.ModelForm):
             )
         return name
 
-    def clean(self):
-        cleaned_data = super().clean()
-
-        for field_name in ("humidity_min", "humidity_max"):
-            value = cleaned_data.get(field_name)
-            if value is not None and not 0 <= value <= 100:
-                self.add_error(
-                    field_name,
-                    "Kelembapan harus berada dalam rentang 0 sampai 100 persen.",
-                )
-
-        for minimum, maximum, label in (
-            ("temp_min", "temp_max", "Suhu"),
-            ("humidity_min", "humidity_max", "Kelembapan"),
-            ("rainfall_min", "rainfall_max", "Curah hujan"),
-        ):
-            min_value = cleaned_data.get(minimum)
-            max_value = cleaned_data.get(maximum)
-            if (
-                min_value is not None
-                and max_value is not None
-                and min_value > max_value
-            ):
-                self.add_error(
-                    maximum,
-                    f"{label} maksimum tidak boleh lebih kecil dari nilai minimum.",
-                )
-
-        if not (
-            cleaned_data.get("supports_soil")
-            or cleaned_data.get("supports_hydroponic")
-        ):
-            raise forms.ValidationError(
-                "Pilih minimal satu media tanam: tanah atau hidroponik."
-            )
-
-        return cleaned_data

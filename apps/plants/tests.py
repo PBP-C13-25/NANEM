@@ -459,6 +459,13 @@ class PlantAdminCrudTests(TestCase):
                 self.assertFalse(form.is_valid())
                 self.assertIn(field_name, form.errors)
 
+    def test_form_rejects_negative_rainfall(self):
+        form = PlantForm(data=self.plant_payload(rainfall_min="-0.1"))
+
+        self.assertFalse(form.is_valid())
+        self.assertIn("rainfall_min", form.errors)
+        self.assertIn("tidak boleh bernilai negatif", form.errors["rainfall_min"][0])
+
     def test_form_requires_at_least_one_growing_medium(self):
         form = PlantForm(
             data=self.plant_payload(

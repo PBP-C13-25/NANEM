@@ -1,3 +1,4 @@
+from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 from django.db import models
 from django.db.models.functions import Lower
 
@@ -13,6 +14,11 @@ class Plant(models.Model):
         ("small", "Small"),
         ("medium", "Medium"),
         ("large", "Large"),
+    ]
+    SUNLIGHT_CHOICES = [
+        ("full_sun", "Matahari penuh"),
+        ("partial_shade", "Teduh sebagian"),
+        ("shade", "Teduh"),
     ]
 
     # Django's auto-generated id is NANEM's primary key. This is only
@@ -59,3 +65,50 @@ class Plant(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        super().clean()
+        errors = {}
+
+        for field_name in ("humidity_min", "humidity_max"):
+            value = getattr(self, field_name)
+            if value is not None and not 0 <= value <= 100:
+                errors[field_name] = (
+                    "Kelembapan harus berada dalam rentang 0 sampai 100 persen."
+                )
+
+        for field_name in ("rainfall_min", "rainfall_max"):
+            value = getattr(self, field_name)
+            if value is not None and value < 0:
+                errors[field_name] = "Curah hujan tidak boleh bernilai negatif."
+
+        for minimum, maximum, label in (
+            ("temp_min", "temp_max", "Suhu"),
+            ("humidity_min", "humidity_max", "Kelembapan"),
+            ("rainfall_min", "rainfall_max", "Curah hujan"),
+        ):
+            min_value = getattr(self, minimum)
+            max_value = getattr(self, maximum)
+            if (
+                min_value is not None
+                and max_value is not None
+                and min_value > max_value
+            ):
+                errors[maximum] = (
+                    f"{label} maksimum tidak boleh lebih kecil dari nilai minimum."
+                )
+
+        if not (self.supports_soil or self.supports_hydroponic):
+            errors[NON_FIELD_ERRORS] = (
+                "Pilih minimal satu media tanam: tanah atau hidroponik."
+            )
+
+        allowed_sunlight = {value for value, _ in self.SUNLIGHT_CHOICES}
+        if not isinstance(self.sunlight, list) or any(
+            not isinstance(value, str) or value not in allowed_sunlight
+            for value in self.sunlight
+        ):
+            errors["sunlight"] = "Pilihan kebutuhan cahaya tidak valid."
+
+        if errors:
+            raise ValidationError(errors)
