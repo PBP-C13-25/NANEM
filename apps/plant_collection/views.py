@@ -52,8 +52,13 @@ class CollectionUpdateView(LoginRequiredMixin, OwnedQuerysetMixin, UpdateView):
     template_name = "plant_collection/plant_form.html"
     owner_field = "owner" 
     
+    def form_valid(self, form):
+        messages.success(self.request, "Postingan berhasil diperbarui.")
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse_lazy('collection:detail', kwargs={'pk': self.object.pk})
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['is_edit'] = True
@@ -64,6 +69,10 @@ class CollectionDeleteView(LoginRequiredMixin, OwnedQuerysetMixin, DeleteView):
     template_name = "plant_collection/plant_confirm_delete.html"
     success_url = reverse_lazy('collection:index')
     owner_field = "owner"
+
+    def form_valid(self, form):
+        messages.success(self.request, f"Postingan {self.object.title} berhasil dihapus.")
+        return super().form_valid(form)
 
 class ToggleLikeView(LoginRequiredMixin, View):
     def post(self, request, pk):
