@@ -380,9 +380,8 @@ class SeedGuidesCommandTests(TestCase):
         from django.core.management import call_command
 
         with tempfile.TemporaryDirectory() as folder:
-            path = Path(folder) / "guides.json"
-            path.write_text(json.dumps(entries), encoding="utf-8")
-            with mock.patch("apps.cultivation.management.commands.seed_guides.DATA_FILE", path):
+            (Path(folder) / "guides_test.json").write_text(json.dumps(entries), encoding="utf-8")
+            with mock.patch("apps.cultivation.management.commands.seed_guides.DATA_DIR", Path(folder)):
                 call_command("seed_guides", *args, stdout=mock.MagicMock(), stderr=mock.MagicMock())
 
     def entry(self, **overrides):
@@ -436,14 +435,14 @@ class SeedGuidesCommandTests(TestCase):
         self.assertFalse(CultivationGuide.objects.exists())
 
     def test_bundled_seed_file_is_valid(self):
-        import json
-        from io import StringIO
+        from apps.cultivation.management.commands.seed_guides import load_entries
 
-        from django.core.management import call_command
-
-        from apps.cultivation.management.commands.seed_guides import DATA_FILE
-
-        names = {p["plant"] for p in json.loads(DATA_FILE.read_text(encoding="utf-8"))}
+        entries = load_entries()
+        self.assertEqual(len(entries), len({p["plant"] for p in entries}))
+        names = {p["plant"] for p in entries}
         for name in names:
             Plant.objects.get_or_create(name=name, defaults={"category": "hias", "space_needed": "small"})
+        from django.core.management import call_command
+        from io import StringIO
+
         call_command("seed_guides", "--dry-run", stdout=StringIO(), stderr=StringIO())

@@ -8,7 +8,17 @@ from apps.cultivation.models import CultivationGuide
 from apps.plants.models import Plant
 
 
-DATA_FILE = Path(__file__).resolve().parents[2] / "seed_data" / "guides.json"
+DATA_DIR = Path(__file__).resolve().parents[2] / "seed_data"
+
+
+def load_entries():
+    files = sorted(DATA_DIR.glob("guides_*.json"))
+    if not files:
+        raise CommandError(f"Tidak ada file guides_*.json di {DATA_DIR}")
+    entries = []
+    for path in files:
+        entries.extend(json.loads(path.read_text(encoding="utf-8")))
+    return entries
 
 
 def build_form_data(entry):
@@ -38,17 +48,14 @@ def source_errors(sources):
 
 
 class Command(BaseCommand):
-    help = "Memuat panduan budidaya dari apps/cultivation/seed_data/guides.json."
+    help = "Memuat panduan budidaya dari apps/cultivation/seed_data/guides_*.json."
 
     def add_arguments(self, parser):
         parser.add_argument("--dry-run", action="store_true", help="Periksa data tanpa menyimpan.")
         parser.add_argument("--overwrite", action="store_true", help="Timpa panduan yang sudah ada.")
 
     def handle(self, *args, **options):
-        if not DATA_FILE.exists():
-            raise CommandError(f"File tidak ditemukan: {DATA_FILE}")
-
-        entries = json.loads(DATA_FILE.read_text(encoding="utf-8"))
+        entries = load_entries()
         created = updated = skipped = 0
         problems = []
 
