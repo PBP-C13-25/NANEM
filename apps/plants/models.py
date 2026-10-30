@@ -11,9 +11,9 @@ class Plant(models.Model):
         ("hias", "Hias"),
     ]
     SPACE_NEEDED_CHOICES = [
-        ("small", "Small"),
-        ("medium", "Medium"),
-        ("large", "Large"),
+        ("small", "Kecil"),
+        ("medium", "Sedang"),
+        ("large", "Besar"),
     ]
     SUNLIGHT_CHOICES = [
         ("full_sun", "Matahari penuh"),

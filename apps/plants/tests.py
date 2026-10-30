@@ -48,6 +48,9 @@ class PlantCatalogViewTests(TestCase):
         self.assertContains(response, "Monstera")
         self.assertContains(response, "Tanah, Hidroponik")
         self.assertContains(response, "Matahari penuh, Teduh sebagian")
+        self.assertContains(response, "Kecil")
+        self.assertContains(response, "Sedang")
+        self.assertContains(response, "Atur ulang")
 
     def test_search_and_filters_can_be_combined(self):
         response = self.client.get(reverse("plants:index"), {
@@ -100,6 +103,7 @@ class PlantAdminCrudTests(TestCase):
             supports_soil=True,
             supports_hydroponic=True,
             sunlight=["full_sun"],
+            care_level="Low",
             space_needed="small",
         )
 
@@ -270,6 +274,10 @@ class PlantAdminCrudTests(TestCase):
         self.assertContains(response, "plant-admin__thumbnail")
         self.assertContains(response, "Media &amp; cahaya")
         self.assertContains(response, "Perawatan")
+        self.assertContains(response, "Mudah")
+        self.assertContains(response, "data")
+        self.assertContains(response, "<details")
+        self.assertContains(response, "Belum ada:")
         self.assertContains(response, reverse("plants:create"))
         self.assertContains(response, reverse("plants:update", args=[self.plant.pk]))
         self.assertContains(response, reverse("plants:delete", args=[self.plant.pk]))
@@ -281,7 +289,7 @@ class PlantAdminCrudTests(TestCase):
         self.client.force_login(self.staff)
         response = self.client.get(reverse("plants:manage"), {"q": "tidak-ada"})
         self.assertContains(response, "Tanaman tidak ditemukan")
-        self.assertContains(response, "Reset filter")
+        self.assertContains(response, "Atur ulang filter")
 
     def test_manage_list_sorting_is_stable(self):
         Plant.objects.create(
