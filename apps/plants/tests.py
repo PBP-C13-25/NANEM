@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.db import IntegrityError, transaction
 from django.test import TestCase
 from django.urls import resolve, reverse
 
@@ -376,6 +377,31 @@ class PlantAdminCrudTests(TestCase):
         self.assertRedirects(response, reverse("plants:manage"), fetch_redirect_response=False)
         self.plant.refresh_from_db()
         self.assertEqual(self.plant.name, "Kangkung Air")
+
+    def test_form_rejects_duplicate_name_ignoring_case(self):
+        form = PlantForm(data=self.plant_payload(name="  KANGKUNG  "))
+
+        self.assertFalse(form.is_valid())
+        self.assertIn("name", form.errors)
+        self.assertIn("sudah digunakan", form.errors["name"][0])
+
+    def test_update_can_keep_its_existing_name(self):
+        form = PlantForm(
+            data=self.plant_payload(name="  Kangkung  "),
+            instance=self.plant,
+        )
+
+        self.assertTrue(form.is_valid(), form.errors)
+        self.assertEqual(form.cleaned_data["name"], "Kangkung")
+
+    def test_database_rejects_duplicate_name_ignoring_case(self):
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            Plant.objects.create(
+                name="KANGKUNG",
+                category="sayur",
+                supports_soil=True,
+                space_needed="small",
+            )
 
     def test_staff_can_delete_plant(self):
         self.client.force_login(self.staff)

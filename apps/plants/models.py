@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.functions import Lower
+
 
 class Plant(models.Model):
     CATEGORY_CHOICES = [
@@ -46,6 +48,14 @@ class Plant(models.Model):
     space_needed = models.CharField(max_length=10, choices=SPACE_NEEDED_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                Lower("name"),
+                name="plants_plant_name_ci_unique",
+            ),
+        ]
 
     def __str__(self):
         return self.name

@@ -120,6 +120,17 @@ class PlantForm(forms.ModelForm):
             "rainfall_max": forms.NumberInput(attrs={"step": "any"}),
         }
 
+    def clean_name(self):
+        name = self.cleaned_data["name"].strip()
+        duplicate = Plant.objects.filter(name__iexact=name).exclude(
+            pk=self.instance.pk
+        )
+        if duplicate.exists():
+            raise forms.ValidationError(
+                "Nama tanaman sudah digunakan. Gunakan nama yang berbeda."
+            )
+        return name
+
     def clean(self):
         cleaned_data = super().clean()
 
