@@ -1,0 +1,719 @@
+[
+  {
+    "plant": "Pakcoy",
+    "planting_steps": [
+      "Siapkan lahan atau media yang subur, drainasenya baik, dan kaya bahan organik. Tambahkan kompos atau pupuk kandang matang bila perlu. pH yang cocok sekitar 6,0-7,5.",
+      "Tanam benih langsung atau pindahkan bibit semaian. Benih ditanam sedalam sekitar 1 cm.",
+      "Beri jarak sekitar 15-20 cm antar tanaman dan 30-45 cm antar baris. Varietas besar membutuhkan jarak lebih lebar, hingga sekitar 50 cm.",
+      "Benih umumnya berkecambah dalam 4-8 hari. Jaga media tetap lembap selama masa ini.",
+      "Beri mulsa untuk menjaga kelembapan media.",
+      "Siram di pangkal tanaman supaya daun tidak basah."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Jaga media tetap lembap tetapi tidak tergenang. Saat hujan panjang, siram hanya ketika media hampir kering. Sumber tidak menyebut jumlah air maupun jadwal harian yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri pupuk seimbang atau kompos sebelum tanam. Salah satu sumber menyebut pupuk 10:10:10 sekitar 1,6 kg per 9 m2 per musim tanam. Waktu pemberian lanjutan tidak disebut sumber.",
+    "is_harvestable": true,
+    "harvest_days_min": 35,
+    "harvest_days_max": 56,
+    "harvest_note": "Angka hari dihitung sejak benih berkecambah: varietas standar 5-8 minggu, varietas mini sekitar 5 minggu. Pakcoy mini dipanen saat tinggi sekitar 15 cm, pakcoy dewasa saat tinggi 30-45 cm dengan daun penuh dan padat. Panen seluruh tanaman dengan memotong tepat di atas permukaan tanah, atau petik daun luar dan sisakan sekitar 2,5 cm di atas tanah. Tanaman suka suhu sejuk sekitar 13-21 C.",
+    "sources": [
+      {
+        "title": "University of Guam, Western Pacific Tropical Research Center - Bok Choy",
+        "url": "https://www.uog.edu/_resources/files/wptrc/BokChoy.pdf"
+      },
+      {
+        "title": "Kentucky State University - Bok Choy Fact Sheet",
+        "url": "https://kysu.edu/documents/college-of-agriculture-communities-the-sciences/urban-ag/BoK%20Choy%20Fact%20Sheet.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Kubis",
+    "planting_steps": [
+      "Siapkan tanah subur yang tetap lembap tetapi drainasenya baik, dengan pH sekitar 6-7.",
+      "Semai benih sedalam sekitar 0,6 cm, lalu pindahkan bibit saat berumur 6-7 minggu dan memiliki 4-6 daun serta akar yang sudah berkembang. Bila ditanam langsung, benih sedalam 0,6-1,2 cm dan dijarangkan saat tumbuh 3-4 daun sejati.",
+      "Pindahkan bibit pada kedalaman tanah yang sama seperti di pot semai.",
+      "Beri jarak 30-45 cm antar tanaman dengan jarak antar baris 60-90 cm.",
+      "Tempatkan di lokasi yang terkena matahari penuh. Pertumbuhan terbaik pada suhu yang tidak melebihi sekitar 27 C.",
+      "Siram dalam dan tidak terlalu sering, lebih baik dengan irigasi tetes."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Kebutuhan air sekitar 2,5-5 cm per minggu dari hujan atau penyiraman. Tanah berpasir perlu disiram lebih sering dari seminggu sekali.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Pupuk nitrogen diberikan saat tanaman setinggi sekitar 10 cm atau 4 minggu setelah pindah tanam. Satu sumber menyebut sekitar 1/2 cangkir urea (46-0-0) per 30 m baris, sumber lain sekitar 1/2 cangkir 21-0-0 per 3 m baris. Taruh sekitar 15 cm dari tanaman lalu siram. Hentikan pupuk nitrogen setelah krop terbentuk. Dosis pastinya sebaiknya mengikuti uji tanah.",
+    "is_harvestable": true,
+    "harvest_days_min": 60,
+    "harvest_days_max": 100,
+    "harvest_note": "Tergantung varietas: ada yang sekitar 55 hari dan ada yang sekitar 100 hari. Panen saat krop sudah berukuran penuh, keras, dan padat, sebelum pecah. Potong di bawah krop dan sisakan 2-3 daun pembungkus.",
+    "sources": [
+      {
+        "title": "University of Minnesota Extension - Growing cabbage in home gardens",
+        "url": "https://extension.umn.edu/vegetables/growing-cabbage-home-gardens"
+      },
+      {
+        "title": "Utah State University Extension - Cabbage in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/cabbage-in-the-garden.php"
+      }
+    ]
+  },
+  {
+    "plant": "Wortel",
+    "planting_steps": [
+      "Siapkan tanah yang dalam, gembur, berpasir, subur, drainasenya baik, dan kaya bahan organik. Tanah berat atau berbatu membuat umbi bercabang.",
+      "Tanam benih langsung di lahan. Wortel tidak boleh dipindah tanam karena akarnya akan bercabang.",
+      "Tanam benih sedalam sekitar 0,6-1,2 cm dengan jarak antar baris 30-45 cm, lalu tutup dengan kompos atau pasir halus.",
+      "Jaga permukaan tanah tetap lembap. Benih dapat butuh hingga 3 minggu untuk berkecambah.",
+      "Saat daun setinggi 7-10 cm, jarangkan hingga jarak antar tanaman sekitar 5-7 cm."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Beri minimal 2,5 cm air per minggu dari hujan atau penyiraman, basahi tanah secara menyeluruh. Salah satu sumber menyarankan penyiraman yang sering dan merata. Jadwal harian yang pasti tidak disebut sumber.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Pupuk nitrogen 21-0-0 sekitar 1/4 cangkir per 3 m baris sekitar 6 minggu setelah tanaman muncul, atau pupuk rumput tanpa herbisida 2-3 sendok makan per 3 m baris saat wortel setinggi sekitar 10 cm. Taruh di samping tanaman lalu siram.",
+    "is_harvestable": true,
+    "harvest_days_min": 55,
+    "harvest_days_max": 100,
+    "harvest_note": "Tergantung varietas: sumber menyebut 55-80 hari dan 70-100 hari sejak tanam benih. Panen saat diameter bagian atas umbi sekitar 2 cm atau sudah berukuran layak konsumsi.",
+    "sources": [
+      {
+        "title": "South Dakota State University Extension - How to Grow It: Carrots",
+        "url": "https://extension.sdstate.edu/how-grow-it-carrots"
+      },
+      {
+        "title": "Utah State University Extension - Carrots in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/carrots-in-the-garden.php"
+      }
+    ]
+  },
+  {
+    "plant": "Lobak",
+    "planting_steps": [
+      "Siapkan tanah yang subur, gembur, dan drainasenya baik, dalam, serta kaya bahan organik. Tanah berat perlu ditambah kompos.",
+      "Tanam benih langsung sedalam sekitar 0,6-1,2 cm dan tutup hanya dengan lapisan tanah tipis.",
+      "Beri jarak antar baris 25-30 cm. Tanam benih berjarak 2,5-5 cm, lalu jarangkan menjadi 5-10 cm antar tanaman.",
+      "Tanam sedikit benih setiap lima hari supaya panen berkesinambungan.",
+      "Tempatkan di lokasi yang mendapat sinar matahari langsung minimal 6 jam sehari, idealnya 8-10 jam."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Jaga tanah lembap merata tetapi tidak basah kuyup. Sumber tidak menyebut jumlah dan jadwal penyiraman yang pasti.",
+    "fertilizing_frequency": "none",
+    "fertilizing_note": "Kebutuhan pupuk rendah. Hindari kelebihan nitrogen karena mendorong daun lebih subur daripada umbi. Jika tanah sudah diuji, ikuti rekomendasinya.",
+    "is_harvestable": true,
+    "harvest_days_min": 25,
+    "harvest_days_max": 45,
+    "harvest_note": "Tergantung varietas. Panen saat umbi berdiameter sekitar 2,5 cm sebelum retak, berserat, atau terlalu pedas. Umbi yang terlalu tua atau tumbuh di cuaca panas menjadi pedas dan keras.",
+    "sources": [
+      {
+        "title": "University of Maryland Extension - Radishes",
+        "url": "https://extension.umd.edu/resource/radishes"
+      },
+      {
+        "title": "Utah State University Extension - Radishes in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/radishes-in-the-garden.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Tomat",
+    "planting_steps": [
+      "Siapkan tanah saat tidak basah (hancur bila diremas), tambahkan kompos dan sedikit pupuk nitrogen. Pilih lokasi sinar matahari penuh dengan drainase baik.",
+      "Kecambahkan benih pada suhu sekitar 27 C hingga akar muncul, lalu pindahkan ke media semai steril pada suhu 18-21 C.",
+      "Rawat bibit selama 6-8 minggu hingga memiliki 5-7 daun dan akar yang berkembang baik.",
+      "Pindahkan bibit saat suhu tanah di atas sekitar 16 C. Beri jarak sekitar 60 cm antar tanaman dan 60-90 cm antar baris.",
+      "Tanam sedikit lebih dalam dari posisi di pot. Bibit yang tinggi boleh dibaringkan dalam parit dengan beberapa cm pucuk di atas tanah.",
+      "Siram pelan dan dalam setelah tanam.",
+      "Pasang penyangga seperti turus sedalam sekitar 45 cm dan 8-10 cm dari batang, atau sangkar kawat. Tipe determinate boleh dibiarkan menjalar di tanah, tipe semi dan indeterminate perlu penyangga."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Siram dalam dan jarang, sekitar 2,5-5 cm air per minggu, lebih baik dengan irigasi tetes. Untuk tanaman di pot, hindari media yang berganti dari sangat basah ke sangat kering.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Bibit diberi larutan pupuk lengkap setengah dosis seminggu sekali sebelum tanam. Setelah pindah tanam, beri sekitar 1/2 sendok makan pupuk 21-0-0 per tanaman pada minggu ke-4 dan ke-8, lalu siram. Hindari kelebihan nitrogen karena menghasilkan daun lebat dan buah sedikit. Untuk pot, beri pupuk dalam dosis ringan sekitar setengah anjuran tetapi lebih sering.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut jumlah hari dari tanam sampai panen. Buah matang 25-35 hari setelah berbunga, tergantung suhu dan varietas. Panen saat buah berwarna penuh tetapi masih padat. Produksi terbaik dengan 6-8 jam sinar matahari penuh; buah gugur saat suhu di atas sekitar 32 C.",
+    "sources": [
+      {
+        "title": "University of Arizona Cooperative Extension - Tomato planting, growing, and harvest",
+        "url": "https://extension.arizona.edu/publication/tomato-planting-growing-and-harvest"
+      },
+      {
+        "title": "Utah State University Extension - Tomatoes in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/tomatoes-in-the-garden.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Cabai rawit",
+    "planting_steps": [
+      "Semai benih di dalam ruangan sekitar 6-8 minggu sebelum pindah tanam.",
+      "Beberapa hari sebelum pindah tanam, kurangi pupuk dan air, lalu kenalkan bibit pada sinar matahari secara bertahap.",
+      "Pindahkan bibit ke tanah yang gembur dan drainasenya baik. Hindari lahan yang tahun sebelumnya ditanami tomat, terong, kentang, atau cabai.",
+      "Beri jarak 30-45 cm antar tanaman dan sekitar 90 cm antar baris.",
+      "Tempatkan di lokasi dengan sinar matahari sekitar 8 jam per hari. Tanaman menyukai suhu hangat sekitar 21-29 C pada siang hari.",
+      "Beri mulsa untuk menjaga kelembapan tanah."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Beri sekitar 2,5 cm air per minggu dari hujan atau penyiraman, siram dalam dan periksa tanah sebelum menyiram supaya tidak becek. Basahi tanah minimal sedalam 15 cm dan jaga kelembapan merata saat berbuah.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri pupuk awal saat pindah tanam. Susulan kalsium nitrat (15.5-0-0) sekitar 230 g per 9 m2, 3-4 minggu setelah tanam dan diulang 3-4 minggu kemudian, ditaruh 10-15 cm dari tanaman. Pupuk tambahan juga dapat diberikan setelah gelombang buah pertama terbentuk.",
+    "is_harvestable": true,
+    "harvest_days_min": 65,
+    "harvest_days_max": 85,
+    "harvest_note": "Angka hari dihitung sejak pindah tanam (sekitar 100-120 hari sejak benih) dan berasal dari panduan cabai secara umum, bukan khusus cabai rawit. Panen saat buah berukuran dan berwarna layak. Potong tangkai dengan gunting, jangan ditarik.",
+    "sources": [
+      {
+        "title": "Clemson Cooperative Extension HGIC - Pepper",
+        "url": "https://hgic.clemson.edu/factsheet/pepper/"
+      },
+      {
+        "title": "South Dakota State University Extension - Peppers: How to Grow It",
+        "url": "https://extension.sdstate.edu/peppers-how-grow-it"
+      }
+    ]
+  },
+  {
+    "plant": "Cabai merah",
+    "planting_steps": [
+      "Semai benih di dalam ruangan sekitar 6-8 minggu sebelum pindah tanam.",
+      "Beberapa hari sebelum pindah tanam, kurangi pupuk dan air, lalu kenalkan bibit pada sinar matahari secara bertahap.",
+      "Pindahkan bibit ke tanah yang gembur dan drainasenya baik. Hindari lahan yang tahun sebelumnya ditanami tomat, terong, kentang, atau cabai.",
+      "Beri jarak 30-45 cm antar tanaman dan sekitar 90 cm antar baris.",
+      "Tempatkan di lokasi dengan sinar matahari sekitar 8 jam per hari. Tanaman menyukai suhu hangat sekitar 21-29 C pada siang hari.",
+      "Beri mulsa untuk menjaga kelembapan tanah."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Beri sekitar 2,5 cm air per minggu dari hujan atau penyiraman, siram dalam dan periksa tanah sebelum menyiram supaya tidak becek. Basahi tanah minimal sedalam 15 cm dan jaga kelembapan merata saat berbuah.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri pupuk awal saat pindah tanam. Susulan kalsium nitrat (15.5-0-0) sekitar 230 g per 9 m2, 3-4 minggu setelah tanam dan diulang 3-4 minggu kemudian, ditaruh 10-15 cm dari tanaman. Pupuk tambahan juga dapat diberikan setelah gelombang buah pertama terbentuk.",
+    "is_harvestable": true,
+    "harvest_days_min": 65,
+    "harvest_days_max": 85,
+    "harvest_note": "Angka hari dihitung sejak pindah tanam (sekitar 100-120 hari sejak benih) dan berasal dari panduan cabai/paprika secara umum, bukan khusus cabai merah. Buah paprika merah atau oranye perlu pematangan lebih lama dibanding buah hijau. Potong tangkai dengan gunting, jangan ditarik.",
+    "sources": [
+      {
+        "title": "Clemson Cooperative Extension HGIC - Pepper",
+        "url": "https://hgic.clemson.edu/factsheet/pepper/"
+      },
+      {
+        "title": "South Dakota State University Extension - Peppers: How to Grow It",
+        "url": "https://extension.sdstate.edu/peppers-how-grow-it"
+      }
+    ]
+  },
+  {
+    "plant": "Terong",
+    "planting_steps": [
+      "Semai benih sedalam sekitar 0,6 cm di media semai steril tanpa tanah sekitar 8 minggu sebelum pindah tanam. Jaga suhu 24-29 C hingga benih muncul.",
+      "Setelah daun sejati muncul, jarangkan atau pindahkan bibit ke jarak 5-7 cm.",
+      "Biasakan bibit dengan sinar matahari selama 1-2 minggu, mulai dari beberapa jam di tempat terlindung angin.",
+      "Pindahkan bibit saat suhu malam di atas sekitar 10 C. Beri jarak sekitar 45 cm antar tanaman dan 75-90 cm antar baris.",
+      "Gunakan tanah dengan pH 5,5-7,5. Hindari lahan yang tahun sebelumnya ditanami terong, tomat, cabai, atau kentang.",
+      "Beri mulsa untuk menjaga kelembapan tanah."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Bila hujan kurang dari 2,5 cm per minggu, siram hingga tanah basah menyeluruh minimal seminggu sekali. Tanah berpasir perlu lebih sering. Jaga kelembapan merata, terutama saat berbuah, dan hindari penyiraman dari atas.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Tambahkan kompos atau pupuk kandang matang. Fosfor dan kalium sebaiknya mengikuti uji tanah. Susulan kalsium nitrat (15.5-0-0) sekitar 230 g per 9 m2, 3-4 minggu setelah tanam dan diulang 3-4 minggu kemudian, ditaruh 10-15 cm dari tanaman.",
+    "is_harvestable": true,
+    "harvest_days_min": 65,
+    "harvest_days_max": 80,
+    "harvest_note": "Angka hari dihitung sejak pindah tanam (sekitar 100-120 hari sejak benih). Tipe Italia dipanen saat besar, mengkilap, dan ungu seragam; bila ditekan dengan kuku jari meninggalkan lekukan tipis. Tipe Jepang dipanen saat sebesar jari. Panen minimal seminggu sekali dengan memotong tangkai memakai pisau atau gunting.",
+    "sources": [
+      {
+        "title": "Clemson Cooperative Extension HGIC - Eggplant",
+        "url": "https://hgic.clemson.edu/factsheet/eggplant/"
+      },
+      {
+        "title": "University of Minnesota Extension - Growing eggplant",
+        "url": "https://extension.umn.edu/vegetables/growing-eggplant"
+      }
+    ]
+  },
+  {
+    "plant": "Mentimun",
+    "planting_steps": [
+      "Pilih lokasi sinar matahari penuh dengan tanah subur dan drainase baik. Bedengan sedikit ditinggikan membantu drainase. pH ideal 6,0-6,5.",
+      "Tanam benih atau bibit saat tanah sudah hangat, sekitar 21 C. Benih tidak berkecambah bila tanah di bawah sekitar 10 C.",
+      "Tanam 4-5 benih per lubang tanam sedalam sekitar 2,5 cm, lalu jarangkan menjadi 2-3 tanaman setelah muncul 1-2 daun sejati.",
+      "Tanpa ajir: jarak tanaman sekitar 20-25 cm dengan jarak baris sekitar 1,5 m. Dengan ajir: jarangkan hingga 23-30 cm antar tanaman dengan jarak baris sekitar 90 cm.",
+      "Pasang ajir atau rambatan setinggi sekitar 1,8 m bila ingin dirambatkan untuk menghemat tempat.",
+      "Siram di pangkal tanaman pada pagi hari dan hindari membasahi daun."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Siram seminggu sekali saat cuaca kering, basahi tanah minimal sedalam 15 cm, dan jaga kelembapan merata terutama saat berbunga dan berbuah.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Sebelum tanam tanpa uji tanah, campurkan sekitar 0,5-1 kg pupuk serbaguna seperti 10-10-10 per 9 m2. Susulan nitrogen 34-0-0 sekitar 450 g per 30 m baris diberikan sebelum sulur memanjang. Hindari kelebihan nitrogen.",
+    "is_harvestable": true,
+    "harvest_days_min": 50,
+    "harvest_days_max": 70,
+    "harvest_note": "Tergantung varietas. Panen sebelum daging buah pahit, biji mengeras, atau kulit menguning. Tipe acar dipanen pada panjang 5-15 cm, tipe iris 15-25 cm dengan kulit hijau tua dan padat. Petik setiap 2-3 hari.",
+    "sources": [
+      {
+        "title": "Clemson Cooperative Extension HGIC - Cucumber",
+        "url": "https://hgic.clemson.edu/factsheet/cucumber/"
+      },
+      {
+        "title": "Iowa State University Extension - Growing Cucumbers in the Home Garden",
+        "url": "https://yardandgarden.extension.iastate.edu/how-to/growing-cucumbers-home-garden"
+      }
+    ]
+  },
+  {
+    "plant": "Kangkung",
+    "planting_steps": [
+      "Perbanyak dengan stek atau benih. Stek lebih disarankan karena lebih andal. Benih direndam sehari sebelum disemai.",
+      "Ambil stek sepanjang 20-60 cm, sebaiknya sehari dua hari setelah pucuk dipanen. Stek dengan tiga ruas atau lebih ditanam dengan minimal satu ruas terbenam di tanah.",
+      "Pilih tanah yang kaya bahan organik dan mudah mendapat air. Untuk tanam di lahan kering, jaga tanah tetap lembap tetapi tidak tergenang. Untuk sawah, genangi setelah tanaman tumbuh dan naikkan tinggi air seiring pertumbuhan.",
+      "Tempatkan di sinar matahari penuh, sebaiknya dengan sedikit naungan di sore hari.",
+      "Jaga area sekitar tanaman tetap lembap dan bebas rumput liar."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Jaga media selalu lembap. Kekurangan air atau tanah miskin hara membuat pertumbuhan lambat, batang tipis, daun kecil, dan rasa pahit. Sumber tidak menyebut jadwal siram yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Gunakan pupuk berbasis organik yang dikombinasikan dengan urea, diberikan setelah tanam. Dosis tidak disebut sumber.",
+    "is_harvestable": true,
+    "harvest_days_min": 20,
+    "harvest_days_max": 30,
+    "harvest_note": "Angka hari berlaku untuk tanam di lahan kering: tanaman dicabut 20-30 hari setelah tanam saat batang besar, empuk, dan renyah. Untuk panen berulang, petik atau potong pucuk sampai sekitar daun penuh ketiga dari ujung dengan pisau tajam. Pucuk baru tumbuh dalam beberapa hari. Panen pada jam yang sejuk agar tidak layu. Suhu stabil di atas 23 C paling disukai.",
+    "sources": [
+      {
+        "title": "Northern Territory Government (Australia) - Water spinach / Kangkong",
+        "url": "https://daf.nt.gov.au/__data/assets/pdf_file/0020/227603/vf5.pdf"
+      },
+      {
+        "title": "Pacific Community (SPC) - Kangkong Factsheet",
+        "url": "https://piras.lrd.spc.int/sites/default/files/2021-07/Factsheet08_KANGKONG_0.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Labu siam",
+    "planting_steps": [
+      "Gali lubang sedalam lebar buah, lalu baringkan satu buah utuh miring dengan ujung yang sempit mengarah ke atas.",
+      "Di daerah hangat, biarkan ujung tangkai buah tetap terbuka di atas tanah. Di daerah yang lebih dingin, tutup buah seluruhnya untuk melindungi tunasnya.",
+      "Tambahkan kompos atau bahan organik lain ke tanah. Uji tanah dapat membantu menentukan kebutuhan tambahan.",
+      "Pasang para-para atau pergola karena sulurnya merambat. Dengan para-para, buah dapat dipanen dari tempat teduh.",
+      "Tanam pada awal musim semi, atau di daerah tropis juga pada musim gugur."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Sumber tidak menyebut kebutuhan atau jadwal penyiraman. Hindari media becek.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri pupuk 30 hari setelah tanam, ketika sulur sudah setinggi beberapa puluh cm. Ulangi pada pertengahan musim panas dan saat buah masih kecil bila perlu. Jenis dan dosis pupuk tidak disebut sumber.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut jumlah hari panen. Petik buah muda saat biji dan kulitnya masih lunak dan bisa dimakan; buah yang lebih tua lebih alot. Hasil terbaik didapat setelah tanaman berumur 2-3 tahun.",
+    "sources": [
+      {
+        "title": "UF/IFAS Gardening Solutions - Chayote",
+        "url": "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/vegetables/chayote/"
+      }
+    ]
+  },
+  {
+    "plant": "Buncis",
+    "planting_steps": [
+      "Tanam benih setelah tanah benar-benar hangat. Pilih lokasi dengan sinar matahari langsung minimal 6 jam per hari, idealnya 8-10 jam.",
+      "Buncis tegak: tanam benih sedalam sekitar 1-2,5 cm, berjarak 5-10 cm dalam baris, dengan jarak antar baris 60-75 cm.",
+      "Buncis rambat: beri jarak 10-20 cm dalam baris dengan jarak antar baris 60-90 cm.",
+      "Buncis rambat memerlukan penyangga sejak tanam, misalnya turus setinggi 1,8-2,4 m dengan tali atau para-para bambu.",
+      "Jaga media lembap tetapi tidak becek sampai bibit muncul."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Sekitar 2,5 cm air per minggu. Jaga media lembap tetapi tidak becek, biarkan permukaan mengering sekitar 1 cm di antara penyiraman. Pastikan lembap saat dan setelah berbunga, dan siram lebih sering setelah polong terbentuk.",
+    "fertilizing_frequency": "none",
+    "fertilizing_note": "Buncis termasuk kacang-kacangan sehingga tidak butuh tambahan pupuk nitrogen. Nitrogen berlebih menunda pembungaan dan pemupukan susulan biasanya tidak diperlukan.",
+    "is_harvestable": true,
+    "harvest_days_min": 50,
+    "harvest_days_max": 110,
+    "harvest_note": "Buncis tegak sekitar 50-60 hari dan buncis rambat sekitar 60-110 hari sejak tanam benih. Panen saat biji dalam polong baru sekitar seperempat ukuran penuh, polong belum menggembung, dan mudah patah. Petik hanya saat tanaman kering, setelah embun hilang.",
+    "sources": [
+      {
+        "title": "South Dakota State University Extension - Green Beans: How to Grow It",
+        "url": "https://extension.sdstate.edu/how-grow-it-green-beans"
+      },
+      {
+        "title": "University of Maryland Extension - Beans",
+        "url": "https://extension.umd.edu/resource/beans"
+      }
+    ]
+  },
+  {
+    "plant": "Ketela rambat",
+    "planting_steps": [
+      "Gunakan bibit berupa tunas (slip) yang tumbuh dari umbi. Slip dipindah saat panjangnya 12-15 cm dengan beberapa daun dan akar.",
+      "Untuk menyiapkan slip sendiri, belah umbi organik, letakkan sisi potong di air atau media lembap, dan simpan di tempat hangat dan terang.",
+      "Pilih tanah yang drainasenya baik. Tanam saat suhu tanah pada kedalaman 10 cm minimal sekitar 18 C.",
+      "Tanam slip berjarak 30 cm dengan kedalaman 10-15 cm pada guludan atau baris berjarak 90-100 cm. Guludan setinggi 20-30 cm dan selebar 30 cm.",
+      "Tanam pada hari mendung atau sore hari untuk mengurangi stres tanaman."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Siram teratur setelah tanam, lalu biarkan tanah mengering di antara penyiraman karena tanah yang terlalu basah memicu busuk akar.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Batasi nitrogen karena kelebihan nitrogen mendorong pertumbuhan sulur dibanding umbi. Dosis pupuk tidak disebut sumber.",
+    "is_harvestable": true,
+    "harvest_days_min": 90,
+    "harvest_days_max": 100,
+    "harvest_note": "Varietas yang direkomendasikan matang dalam 90-100 hari. Panen saat umbi sepanjang 12-15 cm dengan diameter sekitar 5 cm. Tanaman rusak bila suhu di bawah sekitar 10 C. Setelah panen, umbi diperam pada suhu 27-32 C yang lembap selama 7-14 hari, lalu disimpan pada suhu 10-15 C.",
+    "sources": [
+      {
+        "title": "South Dakota State University Extension - Sweet Potatoes: How to Grow It",
+        "url": "https://extension.sdstate.edu/sweet-potatoes-how-grow-it"
+      }
+    ]
+  },
+  {
+    "plant": "Kentang",
+    "planting_steps": [
+      "Gunakan bibit umbi yang sehat, keras, dan belum bertunas. Umbi besar dipotong menjadi potongan 40-55 g dengan 1-3 mata tunas, lalu dikeringkan beberapa hari sebelum tanam.",
+      "Olah tanah sedalam mungkin agar drainase baik. Tanam saat suhu tanah sekitar 13-21 C.",
+      "Tanam potongan dengan sisi potong menghadap bawah pada kedalaman sekitar 8-12 cm. Beri jarak 20-30 cm antar tanaman dan 60-90 cm antar baris. Jarak lebih lebar untuk umbi yang lebih besar.",
+      "Saat batang setinggi sekitar 20 cm, timbun pangkal batang dengan tanah dari kedua sisi. Ulangi dua kali lagi dengan selang dua minggu. Tinggi timbunan sebaiknya tidak lebih dari sekitar 15 cm di atas permukaan tanah.",
+      "Lindungi umbi dari sinar matahari agar tidak menghijau. Tanaman membutuhkan minimal 6 jam sinar matahari per hari, idealnya 8-10 jam."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Jaga tanah lembap merata tetapi tidak terlalu basah. Kelembapan yang stabil saat umbi terbentuk mengurangi kudis. Hindari penyiraman dari atas. Sumber tidak menyebut jadwal yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Kebutuhan hara tinggi. Beri kompos atau pupuk granul secukupnya sebelum tanam, lalu pupuk susulan saat penimbunan kedua atau sekitar 6 minggu setelah tanam ketika umbi mulai terbentuk. Pupuk kandang dapat memicu kudis. Dosis tidak disebut sumber.",
+    "is_harvestable": true,
+    "harvest_days_min": 60,
+    "harvest_days_max": 120,
+    "harvest_note": "Kentang muda siap setelah sekitar 60-70 hari (6-8 minggu setelah tanam, umumnya setelah tanaman berbunga). Kentang simpan matang dalam 90-120 hari; biarkan di tanah sekitar 2 minggu setelah tanaman mati. Periksa ukuran dengan menggali pinggir tanaman dan mengambil beberapa umbi. Simpan di tempat sejuk dan gelap.",
+    "sources": [
+      {
+        "title": "Montana State University Extension - Potato Growing Guide",
+        "url": "https://www.montana.edu/extension/valley/potatoguide.html"
+      },
+      {
+        "title": "University of Maryland Extension - Potatoes",
+        "url": "https://extension.umd.edu/resource/potatoes"
+      }
+    ]
+  },
+  {
+    "plant": "Selada",
+    "planting_steps": [
+      "Siapkan tanah yang subur, drainasenya baik, dan kaya bahan organik. Tambahkan banyak bahan organik sebelum tanam.",
+      "Tanam benih sedalam sekitar 0,6-1,2 cm. Untuk selada daun, romaine, dan butterhead beri jarak 10-25 cm antar tanaman dan 30-60 cm antar baris. Selada krop (crisphead) berjarak 30-38 cm antar tanaman dan 50-75 cm antar baris.",
+      "Benih berkecambah paling baik pada suhu 13-18 C. Perkecambahan berkurang di atas sekitar 27 C.",
+      "Tempatkan di tempat yang terkena sinar matahari penuh. Tanaman masih tahan teduh 4-6 jam sinar langsung per hari, dan selada daun muda dapat tumbuh dengan cahaya tidak langsung.",
+      "Beri mulsa untuk menjaga kelembapan tanah."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Sumber menyebut sekitar 2,5-5 cm air per minggu, lebih baik dengan irigasi tetes. Sumber lain menyarankan penyiraman sering dengan jumlah sedikit tanpa berlebihan; siram dari atas hanya pada pagi hari.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri pupuk awal saat pindah tanam. Susulan pupuk nitrogen 21-0-0 sekitar 1/4 cangkir (60 ml) per 3 m baris, 4 minggu setelah pindah tanam atau saat penjarangan. Taruh di samping tanaman lalu siram.",
+    "is_harvestable": true,
+    "harvest_days_min": 40,
+    "harvest_days_max": 80,
+    "harvest_note": "Tergantung jenis. Selada daun: petik daun luar saat tanaman setinggi 12-15 cm. Panen potong-dan-tumbuh lagi: potong pada 15-25 cm di atas tanah, tumbuh kembali dalam 2-3 minggu. Romaine dan krop: panen saat kepala padat dan keras. Pertumbuhan terbaik pada suhu tidak lebih dari sekitar 24 C; panas dan hari panjang menyebabkan berbunga dini dan rasa pahit.",
+    "sources": [
+      {
+        "title": "Utah State University Extension - Lettuce in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/lettuce-in-the-garden.php"
+      },
+      {
+        "title": "University of Maryland Extension - Planting lettuce in a home garden",
+        "url": "https://extension.umd.edu/resource/lettuce"
+      }
+    ]
+  },
+  {
+    "plant": "Bayam",
+    "planting_steps": [
+      "Siapkan tanah yang subur, drainasenya baik, dan kaya bahan organik. Campurkan kompos atau pupuk sebelum tanam.",
+      "Tanam benih sedalam sekitar 1,2 cm dengan jarak sekitar 7,5 cm dalam baris dan 30 cm antar baris.",
+      "Jarangkan saat tanaman memiliki 3-4 daun sejati. Bila benih tumbuh rapat, jarangkan hingga sekitar 15 cm; tanaman hasil penjarangan bisa dimakan.",
+      "Lakukan beberapa kali tanam kecil dengan selang beberapa hari agar panen lebih panjang.",
+      "Tempatkan di lokasi cerah. Tanaman masih tumbuh dengan sinar langsung 4-6 jam per hari."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Sekitar 2,5-5 cm air per minggu, bergantung jenis tanah dan suhu. Jaga kelembapan konsisten dan siram dalam saat cuaca kering.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Kebutuhan hara tinggi. Beri kompos atau pupuk sebelum tanam. Susulan pupuk nitrogen 21-0-0 sekitar 1/4 cangkir (60 ml) per 3 m baris, 4 minggu setelah pindah tanam atau saat penjarangan, ditaruh di samping tanaman lalu disiram.",
+    "is_harvestable": true,
+    "harvest_days_min": 28,
+    "harvest_days_max": 55,
+    "harvest_note": "Angka hari dihitung dari benih. Petik daun satu per satu sebelum tangkai bunga muncul, atau potong semua daun hingga sekitar 5 cm dari tanah bila titik tumbuh tidak rusak. Memotong daun penuh mendorong daun baru dari pangkal. Data dari panduan bayam spinach (Spinacia oleracea). Tumbuh terbaik pada suhu sekitar 24 C atau lebih rendah.",
+    "sources": [
+      {
+        "title": "Utah State University Extension - Spinach in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/spinach-in-the-garden"
+      },
+      {
+        "title": "University of Maryland Extension - Spinach",
+        "url": "https://extension.umd.edu/resource/spinach"
+      }
+    ]
+  },
+  {
+    "plant": "Sawi",
+    "planting_steps": [
+      "Tanam di musim sejuk. Sawi lebih rentan berbunga dini bila mengalami dingin berkepanjangan setelah tumbuh baik.",
+      "Benih sangat kecil, jadi tabur dangkal lalu jarangkan sampai jarak yang diinginkan. Penanaman dengan bibit pindahan memberi hasil lebih baik daripada tabur langsung.",
+      "Gunakan tanah dengan pH 6,0-6,4 berdasarkan uji tanah.",
+      "Jaga tanah lembap merata selama tanaman menyesuaikan diri."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Basahi tanah minimal sedalam 15 cm dan hindari penyiraman ringan yang hanya membasahi permukaan. Bila tidak memakai irigasi tetes, siram dari atas pada pagi hari. Sumber tidak menyebut jadwal yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Pemupukan didasarkan pada uji tanah. Dosis tidak disebut sumber.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut jumlah hari panen maupun ukuran panen untuk sawi. Panduan ini tergolong ringkas; tambahkan detail lain lewat Edit Panduan bila ada sumber tepercaya.",
+    "sources": [
+      {
+        "title": "Clemson Cooperative Extension HGIC - Chinese Vegetables",
+        "url": "https://hgic.clemson.edu/factsheet/chinese-vegetables/"
+      }
+    ]
+  },
+  {
+    "plant": "Kailan",
+    "planting_steps": [
+      "Tanam di musim sejuk karena kailan tumbuh paling baik pada cuaca dingin.",
+      "Gunakan tanah dengan pH 6,0-6,4 berdasarkan uji tanah.",
+      "Jaga kelembapan tanah merata sepanjang pertumbuhan."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Panduan umum sayuran Cina menyarankan kelembapan yang merata. Sumber tidak menyebut jadwal yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Pemupukan didasarkan pada uji tanah. Dosis tidak disebut sumber.",
+    "is_harvestable": true,
+    "harvest_days_min": 55,
+    "harvest_days_max": 70,
+    "harvest_note": "Tanaman butuh 55-70 hari dari tanam benih sampai panen. Potong sesaat sebelum bunga mekar. Potong batang tengah dahulu dan sisakan tunggul yang panjang supaya tunas samping tumbuh. Sumber menyebut kailan sebagai Chinese broccoli.",
+    "sources": [
+      {
+        "title": "Clemson Cooperative Extension HGIC - Chinese Vegetables",
+        "url": "https://hgic.clemson.edu/factsheet/chinese-vegetables/"
+      }
+    ]
+  },
+  {
+    "plant": "Seledri",
+    "planting_steps": [
+      "Semai benih di dalam ruangan sekitar 10-12 minggu sebelum panen yang diharapkan, lalu pindahkan saat bibit memiliki 3-4 daun dewasa dan akar yang kuat.",
+      "Pilih tanah subur, drainasenya baik, berpasir dan kaya bahan organik. Campur pupuk ke bagian atas tanah sedalam sekitar 15 cm.",
+      "Beri jarak sekitar 30 cm antar tanaman dan 60 cm antar baris.",
+      "Tempatkan di sinar matahari penuh. Suhu ideal sekitar 13-18 C dan tanaman peka terhadap embun beku.",
+      "Beri mulsa dan siram secara teratur."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Minimal 2,5-5 cm air per minggu dari hujan atau penyiraman. Basahi tanah menyeluruh, irigasi tetes efisien. Siram lebih sering saat suhu di atas sekitar 29 C.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Saat tanam, beri pupuk lengkap dengan rasio 4-4-8. Susulan pupuk nitrogen 21-0-0 sekitar 1/4 cangkir (60 ml) per 3 m baris, pada minggu ke-4 dan ke-8 setelah pindah tanam. Hentikan setelah batang terbentuk.",
+    "is_harvestable": true,
+    "harvest_days_min": 70,
+    "harvest_days_max": 84,
+    "harvest_note": "Sumber menyebut sekitar 10-12 minggu dari waktu tanam sampai panen. Cabut batang luar saat panjangnya 30 cm atau lebih, atau panen seluruh tanaman saat diameternya 7,5 cm atau lebih.",
+    "sources": [
+      {
+        "title": "Utah State University Extension - Celery in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/celery-in-the-garden.php"
+      }
+    ]
+  },
+  {
+    "plant": "Tomat ceri",
+    "planting_steps": [
+      "Siapkan tanah saat tidak basah (hancur bila diremas), tambahkan kompos dan sedikit pupuk nitrogen. Pilih lokasi sinar matahari penuh dengan drainase baik.",
+      "Kecambahkan benih pada suhu sekitar 27 C hingga akar muncul, lalu pindahkan ke media semai steril pada suhu 18-21 C.",
+      "Rawat bibit selama 6-8 minggu hingga memiliki 5-7 daun dan akar yang berkembang baik.",
+      "Pindahkan bibit saat suhu tanah di atas sekitar 16 C. Beri jarak sekitar 60 cm antar tanaman dan 60-90 cm antar baris.",
+      "Tanam sedikit lebih dalam dari posisi di pot. Bibit yang tinggi boleh dibaringkan dalam parit dengan beberapa cm pucuk di atas tanah.",
+      "Siram pelan dan dalam setelah tanam.",
+      "Pasang penyangga seperti turus sedalam sekitar 45 cm dan 8-10 cm dari batang, atau sangkar kawat. Tipe determinate boleh dibiarkan menjalar di tanah, tipe semi dan indeterminate perlu penyangga."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Siram dalam dan jarang, sekitar 2,5-5 cm air per minggu, lebih baik dengan irigasi tetes. Untuk tanaman di pot, hindari media yang berganti dari sangat basah ke sangat kering.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Bibit diberi larutan pupuk lengkap setengah dosis seminggu sekali sebelum tanam. Setelah pindah tanam, beri sekitar 1/2 sendok makan pupuk 21-0-0 per tanaman pada minggu ke-4 dan ke-8, lalu siram. Hindari kelebihan nitrogen karena menghasilkan daun lebat dan buah sedikit. Untuk pot, beri pupuk dalam dosis ringan sekitar setengah anjuran tetapi lebih sering.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut jumlah hari dari tanam sampai panen. Buah matang 25-35 hari setelah berbunga, tergantung suhu dan varietas. Panen saat buah berwarna penuh tetapi masih padat. Produksi terbaik dengan 6-8 jam sinar matahari penuh; buah gugur saat suhu di atas sekitar 32 C. Panduan ini berasal dari tomat secara umum, bukan khusus tomat ceri.",
+    "sources": [
+      {
+        "title": "University of Arizona Cooperative Extension - Tomato planting, growing, and harvest",
+        "url": "https://extension.arizona.edu/publication/tomato-planting-growing-and-harvest"
+      },
+      {
+        "title": "Utah State University Extension - Tomatoes in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/tomatoes-in-the-garden.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Paprika",
+    "planting_steps": [
+      "Semai benih di dalam ruangan sekitar 6-8 minggu sebelum pindah tanam.",
+      "Beberapa hari sebelum pindah tanam, kurangi pupuk dan air, lalu kenalkan bibit pada sinar matahari secara bertahap.",
+      "Pindahkan bibit ke tanah yang gembur dan drainasenya baik. Hindari lahan yang tahun sebelumnya ditanami tomat, terong, kentang, atau cabai.",
+      "Beri jarak 30-45 cm antar tanaman dan sekitar 90 cm antar baris.",
+      "Tempatkan di lokasi dengan sinar matahari sekitar 8 jam per hari. Tanaman menyukai suhu hangat sekitar 21-29 C pada siang hari.",
+      "Beri mulsa untuk menjaga kelembapan tanah."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Beri sekitar 2,5 cm air per minggu dari hujan atau penyiraman, siram dalam dan periksa tanah sebelum menyiram supaya tidak becek. Basahi tanah minimal sedalam 15 cm dan jaga kelembapan merata saat berbuah.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Beri pupuk awal saat pindah tanam. Susulan kalsium nitrat (15.5-0-0) sekitar 230 g per 9 m2, 3-4 minggu setelah tanam dan diulang 3-4 minggu kemudian, ditaruh 10-15 cm dari tanaman. Pupuk tambahan juga dapat diberikan setelah gelombang buah pertama terbentuk.",
+    "is_harvestable": true,
+    "harvest_days_min": 65,
+    "harvest_days_max": 85,
+    "harvest_note": "Angka hari dihitung sejak pindah tanam (sekitar 100-120 hari sejak benih). Paprika dipanen saat berukuran penuh dengan dinding buah keras, saat masih hijau atau kuning. Buah merah atau oranye butuh pematangan lebih lama. Potong tangkai dengan gunting, jangan ditarik.",
+    "sources": [
+      {
+        "title": "Clemson Cooperative Extension HGIC - Pepper",
+        "url": "https://hgic.clemson.edu/factsheet/pepper/"
+      },
+      {
+        "title": "South Dakota State University Extension - Peppers: How to Grow It",
+        "url": "https://extension.sdstate.edu/peppers-how-grow-it"
+      }
+    ]
+  },
+  {
+    "plant": "Oyong",
+    "planting_steps": [
+      "Rendam benih dalam air panas 45-55 C selama 20 menit, lalu dalam air hangat sekitar 30 C selama 24 jam sebelum disemai.",
+      "Semai benih sekitar 4-6 minggu sebelum dipindahkan, atau tanam langsung. Bila dari semaian, pindahkan bibit setelah memiliki 2-3 daun sejati.",
+      "Tanam saat tanah sudah hangat, minimal sekitar 15 C. Suhu tanah ideal untuk tanam sekitar 25-35 C.",
+      "Pilih tanah subur, drainasenya baik, dan tetap lembap, dengan pH 5,5-6,8, di tempat yang terkena sinar matahari penuh.",
+      "Beri jarak 40-100 cm antar tanaman dengan jarak antar baris 1,5-2 m. Jarak 90 cm antar tanaman dan 1,8 m antar baris juga umum dipakai.",
+      "Pasang para-para vertikal setinggi 1,8 m atau lebih. Rambatan membuat buah lebih lurus dan tidak rusak di tanah."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Tanah perlu tetap lembap dengan drainase baik, dan penyiraman bermanfaat. Sumber tidak menyebut jumlah atau jadwal yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Gunakan pupuk seimbang lepas lambat bila diperlukan, dan uji tanah untuk mengetahui kekurangan hara. Pupuk nitrogen susulan diberikan sebelum sulur menjalar. Tanah berpasir mungkin perlu pemberian kedua saat sulur mulai menjalar.",
+    "is_harvestable": true,
+    "harvest_days_min": 60,
+    "harvest_days_max": 90,
+    "harvest_note": "Panen pertama untuk dimakan sekitar 60-90 hari tergantung varietas. Petik buah muda saat panjangnya kurang dari 15 cm; buah tumbuh sangat cepat sehingga mudah terlewat. Buah dapat dimakan mentah atau dimasak seperti labu. Sumber membahas luffa secara umum.",
+    "sources": [
+      {
+        "title": "UF/IFAS Gardening Solutions - Luffa",
+        "url": "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/vegetables/luffa/"
+      },
+      {
+        "title": "Ontario Ministry of Agriculture (OMAFRA) - Luffa",
+        "url": "https://omafra.gov.on.ca/CropOp/en/spec_veg/cucurbits/luffa.html"
+      }
+    ]
+  },
+  {
+    "plant": "Daun bawang",
+    "planting_steps": [
+      "Pilih tanah yang gembur dan drainasenya baik seperti lempung berpasir atau lempung, karena akar daun bawang dangkal dan tanah ini menahan lembap. Tanah berpasir cepat kering sehingga perlu disiram lebih sering.",
+      "Tabur benih sedalam sekitar 1,3 cm. Benih dapat butuh hingga 10 hari untuk berkecambah.",
+      "Beri jarak antar baris 30-40 cm, dan jarak benih sekitar 1,3-3,8 cm dalam baris.",
+      "Tanam berulang secara bertahap sepanjang musim agar panen berkesinambungan.",
+      "Timbun pangkal tanaman dengan tanah setebal 2,5-5 cm supaya pangkalnya putih."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Pertumbuhan membutuhkan penyiraman yang sering dan merata, dan kebutuhan air bertambah seiring tanaman membesar. Sumber tidak menyebut jadwal yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Sebagian besar pupuk diberikan sebelum tanam. Pupuk nitrogen susulan diberikan sekitar 4-5 minggu setelah tanam dan sekali lagi 3-4 minggu sebelum panen. Takaran dalam sumber untuk skala komersial, jadi sesuaikan dengan uji tanah.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut jumlah hari panen. Panen dapat dimulai saat diameter pangkal sekitar 0,6-1,3 cm; tipe semi-bulat dapat mencapai sekitar 2,5 cm. Cabut dan ikat dalam satu ikat berisi 5-9 batang.",
+    "sources": [
+      {
+        "title": "University of Maryland Extension - Onions (incl. green onions / scallions)",
+        "url": "https://extension.umd.edu/sites/extension.umd.edu/files/2026-02/Onions.pdf"
+      },
+      {
+        "title": "UC Davis WIFSS - Green Onions",
+        "url": "https://www.wifss.ucdavis.edu/wp-content/uploads/2016/10/GreenOnions_PDF.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Kucai",
+    "planting_steps": [
+      "Pilih tempat dengan sinar matahari penuh hingga teduh sebagian, dengan tanah lembap dan drainasenya baik.",
+      "Tabur benih sedalam sekitar 0,6 cm. Benih dapat disemai begitu matang pada musim gugur atau pada musim semi di bedengan terlindung.",
+      "Setelah bibit setinggi sekitar 5 cm, jarangkan hingga berjarak 30 cm ke segala arah. Jarak antar tanaman dan antar baris sama-sama 30 cm.",
+      "Rumpun umbi juga dapat dibagi dan ditanam kembali pada awal musim semi."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Jaga tanah lembap merata. Sumber tidak menyebut jadwal yang pasti.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Sumber tidak menyebut pemupukan.",
+    "is_harvestable": true,
+    "harvest_days_min": 80,
+    "harvest_days_max": 90,
+    "harvest_note": "Sumber mencantumkan umur matang sekitar 80-90 hari tetapi tidak menjelaskan kapan panen pertama. Daun muda dapat dipanen kapan saja dan bunga yang dapat dimakan dapat dipetik sesaat setelah mekar.",
+    "sources": [
+      {
+        "title": "University of New Hampshire Extension - How to Grow Garlic Chives (Allium tuberosum)",
+        "url": "https://extension.unh.edu/resource/how-grow-garlic-chives-allium-tuberosum"
+      }
+    ]
+  },
+  {
+    "plant": "Kacang panjang",
+    "planting_steps": [
+      "Tanam benih langsung setelah suhu tanah hangat, ideal di atas sekitar 20 C. Pilih lokasi sinar matahari penuh.",
+      "Siapkan tanah yang lembap, drainasenya baik, diperkaya kompos, dengan pH 5,5-7,0. Tanaman tidak tahan tanah tergenang.",
+      "Tanam benih sedalam sekitar 2,5 cm dengan jarak 15-30 cm antar tanaman dan 90-120 cm antar baris. Sumber lain menyebut jarak dalam baris 15-40 cm dan antar baris 60-150 cm.",
+      "Pasang rambatan yang kuat setinggi minimal 1,8-2,1 m karena sulur bisa mencapai 3,6 m. Para-para ini membuat polong lebih lurus dan mudah dipanen.",
+      "Bedengan ditinggikan membantu drainase dan perawatan.",
+      "Pada lahan yang baru pertama kali ditanami kacang-kacangan, benih dapat diinokulasi dengan bakteri Rhizobium atau Bradyrhizobium sesuai petunjuk label."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Penyiraman bermanfaat, tetapi hindari tanah tergenang atau banjir. Sumber tidak menyebut jumlah dan jadwal yang pasti.",
+    "fertilizing_frequency": "none",
+    "fertilizing_note": "Tanaman mengikat nitrogen sendiri, sehingga inokulasi Rhizobium dapat mengurangi kebutuhan pupuk nitrogen. Sumber tidak memberi dosis pupuk.",
+    "is_harvestable": true,
+    "harvest_days_min": 40,
+    "harvest_days_max": 80,
+    "harvest_note": "Sekitar 40-70 hari dari benih (sumber lain: 60-80 hari), tergantung varietas. Petik polong saat masih lunak dengan panjang sekitar 25-30 cm bila ingin dimakan seperti buncis, sebelum biji terisi penuh. Panen setiap 1-3 hari agar tanaman terus berbuah.",
+    "sources": [
+      {
+        "title": "Ontario Ministry of Agriculture (OMAFRA) - Yard-long Bean",
+        "url": "https://www.omafra.gov.on.ca/CropOp/en/spec_veg/pea_bean/yard.html"
+      },
+      {
+        "title": "UF/IFAS Extension Charlotte County - Yard long beans",
+        "url": "https://blogs.ifas.ufl.edu/charlotteco/2020/06/04/yard-long-beans-plus-or-minus-thirty-six-inches/"
+      },
+      {
+        "title": "NC State Extension Plant Toolbox - Vigna unguiculata (Yard-long Bean)",
+        "url": "https://plants.ces.ncsu.edu/plants/vigna-unguiculata/common-name/yard-long-bean/"
+      }
+    ]
+  },
+  {
+    "plant": "Singkong",
+    "planting_steps": [
+      "Gunakan stek batang sepanjang sekitar 15-25 cm dari tanaman yang sehat.",
+      "Tanam stek secara tegak sedalam sekitar 5-10 cm dan sisakan satu atau dua mata tunas di atas tanah.",
+      "Beri jarak sekitar 90-120 cm antar tanaman dan antar baris.",
+      "Dalam penelitian di Sri Lanka, lubang tanam berukuran 20 x 20 x 30 cm diisi tanah yang dicampur sekitar 500 g kotoran sapi kering dan 10 g TSP.",
+      "Siram tambahan pada bulan pertama setelah tanam."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Sumber hanya menyebut penyiraman tambahan selama bulan pertama setelah tanam. Jadwal pastinya tidak disebut.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Dalam penelitian Sri Lanka, tiap lubang diberi sekitar 7 g urea dan 7 g muriate of potash 3 minggu setelah tanam, lalu dosis yang sama sebagai pupuk susulan pada bulan ke-2 dan ke-4. Ini angka percobaan, bukan anjuran baku.",
+    "is_harvestable": true,
+    "harvest_days_min": 240,
+    "harvest_days_max": 330,
+    "harvest_note": "Tanaman butuh sekitar 8-11 bulan bebas embun beku untuk menghasilkan umbi yang bisa dimakan. Gali atau cabut umbi dan gunakan segera karena cepat rusak setelah panen. Penelitian Sri Lanka menguji panen pada umur 6 dan 8 bulan untuk perbanyakan bibit.",
+    "sources": [
+      {
+        "title": "UF/IFAS Gardening Solutions - Cassava",
+        "url": "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/vegetables/cassava.html"
+      },
+      {
+        "title": "Department of Agriculture Sri Lanka - Cassava planting material study",
+        "url": "https://dl-doa.nsf.gov.lk/bitstreams/bd819c07-1c89-42b1-a526-b259e64abbff/download"
+      }
+    ]
+  }
+]

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{% if is_edit %}Edit{% else %}Tambah{% endif %} Panduan {{ plant.name }} - NANEM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/cultivation.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="card card--form cg-form-card">
+    <div class="cg-form-plant">
+        {% if plant.image_url %}
+        <img src="{{ plant.image_url }}" alt="{{ plant.name }}" class="cg-form-plant__image">
+        {% endif %}
+        <div>
+            <strong class="cg-form-plant__name">{{ plant.name }}</strong>
+            {% if plant.scientific_name %}<i class="cg-form-plant__scientific">{{ plant.scientific_name }}</i>{% endif %}
+        </div>
+    </div>
+    <h1 class="card__title">{% if is_edit %}Edit{% else %}Tambah{% endif %} Panduan {{ plant.name }}</h1>
+    <p class="card__text">Isi panduan budidaya yang akan tampil di halaman detail tanaman ini.</p>
+    <p class="field-hint">
+        Media tanam, kebutuhan air, dan kebutuhan cahaya diambil dari data katalog tanaman, jadi tidak diisi di sini.
+        Ubah lewat <a href="{% url 'plants:update' plant.pk %}">Kelola Tanaman</a>.
+    </p>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <ul class="form-errors">
+            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+
+        {% include "cultivation/_form_field.html" with field=form.planting_steps %}
+
+        <h2 class="cg-form-section">Penyiraman</h2>
+        {% include "cultivation/_form_field.html" with field=form.watering_frequency %}
+        {% include "cultivation/_form_field.html" with field=form.watering_note %}
+
+        <h2 class="cg-form-section">Pemupukan</h2>
+        {% include "cultivation/_form_field.html" with field=form.fertilizing_frequency %}
+        {% include "cultivation/_form_field.html" with field=form.fertilizing_note %}
+
+        <h2 class="cg-form-section">Panen</h2>
+        <div class="form-group cg-check">
+            {{ form.is_harvestable }}
+            <label for="{{ form.is_harvestable.id_for_label }}">{{ form.is_harvestable.label }}</label>
+        </div>
+        <div class="cg-form-row">
+            {% include "cultivation/_form_field.html" with field=form.harvest_days_min %}
+            {% include "cultivation/_form_field.html" with field=form.harvest_days_max %}
+        </div>
+        {% include "cultivation/_form_field.html" with field=form.harvest_note %}
+
+        <div class="card__actions">
+            <a href="{% url 'cultivation:detail' plant.pk %}" class="btn btn--outline">Batal</a>
+            <button type="submit" class="btn btn--primary">Simpan</button>
+        </div>
+    </form>
+</section>
+
+<script>
+(function () {
+    var toggle = document.getElementById("{{ form.is_harvestable.id_for_label }}");
+    var inputs = [
+        document.getElementById("{{ form.harvest_days_min.id_for_label }}"),
+        document.getElementById("{{ form.harvest_days_max.id_for_label }}")
+    ];
+    function sync() {
+        inputs.forEach(function (input) {
+            input.disabled = !toggle.checked;
+        });
+    }
+    toggle.addEventListener("change", sync);
+    sync();
+})();
+</script>
+{% endblock %}
