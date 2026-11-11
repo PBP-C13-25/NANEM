@@ -34,6 +34,7 @@ urlpatterns = [
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 
     # API PATH
+    path("api/", include("apps.accounts.api.urls")),
     path("api/", include("apps.recommendations.api.urls")),
 ]
 
