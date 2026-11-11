@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "apps.cultivation",
     "apps.profiles",
     "apps.plant_collection",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -183,3 +184,10 @@ if not DEBUG:
 # Cache untuk pembatas login. LocMem cuma per-proses; kalau deploy multi-worker
 # pakai Redis/Memcached/DB cache agar counter dibagi antar worker.
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": ["apps.core.api.MobileSessionAuthentication"],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"]
+    + (["rest_framework.renderers.BrowsableAPIRenderer"] if DEBUG else []),
+}
