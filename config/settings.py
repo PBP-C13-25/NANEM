@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "apps.cultivation",
     "apps.profiles",
     "apps.plant_collection",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
