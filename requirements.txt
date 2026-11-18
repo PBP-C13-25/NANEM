@@ -7,3 +7,5 @@ urllib3
 python-dotenv
 Pillow
 coverage
+djangorestframework
+django-cors-headers

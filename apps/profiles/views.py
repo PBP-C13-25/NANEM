@@ -8,9 +8,14 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import DetailView
 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+
 from apps.plant_collection.models import PlantCollection
 from .forms import ProfileEditForm, UserEditForm
 from .models import UserProfile
+from .serializers import UserProfileSerializer
 
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
@@ -123,3 +128,17 @@ class SearchUsersView(LoginRequiredMixin, View):
             })
 
         return JsonResponse({'query': query, 'users': data})
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def api_get_profile(request):
+    # Jika user belum login, ambil user pertama di database untuk testing
+    target_user = request.user if request.user.is_authenticated else User.objects.first()
+    
+    if target_user:
+        profile, _ = UserProfile.objects.get_or_create(user=target_user)
+        serializer = UserProfileSerializer(profile)
+        return Response(serializer.data)
+    else:
+        return Response({"detail": "Tidak ada user di database."}, status=404)

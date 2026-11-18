@@ -25,3 +25,12 @@ class ProfileEditForm(forms.ModelForm):
         widgets = {
             "photo": forms.FileInput(attrs={"class": "hidden-file-input", "id": "realPhotoInput"}),
         }
+
+    def clean(self):
+        self.cleaned_data = super().clean()
+        photo = self.cleaned_data.get('photo')
+
+        if photo.size > 2*1024*1024:
+            raise forms.ValidationError("Ukuran foto melebihi batas (maks 2mb)")
+
+        return photo
