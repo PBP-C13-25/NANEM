@@ -1,0 +1,221 @@
+[
+  {
+    "plant": "Stroberi",
+    "planting_steps": [
+      "Pilih lokasi yang terkena sinar matahari penuh minimal 6 jam per hari, dengan tanah berdrainase baik dan kaya bahan organik. pH ideal 6,0-6,5. Hindari lahan bekas tomat, cabai, terong, atau kentang.",
+      "Sebelum tanam, buang semua daun kecuali dua atau tiga daun yang paling kuat.",
+      "Tanam bibit dengan mahkota (crown) sejajar permukaan tanah. Terlalu dalam menyebabkan busuk, terlalu dangkal menyebabkan kering.",
+      "Beri jarak 45-75 cm antar tanaman. Tanam pada sore hari atau saat mendung bila memungkinkan.",
+      "Siram sekitar satu pint (sekitar 0,5 liter) per tanaman setelah tanam.",
+      "Pada musim pertama, buang semua tangkai bunga supaya tanaman menjadi kuat. Tipe berbuah sepanjang tahun dapat dibiarkan berbunga di pertengahan musim.",
+      "Beri mulsa jerami setebal 7-10 cm saat musim dingin atau cuaca dingin."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Sekitar 2,5 cm air per minggu selama musim tumbuh. Akar dangkal sehingga tanaman butuh siram lebih sering setelah pindah tanam. Bila hujan sedikit selama dua minggu, basahi tanah sedalam 30 cm. Irigasi tetes atau selang berpori mengurangi penyakit akibat daun basah.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Tahun pertama: sebar amonium nitrat sekitar 680 g per 30 m baris antara pertengahan Agustus dan pertengahan September; jaga daun tetap kering dan sikat sisa pupuk. Tahun berikutnya ikuti rekomendasi uji tanah. Kurangi nitrogen bila gulma tumbuh lebih cepat dari tanaman.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Dari bunga mekar sampai panen pertama sekitar 18-45 hari, tergantung varietas dan cuaca. Warna matang berbeda-beda tiap varietas, jadi cicipi buah untuk menilai kematangan. Petik pada waktu sejuk dan biarkan kelopak tetap menempel sampai buah dipakai.",
+    "sources": [
+      {
+        "title": "University of Illinois Extension - Growing Strawberries",
+        "url": "https://extension.illinois.edu/small-fruits/growing-strawberries"
+      },
+      {
+        "title": "Oklahoma State University Extension - Growing Strawberries in the Home Garden",
+        "url": "https://extension.okstate.edu/fact-sheets/growing-strawberries-in-the-home-garden.html"
+      }
+    ]
+  },
+  {
+    "plant": "Mangga",
+    "planting_steps": [
+      "Beli bibit hasil okulasi karena berbuah lebih cepat dan lebih pasti dibanding bibit dari biji.",
+      "Pilih lokasi sinar matahari penuh dengan tanah dalam dan berdrainase baik. Jarak dari bangunan, kabel listrik, atau pohon lain sebaiknya 6-9 m. Kebun komersial memakai jarak sekitar 6-12 m.",
+      "Gali lubang tanam minimal dua kali lebar pot, tidak lebih dalam dari bola akar. Timbun kembali dengan tanah galian dan siram banyak.",
+      "Tanam pada awal atau selama musim hujan.",
+      "Beri mulsa untuk menjaga kelembapan dan mengurangi gulma."
+    ],
+    "watering_frequency": "every_2_3_days",
+    "watering_note": "Pohon baru disiram selang sehari pada minggu pertama, lalu dua kali seminggu sampai hujan cukup. Pohon muda disiram dalam dan jarang saat kering. Setelah sekitar empat tahun, pohon tahan kekeringan dan hanya butuh air saat kemarau ekstrem. Air berlebih menurunkan kualitas buah.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Pakai pupuk lengkap seperti 10-20-20 atau 16-16-16 dan hindari kadar nitrogen lebih tinggi dari fosfor dan kalium. Pohon muda dipupuk 6 kali setahun pada tahun 1-3 dan 4 kali setahun pada tahun 4-6. Pohon berbuah diberi pupuk sekali setelah panen dan dua kali lagi dengan selang sekitar dua bulan. Taburkan di sekitar tepi tajuk, bukan di pangkal batang.",
+    "is_harvestable": true,
+    "harvest_days_min": 1095,
+    "harvest_days_max": 1825,
+    "harvest_note": "Bibit okulasi mulai berbuah sekitar 3-5 tahun setelah tanam, sedangkan bibit dari biji bisa 10-12 tahun. Buah matang sekitar 100-150 hari setelah berbunga. Petik saat buah keras dan matang; perubahan warna berbeda tiap varietas. Buah masak di suhu ruang dalam sekitar 3-8 hari setelah dipetik.",
+    "sources": [
+      {
+        "title": "UF/IFAS Gardening Solutions - Mango",
+        "url": "https://gardeningsolutions.ifas.ufl.edu/plants/fruit-trees/mango.html"
+      },
+      {
+        "title": "University of Guam Extension - Mango Tree Care on Guam",
+        "url": "https://www.uog.edu/_resources/files/extension/2016-mango-tree-care-on-guam.pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Pepaya",
+    "planting_steps": [
+      "Pilih lokasi sinar matahari penuh, tempat terhangat yang tidak tergenang setelah hujan. Jauhkan dari tanaman lain, bangunan, dan kabel listrik. Di tempat rawan banjir, tanam di gundukan setinggi 60-90 cm.",
+      "Tanah berpasir, lempung, atau berbatu dengan pH 4,5-8,0 bisa dipakai asalkan drainasenya baik.",
+      "Gali lubang 3-4 kali diameter wadah dan 3 kali kedalamannya. Jangan menambah pupuk atau tanah lain ke dalam lubang.",
+      "Pindahkan bibit saat setinggi sekitar 30 cm. Tanam 2-3 tanaman berjarak 2-3,5 m supaya paling tidak satu berbuah.",
+      "Setelah berbunga, sisakan satu tanaman betina atau berkelamin ganda per titik tanam. Bila tidak ada tanaman berkelamin ganda, tanam satu jantan untuk tiap 8-10 betina.",
+      "Lindungi dari angin kencang."
+    ],
+    "watering_frequency": "every_2_3_days",
+    "watering_note": "Tanah berpasir atau berbatu disiram selang sehari, atau tiap hari saat panas dan kering. Tanah lempung disiram tiap 3-4 hari. Hindari genangan dan hindari membasahi buah serta daun. Pengairan yang naik turun dapat memperlambat pertumbuhan dan mengurangi pembuahan.",
+    "fertilizing_frequency": "biweekly",
+    "fertilizing_note": "Beri pupuk lengkap sedikit tetapi sering. Tanaman muda sekitar 110 g tiap 14 hari, bertambah seiring ukuran. Dari umur 7-8 bulan, sekitar 0,5-1 kg tiap dua bulan. Sumber lain menyarankan amonium sulfat sekitar 110 g per tanaman tiap bulan, lalu 230 g setelah enam bulan.",
+    "is_harvestable": true,
+    "harvest_days_min": 210,
+    "harvest_days_max": 330,
+    "harvest_note": "Bunga muncul sekitar 4 bulan setelah tanam dan buah siap dalam 7-11 bulan. Buah matang bila kulit kuning penuh hingga oranye; boleh dipetik saat warna kuning menutupi sekitar 10-33% kulit, dan makin banyak warna di pohon makin manis. Pertumbuhan terbaik pada 21-32 C dan tanaman rusak pada suhu mendekati 0 C.",
+    "sources": [
+      {
+        "title": "UF/IFAS - Papaya",
+        "url": "https://ask.ifas.ufl.edu/publication/MG054/pdf"
+      },
+      {
+        "title": "Texas A&M AgriLife Extension - Papaya",
+        "url": "https://aggie-horticulture.tamu.edu/fruit-nut/fact-sheets/papaya"
+      }
+    ]
+  },
+  {
+    "plant": "Pisang",
+    "planting_steps": [
+      "Perbanyak dengan anakan (sucker) berdiameter batang 5-15 cm.",
+      "Pilih tanah yang dalam dan drainasenya baik, di tempat terlindung dari angin dan dingin. Bedengan tinggi membantu bila drainase buruk. Pisang tidak tahan tergenang.",
+      "Tanam anakan pada kedalaman yang sama seperti saat tumbuh sebelumnya.",
+      "Beri jarak 60-90 cm untuk pisang hias dan 2,4-3 m untuk pisang buah.",
+      "Buang anakan berlebih saat setinggi beberapa cm dengan memotongnya di bawah tanah. Untuk pisang buah, batasi setiap rumpun 5-6 batang."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Siram secara berkala hingga tanah basah menyeluruh. Hindari genangan air. Sumber tidak menyebut jadwal yang pasti.",
+    "fertilizing_frequency": "monthly",
+    "fertilizing_note": "Tanaman baru diberi amonium sulfat sekitar 1/4 cangkir sebulan sekali selama 3-4 bulan setelah tumbuh kembali, naik menjadi sekitar 2 cangkir sebulan saat mulai berbuah. Rumpun yang sudah mapan diberi sekitar 2 cangkir tiap beberapa bulan sepanjang tahun.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Bunga muncul sekitar 10-15 bulan setelah anakan tumbuh, tergantung varietas dan cuaca dingin. Potong tandan saat buah sudah gemuk dan membulat meski masih hijau, lalu matangkan di tempat sejuk dan teduh. Batang induk yang sudah berbuah tidak akan berbuah lagi, jadi potong sampai permukaan tanah.",
+    "sources": [
+      {
+        "title": "Texas A&M AgriLife Extension - Banana",
+        "url": "https://aggie-horticulture.tamu.edu/fruit-nut/fact-sheets/banana"
+      }
+    ]
+  },
+  {
+    "plant": "Jeruk nipis",
+    "planting_steps": [
+      "Beli pohon bibit bersertifikat yang bebas penyakit. Tanam pada musim semi atau musim panas di tempat dengan sinar matahari penuh dan terlindung dari angin dingin.",
+      "Beri jarak sekitar 4-6 m dari bangunan atau pohon lain.",
+      "Singkirkan rumput di lingkaran selebar 1-3 m, lalu gali lubang 3-4 kali diameter wadah dan sekitar 3 kali kedalamannya.",
+      "Tanah apa pun boleh asalkan drainasenya baik. Tanaman tidak tahan genangan. Di lahan rawan banjir, tanam di gundukan setinggi 60-120 cm.",
+      "Siram saat tanam."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Pohon baru disiram saat tanam, selang sehari selama sekitar seminggu, lalu 1-2 kali seminggu selama beberapa bulan. Pohon muda (dua tahun pertama) disiram bila kering lebih dari 5 hari. Kurangi atau hentikan di musim hujan. Pohon dewasa butuh sedikit air dan air berlebih menyebabkan pohon merana.",
+    "fertilizing_frequency": "every_3_months",
+    "fertilizing_note": "Pohon muda diberi pupuk jenis 6-6-6-2 dengan unsur mikro saat tunas baru tumbuh, diulang tiap 3-4 bulan pada tahun pertama. Pohon dewasa diberi sekitar 0,7-0,9 kg per aplikasi, 3-4 kali setahun. Semprot hara 2-4 kali setahun dan berikan zat besi bila muncul gejala kekurangan.",
+    "is_harvestable": true,
+    "harvest_days_min": 366,
+    "harvest_days_max": 1095,
+    "harvest_note": "Bibit dari stek atau cangkok berbuah dalam sekitar satu tahun, bibit okulasi sekitar tiga tahun, dan bibit dari biji satu sampai dua tahun lebih lama. Petik buah matang berkulit kuning pada sore hari dan tangani dengan hati-hati. Sumber membahas jeruk nipis Key lime (Citrus aurantiifolia).",
+    "sources": [
+      {
+        "title": "UF/IFAS Extension - Key Lime (Citrus aurantiifolia)",
+        "url": "https://ask.ifas.ufl.edu/publication/CH092/pdf"
+      }
+    ]
+  },
+  {
+    "plant": "Anggur",
+    "planting_steps": [
+      "Uji tanah sebelum tanam dan tambahkan hara sesuai hasilnya.",
+      "Tanam pada awal musim semi, secepat tanah bisa diolah. Pangkas akar yang panjang atau patah, lalu bentangkan akar secara merata di lubang tanam.",
+      "Tanam bibit sedikit lebih dalam dari posisinya di pembibitan. Untuk bibit sambung, letakkan sambungan 10-15 cm di atas permukaan tanah.",
+      "Beri jarak sekitar 2,4 m antar tanaman dalam baris dan 3 m antar baris.",
+      "Pada musim pertama, pasang turus kayu 2,5 x 2,5 cm. Bangun para-para atau pergola yang kokoh sebelum musim tumbuh kedua, cukup kuat untuk bertahan 20 tahun lebih.",
+      "Sistem Kniffin empat cabang: dua kawat dengan jarak vertikal sekitar 90 cm, kawat bawah pada ketinggian sekitar 90 cm dan kawat atas pada 1,7-1,8 m, dengan tiang berjarak 6-9 m.",
+      "Olah tanah tahun pertama tidak lebih dalam dari 7,5 cm. Setelah tanaman mapan, beri mulsa jerami, serbuk gergaji, daun, atau kompos."
+    ],
+    "watering_frequency": "when_dry",
+    "watering_note": "Sumber tidak menyebut kebutuhan atau jadwal penyiraman.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Lewati pemupukan bila tanaman tumbuh kuat. Bila tidak, beri sekitar 55 g pupuk 10-10-10 setelah tanam, lalu naikkan tiap tahun hingga sekitar 0,45 kg per tanaman saat dewasa, dibagi dalam tiga kali pemberian (Maret, Mei, Juli di lokasi sumber). Pada tanah yang tinggi fosfor dan kalium, gunakan amonium nitrat dengan dosis sepertiga.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Sumber tidak menyebut waktu panen maupun tanda kematangan. Panduan ini ringkas; tambahkan detail lain lewat Edit Panduan bila ada sumber tepercaya.",
+    "sources": [
+      {
+        "title": "University of Illinois Extension - Planting and Care of Backyard Grapes",
+        "url": "https://extension.illinois.edu/small-fruits/planting-and-care-backyard-grapes"
+      }
+    ]
+  },
+  {
+    "plant": "Melon",
+    "planting_steps": [
+      "Tanam setelah suhu tanah mencapai sekitar 18 C atau bahaya embun beku lewat. Tempatkan di sinar matahari penuh.",
+      "Siapkan tanah yang kaya, drainasenya baik, dan berpasir. Mulsa plastik hitam menghangatkan tanah lebih cepat dan menjaga kelembapan.",
+      "Tanam 4-6 benih per gundukan sedalam 2,5-5 cm, lalu jarangkan menjadi 2 tanaman setelah muncul dua daun.",
+      "Bila memakai bibit, rawat selama sekitar 6 minggu hingga memiliki 2-3 daun dewasa dan akar yang berkembang baik.",
+      "Beri jarak gundukan sekitar 1,2 m. Untuk bibit pindahan, jarak 45-60 cm dalam baris dengan jarak antar baris 1,2-2,4 m.",
+      "Siram dalam dan tidak terlalu sering, lebih baik dengan irigasi tetes."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Sekitar 2,5-5 cm air per minggu, basahi tanah minimal sedalam 15 cm, dan beri tambahan saat buah terbentuk. Kurangi air saat buah mulai masak; air berlebih pada minggu terakhir mengurangi rasa manis.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Setelah sulur terbentuk, beri sekitar 3-4 sendok makan pupuk nitrogen 21-0-0 per tanaman lalu siram. Sumber lain menyarankan pupuk susulan sebelum sulur menjalar dan lagi setelah berbunga. Kelebihan nitrogen mendorong daun dan sulur, bukan buah.",
+    "is_harvestable": true,
+    "harvest_days_min": null,
+    "harvest_days_max": null,
+    "harvest_note": "Buah matang sekitar 30-45 hari setelah penyerbukan atau berbunga, tergantung suhu dan varietas. Tanda matang: jaring pada kulit mengasar, tangkai mudah terlepas dari sulur (full slip), dan warna dasar berubah dari hijau menjadi kuning. Sumber membahas melon jenis cantaloupe/muskmelon.",
+    "sources": [
+      {
+        "title": "Utah State University Extension - Cantaloupe (Muskmelon) in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/cantaloupe-in-the-garden.php"
+      },
+      {
+        "title": "Clemson Cooperative Extension HGIC - Cantaloupe",
+        "url": "https://hgic.clemson.edu/factsheet/cantaloupe/"
+      }
+    ]
+  },
+  {
+    "plant": "Semangka",
+    "planting_steps": [
+      "Tanam setelah suhu tanah mencapai sekitar 18 C atau bahaya embun beku lewat, di tempat bersinar matahari penuh.",
+      "Siapkan tanah yang kaya, drainasenya baik, dan berpasir. Mulsa plastik hitam membantu menghangatkan tanah. Uji tanah sebelum tanam.",
+      "Tanam 4-6 benih per gundukan sedalam 2,5-5 cm, lalu jarangkan menjadi 2 tanaman setelah muncul dua daun.",
+      "Bila memakai bibit, rawat sekitar 6 minggu hingga memiliki 2-3 daun dewasa dan akar yang berkembang baik. Bibit pindahan matang sekitar 2 minggu lebih awal dari yang disemai langsung.",
+      "Beri jarak gundukan sekitar 1,2 m. Untuk bibit pindahan, jarak 60 cm dalam baris dengan jarak antar baris 1,2-1,8 m; sumber lain menyarankan 1,5-1,8 m dalam baris dan 1,8-2,4 m antar baris.",
+      "Untuk semangka tanpa biji, tanam varietas berbiji dalam jarak sekitar 3 m sebagai penyerbuk."
+    ],
+    "watering_frequency": "weekly",
+    "watering_note": "Siram dalam dan tidak terlalu sering, sekitar 2,5-5 cm per minggu, lebih baik dengan irigasi tetes. Jaga kelembapan konsisten saat buah terbentuk dan berkembang, lalu kurangi saat buah masak. Sebagian besar akar berada di 30 cm bagian atas tanah.",
+    "fertilizing_frequency": "as_needed",
+    "fertilizing_note": "Setelah sulur terbentuk, beri sekitar 3-4 sendok makan pupuk nitrogen 21-0-0 per tanaman lalu siram. Sumber lain: nitrogen 34-0-0 sekitar 450 g per 30 m baris sebelum sulur menjalar dan sekali lagi setelah berbunga. Kelebihan nitrogen mendorong sulur dibanding buah.",
+    "is_harvestable": true,
+    "harvest_days_min": 85,
+    "harvest_days_max": 90,
+    "harvest_note": "Sekitar 85-90 hari dari pindah tanam sampai buah pertama matang, atau 35-45 hari setelah berbunga. Tanda matang: sulur terdekat dengan buah mengering cokelat, bercak tanah di bagian bawah berubah dari putih menjadi krem atau kuning, dan kulit berubah dari mengkilap menjadi kusam.",
+    "sources": [
+      {
+        "title": "Utah State University Extension - Watermelon in the Garden",
+        "url": "https://extension.usu.edu/yardandgarden/research/watermelon-in-the-garden.php"
+      },
+      {
+        "title": "Clemson Cooperative Extension HGIC - Watermelon",
+        "url": "https://hgic.clemson.edu/factsheet/watermelon/"
+      }
+    ]
+  }
+]

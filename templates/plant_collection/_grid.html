@@ -14,7 +14,7 @@
                         <span class="like-count">{{ post.likes.count }}</span>
                     </button>
                 </div>
-                <h1 class="card-title">{{ post.title }}</h1>
+                <h1 class="card-title"><a href="{% url 'collection:detail' post.pk %}" class="card-link">{{ post.title }}</a></h1>
                 <p class="card-desc">{{ post.description }}</p>
                 <div class="author-name">
                     <strong>{{ post.owner.first_name|default:post.owner.username }}</strong>
@@ -23,13 +23,21 @@
                     {{ post.created_at|timesince|truncatewords:2|cut:","|cut:"…"}} yang lalu
                 </span>
             </div>
-            {% if request.user == post.owner %}
+                        {% if request.user == post.owner %}
             <div class="owner-actions">
                 <a href="{% url 'collection:edit' post.pk %}" class="btn btn--outline">Edit</a>
-                <a href="{% url 'collection:delete' post.pk %}" class="btn btn--danger">Hapus</a>
-            </div> 
+                <button type="button" class="btn btn--danger" data-modal-open="delete-post-{{ post.pk }}">Hapus</button>
+            </div>
             {% endif %}
         </div>
+
+        {% if request.user == post.owner %}
+            {% url 'collection:delete' post.pk as delete_url %}
+            {% with pk_str=post.pk|stringformat:"s" %}
+                {% include "components/confirm_modal.html" with id="delete-post-"|add:pk_str title="Hapus postingan?" message="Postingan ini akan dihapus permanen dan tidak bisa dikembalikan." action=delete_url confirm_label="Ya, Hapus" danger=True %}
+            {% endwith %}
+        {% endif %}
+
         {% empty %}
         <div style="grid-column: 1 / -1; text-align: center; color: var(--color-muted); padding: 40px;">
             <p>Yahhh, masih belum ada postingan apapun nih.</p>

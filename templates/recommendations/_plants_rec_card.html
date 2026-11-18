@@ -27,8 +27,8 @@
         {% for plant in plants %}
             <li class="plant {% if forloop.first %}plant--top {% endif %}{% if plant.match_percentage >= 75 %}plant--high{% elif plant.match_percentage >= 50 %}plant--mid{% else %}plant--low{% endif %}"
                 data-category="{{ plant.category }}">
-                {# TODO: ganti "#" jadi URL detail/panduan tanaman kalau sudah dipastikan #}
-                <a href="#" class="plant__link" aria-label="Lihat detail {{ plant.plant_name }}">
+                {% url 'cultivation:detail' plant.plant_id as guide_url %}
+                <a {% if guide_url %}href="{{ guide_url }}"{% endif %} class="plant__link" aria-label="Lihat panduan budidaya {{ plant.plant_name }}">
                     <div class="plant__head">
                         <span class="plant__rank">{{ forloop.counter }}</span>
                         <div class="plant__names">

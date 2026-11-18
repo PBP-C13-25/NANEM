@@ -1,217 +1,247 @@
-/* --- Hero image placeholder --- */
-.cg-hero-image {
-  width: 100%;
-  aspect-ratio: 21 / 6;
-  background: #eee;
-  border: 1px dashed #ccc;
-  border-radius: 6px;
+.cg-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.cg-back-links {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #888;
-  font-size: 0.9em;
-  margin-bottom: 24px;
-}
-
-/* --- CTA grid (Katalog / Tanaman Saya) --- */
-.cg-cta-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.cg-cta-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 20px;
-}
-
-.cg-cta-card .icon {
-  font-size: 1.3em;
-  display: block;
-  margin-bottom: 6px;
-}
-
-.cg-cta-card h3 {
-  font-size: 1.1em;
-  margin: 0 0 6px;
-}
-
-.cg-cta-card p {
-  color: #555;
-  font-size: 0.9em;
-  margin: 0;
-}
-
-@media (max-width: 600px) {
-  .cg-cta-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* --- Hero --- */
-.cg-hero {
-  padding: 32px 0 24px;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 24px;
-}
-
-.cg-hero__kicker {
-  display: inline-block;
-  font-size: 0.75em;
-  font-weight: bold;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #2f6d3c;
-  background: #dff5e1;
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-}
-
-.cg-hero h1 {
-  font-size: 1.8em;
-  line-height: 1.25;
-  margin: 0 0 12px;
-  max-width: 34em;
-}
-
-.cg-hero p {
-  color: #555;
-  max-width: 40em;
-  margin: 0;
-}
-
-/* --- Section headings --- */
-.cg-section {
-  margin-bottom: 32px;
-}
-
-.cg-section__title {
-  font-size: 1.2em;
-  margin: 0 0 6px;
-}
-
-.cg-section__subtitle {
-  color: #555;
-  margin: 0 0 16px;
-  max-width: 42em;
-}
-
-/* --- Feature grid --- */
-.cg-feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-}
-
-.cg-feature-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 14px 16px;
-}
-
-.cg-feature-card .icon {
-  font-size: 1.3em;
-  display: block;
-  margin-bottom: 6px;
-}
-
-.cg-feature-card h3 {
-  font-size: 1em;
-  margin: 0 0 4px;
-}
-
-.cg-feature-card p {
-  color: #555;
-  font-size: 0.9em;
-  margin: 0;
-}
-
-.cg-feature-card .field-link {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 0.78em;
-  font-weight: bold;
-  color: #2f6d3c;
-  background: #dff5e1;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-/* kelola_panduan.css — halaman admin Kelola Panduan Budidaya. */
-
-.kp-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px 20px;
+  margin-bottom: 18px;
+}
+
+.cg-back {
+  display: inline-block;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cg-back:hover {
+  color: var(--color-primary-hover);
+}
+
+.cg-plant {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 28px;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-.kp-header h1 {
-  font-size: 1.4em;
-  margin: 0;
+.cg-plant__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: #f3f5ee;
+  color: var(--color-muted);
+  font-size: 0.9rem;
 }
 
-.kp-add-button {
+.cg-plant__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cg-plant__category {
   display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-hover);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cg-plant__info h1 {
+  margin: 0 0 6px;
+  font-size: 1.8rem;
+  line-height: 1.25;
+}
+
+.cg-plant__scientific {
+  margin: 0 0 12px;
+  color: var(--color-muted);
+}
+
+.cg-plant__description {
+  margin: 0 0 18px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.cg-plant__facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+.cg-plant__facts div {
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+}
+
+.cg-plant__facts dt {
+  margin-bottom: 2px;
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cg-plant__facts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.cg-admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.cg-admin-actions .btn {
   width: auto;
   text-decoration: none;
-  white-space: nowrap;
 }
 
-.kp-table-wrapper {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  overflow-x: auto;
+.cg-steps {
+  margin-bottom: 28px;
+  padding: 24px 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: 0 10px 30px rgba(30, 40, 20, 0.06);
 }
 
-.kp-table {
+.cg-steps h2 {
+  margin: 0 0 14px;
+  font-size: 1.2rem;
+}
+
+.cg-steps ol {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 22px;
+}
+
+.cg-steps li::marker {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.cg-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.cg-card {
+  padding: 20px 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+}
+
+.cg-card h3 {
+  margin: 0 0 8px;
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.cg-card p + p {
+  margin-top: 8px;
+}
+
+.cg-card p {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.cg-form-section {
+  margin: 24px 0 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+  font-size: 1.05rem;
+}
+
+.cg-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cg-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cg-check input {
+  width: auto;
+}
+
+.cg-form-plant {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cg-form-plant__image {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cg-form-plant__name {
+  display: block;
+}
+
+.cg-form-plant__scientific {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.cg-form-card textarea,
+.cg-form-card select,
+.cg-form-card input[type="number"] {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.92em;
+  resize: vertical;
 }
 
-.kp-table th,
-.kp-table td {
-  text-align: left;
-  padding: 10px 14px;
-  border-bottom: 1px solid #eee;
+@media (max-width: 640px) {
+  .cg-plant__facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.kp-table th {
-  background: #fafafa;
-  color: #555;
-  font-weight: bold;
-  font-size: 0.85em;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
+@media (max-width: 720px) {
+  .cg-plant {
+    grid-template-columns: 1fr;
+  }
 
-.kp-table tbody tr:last-child td {
-  border-bottom: none;
-}
+  .cg-plant__image {
+    aspect-ratio: 16 / 10;
+  }
 
-.kp-actions {
-  white-space: nowrap;
-}
-
-.kp-action-link {
-  margin-right: 12px;
-  font-size: 0.9em;
-}
-
-.kp-action-link--danger {
-  color: #c0392b;
-}
-
-.kp-empty {
-  text-align: center;
-  color: #888;
-  padding: 24px 14px;
+  .cg-form-row {
+    grid-template-columns: 1fr;
+  }
 }
