@@ -15,11 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.urls import re_path
-from django.views.static import serve
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
+from django.views.static import serve
+
+from apps.profiles.views import (
+    api_delete_account,
+    api_edit_profile,
+    api_get_profile,
+    api_get_public_profile,
+    api_search_users,
+)
 
 
 urlpatterns = [
@@ -36,6 +43,11 @@ urlpatterns = [
     # API PATH
     path("api/", include("apps.accounts.api.urls")),
     path("api/", include("apps.recommendations.api.urls")),
+    path("api/profile/", api_get_profile, name="api_get_profile"),
+    path("api/profile/edit/", api_edit_profile, name="api_edit_profile"),
+    path("api/profile/delete/", api_delete_account, name="api_delete_account"),
+    path("api/profile/search/", api_search_users, name="api_search_users"),
+    path("api/profile/<str:username>/", api_get_public_profile, name="api_get_public_profile"),
 ]
 
 if settings.DEBUG:
