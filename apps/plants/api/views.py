@@ -2,8 +2,9 @@
 
 from django.db.models import Q
 from rest_framework import generics
+from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 from ..models import Plant
 from .serializers import PlantSerializer
@@ -13,9 +14,30 @@ class PlantPagination(PageNumberPagination):
     page_size = 6
 
 
-class PlantListAPIView(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+class PlantPermission(BasePermission):
+    """User aktif dapat membaca, hanya staff aktif dapat mengubah tanaman."""
+
+    def has_permission(self, request, view):
+        user = request.user
+        return bool(
+            user.is_authenticated and user.is_active
+            and (request.method in SAFE_METHODS or user.is_staff)
+        )
+
+
+class PlantAPIMixin:
+    permission_classes = [PlantPermission]
     serializer_class = PlantSerializer
+
+    def handle_exception(self, exc):
+        response = super().handle_exception(exc)
+        if isinstance(exc, ValidationError):
+            # Bentuk error input sama dengan API akun/rekomendasi.
+            response.data = {"errors": response.data}
+        return response
+
+
+class PlantListAPIView(PlantAPIMixin, generics.ListCreateAPIView):
     pagination_class = PlantPagination
 
     def get_queryset(self):
@@ -60,7 +82,5 @@ class PlantListAPIView(generics.ListAPIView):
         return queryset.order_by(*sort_fields.get(sort, sort_fields["name"]))
 
 
-class PlantDetailAPIView(generics.RetrieveAPIView):
-    permission_classes = [IsAuthenticated]
-    serializer_class = PlantSerializer
+class PlantDetailAPIView(PlantAPIMixin, generics.RetrieveUpdateDestroyAPIView):
     queryset = Plant.objects.all()
