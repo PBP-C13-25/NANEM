@@ -15,6 +15,10 @@ from apps.plants.models import Plant
 
 class SeedWorkflowTests(TestCase):
     def setUp(self):
+        # Fetch responses are mocked; tests must not depend on local credentials.
+        api_key = patch.dict(seed.os.environ, {"PERENUAL_API_KEY": "test-only-key"})
+        api_key.start()
+        self.addCleanup(api_key.stop)
         temporary = TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
@@ -89,6 +93,17 @@ class SeedWorkflowTests(TestCase):
             self.run_mode(fetch=True, limit=1)
         self.assertIsNone(seed.load_candidates()[0]["selected_perenual_id"])
         self.assertEqual(seed.load_candidates()[0]["status"], "no_results")
+
+    def test_fetch_without_api_key_stops_before_requesting_candidates(self):
+        with patch.dict(seed.os.environ, {"PERENUAL_API_KEY": ""}), patch.object(
+            self.command, "fetch_candidates"
+        ) as fetch:
+            with self.assertRaisesMessage(CommandError, "Set PERENUAL_API_KEY"):
+                self.run_mode(fetch=True, limit=1)
+
+        fetch.assert_not_called()
+        self.assertEqual(Plant.objects.count(), 0)
+        self.assertEqual(seed.load_candidates()[0]["status"], "failed")
 
     def test_detail_fetch_resumes_and_skips_ids_outside_free_tier(self):
         with patch.object(self.command, "request_json", return_value={
