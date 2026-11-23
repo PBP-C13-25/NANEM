@@ -36,6 +36,7 @@ urlpatterns = [
     # API PATH
     path("api/", include("apps.accounts.api.urls")),
     path("api/", include("apps.recommendations.api.urls")),
+    path("api/", include("apps.plants.api.urls")),
 ]
 
 if settings.DEBUG:
