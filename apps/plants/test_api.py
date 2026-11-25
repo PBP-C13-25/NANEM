@@ -141,6 +141,16 @@ class PlantReadAPITests(PlantAPITestBase):
         )
         self.assertEqual(self.client.get(self.list_url, {"page": 999}).status_code, 404)
 
+    def test_detail_includes_labels_and_guide_flag(self):
+        response = self.client.get(self.detail_url)
+        self.assertEqual(response.data["category_label"], self.kangkung.get_category_display())
+        self.assertEqual(response.data["space_needed_label"], self.kangkung.get_space_needed_display())
+        self.assertFalse(response.data["has_guide"])
+
+        CultivationGuide.objects.create(plant=self.kangkung, planting_steps="Siapkan media tanam.")
+        response = self.client.get(self.detail_url)
+        self.assertTrue(response.data["has_guide"])
+        
 
 class PlantWriteAPITests(PlantAPITestBase):
     def setUp(self):

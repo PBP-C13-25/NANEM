@@ -5,13 +5,13 @@ Kirim cookie `sessionid` pada request berikutnya. User aktif dapat membaca;
 hanya staff aktif (`is_staff=True`) dapat menambah, mengubah, atau menghapus.
 Guest mendapat 401; user biasa yang mencoba menulis mendapat 403.
 
-| Method | URL | Hasil |
-| --- | --- | --- |
-| GET | `/api/plants/` | 200, daftar dengan pagination |
-| GET | `/api/plants/<id>/` | 200, objek tanaman; 404 jika tidak ada |
-| POST | `/api/plants/` | 201, objek tanaman baru (admin) |
+| Method    | URL                 | Hasil                                     |
+| --------- | ------------------- | ----------------------------------------- |
+| GET       | `/api/plants/`      | 200, daftar dengan pagination             |
+| GET       | `/api/plants/<id>/` | 200, objek tanaman; 404 jika tidak ada    |
+| POST      | `/api/plants/`      | 201, objek tanaman baru (admin)           |
 | PUT/PATCH | `/api/plants/<id>/` | 200, objek tanaman setelah diubah (admin) |
-| DELETE | `/api/plants/<id>/` | 204 tanpa body (admin) |
+| DELETE    | `/api/plants/<id>/` | 204 tanpa body (admin)                    |
 
 ## Daftar dan filter
 
@@ -21,15 +21,15 @@ URL `next`/`previous`. Respons detail/tambah/edit berupa satu objek langsung.
 
 Parameter dapat dikombinasikan:
 
-| Parameter | Nilai |
-| --- | --- |
-| `q` | Cari nama atau nama ilmiah, tanpa membedakan kapital |
-| `category` | `sayur`, `buah`, `herbal`, `hias` |
-| `medium` | `soil`, `hydroponic` |
+| Parameter  | Nilai                                                       |
+| ---------- | ----------------------------------------------------------- |
+| `q`        | Cari nama atau nama ilmiah, tanpa membedakan kapital        |
+| `category` | `sayur`, `buah`, `herbal`, `hias`                           |
+| `medium`   | `soil`, `hydroponic`                                        |
 | `sunlight` | `full_sun`, `partial_shade`, `shade` (anggota list tanaman) |
-| `space` | `small`, `medium`, `large` |
-| `sort` | `name` (default), `name_desc`, `category`, `updated` |
-| `page` | Nomor halaman, mulai dari 1 |
+| `space`    | `small`, `medium`, `large`                                  |
+| `sort`     | `name` (default), `name_desc`, `category`, `updated`        |
+| `page`     | Nomor halaman, mulai dari 1                                 |
 
 Nilai filter yang tidak dikenal diabaikan; sort tidak dikenal kembali ke nama.
 Halaman yang tidak tersedia mendapat 404. Contoh:
@@ -69,7 +69,7 @@ PATCH mempertahankan field yang tidak dikirim. Semua perubahan divalidasi
 dengan `PlantForm` yang sama dengan CRUD web, termasuk rentang min/max,
 RH 0-100, curah hujan nonnegatif, dan minimal satu media tanam.
 Error input mendapat 400 dengan bentuk `{"errors": {"field": ["pesan"]}}`;
-error lintas field dapat berada di `__all__` atau `non_field_errors`.
+error lintas field dapat berada di `__all__`.
 
 `rainfall_min/max` tetap ekuivalen harian dari curah hujan optimal tahunan,
 bukan jadwal/kebutuhan penyiraman. Metadata riset seperti `sources` dan
@@ -82,6 +82,6 @@ Tidak ada perubahan model/migration atau logika rekomendasi dalam API ini.
 ## Verifikasi
 
 ```bash
-python manage.py test apps.plants.tests_api
+python manage.py test apps.plants.test_api
 python manage.py check
 ```

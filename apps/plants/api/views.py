@@ -32,8 +32,10 @@ class PlantAPIMixin:
     def handle_exception(self, exc):
         response = super().handle_exception(exc)
         if isinstance(exc, ValidationError):
-            # Bentuk error input sama dengan API akun/rekomendasi.
-            response.data = {"errors": response.data}
+            errors = response.data
+            if isinstance(errors, dict) and "non_field_errors" in errors:
+                errors.setdefault("__all__", []).extend(errors.pop("non_field_errors"))
+            response.data = {"errors": errors}
         return response
 
 
@@ -79,7 +81,7 @@ class PlantListAPIView(PlantAPIMixin, generics.ListCreateAPIView):
             "updated": ("-updated_at", "name", "pk"),
         }
         sort = params.get("sort", "name").strip()
-        return queryset.order_by(*sort_fields.get(sort, sort_fields["name"]))
+        return queryset.select_related("cultivation_guide").order_by(*sort_fields.get(sort, sort_fields["name"]))
 
 
 class PlantDetailAPIView(PlantAPIMixin, generics.RetrieveUpdateDestroyAPIView):

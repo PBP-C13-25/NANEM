@@ -8,17 +8,25 @@ from ..models import Plant
 
 
 class PlantSerializer(serializers.ModelSerializer):
+    category_label = serializers.CharField(source="get_category_display", read_only=True)
+    space_needed_label = serializers.CharField(source="get_space_needed_display", read_only=True)
+    has_guide = serializers.SerializerMethodField()
+
     class Meta:
         model = Plant
         fields = (
             "id", "perenual_id", "name", "scientific_name", "description",
-            "image_url", "category", "temp_min", "temp_max", "humidity_min",
-            "humidity_max", "rainfall_min", "rainfall_max", "supports_soil",
-            "supports_hydroponic", "sunlight", "watering", "care_level",
-            "drought_tolerant", "indoor", "space_needed", "created_at", "updated_at",
+            "image_url", "category", "category_label", "temp_min", "temp_max",
+            "humidity_min", "humidity_max", "rainfall_min", "rainfall_max",
+            "supports_soil", "supports_hydroponic", "sunlight", "watering",
+            "care_level", "drought_tolerant", "indoor", "space_needed",
+            "space_needed_label", "has_guide", "created_at", "updated_at",
         )
         read_only_fields = ("id", "perenual_id", "created_at", "updated_at")
 
+    def get_has_guide(self, obj):
+        return hasattr(obj, "cultivation_guide")
+    
     def validate(self, attrs):
         # PATCH hanya mengganti field yang dikirim, lalu validasi keseluruhan
         # tanaman melalui form yang sama dengan CRUD web.
