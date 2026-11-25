@@ -155,3 +155,45 @@ class CultivationAPITests(APITestCase):
         self.assertEqual(response.data["summary"]["without_guide"], 1)
         response = self.client.get(self.list_url(), {"q": "kang"})
         self.assertTrue(response.data["plants"][0]["has_guide"])
+        
+    def test_admin_post_unknown_plant_returns_404(self):
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.post(
+            reverse("cultivation_api:guide", args=[9999]), VALID, format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_admin_delete_without_guide_returns_404(self):
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.delete(self.guide_url(self.kangkung))
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_admin_patch_accepts_step_list(self):
+        self.create_guide(self.kangkung)
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.patch(
+            self.guide_url(self.kangkung),
+            {"planting_steps": ["Langkah satu", "Langkah dua"]},
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data["guide"]["planting_steps"]), 2)
+
+    def test_patch_cannot_move_guide_to_other_plant(self):
+        self.create_guide(self.kangkung)
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.patch(
+            self.guide_url(self.kangkung),
+            {"plant": self.bayam.pk, "watering_note": "x"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(CultivationGuide.objects.filter(plant=self.kangkung).exists())
+        self.assertFalse(CultivationGuide.objects.filter(plant=self.bayam).exists())
+
+    def test_put_not_allowed(self):
+        self.create_guide(self.kangkung)
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.put(self.guide_url(self.kangkung), VALID, format="json")
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        

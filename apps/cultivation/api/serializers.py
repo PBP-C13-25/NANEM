@@ -64,3 +64,4 @@ class GuideListItemSerializer(serializers.ModelSerializer):
         if guide is None:
             return None
         return serializers.DateTimeField().to_representation(guide.updated_at)
+    

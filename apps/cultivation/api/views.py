@@ -20,11 +20,13 @@ def _form_errors(form):
 
 
 def _form_data(request, guide=None):
+    allowed = CultivationGuideForm.Meta.fields
     data = {}
     if guide is not None:
-        data = {field: getattr(guide, field) for field in CultivationGuideForm.Meta.fields}
+        data = {field: getattr(guide, field) for field in allowed}
     for key in request.data:
-        data[key] = request.data.get(key)
+        if key in allowed:
+            data[key] = request.data.get(key)
     steps = data.get("planting_steps")
     if isinstance(steps, (list, tuple)):
         data["planting_steps"] = "\n".join(str(step) for step in steps)
@@ -69,9 +71,6 @@ class GuideDetailAPIView(APIView):
         guide = form.save()
         return Response({"guide": GuideSerializer(guide).data})
 
-    def put(self, request, plant_id):
-        return self.patch(request, plant_id)
-
     def delete(self, request, plant_id):
         guide = get_object_or_404(CultivationGuide, plant_id=plant_id)
         guide.delete()
@@ -108,3 +107,4 @@ class GuideListAPIView(APIView):
                 "plants": GuideListItemSerializer(plants, many=True).data,
             }
         )
+        
