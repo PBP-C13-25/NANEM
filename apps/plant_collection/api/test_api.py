@@ -52,23 +52,36 @@ class PlantCollectionAPITests(APITestCase):
     # 1. URL RESOLVING TESTS
     def test_api_urls_resolving(self):
         """Menguji resolusi URL API ke setiap APIView yang sesuai."""
-        self.assertEqual(resolve(reverse('collection_api:index')).func.view_class, views.CollectionListAPIView)
-        self.assertEqual(resolve(reverse('collection_api:create')).func.view_class, views.CollectionCreateAPIView)
+        self.assertEqual(resolve(reverse('collection_api:list')).func.view_class, views.CollectionListCreateAPIView)
         self.assertEqual(resolve(reverse('collection_api:detail', kwargs={'pk': self.collection.pk})).func.view_class, views.CollectionDetailAPIView)
-        self.assertEqual(resolve(reverse('collection_api:edit', kwargs={'pk': self.collection.pk})).func.view_class, views.CollectionUpdateAPIView)
-        self.assertEqual(resolve(reverse('collection_api:delete', kwargs={'pk': self.collection.pk})).func.view_class, views.CollectionDeleteAPIView)
         self.assertEqual(resolve(reverse('collection_api:like', kwargs={'pk': self.collection.pk})).func.view_class, views.ToggleLikeAPIView)
 
     # 2. VIEW ENDPOINT TESTS
     def test_collection_list_api(self):
-        """Menguji pengambilan daftar koleksi tanaman (index)."""
+        """Menguji pengambilan daftar koleksi tanaman (list)."""
         self.client.force_authenticate(user=self.user)
-        response = self.client.get(reverse('collection_api:index'))
+        response = self.client.get(reverse('collection_api:list'))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]['title'], 'Monstera Deliciosa')
         self.assertEqual(response.data[0]['owner_username'], 'testuser')
+
+    def test_collection_list_filter_by_owner(self):
+        """Menguji filter query parameter ?owner= pada endpoint list."""
+        PlantCollection.objects.create(
+            owner=self.other_user,
+            title='Lidah Mertua',
+            description='Tanaman pembersih udara.',
+            photo=self._generate_dummy_image()
+        )
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('collection_api:list'), {'owner': self.other_user.pk})
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['title'], 'Lidah Mertua')
+        self.assertEqual(response.data[0]['owner'], self.other_user.pk)
 
     def test_collection_detail_api(self):
         """Menguji pengambilan detail koleksi (detail)."""
@@ -80,14 +93,14 @@ class PlantCollectionAPITests(APITestCase):
         self.assertEqual(response.data['title'], 'Monstera Deliciosa')
 
     def test_collection_create_api(self):
-        """Menguji pembuatan koleksi baru (create)."""
+        """Menguji pembuatan koleksi baru (POST ke list)."""
         self.client.force_authenticate(user=self.user)
         post_data = {
             'title': 'Kaktus Koboi',
             'description': 'Tahan terhadap cuaca panas.',
             'photo': self._generate_dummy_image()
         }
-        response = self.client.post(reverse('collection_api:create'), data=post_data, format='multipart')
+        response = self.client.post(reverse('collection_api:list'), data=post_data, format='multipart')
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(PlantCollection.objects.filter(title='Kaktus Koboi').exists())
@@ -96,21 +109,37 @@ class PlantCollectionAPITests(APITestCase):
         self.assertEqual(created_item.owner, self.user)
 
     def test_collection_create_api_invalid(self):
-        """Menguji gagal create saat field wajib kosong."""
+        """Menguji gagal create saat field wajib kosong & format error dibungkus 'errors'."""
         self.client.force_authenticate(user=self.user)
-        response = self.client.post(reverse('collection_api:create'), data={'title': ''}, format='multipart')
+        response = self.client.post(reverse('collection_api:list'), data={'title': ''}, format='multipart')
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('title', response.data)
-        self.assertIn('photo', response.data)
+        self.assertIn('errors', response.data)
+        self.assertIn('title', response.data['errors'])
+        self.assertIn('photo', response.data['errors'])
+
+    def test_collection_create_description_max_words(self):
+        """Menguji validasi deskripsi maksimal 10 kata."""
+        self.client.force_authenticate(user=self.user)
+        long_description = "satu dua tiga empat lima enam tujuh delapan sembilan sepuluh sebelas"
+        post_data = {
+            'title': 'Kaktus Mini',
+            'description': long_description,
+            'photo': self._generate_dummy_image()
+        }
+        response = self.client.post(reverse('collection_api:list'), data=post_data, format='multipart')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('errors', response.data)
+        self.assertIn('description', response.data['errors'])
 
     def test_collection_update_api(self):
-        """Menguji pembaruan data koleksi oleh pemiliknya (edit)."""
+        """Menguji pembaruan data koleksi oleh pemiliknya (PATCH/PUT ke detail)."""
         self.client.force_authenticate(user=self.user)
-        edit_url = reverse('collection_api:edit', kwargs={'pk': self.collection.pk})
+        detail_url = reverse('collection_api:detail', kwargs={'pk': self.collection.pk})
 
         # Uji PATCH (partial update)
-        patch_response = self.client.patch(edit_url, data={'title': 'Monstera Deliciosa Updated'}, format='multipart')
+        patch_response = self.client.patch(detail_url, data={'title': 'Monstera Deliciosa Updated'}, format='multipart')
         self.assertEqual(patch_response.status_code, status.HTTP_200_OK)
 
         self.collection.refresh_from_db()
@@ -122,17 +151,17 @@ class PlantCollectionAPITests(APITestCase):
             'description': 'Deskripsi baru.',
             'photo': self._generate_dummy_image()
         }
-        put_response = self.client.put(edit_url, data=put_data, format='multipart')
+        put_response = self.client.put(detail_url, data=put_data, format='multipart')
         self.assertEqual(put_response.status_code, status.HTTP_200_OK)
 
         self.collection.refresh_from_db()
         self.assertEqual(self.collection.title, 'Monstera Full Put')
 
     def test_collection_delete_api(self):
-        """Menguji penghapusan koleksi oleh pemiliknya (delete)."""
+        """Menguji penghapusan koleksi oleh pemiliknya (DELETE ke detail)."""
         self.client.force_authenticate(user=self.user)
-        delete_url = reverse('collection_api:delete', kwargs={'pk': self.collection.pk})
-        response = self.client.delete(delete_url)
+        detail_url = reverse('collection_api:detail', kwargs={'pk': self.collection.pk})
+        response = self.client.delete(detail_url)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(PlantCollection.objects.filter(pk=self.collection.pk).exists())
@@ -146,37 +175,34 @@ class PlantCollectionAPITests(APITestCase):
         response1 = self.client.post(url)
         self.assertEqual(response1.status_code, status.HTTP_200_OK)
         self.assertEqual(response1.data, {'is_liked': True, 'like_count': 1})
-        self.assertIn(self.user, self.collection.likes.all())
+        self.assertTrue(self.collection.likes.filter(pk=self.user.pk).exists())
 
         # 2. Menghapus Like
         response2 = self.client.post(url)
         self.assertEqual(response2.status_code, status.HTTP_200_OK)
         self.assertEqual(response2.data, {'is_liked': False, 'like_count': 0})
-        self.assertNotIn(self.user, self.collection.likes.all())
+        self.assertFalse(self.collection.likes.filter(pk=self.user.pk).exists())
 
     # 3. AUTHORIZATION & PERMISSION TESTS
     def test_authorization_guest_denied(self):
-        """Tamu (belum login) ditolak saat mencoba mengakses endpoint."""
-        edit_url = reverse('collection_api:edit', kwargs={'pk': self.collection.pk})
-        delete_url = reverse('collection_api:delete', kwargs={'pk': self.collection.pk})
+        """Tamu (belum login) mendapat status 401 Unauthorized."""
+        detail_url = reverse('collection_api:detail', kwargs={'pk': self.collection.pk})
 
-        edit_response = self.client.patch(edit_url, data={'title': 'Guest Hack'}, format='multipart')
-        self.assertIn(edit_response.status_code, [status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN])
+        edit_response = self.client.patch(detail_url, data={'title': 'Guest Hack'}, format='multipart')
+        self.assertEqual(edit_response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-        delete_response = self.client.delete(delete_url)
-        self.assertIn(delete_response.status_code, [status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN])
+        delete_response = self.client.delete(detail_url)
+        self.assertEqual(delete_response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_authorization_other_user_forbidden(self):
-        """User lain (bukan owner) mendapat status 403 Forbidden saat mencoba edit/hapus."""
+    def test_authorization_other_user_not_found(self):
+        """User lain (bukan owner) mendapat status 404 Not Found saat mencoba edit/hapus."""
         self.client.force_authenticate(user=self.other_user)
+        detail_url = reverse('collection_api:detail', kwargs={'pk': self.collection.pk})
 
-        edit_url = reverse('collection_api:edit', kwargs={'pk': self.collection.pk})
-        delete_url = reverse('collection_api:delete', kwargs={'pk': self.collection.pk})
+        # Coba PATCH sebagai user lain -> 404 Not Found
+        edit_response = self.client.patch(detail_url, data={'title': 'Hack'}, format='multipart')
+        self.assertEqual(edit_response.status_code, status.HTTP_404_NOT_FOUND)
 
-        # Coba PATCH ke Edit sebagai user lain -> 403 Forbidden
-        edit_response = self.client.patch(edit_url, data={'title': 'Hack'}, format='multipart')
-        self.assertEqual(edit_response.status_code, status.HTTP_403_FORBIDDEN)
-
-        # Coba DELETE sebagai user lain -> 403 Forbidden
-        delete_response = self.client.delete(delete_url)
-        self.assertEqual(delete_response.status_code, status.HTTP_403_FORBIDDEN)
+        # Coba DELETE sebagai user lain -> 404 Not Found
+        delete_response = self.client.delete(detail_url)
+        self.assertEqual(delete_response.status_code, status.HTTP_404_NOT_FOUND)

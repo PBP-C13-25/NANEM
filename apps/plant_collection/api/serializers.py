@@ -22,8 +22,13 @@ class PlantCollectionSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['owner', 'created_at', 'updated_at']
 
+    def validate_description(self, value):
+        if value and len(value.split()) > 10:
+            raise serializers.ValidationError("Deskripsi maksimal terdiri dari 10 kata.")
+        return value
+    
     def get_is_liked(self, obj):
         request = self.context.get('request')
         if request and request.user.is_authenticated:
-            return obj.likes.filter(pk=request.user.pk).exists()
+            return any(u.pk == request.user.pk for u in obj.likes.all())
         return False

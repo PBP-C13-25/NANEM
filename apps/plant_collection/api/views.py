@@ -4,73 +4,60 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.exceptions import ValidationError
 
 from ..models import PlantCollection
 from .serializers import PlantCollectionSerializer
-from .permissions import IsOwnerOrReadOnly
 
+class WrappedValidationExceptionMixin:
+    """Membungkus error validasi ke dalam key 'errors'."""
+    def handle_exception(self, exc):
+        response = super().handle_exception(exc)
+        if isinstance(exc, ValidationError) and response is not None:
+            response.data = {"errors": response.data}
+        return response
 
-class CollectionListAPIView(generics.ListAPIView):
+class CollectionListCreateAPIView(WrappedValidationExceptionMixin, generics.ListCreateAPIView):
     serializer_class = PlantCollectionSerializer
     permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
 
     def get_queryset(self):
-        return (
+        queryset = (
             PlantCollection.objects
             .select_related("owner")
             .prefetch_related("likes")
             .order_by("-created_at")
         )
-
-
-class CollectionDetailAPIView(generics.RetrieveAPIView):
-    serializer_class = PlantCollectionSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return (
-            PlantCollection.objects
-            .select_related("owner")
-            .prefetch_related("likes")
-        )
-
-
-class CollectionCreateAPIView(generics.CreateAPIView):
-    serializer_class = PlantCollectionSerializer
-    permission_classes = [IsAuthenticated]
-    parser_classes = [MultiPartParser, FormParser]
+        owner_id = self.request.query_params.get("owner")
+        if owner_id:
+            queryset = queryset.filter(owner_id=owner_id)
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-
-class CollectionUpdateAPIView(generics.UpdateAPIView):
+class CollectionDetailAPIView(WrappedValidationExceptionMixin, generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PlantCollectionSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated]
     parser_classes = [MultiPartParser, FormParser]
 
     def get_queryset(self):
-        return (
+        queryset = (
             PlantCollection.objects
             .select_related("owner")
             .prefetch_related("likes")
         )
+        if self.request.method in ("PUT", "PATCH", "DELETE"):
+            queryset = queryset.filter(owner=self.request.user)
+        return queryset
 
-
-class CollectionDeleteAPIView(generics.DestroyAPIView):
-    serializer_class = PlantCollectionSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
-
-    def get_queryset(self):
-        return PlantCollection.objects.all()
-
-
-class ToggleLikeAPIView(APIView):
+class ToggleLikeAPIView(WrappedValidationExceptionMixin, APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, pk):
         post = get_object_or_404(PlantCollection, pk=pk)
-        if request.user in post.likes.all():
+        if post.likes.filter(pk=request.user.pk).exists():
             post.likes.remove(request.user)
             is_liked = False
         else:
