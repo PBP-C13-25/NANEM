@@ -29,8 +29,9 @@ class CollectionListCreateAPIView(WrappedValidationExceptionMixin, generics.List
             .prefetch_related("likes")
             .order_by("-created_at")
         )
-        owner_id = self.request.query_params.get("owner")
-        if owner_id:
+        
+        owner_id = self.request.query_params.get("owner", "")
+        if owner_id.isdigit():
             queryset = queryset.filter(owner_id=owner_id)
         return queryset
 

@@ -132,6 +132,27 @@ class PlantCollectionAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('errors', response.data)
         self.assertIn('description', response.data['errors'])
+        
+    def test_collection_create_photo_max_size(self):
+        """Menguji validasi ukuran foto maksimal 5MB lewat API."""
+        self.client.force_authenticate(user=self.user)
+        oversized = SimpleUploadedFile(
+            'big_photo.jpg', b'x' * (5 * 1024 * 1024 + 1), content_type='image/jpeg'
+        )
+        post_data = {'title': 'Kaktus Besar', 'description': 'Deskripsi singkat.', 'photo': oversized}
+        response = self.client.post(reverse('collection_api:list'), data=post_data, format='multipart')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('photo', response.data['errors'])
+        self.assertFalse(PlantCollection.objects.filter(title='Kaktus Besar').exists())
+
+    def test_collection_list_ignores_invalid_owner_filter(self):
+        """?owner= yang bukan angka diabaikan, bukan error 500."""
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('collection_api:list'), {'owner': 'abc'})
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
 
     def test_collection_update_api(self):
         """Menguji pembaruan data koleksi oleh pemiliknya (PATCH/PUT ke detail)."""

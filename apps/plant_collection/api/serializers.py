@@ -27,6 +27,11 @@ class PlantCollectionSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Deskripsi maksimal terdiri dari 10 kata.")
         return value
     
+    def validate_photo(self, value):
+        if value and value.size > 5 * 1024 * 1024:
+            raise serializers.ValidationError("Ukuran foto maksimal 5MB.")
+        return value
+    
     def get_is_liked(self, obj):
         request = self.context.get('request')
         if request and request.user.is_authenticated:
