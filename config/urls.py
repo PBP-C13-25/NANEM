@@ -33,11 +33,19 @@ urlpatterns = [
     path("cultivation/", include("apps.cultivation.urls")),
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 
+<<<<<<< HEAD
 
     # API PATH
     path("api/", include("apps.accounts.api.urls")),
     path("api/", include("apps.recommendations.api.urls")),
     path("api/", include("apps.plant_collection.api.urls")),
+=======
+    # API PATH
+    path("api/", include("apps.accounts.api.urls")),
+    path("api/", include("apps.recommendations.api.urls")),
+    path("api/", include("apps.plant_collection.api.urls")) 
+
+>>>>>>> 799ea0d55f9a521507aadab7ce89857cdd75d03c
 ]
 
 if settings.DEBUG:
