@@ -3,7 +3,8 @@ from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
+from rest_framework.authtoken.models import Token
+from rest_framework.test import APIClient, APITestCase
 
 User = get_user_model()
 
@@ -210,3 +211,114 @@ class ChangePasswordApiTests(AccountApiTestBase):
     def test_guest_gets_401(self):
         response = self.client.post(self.password_url, {}, format="json")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class TokenAuthApiTests(AccountApiTestBase):
+    """Alur aplikasi Flutter: login dapat token, lalu kirim header Authorization."""
+
+    def token_client(self, token):
+        # Client baru tanpa cookie session, supaya yang diuji benar-benar token.
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION=f"Token {token}")
+        return client
+
+    def test_login_returns_token_that_works_without_session(self):
+        token = self.login().data["token"]
+
+        response = self.token_client(token).get(self.me_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["user"]["username"], "jihan")
+
+    def test_login_again_returns_same_token(self):
+        first = self.login().data["token"]
+        self.client.logout()
+
+        self.assertEqual(self.login().data["token"], first)
+
+    def test_register_returns_token(self):
+        response = self.client.post(
+            self.register_url,
+            {
+                "first_name": "Budi",
+                "username": "budi",
+                "password1": STRONG_PASSWORD,
+                "password2": STRONG_PASSWORD,
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        token = response.data["token"]
+        self.assertEqual(Token.objects.get(key=token).user.username, "budi")
+        self.assertEqual(self.token_client(token).get(self.me_url).status_code, status.HTTP_200_OK)
+
+    def test_failed_login_has_no_token(self):
+        response = self.login(password="salah-banget")
+
+        self.assertNotIn("token", response.data)
+        self.assertFalse(Token.objects.exists())
+
+    def test_logout_with_token_revokes_it(self):
+        token = self.login().data["token"]
+        client = self.token_client(token)
+
+        self.assertEqual(client.post(self.logout_url).status_code, status.HTTP_200_OK)
+
+        self.assertFalse(Token.objects.filter(key=token).exists())
+        self.assertEqual(client.get(self.me_url).status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_session_logout_keeps_token_of_other_device(self):
+        token = self.login().data["token"]
+
+        self.client.post(self.logout_url)  # logout web (session), bukan token
+
+        self.assertEqual(self.token_client(token).get(self.me_url).status_code, status.HTTP_200_OK)
+
+    def test_invalid_token_is_401(self):
+        response = self.token_client("bukan-token-asli").get(self.me_url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_guest_401_says_token(self):
+        response = APIClient().get(self.me_url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response["WWW-Authenticate"], "Token")
+
+    def test_inactive_user_token_is_rejected(self):
+        token = self.login().data["token"]
+        self.user.is_active = False
+        self.user.save()
+
+        response = self.token_client(token).get(self.me_url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_change_password_rotates_token(self):
+        old_token = self.login().data["token"]
+        old_client = self.token_client(old_token)
+        new_password = "DaunMuda#2027"
+
+        response = old_client.post(
+            self.password_url,
+            {
+                "old_password": STRONG_PASSWORD,
+                "new_password1": new_password,
+                "new_password2": new_password,
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        new_token = response.data["token"]
+        self.assertNotEqual(new_token, old_token)
+        self.assertEqual(old_client.get(self.me_url).status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(self.token_client(new_token).get(self.me_url).status_code, status.HTTP_200_OK)
+
+    def test_deleting_user_deletes_token(self):
+        token = self.login().data["token"]
+
+        self.user.delete()
+
+        self.assertFalse(Token.objects.filter(key=token).exists())
