@@ -6,10 +6,12 @@ dan tes engine sendiri sudah ada di tes web.
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
+from django.core import signing
 from django.core.cache import cache
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
+from rest_framework.authtoken.models import Token
+from rest_framework.test import APIClient, APITestCase
 
 from .models import RecommendationHistory
 from .services.open_meteo import OpenMeteoError
@@ -138,6 +140,21 @@ class SaveHistoryApiTests(ApiTestBase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(RecommendationHistory.objects.count(), 0)
+
+    def test_guest_result_can_be_saved_after_login(self):
+        # Alur mobile: coba rekomendasi sebagai guest, lalu login, lalu simpan.
+        # login() mengganti session key tapi tetap membawa isi session.
+        self.generate()
+        self.client.post(
+            reverse("accounts_api:login"),
+            {"username": "jihan", "password": "rahasia123"},
+            format="json",
+        )
+
+        response = self.client.post(self.list_url)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(RecommendationHistory.objects.get().user, self.user)
 
     def test_save_without_result_returns_400(self):
         self.client.force_login(self.user)
@@ -286,7 +303,7 @@ class HistoryDetailApiTests(ApiTestBase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("land_name", response.data)
+        self.assertIn("land_name", response.data["errors"])
 
     def test_put_is_not_allowed(self):
         response = self.client.put(
@@ -304,3 +321,139 @@ class HistoryDetailApiTests(ApiTestBase):
         self.client.logout()
         response = self.client.get(self.detail_url(self.history.pk))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class ResultTokenApiTests(ApiTestBase):
+    """Alur klien token (Flutter): tidak ada session, hasil dibawa lewat result_token."""
+
+    def setUp(self):
+        super().setUp()
+        self.token = Token.objects.create(user=self.user)
+
+    def token_client(self, token=None):
+        client = APIClient()  # tanpa cookie session
+        if token:
+            client.credentials(HTTP_AUTHORIZATION=f"Token {token}")
+        return client
+
+    def generate_with(self, client, data=None):
+        with patch(FETCH, return_value=ENVIRONMENT), patch(RECOMMEND, return_value=PLANTS):
+            return client.post(self.recommend_url, data or VALID_INPUT, format="json")
+
+    def test_generate_returns_result_token(self):
+        response = self.generate_with(self.token_client(self.token.key))
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(response.data["can_save"])
+        self.assertTrue(response.data["result_token"])
+
+    def test_save_with_result_token(self):
+        client = self.token_client(self.token.key)
+        result_token = self.generate_with(client).data["result_token"]
+
+        response = client.post(self.list_url, {"result_token": result_token}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(response.data["created"])
+        history = RecommendationHistory.objects.get(pk=response.data["id"])
+        self.assertEqual(history.user, self.user)
+        self.assertEqual(history.land_name, "Kebun Belakang")
+        self.assertEqual(history.recommended_plants, PLANTS)
+        self.assertEqual(history.environment_snapshot["raw"], ENVIRONMENT)
+
+    def test_guest_result_saved_after_token_login(self):
+        # Coba sebagai guest -> login di aplikasi (dapat token) -> simpan.
+        result_token = self.generate_with(self.token_client()).data["result_token"]
+        login = self.token_client().post(
+            reverse("accounts_api:login"),
+            {"username": "jihan", "password": "rahasia123"},
+            format="json",
+        )
+
+        response = self.token_client(login.data["token"]).post(
+            self.list_url, {"result_token": result_token}, format="json"
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(RecommendationHistory.objects.get().user, self.user)
+
+    def test_save_same_result_twice_creates_once(self):
+        client = self.token_client(self.token.key)
+        result_token = self.generate_with(client).data["result_token"]
+
+        first = client.post(self.list_url, {"result_token": result_token}, format="json")
+        second = client.post(self.list_url, {"result_token": result_token}, format="json")
+
+        self.assertEqual(first.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(second.status_code, status.HTTP_200_OK)
+        self.assertFalse(second.data["created"])
+        self.assertEqual(first.data["id"], second.data["id"])
+        self.assertEqual(RecommendationHistory.objects.count(), 1)
+
+    def test_same_result_can_be_saved_by_another_user(self):
+        result_token = self.generate_with(self.token_client()).data["result_token"]
+        other_token = Token.objects.create(user=self.other)
+
+        self.token_client(self.token.key).post(self.list_url, {"result_token": result_token}, format="json")
+        response = self.token_client(other_token.key).post(
+            self.list_url, {"result_token": result_token}, format="json"
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(RecommendationHistory.objects.filter(user=self.other).count(), 1)
+
+    def test_save_again_after_history_deleted(self):
+        client = self.token_client(self.token.key)
+        result_token = self.generate_with(client).data["result_token"]
+        first_id = client.post(self.list_url, {"result_token": result_token}, format="json").data["id"]
+        RecommendationHistory.objects.filter(pk=first_id).delete()
+
+        response = client.post(self.list_url, {"result_token": result_token}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertNotEqual(response.data["id"], first_id)
+
+    def test_tampered_result_token_is_rejected(self):
+        client = self.token_client(self.token.key)
+        result_token = self.generate_with(client).data["result_token"]
+        forged = signing.dumps(
+            {**VALID_INPUT, "environment": {}, "plants": [{"plant_name": "Palsu"}]},
+            salt="salt-lain",
+        )
+
+        for bad in (result_token[:-3] + "abc", forged, "", "acak"):
+            with self.subTest(bad=bad):
+                response = client.post(self.list_url, {"result_token": bad}, format="json")
+                self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+                self.assertIn("result_token", response.data["errors"])
+
+        self.assertFalse(RecommendationHistory.objects.exists())
+
+    def test_expired_result_token_is_rejected(self):
+        client = self.token_client(self.token.key)
+        result_token = self.generate_with(client).data["result_token"]
+
+        with patch("apps.recommendations.api.views.RESULT_TOKEN_MAX_AGE", -1):
+            response = client.post(self.list_url, {"result_token": result_token}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("kedaluwarsa", response.data["errors"]["result_token"][0])
+
+    def test_token_client_without_result_token_gets_400(self):
+        response = self.token_client(self.token.key).post(self.list_url, {}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_history_endpoints_work_with_token(self):
+        history = self.make_history(self.user, "Kebun Token")
+        client = self.token_client(self.token.key)
+
+        listed = client.get(self.list_url)
+        detail = client.get(self.detail_url(history.pk))
+        renamed = client.patch(self.detail_url(history.pk), {"land_name": "Baru"}, format="json")
+        deleted = client.delete(self.detail_url(history.pk))
+
+        self.assertEqual(listed.status_code, status.HTTP_200_OK)
+        self.assertEqual(detail.status_code, status.HTTP_200_OK)
+        self.assertEqual(renamed.status_code, status.HTTP_200_OK)
+        self.assertEqual(deleted.status_code, status.HTTP_204_NO_CONTENT)

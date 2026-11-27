@@ -6,12 +6,16 @@ Alurnya SENGAJA sama dengan view web di ../views.py:
 - login() dan update_session_auth_hash() dipanggil seperti di web,
   jadi session key berganti saat login (anti session fixation) dan
   session tidak putus setelah ganti password.
-Autentikasi API memakai session yang sama dengan web (apps.core.api).
+Selain session, API juga mengembalikan TOKEN untuk aplikasi Flutter
+(header `Authorization: Token <token>`, lihat apps.core.api):
+- register & login -> {"user": {...}, "token": "..."};
+- logout -> token yang dipakai dihapus (tidak berlaku lagi);
+- ganti password -> token lama dihapus, token baru dikirim.
 """
-
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from rest_framework import status
+from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -35,12 +39,23 @@ def _form_errors(form):
     }
 
 
+def _auth_payload(user):
+    """Data yang dikirim setelah register/login: user + token API.
+
+    Token dibuat sekali per user dan dipakai ulang (sama seperti
+    obtain_auth_token di Tutorial 10). Token baru dibuat lagi setelah
+    logout atau ganti password.
+    """
+    token, _ = Token.objects.get_or_create(user=user)
+    return {"user": UserSerializer(user).data, "token": token.key}
+
+
 #* REGISTER
 class RegisterAPIView(APIView):
     """POST /api/auth/register/
 
     Body: first_name, username, password1, password2.
-    201 -> {"user": {...}} dan langsung login (sama seperti web).
+    201 -> {"user": {...}, "token": "..."} dan langsung login (sama seperti web).
     """
 
     permission_classes = [AllowAny]
@@ -59,9 +74,7 @@ class RegisterAPIView(APIView):
 
         user = form.save()
         login(request, user)
-        return Response(
-            {"user": UserSerializer(user).data}, status=status.HTTP_201_CREATED
-        )
+        return Response(_auth_payload(user), status=status.HTTP_201_CREATED)
 
 
 #* LOGIN
@@ -69,7 +82,7 @@ class LoginAPIView(APIView):
     """POST /api/auth/login/
 
     Body: username, password.
-    200 -> {"user": {...}} | 400 salah | 429 terkunci 15 menit.
+    200 -> {"user": {...}, "token": "..."} | 400 salah | 429 terkunci 15 menit.
     """
 
     permission_classes = [AllowAny]
@@ -96,16 +109,23 @@ class LoginAPIView(APIView):
         throttle.reset(request, username)
         user = form.get_user()
         login(request, user)
-        return Response({"user": UserSerializer(user).data})
+        return Response(_auth_payload(user))
 
 
 #* LOGOUT
 class LogoutAPIView(APIView):
-    """POST /api/auth/logout/ -> 200, juga kalau sesi sudah habis."""
+    """POST /api/auth/logout/ -> 200, juga kalau sesi sudah habis.
+
+    Kalau request memakai token, token itu dihapus, jadi tidak bisa dipakai
+    lagi. Token yang sudah tidak valid dijawab 401 oleh DRF; aplikasi cukup
+    menghapus token lokalnya.
+    """
 
     permission_classes = [AllowAny]
 
     def post(self, request):
+        if isinstance(request.auth, Token):
+            request.auth.delete()
         logout(request)
         return Response({"detail": "Berhasil keluar."})
 
@@ -114,7 +134,7 @@ class LogoutAPIView(APIView):
 class MeAPIView(APIView):
     """GET /api/auth/me/ -> {"user": {...}} | 401 kalau belum login.
 
-    Dipakai aplikasi saat dibuka untuk mengecek sesi masih berlaku.
+    Dipakai aplikasi saat dibuka untuk mengecek token/sesi masih berlaku.
     """
 
     permission_classes = [IsAuthenticated]
@@ -128,7 +148,10 @@ class ChangePasswordAPIView(APIView):
     """POST /api/auth/password/
 
     Body: old_password, new_password1, new_password2.
-    200 -> sesi tetap aktif (update_session_auth_hash), password lama tidak berlaku.
+    200 -> {"detail": "...", "token": "<token baru>"}
+    Password lama tidak berlaku. Token lama dihapus (perangkat lain yang
+    memakainya harus login ulang), lalu aplikasi memakai token baru.
+    Untuk session, sesi tetap aktif (update_session_auth_hash) seperti web.
     """
 
     permission_classes = [IsAuthenticated]
@@ -142,4 +165,6 @@ class ChangePasswordAPIView(APIView):
 
         user = form.save()
         update_session_auth_hash(request, user)
-        return Response({"detail": "Password berhasil diubah."})
+        Token.objects.filter(user=user).delete()
+        token = Token.objects.create(user=user)
+        return Response({"detail": "Password berhasil diubah.", "token": token.key})
